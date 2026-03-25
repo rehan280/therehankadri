@@ -625,14 +625,10 @@ export default function Home() {
             <span className="section-label">Client Feedback</span>
             <h2 className="section-title">The <span className="text-orange">Consensus</span></h2>
           </div>
-          <div className="reveal" style={{ maxWidth: "800px", margin: "0 auto 4rem", background: "white", padding: "3.5rem", borderRadius: "24px", boxShadow: "0 20px 40px rgba(0,0,0,0.05)", textAlign: "center", border: "1px solid rgba(0,0,0,0.04)" }}>
+          <div className="reveal" style={{ maxWidth: "720px", margin: "0 auto 4rem", background: "white", padding: "2.75rem", borderRadius: "24px", boxShadow: "0 20px 40px rgba(0,0,0,0.05)", textAlign: "center", border: "1px solid rgba(0,0,0,0.04)" }}>
             <div style={{ color: "var(--brand-orange)", fontSize: "2rem", marginBottom: "1.5rem" }}>★★★★★</div>
-            <p style={{ fontSize: "1.2rem", color: "var(--text-dark)", fontStyle: "italic", lineHeight: "1.8", marginBottom: "2rem", fontWeight: "500" }}>
-              &quot;Rehan completely transformed our growth systems at Fuzen.io. He didn&apos;t just improve our SEO, he built a pipeline that actually brings in qualified leads.
-              <br /><br />
-              Our website traffic scaled significantly through his SEO strategy, and more importantly, it started converting. On top of that, his YouTube approach helped our videos rank higher and bring in consistent inbound interest.
-              <br /><br />
-              What stood out was his focus on systems. Everything was connected, from search to content to conversion. The results were clear in both traffic and lead quality.&quot;
+            <p style={{ fontSize: "1.08rem", color: "var(--text-dark)", fontStyle: "italic", lineHeight: "1.65", marginBottom: "2rem", fontWeight: "500" }}>
+              &quot;Rehan built a real growth pipeline for Fuzen.io, not just better SEO. He connected search, content, and conversion into one system that improved both traffic quality and qualified leads.&quot;
             </p>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", maxWidth: "360px", margin: "0 auto" }}>
               <div style={{ textAlign: "left" }}>
