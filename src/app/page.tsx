@@ -24,6 +24,35 @@ type ProofShowcase = {
   proofShots?: ProofShot[];
 };
 
+const renderSocialIcon = (type: "email" | "linkedin" | "youtube" | "x") => {
+  switch (type) {
+    case "email":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 5.75A1.75 1.75 0 0 1 4.75 4h14.5A1.75 1.75 0 0 1 21 5.75v12.5A1.75 1.75 0 0 1 19.25 20H4.75A1.75 1.75 0 0 1 3 18.25V5.75Zm2 .24v.3l7 4.9 7-4.9v-.3a.25.25 0 0 0-.25-.25H5.25A.25.25 0 0 0 5 5.99Zm14 2.14-6.57 4.6a.75.75 0 0 1-.86 0L5 8.13v10.12c0 .14.11.25.25.25h13.5a.25.25 0 0 0 .25-.25V8.13Z" />
+        </svg>
+      );
+    case "linkedin":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.94 8.5H4.12V19h2.82V8.5ZM5.53 4C4.6 4 4 4.62 4 5.43c0 .8.59 1.42 1.5 1.42h.02c.94 0 1.52-.62 1.52-1.42C7.02 4.62 6.46 4 5.53 4ZM20 12.56c0-3.16-1.69-4.63-3.94-4.63-1.82 0-2.63 1-3.08 1.7V8.5h-2.82c.04.74 0 10.5 0 10.5h2.82v-5.87c0-.31.02-.62.11-.84.25-.61.82-1.24 1.78-1.24 1.25 0 1.75.94 1.75 2.33V19H20v-6.44Z" />
+        </svg>
+      );
+    case "youtube":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21.58 7.19a2.96 2.96 0 0 0-2.08-2.1C17.67 4.6 12 4.6 12 4.6s-5.67 0-7.5.49a2.96 2.96 0 0 0-2.08 2.1C1.93 9.03 1.93 12 1.93 12s0 2.97.49 4.81a2.96 2.96 0 0 0 2.08 2.1c1.83.49 7.5.49 7.5.49s5.67 0 7.5-.49a2.96 2.96 0 0 0 2.08-2.1c.49-1.84.49-4.81.49-4.81s0-2.97-.49-4.81ZM10.18 14.98V9.02L15.41 12l-5.23 2.98Z" />
+        </svg>
+      );
+    case "x":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18.9 3H21l-4.6 5.26L21.8 21h-4.94l-3.87-5.07L8.56 21H6.45l4.92-5.63L2.2 3h5.06l3.5 4.59L14.87 3Zm-.73 16.75h1.16L6.63 4.17H5.39l12.78 15.58Z" />
+        </svg>
+      );
+  }
+};
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -142,6 +171,30 @@ export default function Home() {
       h3: "Traffic proof that backs up the growth claim",
       p: "Search Console screenshots showing multi-million click and impression volume, added as direct evidence behind the 1M+ traffic case study.",
       features: [{ title: "Search Console Evidence", desc: "Direct click and impression screenshots reinforcing the 1M+ traffic performance claim." }],
+    },
+  ];
+
+  const socialLinks = [
+    {
+      type: "linkedin" as const,
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/in/rehan-kadri-27b5b8231",
+      handle: "@rehan-kadri",
+      note: "Professional updates, B2B growth insights, and founder-focused strategy.",
+    },
+    {
+      type: "youtube" as const,
+      name: "YouTube",
+      href: "https://youtube.com/@rehanous?si=FDWGeBZ6MtP6oUcK",
+      handle: "@rehanous",
+      note: "Growth content, content systems, and audience-building breakdowns.",
+    },
+    {
+      type: "x" as const,
+      name: "X",
+      href: "https://x.com/rehanous",
+      handle: "@rehanous",
+      note: "Short-form thoughts on brand, pipeline, content, and execution.",
     },
   ];
 
@@ -691,58 +744,83 @@ export default function Home() {
       <section id="contact" className="contact-section section-padding">
         <div className="container contact-container reveal fade-in">
           <div className="contact-grid">
-            
-            {/* Left Column: Premium Copy */}
             <div className="contact-copy">
-              <span className="section-label">Get In Touch</span>
-              <h2 className="section-title">Ready to <span className="text-orange">Scale Your Revenue?</span></h2>
+              <span className="section-label">Contact</span>
+              <h2 className="section-title">Let&apos;s Build A <span className="text-orange">Revenue System</span></h2>
               <p className="contact-desc">
-                Stop leaving money on the table. Let&apos;s architect a custom growth pipeline that consistently converts your cold traffic into enterprise clients.
+                Whether you need qualified pipeline, sharper positioning, or a stronger content engine, this is where the conversation starts.
               </p>
-              
-              <div className="contact-benefits">
+
+              <div className="contact-pill-row" aria-label="Contact highlights">
+                <span className="contact-pill">Strategy-first approach</span>
+                <span className="contact-pill">B2B pipeline focus</span>
+                <span className="contact-pill">Fast response</span>
+              </div>
+
+              <div className="contact-highlights">
                 <div className="benefit-item">
                   <div className="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" style={{ width: "28px", height: "28px", color: "var(--brand-orange)" }}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M3 13.2 8.4 18l12.6-12.6-1.8-1.8L8.4 14.4 4.8 10.8 3 12.6v.6Z" />
                     </svg>
                   </div>
                   <div>
-                    <h4>Data-Driven Strategy</h4>
-                    <p>No guesswork. Every campaign is backed by hard metrics and compounding SEO data.</p>
+                    <h4>Clear growth diagnosis</h4>
+                    <p>We identify where traffic, positioning, or conversion is slowing pipeline.</p>
                   </div>
                 </div>
                 <div className="benefit-item">
                   <div className="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" style={{ width: "28px", height: "28px", color: "var(--brand-orange)" }}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 2 4 6v5c0 5.25 3.4 10.16 8 11 4.6-.84 8-5.75 8-11V6l-8-4Zm0 2.2 5.8 2.9V11c0 4.17-2.52 8.25-5.8 9.1C8.72 19.25 6.2 15.17 6.2 11V7.1L12 4.2Zm-.95 4.05v3.05H8v1.8h3.05v3.05h1.9V13.1H16v-1.8h-3.05V8.25h-1.9Z" />
                     </svg>
                   </div>
                   <div>
-                    <h4>Rapid Execution</h4>
-                    <p>Fluid timelines with aggressive A/B testing to ensure the fastest time to ROI.</p>
+                    <h4>Systems over hacks</h4>
+                    <p>Search, content, brand, and conversion are planned as one connected engine.</p>
                   </div>
                 </div>
               </div>
 
               <div className="contact-direct">
-                <p>Prefer direct email?</p>
-                <a href="mailto:youtech280@gmail.com" className="direct-email">youtech280@gmail.com</a>
-                <p style={{ marginTop: "0.9rem" }}>GitHub</p>
-                <a
-                  href="https://github.com/rehan280/therehankadri.git"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="direct-email"
-                >
-                  github.com/rehan280/therehankadri
-                </a>
+                <div className="contact-direct-card">
+                  <span className="contact-direct-label">Best for direct outreach</span>
+                  <a href="mailto:youtech280@gmail.com" className="direct-email">
+                    <span className="social-icon-wrap">{renderSocialIcon("email")}</span>
+                    <span>youtech280@gmail.com</span>
+                  </a>
+                </div>
+
+                <div className="contact-social-grid">
+                  {socialLinks.map(({ type, name, href, handle, note }) => (
+                    <a
+                      key={name}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="contact-social-card"
+                    >
+                      <span className="contact-social-icon">{renderSocialIcon(type)}</span>
+                      <span className="contact-social-copy">
+                        <strong>{name}</strong>
+                        <span>{handle}</span>
+                        <small>{note}</small>
+                      </span>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Right Column: Glassmorphism Form */}
             <div className="contact-form-wrapper">
               <div className="form-glass-card">
+                <div className="form-card-top">
+                  <span className="form-kicker">Project inquiry</span>
+                  <h3>Tell me what you&apos;re building</h3>
+                  <p>
+                    Share your goals, current bottleneck, and what kind of growth system you need.
+                  </p>
+                </div>
                 <form className="contact-form" onSubmit={onContactSubmit}>
                   <div className="form-group">
                     <label htmlFor="name">Full Name</label>
@@ -754,14 +832,17 @@ export default function Home() {
                   </div>
                   <div className="form-group">
                     <label htmlFor="message">Message</label>
-                    <textarea id="message" name="message" className="form-textarea" placeholder="Tell me about your project bounds..." required></textarea>
+                    <textarea id="message" name="message" className="form-textarea" placeholder="Tell me about your offer, audience, and where growth is getting stuck..." required></textarea>
                   </div>
-                  <button type="submit" className="btn btn-orange form-submit-btn">Send Message ↗</button>
+                  <button type="submit" className="btn btn-orange form-submit-btn">Send Inquiry ↗</button>
                   {formResult && <div className="form-status">{formResult}</div>}
                 </form>
+                <div className="form-card-footer">
+                  <span>Usually replies within 24-48 hours</span>
+                  <a href="mailto:youtech280@gmail.com">Prefer email instead?</a>
+                </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -769,22 +850,43 @@ export default function Home() {
       {/* ── FOOTER ── */}
       <footer className="footer">
         <div className="container">
-          <div className="footer-wrapper reveal">
-            <div className="footer-left">
-              <div className="nav-logo footer-logo">REHAN<span>.</span></div>
-              <p className="footer-tagline">Growth Marketer &amp; Pipeline Specialist</p>
+          <div className="footer-shell reveal">
+            <div className="footer-wrapper">
+              <div className="footer-left">
+                <div className="nav-logo footer-logo">REHAN<span>.</span></div>
+                <p className="footer-tagline">Growth marketer building systems that turn attention into qualified pipeline.</p>
+              </div>
+              <div className="footer-right">
+                <p className="footer-cta-label">Have a project in mind?</p>
+                <a href="mailto:youtech280@gmail.com" className="btn btn-orange">Start The Conversation ↗</a>
+              </div>
             </div>
-            <div className="footer-right">
-              <p className="footer-cta-label">Ready to scale?</p>
-              <a href="mailto:youtech280@gmail.com" className="btn btn-orange">Let&apos;s Discuss ↗</a>
+
+            <div className="footer-social-strip">
+              {socialLinks.map(({ type, name, href, handle }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-social-card"
+                >
+                  <span className="footer-social-icon">{renderSocialIcon(type)}</span>
+                  <span className="footer-social-meta">
+                    <strong>{name}</strong>
+                    <span>{handle}</span>
+                  </span>
+                </a>
+              ))}
             </div>
-          </div>
-          <div className="footer-bottom reveal">
-            <p>© 2026 Rehan Firoz Kadri. All Rights Reserved.</p>
-            <div className="footer-socials">
-              <a href="mailto:youtech280@gmail.com">Email</a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a href="https://github.com/rehan280/therehankadri.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+
+            <div className="footer-bottom">
+              <p>© 2026 Rehan Firoz Kadri. All rights reserved.</p>
+              <div className="footer-links">
+                <Link href="#services">Services</Link>
+                <Link href="#works">Results</Link>
+                <Link href="#contact">Contact</Link>
+              </div>
             </div>
           </div>
         </div>
