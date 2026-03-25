@@ -4,6 +4,26 @@ import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import "./home.css";
 
+type ProofShot = {
+  img: string;
+  alt: string;
+};
+
+type ProofFeature = {
+  title: string;
+  desc: string;
+};
+
+type ProofShowcase = {
+  img: string;
+  alt: string;
+  tag: string;
+  h3: string;
+  p: string;
+  features: ProofFeature[];
+  proofShots?: ProofShot[];
+};
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -73,6 +93,56 @@ export default function Home() {
     { href: "#process", label: "Systems" },
     { href: "#about", label: "About" },
     { href: "#contact", label: "Contact" },
+  ];
+
+  const caseStudies: ProofShowcase[] = [
+    {
+      img: "/rehanous-website.png", alt: "B2B Growth Infrastructure",
+      tag: "B2B SEO & Content Ops",
+      h3: "Scaling to 1M+ Monthly Organic Visitors",
+      p: "Problem: Client had zero visibility in a highly competitive digital niche.\nAction: Designed an aggressive SEO architecture and programmatic content hubs optimizing for high-intent queries.\nResult: Scaled from zero to over 1M completely free, highly-targeted monthly visitors.",
+      proofShots: [
+        { img: "/traffic shot 4million.webp", alt: "4 million traffic proof screenshot" },
+      ],
+      features: [
+        { title: "Technical Monopoly", desc: "Flawless technical core ensuring perfect search engine indexing." },
+        { title: "Traffic Compounding", desc: "Continuous MoM growth completely independent of ad spend." },
+      ],
+    },
+    {
+      img: "/rehanous-channel.png", alt: "Brand Authority & Video",
+      tag: "Brand Authority & Video",
+      h3: "Building a 33K+ Subscriber Engine",
+      p: "Problem: Stagnant social growth lacking viewer retention and conversion mechanisms.\nAction: Deployed rigorous A/B thumbnail mechanics and retention-focused editing workflows.\nResult: Exploded channel to 33,000+ highly engaged subscribers, driving massive inbound authority.",
+      features: [
+        { title: "Retention Optimization", desc: "Cut audience drop-off by 40% through timeline engineering." },
+        { title: "12%+ Average CTR", desc: "Dominating impressions through high-contrast visual hooks." },
+      ],
+    },
+  ];
+
+  const visualProofItems: ProofShowcase[] = [
+    {
+      img: "/ranked-website-proof.jpeg", alt: "Ranked Website Proof",
+      tag: "SEO Dominance • B2B Rankings",
+      h3: "#1 Ranked Global Websites",
+      p: "Secured the absolute top search spots globally for high-intent keywords connecting product value directly to enterprise search intent.",
+      features: [{ title: "Search Monopoly", desc: "Consistently outranking massive enterprise competitors globally." }],
+    },
+    {
+      img: "/youtube-proof.jpeg", alt: "YouTube Analytics",
+      tag: "Growth Scaling • Backend",
+      h3: "Massive Impression Scaling",
+      p: "The backend dashboard proving exponential growth patterns. Millions of targeted impressions scaling dramatically week over week through systemic editorial ops.",
+      features: [{ title: "Consistent Predictability", desc: "Undeniable backend data proving the exact scalability of my systems." }],
+    },
+    {
+      img: "/traffic shot 4million.webp", alt: "Traffic proof analytics",
+      tag: "Traffic Proof • Search Console",
+      h3: "Traffic proof that backs up the growth claim",
+      p: "Search Console screenshots showing multi-million click and impression volume, added as direct evidence behind the 1M+ traffic case study.",
+      features: [{ title: "Search Console Evidence", desc: "Direct click and impression screenshots reinforcing the 1M+ traffic performance claim." }],
+    },
   ];
 
   return (
@@ -372,31 +442,7 @@ export default function Home() {
             <p className="section-desc">Data-backed examples of how my systems transition stagnant metrics into exponential revenue growth.</p>
           </div>
           <div className="proof-showcase-list">
-            {[
-              {
-                img: "/rehanous-website.png", alt: "B2B Growth Infrastructure",
-                tag: "B2B SEO & Content Ops",
-                h3: "Scaling to 1M+ Monthly Organic Visitors",
-                p: "Problem: Client had zero visibility in a highly competitive digital niche.\nAction: Designed an aggressive SEO architecture and programmatic content hubs optimizing for high-intent queries.\nResult: Scaled from zero to over 1M completely free, highly-targeted monthly visitors.",
-                proofShots: [
-                  { img: "/traffic shot 4million.webp", alt: "4 million traffic proof screenshot" },
-                ],
-                features: [
-                  { title: "Technical Monopoly", desc: "Flawless technical core ensuring perfect search engine indexing." },
-                  { title: "Traffic Compounding", desc: "Continuous MoM growth completely independent of ad spend." },
-                ],
-              },
-              {
-                img: "/rehanous-channel.png", alt: "Brand Authority & Video",
-                tag: "Brand Authority & Video",
-                h3: "Building a 33K+ Subscriber Engine",
-                p: "Problem: Stagnant social growth lacking viewer retention and conversion mechanisms.\nAction: Deployed rigorous A/B thumbnail mechanics and retention-focused editing workflows.\nResult: Exploded channel to 33,000+ highly engaged subscribers, driving massive inbound authority.",
-                features: [
-                  { title: "Retention Optimization", desc: "Cut audience drop-off by 40% through timeline engineering." },
-                  { title: "12%+ Average CTR", desc: "Dominating impressions through high-contrast visual hooks." },
-                ],
-              },
-            ].map(({ img, alt, tag, h3, p, proofShots, features }, i) => (
+            {caseStudies.map(({ img, alt, tag, h3, p, proofShots, features }, i) => (
               <div className={`proof-showcase-row reveal delay-${(i % 3) + 1}`} key={i}>
                 <div className="proof-showcase-img-container">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -440,29 +486,7 @@ export default function Home() {
             <p className="section-desc">Raw backend analytics verifying exponential growth trajectories.</p>
           </div>
           <div className="proof-showcase-list">
-            {[
-              {
-                img: "/ranked-website-proof.jpeg", alt: "Ranked Website Proof",
-                tag: "SEO Dominance • B2B Rankings",
-                h3: "#1 Ranked Global Websites",
-                p: "Secured the absolute top search spots globally for high-intent keywords connecting product value directly to enterprise search intent.",
-                features: [{ title: "Search Monopoly", desc: "Consistently outranking massive enterprise competitors globally." }],
-              },
-              {
-                img: "/youtube-proof.jpeg", alt: "YouTube Analytics",
-                tag: "Growth Scaling • Backend",
-                h3: "Massive Impression Scaling",
-                p: "The backend dashboard proving exponential growth patterns. Millions of targeted impressions scaling dramatically week over week through systemic editorial ops.",
-                features: [{ title: "Consistent Predictability", desc: "Undeniable backend data proving the exact scalability of my systems." }],
-              },
-              {
-                img: "/traffic shot 4million.webp", alt: "Traffic proof analytics",
-                tag: "Traffic Proof • Search Console",
-                h3: "Traffic proof that backs up the growth claim",
-                p: "Search Console screenshots showing multi-million click and impression volume, added as direct evidence behind the 1M+ traffic case study.",
-                features: [{ title: "Search Console Evidence", desc: "Direct click and impression screenshots reinforcing the 1M+ traffic performance claim." }],
-              },
-            ].map(({ img, alt, tag, h3, p, proofShots, features }, i) => (
+            {visualProofItems.map(({ img, alt, tag, h3, p, proofShots, features }, i) => (
               <div className={`proof-showcase-row reveal delay-${(i % 3) + 1}`} key={i}>
                 <div className="proof-showcase-img-container">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
