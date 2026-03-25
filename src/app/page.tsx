@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./home.css";
 
 type ProofShot = {
@@ -73,7 +73,7 @@ export default function Home() {
       },
       { rootMargin: "-40% 0px -55% 0px" }
     );
-    ["services", "works", "proofs", "process", "about", "contact"].forEach(id => {
+    ["services", "works", "proofs", "process", "about"].forEach(id => {
       const el = document.getElementById(id);
       if (el) sectionObserver.observe(el);
     });
@@ -89,39 +89,13 @@ export default function Home() {
     };
   }, []);
 
-  const [formResult, setFormResult] = useState("");
-
-  const onContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setFormResult("Sending message...");
-    const formData = new FormData(event.currentTarget);
-    formData.append("access_key", "c43eac91-aa20-47a0-97b3-2286e58da10f");
-
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      });
-      const data = await response.json();
-      if (data.success) {
-        setFormResult("Form Submitted Successfully!");
-        event.currentTarget.reset();
-        setTimeout(() => setFormResult(""), 5000);
-      } else {
-        setFormResult(data.message || "Error submitting form. Please try again.");
-      }
-    } catch {
-      setFormResult("Network error. Please try again later.");
-    }
-  };
-
   const closeMenu = () => setMenuOpen(false);
   const navLinks = [
     { href: "#services", label: "Expertise" },
     { href: "#works", label: "Results" },
     { href: "#process", label: "Systems" },
     { href: "#about", label: "About" },
-    { href: "#contact", label: "Contact" },
+    { href: "/contact", label: "Contact" },
   ];
 
   const caseStudies: ProofShowcase[] = [
@@ -129,23 +103,23 @@ export default function Home() {
       img: "/rehanous-website.png", alt: "B2B Growth Infrastructure",
       tag: "B2B SEO & Content Ops",
       h3: "Scaling to 1M+ Monthly Organic Visitors",
-      p: "Problem: Client had zero visibility in a highly competitive digital niche.\nAction: Designed an aggressive SEO architecture and programmatic content hubs optimizing for high-intent queries.\nResult: Scaled from zero to over 1M completely free, highly-targeted monthly visitors.",
+      p: "Built an SEO system that took the site from near-zero visibility to 1M+ monthly organic visitors.",
       proofShots: [
         { img: "/traffic shot 4million.webp", alt: "4 million traffic proof screenshot" },
       ],
       features: [
-        { title: "Technical Monopoly", desc: "Flawless technical core ensuring perfect search engine indexing." },
-        { title: "Traffic Compounding", desc: "Continuous MoM growth completely independent of ad spend." },
+        { title: "Technical SEO", desc: "A clean structure built for rankings and scale." },
+        { title: "Compounding Growth", desc: "Traffic kept growing without paid acquisition." },
       ],
     },
     {
       img: "/rehanous-channel.png", alt: "Brand Authority & Video",
       tag: "Brand Authority & Video",
       h3: "Building a 33K+ Subscriber Engine",
-      p: "Problem: Stagnant social growth lacking viewer retention and conversion mechanisms.\nAction: Deployed rigorous A/B thumbnail mechanics and retention-focused editing workflows.\nResult: Exploded channel to 33,000+ highly engaged subscribers, driving massive inbound authority.",
+      p: "Reworked the content system to improve retention, sharpen positioning, and scale the channel to 33K+ subscribers.",
       features: [
-        { title: "Retention Optimization", desc: "Cut audience drop-off by 40% through timeline engineering." },
-        { title: "12%+ Average CTR", desc: "Dominating impressions through high-contrast visual hooks." },
+        { title: "Stronger Retention", desc: "Videos held attention longer and performed better." },
+        { title: "Higher CTR", desc: "Better packaging turned more impressions into views." },
       ],
     },
   ];
@@ -209,7 +183,7 @@ export default function Home() {
             <Link
               key={href}
               href={href}
-              className={activeSection === href.slice(1) ? "active" : ""}
+              className={href.startsWith("#") && activeSection === href.slice(1) ? "active" : ""}
             >
               {label}
             </Link>
@@ -256,7 +230,7 @@ export default function Home() {
               I engineer organic systems that turn cold search traffic into booked calls and enterprise clients. Stop burning cash on ads and start building compounding, data-driven growth.
             </p>
             <div className="hero-cta reveal delay-3">
-              <Link href="#contact" className="btn btn-orange">Book Strategy Call ↗</Link>
+              <Link href="/contact" className="btn btn-orange">Book Strategy Call ↗</Link>
               <Link href="#proofs" className="btn btn-white">See Real Results</Link>
             </div>
             
@@ -475,7 +449,7 @@ export default function Home() {
                     <p className="growth-path-fit">
                       <strong>Best for:</strong> {fit}
                     </p>
-                    <Link href="#contact" className="btn btn-orange growth-path-cta">
+                    <Link href="/contact" className="btn btn-orange growth-path-cta">
                       {cta} ↗
                     </Link>
                   </div>
@@ -710,8 +684,8 @@ export default function Home() {
         <div className="marquee-container reveal fade-in" style={{ padding: "2rem 0" }}>
           <div className="marquee-track">
             <div className="marquee-content">
-              {["B2B Lead Generation", "Organic CRO", "SEO Architecture", "Video Marketing", "Data Analytics",
-                "B2B Lead Generation", "Organic CRO", "SEO Architecture", "Video Marketing", "Data Analytics"].map((t, i) => (
+              {["Organic SEO Pipelines", "B2B Lead Generation Systems", "Content & Video Ops", "LinkedIn Outreach Systems", "YouTube Growth Systems",
+                "Organic SEO Pipelines", "B2B Lead Generation Systems", "Content & Video Ops", "LinkedIn Outreach Systems", "YouTube Growth Systems"].map((t, i) => (
                 <div className="marquee-item" key={i}>{t}</div>
               ))}
             </div>
@@ -732,116 +706,9 @@ export default function Home() {
               <p className="cta-text">
                 I will audit your growth system and map the fastest route to qualified pipeline.
               </p>
-              <Link href="#contact" className="btn btn-orange cta-button">
+              <Link href="/contact" className="btn btn-orange cta-button">
                 Build My System ↗
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 11. CONTACT SECTION ── */}
-      <section id="contact" className="contact-section section-padding">
-        <div className="container contact-container reveal fade-in">
-          <div className="contact-grid">
-            <div className="contact-copy">
-              <span className="section-label">Contact</span>
-              <h2 className="section-title">Let&apos;s Build A <span className="text-orange">Revenue System</span></h2>
-              <p className="contact-desc">
-                Whether you need qualified pipeline, sharper positioning, or a stronger content engine, this is where the conversation starts.
-              </p>
-
-              <div className="contact-pill-row" aria-label="Contact highlights">
-                <span className="contact-pill">Strategy-first approach</span>
-                <span className="contact-pill">B2B pipeline focus</span>
-                <span className="contact-pill">Fast response</span>
-              </div>
-
-              <div className="contact-highlights">
-                <div className="benefit-item">
-                  <div className="benefit-icon">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M3 13.2 8.4 18l12.6-12.6-1.8-1.8L8.4 14.4 4.8 10.8 3 12.6v.6Z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4>Clear growth diagnosis</h4>
-                    <p>We identify where traffic, positioning, or conversion is slowing pipeline.</p>
-                  </div>
-                </div>
-                <div className="benefit-item">
-                  <div className="benefit-icon">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M12 2 4 6v5c0 5.25 3.4 10.16 8 11 4.6-.84 8-5.75 8-11V6l-8-4Zm0 2.2 5.8 2.9V11c0 4.17-2.52 8.25-5.8 9.1C8.72 19.25 6.2 15.17 6.2 11V7.1L12 4.2Zm-.95 4.05v3.05H8v1.8h3.05v3.05h1.9V13.1H16v-1.8h-3.05V8.25h-1.9Z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4>Systems over hacks</h4>
-                    <p>Search, content, brand, and conversion are planned as one connected engine.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="contact-direct">
-                <div className="contact-direct-card">
-                  <span className="contact-direct-label">Best for direct outreach</span>
-                  <a href="mailto:youtech280@gmail.com" className="direct-email">
-                    <span className="social-icon-wrap">{renderSocialIcon("email")}</span>
-                    <span>youtech280@gmail.com</span>
-                  </a>
-                </div>
-
-                <div className="contact-social-grid">
-                  {socialLinks.map(({ type, name, href, handle, note }) => (
-                    <a
-                      key={name}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="contact-social-card"
-                    >
-                      <span className="contact-social-icon">{renderSocialIcon(type)}</span>
-                      <span className="contact-social-copy">
-                        <strong>{name}</strong>
-                        <span>{handle}</span>
-                        <small>{note}</small>
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="contact-form-wrapper">
-              <div className="form-glass-card">
-                <div className="form-card-top">
-                  <span className="form-kicker">Project inquiry</span>
-                  <h3>Tell me what you&apos;re building</h3>
-                  <p>
-                    Share your goals, current bottleneck, and what kind of growth system you need.
-                  </p>
-                </div>
-                <form className="contact-form" onSubmit={onContactSubmit}>
-                  <div className="form-group">
-                    <label htmlFor="name">Full Name</label>
-                    <input type="text" id="name" name="name" className="form-input" placeholder="John Doe" required />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="email">Work Email</label>
-                    <input type="email" id="email" name="email" className="form-input" placeholder="john@company.com" required />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="message">Message</label>
-                    <textarea id="message" name="message" className="form-textarea" placeholder="Tell me about your offer, audience, and where growth is getting stuck..." required></textarea>
-                  </div>
-                  <button type="submit" className="btn btn-orange form-submit-btn">Send Inquiry ↗</button>
-                  {formResult && <div className="form-status">{formResult}</div>}
-                </form>
-                <div className="form-card-footer">
-                  <span>Usually replies within 24-48 hours</span>
-                  <a href="mailto:youtech280@gmail.com">Prefer email instead?</a>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -885,7 +752,7 @@ export default function Home() {
               <div className="footer-links">
                 <Link href="#services">Services</Link>
                 <Link href="#works">Results</Link>
-                <Link href="#contact">Contact</Link>
+                <Link href="/contact">Contact</Link>
               </div>
             </div>
           </div>
