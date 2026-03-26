@@ -4552,10 +4552,10 @@
   }
 
   .hero-title {
-    font-size: clamp(1.92rem, 8.1vw, 2.45rem);
-    line-height: 0.94;
-    max-width: 16.4ch;
-    letter-spacing: -0.055em;
+    font-size: clamp(2.18rem, 9.6vw, 2.9rem);
+    line-height: 0.95;
+    max-width: 15.4ch;
+    letter-spacing: -0.045em;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0.95rem;
@@ -4856,10 +4856,10 @@
   }
 
   .hero-title {
-    font-size: clamp(1.78rem, 7.9vw, 2.12rem);
-    max-width: 15.8ch;
-    line-height: 0.94;
-    letter-spacing: -0.06em;
+    font-size: clamp(1.98rem, 8.8vw, 2.42rem);
+    max-width: 14.8ch;
+    line-height: 0.95;
+    letter-spacing: -0.042em;
   }
 
   .hero-cta .btn {
