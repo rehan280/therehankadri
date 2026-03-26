@@ -331,7 +331,7 @@ export default function Home() {
       ],
     },
     {
-      img: "/rehanous-channel.png", alt: "Brand Authority & Video",
+      img: "/Rehanous%20channel.webp", alt: "Brand Authority & Video",
       tag: "Brand Authority & Video",
       h3: "Building a 33K+ Subscriber Engine",
       p: "Reworked the content system to improve retention, sharpen positioning, and scale the channel to 33K+ subscribers.",
@@ -391,7 +391,7 @@ export default function Home() {
   ];
 
   return (
-    <main>
+    <main className="site-shell">
       {/* ── NAVBAR ── */}
       <nav className={`navbar${scrolled ? " scrolled" : ""}`}>
         <Link href="/" className="nav-brand" aria-label="The Rehan Kadri home">
@@ -512,10 +512,12 @@ export default function Home() {
                 Traffic without <span className="text-orange">conversion</span> is just noise.
               </h2>
               <p className="problem-lead">
-                More visibility means nothing if it doesn&apos;t turn into qualified pipeline.
+                Getting more traffic is easy. Turning it into qualified leads is where most businesses fail.
               </p>
               <div className="problem-intro-note">
-                Most teams chase traffic. I build the system that converts it into revenue.
+                Most businesses focus on traffic first. That is why they struggle to convert.
+                <br />
+                I build systems that turn attention into predictable revenue.
               </div>
             </div>
 
@@ -524,11 +526,11 @@ export default function Home() {
                 <div className="problem-card-top">
                   <div className="problem-mini-copy">
                     <span className="problem-mini-label">What goes wrong</span>
-                    <h3 className="problem-card-title">More traffic. Broken pipeline.</h3>
+                    <h3 className="problem-card-title">More traffic. No conversions.</h3>
                     <p>
-                      Traffic comes in... but nothing converts. Leads are unqualified. Follow-ups break. Sales teams are left chasing dead intent.
+                      Traffic comes in but leads stay unqualified. Follow-ups break. Sales teams waste time chasing the wrong people.
                       <br /><br />
-                      This isn&apos;t a traffic problem. It&apos;s a system problem.
+                      This is not a traffic problem. It is a broken system.
                     </p>
                   </div>
 
@@ -542,8 +544,8 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="problem-card-footer">
-                  <span className="problem-card-chip">Low intent</span>
-                  <span className="problem-card-chip">Broken flow</span>
+                  <span className="problem-card-chip">Unqualified traffic</span>
+                  <span className="problem-card-chip">No conversion system</span>
                 </div>
               </article>
 
@@ -551,9 +553,11 @@ export default function Home() {
                 <div className="problem-card-top">
                   <div className="problem-mini-copy">
                     <span className="problem-mini-label">What I build</span>
-                    <h3 className="problem-card-title">Conversion system that scales</h3>
+                    <h3 className="problem-card-title">A system built to convert and scale</h3>
                     <p>
-                      I build a connected system where every click, visit, and interaction moves toward one goal — revenue.
+                      Every click, visit, and interaction is designed to move one step closer to a booked call.
+                      <br /><br />
+                      No gaps. No wasted attention. Just a clear path to revenue.
                     </p>
                     <div className="problem-build-flow" aria-label="Traffic to revenue flow">
                       <div className="problem-build-step problem-build-step-1">
@@ -561,7 +565,7 @@ export default function Home() {
                         <span className="problem-build-arrow" aria-hidden="true">→</span>
                       </div>
                       <div className="problem-build-step problem-build-step-2">
-                        <span className="problem-build-stage">Qualification</span>
+                        <span className="problem-build-stage">Qualified leads</span>
                         <span className="problem-build-arrow" aria-hidden="true">→</span>
                       </div>
                       <div className="problem-build-step problem-build-step-3">
@@ -569,10 +573,10 @@ export default function Home() {
                         <span className="problem-build-arrow" aria-hidden="true">→</span>
                       </div>
                       <div className="problem-build-step problem-build-step-4">
-                        <span className="problem-build-stage problem-build-stage-accent">Pipeline</span>
+                        <span className="problem-build-stage problem-build-stage-accent">Revenue</span>
                       </div>
                     </div>
-                    <div className="problem-build-note">Everything is connected.</div>
+                    <div className="problem-build-note">Every step is built to convert.</div>
                   </div>
 
                   <div className="problem-image-frame problem-image-frame-build">
@@ -996,32 +1000,41 @@ export default function Home() {
             <span className="section-label">Client Feedback</span>
             <h2 className="section-title">The <span className="text-orange">Consensus</span></h2>
           </div>
-          <div className="reveal" style={{ maxWidth: "720px", margin: "0 auto 4rem", background: "white", padding: "2.75rem", borderRadius: "24px", boxShadow: "0 20px 40px rgba(0,0,0,0.05)", textAlign: "center", border: "1px solid rgba(0,0,0,0.04)" }}>
-            <div style={{ color: "var(--brand-orange)", fontSize: "2rem", marginBottom: "1.5rem" }}>★★★★★</div>
-            <p style={{ fontSize: "1.08rem", color: "var(--text-dark)", fontStyle: "italic", lineHeight: "1.65", marginBottom: "2rem", fontWeight: "500" }}>
-              &quot;Rehan built a real growth pipeline for Fuzen.io, not just better SEO. He connected search, content, and conversion into one system that improved both traffic quality and qualified leads.&quot;
-            </p>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", maxWidth: "360px", margin: "0 auto" }}>
-              <div style={{ textAlign: "left" }}>
-                <strong style={{ display: "block", color: "var(--text-dark)", fontSize: "1.1rem" }}>Pushkar Gaikwad</strong>
-                <span style={{ color: "var(--text-gray)", fontSize: "0.9rem", marginTop: "0.35rem", display: "block" }}>Founder, Fuzen.io</span>
-              </div>
-              <Image
-                src="/pushkar.webp"
-                alt="Pushkar Gaikwad"
-                width={64}
-                height={64}
-                style={{
-                  width: "64px",
-                  height: "64px",
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  border: "2px solid rgba(255,90,54,0.12)",
-                  boxShadow: "0 10px 24px rgba(0,0,0,0.08)",
-                  flexShrink: 0,
-                }}
-              />
-            </div>
+          <div className="testimonials-grid reveal">
+            {[
+              {
+                quote:
+                  "Rehan built a real growth pipeline for Fuzen.io, not just better SEO. He connected search, content, and conversion into one system that improved both traffic quality and qualified leads.",
+                name: "Pushkar Gaikwad",
+                role: "Founder, Fuzen.io",
+                image: "/pushkar.webp",
+              },
+              {
+                quote:
+                  "Rehan helped us fix what was actually holding our growth back. Our traffic increased, but more importantly we started getting qualified leads consistently. The biggest difference was how everything was connected, from SEO to conversion. It finally feels like we have a system that works.",
+                name: "Adil Shaikh",
+                role: "Founder, BinaryLabs",
+                image: "/adill.webp",
+              },
+            ].map(({ quote, name, role, image }, index) => (
+              <article className={`testimonial-card reveal delay-${index + 1}`} key={name}>
+                <div className="testimonial-stars">★★★★★</div>
+                <p className="testimonial-quote">&quot;{quote}&quot;</p>
+                <div className="testimonial-person">
+                  <div className="testimonial-person-copy">
+                    <strong>{name}</strong>
+                    <span>{role}</span>
+                  </div>
+                  <Image
+                    src={image}
+                    alt={name}
+                    width={64}
+                    height={64}
+                    className="testimonial-avatar"
+                  />
+                </div>
+              </article>
+            ))}
           </div>
         </div>
 
