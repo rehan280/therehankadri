@@ -176,28 +176,41 @@ export default function Home() {
     <main>
       {/* ── NAVBAR ── */}
       <nav className={`navbar${scrolled ? " scrolled" : ""}`}>
-        <div className="nav-logo">REHAN<span>.</span></div>
+        <Link href="/" className="nav-brand" aria-label="The Rehan Kadri home">
+          <span className="nav-brand-copy">
+            <span className="nav-brand-kicker">Revenue-first growth systems</span>
+            <span className="nav-brand-title">
+              <span className="nav-brand-the">The</span>
+              <span className="nav-brand-rehan">Rehan</span>
+              <span className="nav-brand-kadri">Kadri</span>
+            </span>
+          </span>
+        </Link>
 
-        <div className="desktop-links">
-          {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={href.startsWith("#") && activeSection === href.slice(1) ? "active" : ""}
-            >
-              {label}
-            </Link>
-          ))}
+        <div className="desktop-links-shell">
+          <div className="desktop-links">
+            {navLinks.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className={href.startsWith("#") && activeSection === href.slice(1) ? "active" : ""}
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
         </div>
 
         <div className="nav-right">
-          <a href="mailto:youtech280@gmail.com" className="btn btn-orange nav-btn">
-            Hire Me
-          </a>
+          <Link href="/contact" className="btn btn-orange nav-btn">
+            Book Call
+          </Link>
           <button
             className={`hamburger${menuOpen ? " open" : ""}`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav-drawer"
           >
             <span /><span /><span />
           </button>
@@ -205,14 +218,18 @@ export default function Home() {
       </nav>
 
       {/* ── MOBILE DRAWER ── */}
-      <div className={`mobile-drawer${menuOpen ? " open" : ""}`}>
+      <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="mobile-nav-drawer">
         <div className="mobile-drawer-links">
+          <div className="mobile-drawer-top">
+            <span className="mobile-drawer-kicker">Menu</span>
+            <p>Explore the site or start a project.</p>
+          </div>
           {navLinks.map(({ href, label }) => (
             <Link key={href} href={href} onClick={closeMenu}>{label}</Link>
           ))}
-          <a href="mailto:youtech280@gmail.com" className="btn btn-orange drawer-hire" onClick={closeMenu}>
-            Hire Me ↗
-          </a>
+          <Link href="/contact" className="btn btn-orange drawer-hire" onClick={closeMenu}>
+            Book Call ↗
+          </Link>
         </div>
       </div>
       {menuOpen && <div className="drawer-overlay" onClick={closeMenu} />}
@@ -760,7 +777,17 @@ export default function Home() {
           <div className="footer-shell reveal">
             <div className="footer-wrapper">
               <div className="footer-left">
-                <div className="nav-logo footer-logo">REHAN<span>.</span></div>
+                <div className="footer-brand" aria-label="The Rehan Kadri logo">
+                  <div className="footer-brand-copy">
+                    <span className="footer-brand-kicker">Revenue-first growth systems</span>
+                    <span className="footer-brand-name">
+                      <span className="footer-brand-the">The</span>
+                      <span className="footer-brand-rehan">Rehan</span>
+                      <span className="footer-brand-kadri">Kadri</span>
+                    </span>
+                    <span className="footer-brand-role">SEO • Content • Pipeline Design</span>
+                  </div>
+                </div>
                 <p className="footer-tagline">Growth marketer building systems that turn attention into qualified pipeline.</p>
               </div>
               <div className="footer-right">
