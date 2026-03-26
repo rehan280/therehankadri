@@ -251,26 +251,66 @@ export default function Home() {
             <div className="problem-intro">
               <span className="section-label">The Gap</span>
               <h2 className="problem-title">
-                Traffic without <span className="text-orange">conversion</span> wastes budget.
+                Traffic without <span className="text-orange">conversion</span> is just noise.
               </h2>
               <p className="problem-lead">
-                More visibility means very little if it does not create qualified pipeline.
+                More visibility means nothing if it doesn&apos;t turn into qualified pipeline.
               </p>
+              <div className="problem-intro-note">
+                Most teams optimize for traffic. I build the system that turns attention into revenue.
+              </div>
             </div>
 
             <div className="problem-cards">
               <article className="problem-mini-card">
-                <span className="problem-mini-label">What goes wrong</span>
-                <p>
-                  Teams buy traffic, publish content, and still end up with weak lead quality and no reliable system.
-                </p>
+                <div className="problem-card-top">
+                  <div className="problem-mini-copy">
+                    <span className="problem-mini-label">What goes wrong</span>
+                    <h3 className="problem-card-title">More traffic, weak pipeline</h3>
+                    <p>
+                      Traffic comes in, but nothing moves forward. No clear handoff. No qualification. No follow-up system.
+                    </p>
+                  </div>
+
+                  <div className="problem-image-frame problem-image-frame-loss">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/arrow%20funnel.png"
+                      alt="Traffic leaking away illustration"
+                      className="problem-image"
+                    />
+                  </div>
+                </div>
+                <div className="problem-card-footer">
+                  <span className="problem-card-chip">Low intent</span>
+                  <span className="problem-card-chip">No clear handoff</span>
+                </div>
               </article>
 
               <article className="problem-mini-card problem-mini-card-accent">
-                <span className="problem-mini-label">What I build</span>
-                <p>
-                  A connected growth pipeline that attracts the right audience, builds trust through SEO, content, and social media, and turns intent into qualified leads and booked calls.
-                </p>
+                <div className="problem-card-top">
+                  <div className="problem-mini-copy">
+                    <span className="problem-mini-label">What I build</span>
+                    <h3 className="problem-card-title">Connected growth engine</h3>
+                    <p>
+                      I build systems that turn scattered attention into structured pipeline, so every click, view, and visit has a path to revenue.
+                    </p>
+                  </div>
+
+                  <div className="problem-image-frame problem-image-frame-build">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/what%20i%20build%20funnel).png"
+                      alt="Qualified pipeline funnel illustration"
+                      className="problem-image"
+                    />
+                  </div>
+                </div>
+                <div className="problem-card-footer">
+                  <span className="problem-card-chip problem-card-chip-accent">SEO</span>
+                  <span className="problem-card-chip problem-card-chip-accent">Content</span>
+                  <span className="problem-card-chip problem-card-chip-accent">Booked calls</span>
+                </div>
               </article>
             </div>
           </div>
