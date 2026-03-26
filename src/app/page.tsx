@@ -393,7 +393,7 @@ export default function Home() {
   return (
     <main className="site-shell">
       {/* ── NAVBAR ── */}
-      <nav className={`navbar${scrolled ? " scrolled" : ""}`}>
+      <nav className={`navbar${scrolled ? " scrolled" : ""}${menuOpen ? " menu-open" : ""}`}>
         <Link href="/" className="nav-brand" aria-label="The Rehan Kadri home">
           <span className="nav-brand-copy">
             <span className="nav-brand-kicker">Revenue-first growth systems</span>
@@ -420,6 +420,9 @@ export default function Home() {
         </div>
 
         <div className="nav-right">
+          <Link href="#proofs" className="nav-secondary">
+            View Results
+          </Link>
           <Link href="/contact" className="btn btn-orange nav-btn">
             Book a strategy call
           </Link>
@@ -439,8 +442,9 @@ export default function Home() {
       <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="mobile-nav-drawer">
         <div className="mobile-drawer-links">
           <div className="mobile-drawer-top">
-            <span className="mobile-drawer-kicker">Menu</span>
-            <p>Explore the site or start a project.</p>
+            <span className="mobile-drawer-kicker">The Rehan Kadri</span>
+            <span className="mobile-drawer-title">Growth Systems</span>
+            <p>SEO, content, and pipeline strategy for qualified revenue growth.</p>
           </div>
           {navLinks.map(({ href, label }) => (
             <Link key={href} href={href} onClick={closeMenu}>{label}</Link>
