@@ -457,16 +457,18 @@ export default function Home() {
         <div className="container hero-container">
           <div className="hero-text-col">
             <h1 className="hero-title reveal delay-2">
-              I help B2B brands rank <span className="text-orange">#1 on Google</span><br />
-              and scale <span className="text-orange">YouTube</span> into real leads.
+              I help B2B brands
+              <br className="hero-title-break-mobile" />
+              rank <span className="text-orange">#1 on Google</span>
+              <br className="hero-title-break" />
+              <br className="hero-title-break-mobile" />
+              and scale <span className="text-orange">YouTube</span>
+              <br className="hero-title-break-mobile" />
+              into real leads.
             </h1>
             <p className="hero-subtitle reveal delay-3">
               Growth systems built to turn search visibility and content reach into qualified pipeline, not vanity metrics.
             </p>
-            <div className="hero-proofline reveal delay-3" aria-label="Trust proof">
-              <span className="hero-proof-badge">Proof</span>
-              <span>Ranked 10+ websites #1</span>
-            </div>
             <div className="hero-cta reveal delay-3">
               <Link href="/contact" className="btn btn-orange">Book a strategy call ↗</Link>
               <Link href="#proofs" className="btn btn-white">See Real Results</Link>
