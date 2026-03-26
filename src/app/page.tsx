@@ -24,6 +24,18 @@ type ProofShowcase = {
   proofShots?: ProofShot[];
 };
 
+type ServiceVisualKind = "seo" | "pipeline" | "content";
+type ServiceDiagramIconKind =
+  | "keyword"
+  | "technical"
+  | "content"
+  | "outreach"
+  | "capture"
+  | "convert"
+  | "youtube"
+  | "instagram"
+  | "linkedin";
+
 const renderSocialIcon = (type: "email" | "linkedin" | "youtube" | "x") => {
   switch (type) {
     case "email":
@@ -49,6 +61,212 @@ const renderSocialIcon = (type: "email" | "linkedin" | "youtube" | "x") => {
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M18.9 3H21l-4.6 5.26L21.8 21h-4.94l-3.87-5.07L8.56 21H6.45l4.92-5.63L2.2 3h5.06l3.5 4.59L14.87 3Zm-.73 16.75h1.16L6.63 4.17H5.39l12.78 15.58Z" />
         </svg>
+      );
+  }
+};
+
+const renderServiceDiagramIcon = (kind: ServiceDiagramIconKind) => {
+  switch (kind) {
+    case "keyword":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="service-diagram-glyph">
+          <circle cx="10" cy="10" r="5.1" fill="none" stroke="currentColor" strokeWidth="2.4" />
+          <path d="M14 14 18.4 18.4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+          <path d="M10 7.1v5.8M7.1 10h5.8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      );
+    case "technical":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="service-diagram-glyph">
+          <path d="M6.5 7.4h11M6.5 12h11M6.5 16.6h11" fill="none" stroke="currentColor" strokeWidth="2.15" strokeLinecap="round" />
+          <circle cx="8.4" cy="7.4" r="1.8" fill="#fff" />
+          <circle cx="14.5" cy="12" r="1.8" fill="#fff" />
+          <circle cx="11.6" cy="16.6" r="1.8" fill="#fff" />
+        </svg>
+      );
+    case "content":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="service-diagram-glyph">
+          <path d="M8 4.6h7.3l2.7 2.8v12H8z" fill="rgba(255,255,255,0.24)" stroke="currentColor" strokeWidth="2.15" strokeLinejoin="round" />
+          <path d="M15.3 4.6v3.2h2.7" fill="none" stroke="currentColor" strokeWidth="2.15" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M10 11h6M10 14.4h6M10 17.8h4.4" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" />
+        </svg>
+      );
+    case "outreach":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="service-diagram-glyph">
+          <path d="M5.2 12h8.5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+          <path d="m12.8 8.2 4 3.8-4 3.8" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="5.4" cy="12" r="1.7" fill="#fff" />
+        </svg>
+      );
+    case "capture":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="service-diagram-glyph">
+          <path d="M5 7.2h14l-5.6 6.2v4.3L10.6 16v-2.6Z" fill="rgba(255,255,255,0.22)" stroke="currentColor" strokeWidth="2.15" strokeLinejoin="round" />
+          <path d="M8.7 10.2h6.6" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+          <circle cx="12" cy="15.3" r="1.1" fill="#fff" />
+        </svg>
+      );
+    case "convert":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="service-diagram-glyph">
+          <rect x="5" y="5" width="14" height="14" rx="3.4" fill="rgba(255,255,255,0.14)" stroke="currentColor" strokeWidth="2.15" />
+          <path d="m9.2 12.2 1.9 1.9 3.9-4.2" fill="none" stroke="currentColor" strokeWidth="2.35" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    case "youtube":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="service-diagram-glyph">
+          <path
+            d="M20.5 12c0 2.45-.26 3.96-.52 4.72a2.3 2.3 0 0 1-1.45 1.45c-.76.26-2.27.52-6.53.52s-5.77-.26-6.53-.52a2.3 2.3 0 0 1-1.45-1.45C3.76 15.96 3.5 14.45 3.5 12s.26-3.96.52-4.72a2.3 2.3 0 0 1 1.45-1.45c.76-.26 2.27-.52 6.53-.52s5.77.26 6.53.52a2.3 2.3 0 0 1 1.45 1.45c.26.76.52 2.27.52 4.72Z"
+            fill="rgba(255,255,255,0.92)"
+          />
+          <path d="m10.3 8.85 5.3 3.15-5.3 3.15z" fill="#ff5a36" />
+        </svg>
+      );
+    case "instagram":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="service-diagram-glyph">
+          <rect x="5" y="5" width="14" height="14" rx="4.1" fill="rgba(255,255,255,0.1)" stroke="currentColor" strokeWidth="2.15" />
+          <circle cx="12" cy="12" r="3.35" fill="none" stroke="currentColor" strokeWidth="2.15" />
+          <circle cx="16.55" cy="7.65" r="1.25" fill="currentColor" />
+        </svg>
+      );
+    case "linkedin":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="service-diagram-glyph">
+          <circle cx="7.9" cy="7.5" r="1.45" fill="currentColor" />
+          <path d="M7.9 10.3V17M11.7 17v-4.4c0-1.35.92-2.3 2.2-2.3 1.36 0 2.16.9 2.16 2.6V17" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+  }
+};
+
+const renderServiceVisual = (kind: ServiceVisualKind) => {
+  switch (kind) {
+    case "seo":
+      return (
+        <div className="service-visual service-visual-seo" aria-hidden="true">
+          <div className="service-diagram service-diagram-seo">
+            <div className="service-diagram-nodes">
+              <div className="service-diagram-node">
+                <span className="service-diagram-icon service-diagram-badge service-diagram-badge-keyword">
+                  {renderServiceDiagramIcon("keyword")}
+                </span>
+                <span className="service-diagram-label">Intent</span>
+              </div>
+              <div className="service-diagram-node">
+                <span className="service-diagram-icon service-diagram-badge service-diagram-badge-technical">
+                  {renderServiceDiagramIcon("technical")}
+                </span>
+                <span className="service-diagram-label">Technical</span>
+              </div>
+              <div className="service-diagram-node">
+                <span className="service-diagram-icon service-diagram-badge service-diagram-badge-content">
+                  {renderServiceDiagramIcon("content")}
+                </span>
+                <span className="service-diagram-label">Content</span>
+              </div>
+            </div>
+
+            <div className="service-diagram-engine-wrap">
+              <div className="service-diagram-lines" />
+              <div className="service-diagram-engine">
+                <span className="service-diagram-kicker">Search engine</span>
+                <span className="service-diagram-title">#1 Visibility</span>
+              </div>
+            </div>
+
+            <div className="service-diagram-results">
+              <span className="service-diagram-result">Rankings</span>
+              <span className="service-diagram-result">Traffic</span>
+              <span className="service-diagram-result service-diagram-result-accent">1M+ proof</span>
+            </div>
+          </div>
+        </div>
+      );
+    case "pipeline":
+      return (
+        <div className="service-visual service-visual-pipeline" aria-hidden="true">
+          <div className="service-diagram service-diagram-pipeline">
+            <div className="service-diagram-nodes">
+              <div className="service-diagram-node">
+                <span className="service-diagram-icon service-diagram-badge service-diagram-badge-outreach">
+                  {renderServiceDiagramIcon("outreach")}
+                </span>
+                <span className="service-diagram-label">Outreach</span>
+              </div>
+              <div className="service-diagram-node">
+                <span className="service-diagram-icon service-diagram-badge service-diagram-badge-capture">
+                  {renderServiceDiagramIcon("capture")}
+                </span>
+                <span className="service-diagram-label">Capture</span>
+              </div>
+              <div className="service-diagram-node">
+                <span className="service-diagram-icon service-diagram-badge service-diagram-badge-convert">
+                  {renderServiceDiagramIcon("convert")}
+                </span>
+                <span className="service-diagram-label">Convert</span>
+              </div>
+            </div>
+
+            <div className="service-diagram-engine-wrap">
+              <div className="service-diagram-lines" />
+              <div className="service-diagram-engine">
+                <span className="service-diagram-kicker">Qualification layer</span>
+                <span className="service-diagram-title">Lead Engine</span>
+              </div>
+            </div>
+
+            <div className="service-diagram-results">
+              <span className="service-diagram-result">Qualified leads</span>
+              <span className="service-diagram-result service-diagram-result-accent">Booked calls</span>
+              <span className="service-diagram-result">Pipeline</span>
+            </div>
+          </div>
+        </div>
+      );
+    case "content":
+      return (
+        <div className="service-visual service-visual-content" aria-hidden="true">
+          <div className="service-diagram service-diagram-content">
+            <div className="service-diagram-nodes">
+              <div className="service-diagram-node">
+                <span className="service-diagram-icon service-diagram-badge service-diagram-badge-youtube">
+                  {renderServiceDiagramIcon("youtube")}
+                </span>
+                <span className="service-diagram-label">YouTube</span>
+              </div>
+              <div className="service-diagram-node">
+                <span className="service-diagram-icon service-diagram-badge service-diagram-badge-instagram">
+                  {renderServiceDiagramIcon("instagram")}
+                </span>
+                <span className="service-diagram-label">Instagram</span>
+              </div>
+              <div className="service-diagram-node">
+                <span className="service-diagram-icon service-diagram-badge service-diagram-badge-linkedin">
+                  {renderServiceDiagramIcon("linkedin")}
+                </span>
+                <span className="service-diagram-label">LinkedIn</span>
+              </div>
+            </div>
+
+            <div className="service-diagram-engine-wrap">
+              <div className="service-diagram-lines" />
+              <div className="service-diagram-engine">
+                <span className="service-diagram-kicker">Content system</span>
+                <span className="service-diagram-title">Authority Engine</span>
+              </div>
+            </div>
+
+            <div className="service-diagram-results">
+              <span className="service-diagram-result">Audience</span>
+              <span className="service-diagram-result">Trust</span>
+              <span className="service-diagram-result service-diagram-result-accent">Inbound leads</span>
+            </div>
+          </div>
+        </div>
       );
   }
 };
@@ -203,7 +421,7 @@ export default function Home() {
 
         <div className="nav-right">
           <Link href="/contact" className="btn btn-orange nav-btn">
-            Book Call
+            Book a strategy call
           </Link>
           <button
             className={`hamburger${menuOpen ? " open" : ""}`}
@@ -228,7 +446,7 @@ export default function Home() {
             <Link key={href} href={href} onClick={closeMenu}>{label}</Link>
           ))}
           <Link href="/contact" className="btn btn-orange drawer-hire" onClick={closeMenu}>
-            Book Call ↗
+            Book a strategy call ↗
           </Link>
         </div>
       </div>
@@ -239,17 +457,23 @@ export default function Home() {
         <div className="container hero-container">
           <div className="hero-text-col">
             <h1 className="hero-title reveal delay-2">
-              Scale Your B2B <span className="text-orange">Revenue</span><br />
-              With Predictable <span className="text-orange">Pipelines</span>
+              I help B2B brands rank <span className="text-orange">#1 on Google</span><br />
+              and scale <span className="text-orange">YouTube</span> into real leads.
             </h1>
             <p className="hero-subtitle reveal delay-3">
-              I build organic growth systems that turn search traffic into qualified pipeline and booked calls.
+              Growth systems built to turn search visibility and content reach into qualified pipeline, not vanity metrics.
             </p>
+            <div className="hero-proofline reveal delay-3" aria-label="Trust proof">
+              <span className="hero-proof-badge">Proof</span>
+              <span>Ranked 10+ websites #1</span>
+            </div>
             <div className="hero-cta reveal delay-3">
-              <Link href="/contact" className="btn btn-orange">Book Strategy Call ↗</Link>
+              <Link href="/contact" className="btn btn-orange">Book a strategy call ↗</Link>
               <Link href="#proofs" className="btn btn-white">See Real Results</Link>
             </div>
-            
+            <p className="hero-cta-note reveal delay-3">
+              45-minute call. We&apos;ll uncover what&apos;s slowing growth and how to fix it.
+            </p>
           </div>
 
           <div className="hero-portrait-col reveal delay-2">
@@ -378,17 +602,18 @@ export default function Home() {
             <div className="services-premium-copy">
               <span className="section-label">Growth Systems</span>
               <h2 className="section-title">
-                Revenue-First <span className="text-orange">Growth Systems</span>
+                Turn Traffic Into <span className="text-orange">Revenue</span>, Not Just Views
               </h2>
               <p className="section-desc">
-                Three systems to attract better leads, build authority, and turn traffic into pipeline.
+                Systems built to attract the right audience, convert them into leads, and close faster.
               </p>
             </div>
 
             <div className="services-premium-note">
-              <span className="services-note-label">Built for premium positioning</span>
+              <span className="services-note-label">Built to generate pipeline</span>
               <p>
-                Designed to make your business easier to find, trust, and buy from.
+                This is not vanity-metric marketing. Each system is designed to create qualified demand,
+                stronger sales conversations, and clearer paths to revenue.
               </p>
             </div>
           </div>
@@ -398,37 +623,46 @@ export default function Home() {
               {
                 num: "01",
                 label: "Search Demand",
+                visual: "seo" as const,
                 title: "SEO & Organic Growth Systems",
-                desc: "Get in front of buyers already searching for your solution.",
+                desc: "Capture high-intent traffic and turn it into consistent inbound leads.",
+                resultLine: "Get discovered when buyers are ready to take action",
                 outcomes: [
-                  "Rank for buyer-intent keywords",
-                  "Strong technical SEO foundation",
-                  "Compounding inbound traffic",
+                  "Rank for keywords that bring real customers",
+                  "Build long-term traffic that compounds every month",
+                  "Turn search visibility into inbound leads",
                 ],
+                cta: "View SEO Strategy",
               },
               {
                 num: "02",
                 label: "Pipeline Design",
+                visual: "pipeline" as const,
                 title: "B2B Lead Generation Systems",
-                desc: "Connect outreach, funnels, and conversion into one lead engine.",
+                desc: "Build a predictable pipeline that brings qualified leads and booked calls.",
+                resultLine: "Turn cold outreach into warm conversations and sales",
                 outcomes: [
-                  "LinkedIn plus inbound strategy",
-                  "High-converting pages and funnels",
-                  "Consistent pipeline for sales",
+                  "Combine LinkedIn, funnels, and automation",
+                  "Convert traffic into booked calls",
+                  "Build a consistent pipeline you can rely on",
                 ],
+                cta: "See Lead System",
               },
               {
                 num: "03",
                 label: "Authority Engine",
+                visual: "content" as const,
                 title: "Content, Video & Social Growth Systems",
-                desc: "Use content to build trust and bring in inbound demand.",
+                desc: "Use content to build authority, attract attention, and drive inbound leads.",
+                resultLine: "Become the brand people trust before they even talk to you",
                 outcomes: [
-                  "YouTube and retention-focused video",
-                  "LinkedIn and content distribution",
-                  "Shorter sales cycles through trust",
+                  "Create content that builds authority and trust",
+                  "Distribute across YouTube, Instagram, and LinkedIn",
+                  "Shorten your sales cycle with inbound demand",
                 ],
+                cta: "Explore Content Engine",
               },
-            ].map(({ num, label, title, desc, outcomes }, i) => (
+            ].map(({ num, label, visual, title, desc, resultLine, outcomes, cta }, i) => (
               <article className={`service-premium-card reveal delay-${i + 1}`} key={num}>
                 <div className="service-premium-top">
                   <div className="service-number-badge">{num}</div>
@@ -439,6 +673,10 @@ export default function Home() {
                   <h3>{title}</h3>
                   <p>{desc}</p>
                 </div>
+
+                {renderServiceVisual(visual)}
+
+                <p className="service-result-line">{resultLine}</p>
 
                 <ul className="service-outcomes" aria-label={`${title} outcomes`}>
                   {outcomes.map((item) => (
@@ -451,10 +689,24 @@ export default function Home() {
 
                 <div className="service-premium-footer">
                   <span className="service-footer-text">Built for qualified pipeline growth</span>
-                  <div className="service-arrow-modern">↗</div>
+                  <Link href="/contact" className="service-cta-button">
+                    <span>{cta}</span>
+                    <span aria-hidden="true">↗</span>
+                  </Link>
                 </div>
               </article>
             ))}
+          </div>
+
+          <div className="services-conversion-close reveal">
+            <div className="services-conversion-copy">
+              <h3>Not sure which system fits your business?</h3>
+              <p>I will break down what is holding your growth back and what to fix first.</p>
+            </div>
+            <Link href="/contact" className="services-audit-button">
+              <span>Get Free Growth Audit</span>
+              <span aria-hidden="true">↗</span>
+            </Link>
           </div>
         </div>
       </section>
