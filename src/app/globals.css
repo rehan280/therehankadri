@@ -220,6 +220,14 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+@media (max-width: 640px) {
+  html,
+  body,
+  .site-shell {
+    overflow-x: clip;
+  }
+}
+
 /* Typography Standard */
 .section-title {
   font-size: clamp(2.5rem, 4vw, 3.5rem);

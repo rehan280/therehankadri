@@ -4181,7 +4181,7 @@
 
   /* Hero — stack */
   .hero {
-    padding-top: 7.15rem;
+    padding-top: 7.7rem;
     padding-bottom: 1.8rem;
     min-height: auto;
     align-items: flex-start;
@@ -4197,7 +4197,7 @@
   .hero-container {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 1.35rem;
+    gap: 1.55rem;
   }
 
   .hero-text-col {
@@ -4236,6 +4236,14 @@
     box-shadow:
       0 22px 48px rgba(0, 0, 0, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  }
+
+  .section-dark,
+  .problem-section,
+  .problem-panel,
+  .problem-cards,
+  .problem-mini-card {
+    overflow-x: clip;
   }
 
   .premium-circle-wrapper {
@@ -4772,7 +4780,7 @@
    ============================================================ */
 @media (max-width: 480px) {
   .hero {
-    padding-top: 5.3rem;
+    padding-top: 6rem;
     padding-bottom: 1.35rem;
   }
 
