@@ -442,8 +442,6 @@ export default function Home() {
       <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="mobile-nav-drawer">
         <div className="mobile-drawer-links">
           <div className="mobile-drawer-top">
-            <span className="mobile-drawer-kicker">The Rehan Kadri</span>
-            <span className="mobile-drawer-title">Growth Systems</span>
             <p>SEO, content, and pipeline strategy for qualified revenue growth.</p>
           </div>
           {navLinks.map(({ href, label }) => (
@@ -466,13 +464,8 @@ export default function Home() {
               and scale <span className="text-orange">YouTube</span> into real leads.
             </h1>
             <h1 className="hero-title hero-title-mobile reveal delay-2">
-              I help B2B brands
-              <br />
-              rank <span className="text-orange">#1 on Google</span>
-              <br />
-              and scale <span className="text-orange">YouTube</span>
-              <br />
-              into real leads.
+              I help B2B brands rank <span className="text-orange">#1 on Google</span> and scale{" "}
+              <span className="text-orange">YouTube</span> into real leads.
             </h1>
             <p className="hero-subtitle reveal delay-3">
               Growth systems built to turn search visibility and content reach into qualified pipeline, not vanity metrics.

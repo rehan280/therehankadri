@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
-
 :root {
   --brand-orange: #FF5A36;
   --brand-orange-hover: #E84D2C;
@@ -24,7 +22,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-sans), sans-serif;
   background-color: var(--page-shell);
   color: var(--text-dark);
   line-height: 1.6;
@@ -114,6 +112,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem; 
   color: inherit; 
   letter-spacing: -0.02em;
+  font-family: var(--font-sans), sans-serif;
 }
 
 .text-orange { color: var(--brand-orange) !important; }

@@ -461,11 +461,12 @@
 }
 
 .hero-title {
+  font-family: var(--font-sans), sans-serif;
   font-size: clamp(2.4rem, 4.4vw, 3.72rem);
-  line-height: 1;
-  font-weight: 900;
+  line-height: 0.96;
+  font-weight: 800;
   margin-bottom: 0.8rem;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.05em;
   color: var(--text-dark);
 }
 
@@ -4551,9 +4552,9 @@
   }
 
   .hero-title {
-    font-size: clamp(2.08rem, 10vw, 2.85rem);
-    line-height: 0.96;
-    max-width: 11.2ch;
+    font-size: clamp(1.92rem, 8.1vw, 2.45rem);
+    line-height: 0.94;
+    max-width: 16.4ch;
     letter-spacing: -0.055em;
     margin-left: auto;
     margin-right: auto;
@@ -4566,6 +4567,7 @@
 
   .hero-title-mobile {
     display: block;
+    text-wrap: balance;
   }
 
   .hero-subtitle {
@@ -4854,9 +4856,9 @@
   }
 
   .hero-title {
-    font-size: clamp(1.92rem, 9.6vw, 2.5rem);
-    max-width: 11.1ch;
-    line-height: 0.96;
+    font-size: clamp(1.78rem, 7.9vw, 2.12rem);
+    max-width: 15.8ch;
+    line-height: 0.94;
     letter-spacing: -0.06em;
   }
 
