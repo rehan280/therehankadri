@@ -464,11 +464,22 @@ export default function Home() {
               and scale <span className="text-orange">YouTube</span> into real leads.
             </h1>
             <h1 className="hero-title hero-title-mobile reveal delay-2">
-              I help B2B brands rank <span className="text-orange">#1 on Google</span> and scale{" "}
-              <span className="text-orange">YouTube</span> into real leads.
+              <span className="hero-mobile-line">I help B2B brands</span>
+              <span className="hero-mobile-line">
+                rank <span className="text-orange">#1 on Google</span>
+              </span>
+              <span className="hero-mobile-line">
+                and scale <span className="text-orange">YouTube</span>
+              </span>
+              <span className="hero-mobile-line">into real leads.</span>
             </h1>
-            <p className="hero-subtitle reveal delay-3">
+            <p className="hero-subtitle hero-subtitle-desktop reveal delay-3">
               Growth systems built to turn search visibility and content reach into qualified pipeline, not vanity metrics.
+            </p>
+            <p className="hero-subtitle hero-subtitle-mobile reveal delay-3">
+              Turn search visibility into qualified pipeline,
+              <br />
+              not vanity metrics.
             </p>
             <div className="hero-cta reveal delay-3">
               <Link href="/contact" className="btn btn-orange">Book a strategy call ↗</Link>
