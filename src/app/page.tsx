@@ -238,13 +238,12 @@ export default function Home() {
       <section className="hero section-light">
         <div className="container hero-container">
           <div className="hero-text-col">
-            <div className="hero-greeting reveal delay-1">Rehan Kadri | Pipeline Specialist</div>
             <h1 className="hero-title reveal delay-2">
               Scale Your B2B <span className="text-orange">Revenue</span><br />
               With Predictable <span className="text-orange">Pipelines</span>
             </h1>
             <p className="hero-subtitle reveal delay-3">
-              I engineer organic systems that turn cold search traffic into booked calls and enterprise clients. Stop burning cash on ads and start building compounding, data-driven growth.
+              I build organic growth systems that turn search traffic into qualified pipeline and booked calls.
             </p>
             <div className="hero-cta reveal delay-3">
               <Link href="/contact" className="btn btn-orange">Book Strategy Call ↗</Link>
