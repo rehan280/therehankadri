@@ -456,14 +456,18 @@ export default function Home() {
       <section className="hero section-light">
         <div className="container hero-container">
           <div className="hero-text-col">
-            <h1 className="hero-title reveal delay-2">
+            <h1 className="hero-title hero-title-desktop reveal delay-2">
+              I help B2B brands rank <span className="text-orange">#1 on Google</span>
+              <br />
+              and scale <span className="text-orange">YouTube</span> into real leads.
+            </h1>
+            <h1 className="hero-title hero-title-mobile reveal delay-2">
               I help B2B brands
-              <br className="hero-title-break-mobile" />
+              <br />
               rank <span className="text-orange">#1 on Google</span>
-              <br className="hero-title-break" />
-              <br className="hero-title-break-mobile" />
+              <br />
               and scale <span className="text-orange">YouTube</span>
-              <br className="hero-title-break-mobile" />
+              <br />
               into real leads.
             </h1>
             <p className="hero-subtitle reveal delay-3">

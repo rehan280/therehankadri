@@ -442,11 +442,7 @@
   color: var(--text-dark);
 }
 
-.hero-title-break {
-  display: block;
-}
-
-.hero-title-break-mobile {
+.hero-title-mobile {
   display: none;
 }
 
@@ -4527,11 +4523,11 @@
     margin-bottom: 0.95rem;
   }
 
-  .hero-title-break {
+  .hero-title-desktop {
     display: none;
   }
 
-  .hero-title-break-mobile {
+  .hero-title-mobile {
     display: block;
   }
 
