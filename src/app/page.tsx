@@ -256,6 +256,24 @@ export default function Home() {
             <div className="premium-circle-wrapper">
               <Image src="/rehan.png" alt="Rehan Kadri" width={500} height={600} priority className="premium-portrait-img" />
             </div>
+            <div className="hero-analytics-card" aria-label="Traffic proof">
+              <div className="hero-analytics-panel hero-analytics-panel-blue">
+                <div className="hero-analytics-label">
+                  <span className="hero-analytics-check">✓</span>
+                  <span>Total clicks</span>
+                </div>
+                <div className="hero-analytics-value">4.12M</div>
+                <span className="hero-analytics-help">?</span>
+              </div>
+              <div className="hero-analytics-panel hero-analytics-panel-purple">
+                <div className="hero-analytics-label">
+                  <span className="hero-analytics-check">✓</span>
+                  <span>Total impressions</span>
+                </div>
+                <div className="hero-analytics-value">56.9M</div>
+                <span className="hero-analytics-help">?</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -273,7 +291,7 @@ export default function Home() {
                 More visibility means nothing if it doesn&apos;t turn into qualified pipeline.
               </p>
               <div className="problem-intro-note">
-                Most teams optimize for traffic. I build the system that turns attention into revenue.
+                Most teams chase traffic. I build the system that converts it into revenue.
               </div>
             </div>
 
@@ -282,9 +300,11 @@ export default function Home() {
                 <div className="problem-card-top">
                   <div className="problem-mini-copy">
                     <span className="problem-mini-label">What goes wrong</span>
-                    <h3 className="problem-card-title">More traffic, weak pipeline</h3>
+                    <h3 className="problem-card-title">More traffic. Broken pipeline.</h3>
                     <p>
-                      Traffic comes in, but nothing moves forward. No clear handoff. No qualification. No follow-up system.
+                      Traffic comes in... but nothing converts. Leads are unqualified. Follow-ups break. Sales teams are left chasing dead intent.
+                      <br /><br />
+                      This isn&apos;t a traffic problem. It&apos;s a system problem.
                     </p>
                   </div>
 
@@ -299,7 +319,7 @@ export default function Home() {
                 </div>
                 <div className="problem-card-footer">
                   <span className="problem-card-chip">Low intent</span>
-                  <span className="problem-card-chip">No clear handoff</span>
+                  <span className="problem-card-chip">Broken flow</span>
                 </div>
               </article>
 
@@ -307,10 +327,28 @@ export default function Home() {
                 <div className="problem-card-top">
                   <div className="problem-mini-copy">
                     <span className="problem-mini-label">What I build</span>
-                    <h3 className="problem-card-title">Connected growth engine</h3>
+                    <h3 className="problem-card-title">Conversion system that scales</h3>
                     <p>
-                      I build systems that turn scattered attention into structured pipeline, so every click, view, and visit has a path to revenue.
+                      I build a connected system where every click, visit, and interaction moves toward one goal — revenue.
                     </p>
+                    <div className="problem-build-flow" aria-label="Traffic to revenue flow">
+                      <div className="problem-build-step problem-build-step-1">
+                        <span className="problem-build-stage">Traffic</span>
+                        <span className="problem-build-arrow" aria-hidden="true">→</span>
+                      </div>
+                      <div className="problem-build-step problem-build-step-2">
+                        <span className="problem-build-stage">Qualification</span>
+                        <span className="problem-build-arrow" aria-hidden="true">→</span>
+                      </div>
+                      <div className="problem-build-step problem-build-step-3">
+                        <span className="problem-build-stage">Booked calls</span>
+                        <span className="problem-build-arrow" aria-hidden="true">→</span>
+                      </div>
+                      <div className="problem-build-step problem-build-step-4">
+                        <span className="problem-build-stage problem-build-stage-accent">Pipeline</span>
+                      </div>
+                    </div>
+                    <div className="problem-build-note">Everything is connected.</div>
                   </div>
 
                   <div className="problem-image-frame problem-image-frame-build">
@@ -325,7 +363,7 @@ export default function Home() {
                 <div className="problem-card-footer">
                   <span className="problem-card-chip problem-card-chip-accent">SEO</span>
                   <span className="problem-card-chip problem-card-chip-accent">Content</span>
-                  <span className="problem-card-chip problem-card-chip-accent">Booked calls</span>
+                  <span className="problem-card-chip problem-card-chip-accent">Conversion</span>
                 </div>
               </article>
             </div>
@@ -421,101 +459,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 4.5. GROWTH PATHS ── */}
-      <section className="section-light section-padding growth-paths-section">
-        <div className="container">
-          <div className="growth-paths-header reveal">
-            <span className="section-label">How Can I Help</span>
-            <h2 className="section-title">
-              Choose Your <span className="text-orange">Growth Path</span>
-            </h2>
-            <p className="section-desc">
-              Pick the outcome you want first. Then build the system around it.
-            </p>
-          </div>
-
-          <div className="growth-paths-grid">
-            {[
-              {
-                eyebrow: "For Founders & B2B Teams",
-                choice: "I need qualified B2B pipeline",
-                title: "Build a Predictable Revenue Pipeline",
-                image: "/business path card img 2.png",
-                alt: "Business growth path illustration",
-                summary: "Turn scattered growth into a system that brings in qualified buyers instead of random traffic.",
-                outcome: "More qualified leads. More booked calls. Less guesswork.",
-                points: [
-                  "Rank for high-intent keywords that convert",
-                  "Build inbound plus outbound lead systems",
-                  "Generate consistent booked calls",
-                ],
-                fit: "SaaS, agencies, and high-ticket service businesses",
-                cta: "Build My Growth System",
-                frameLabel: "Business Track",
-                theme: "business",
-              },
-              {
-                eyebrow: "For Creators & Freelancers",
-                choice: "I need better clients and positioning",
-                title: "Turn Skills Into Consistent Clients",
-                image: "/freelancer img.png",
-                alt: "Freelancer growth path illustration",
-                summary: "Build a stronger personal brand and inbound system so better clients come to you with less chasing.",
-                outcome: "Better positioning. Better inbound leads. Better deal quality.",
-                points: [
-                  "Grow on LinkedIn and YouTube strategically",
-                  "Position yourself as a niche authority",
-                  "Close higher-value deals with positioning",
-                ],
-                fit: "Freelancers, creators, and personal brands",
-                cta: "Grow My Personal Brand",
-                frameLabel: "Creator Track",
-                theme: "creator",
-              },
-            ].map(({ eyebrow, choice, title, image, alt, summary, outcome, points, fit, cta, frameLabel, theme }, index) => (
-              <article className={`growth-path-card growth-path-card-${theme} reveal delay-${index + 1}`} key={title}>
-                <div className="growth-path-card-top">
-                  <div className="growth-path-copy">
-                    <span className="growth-path-eyebrow">{eyebrow}</span>
-                    <div className="growth-path-choice">{choice}</div>
-                    <h3>{title}</h3>
-                    <p className="growth-path-summary">{summary}</p>
-                    <p className="growth-path-outcome">{outcome}</p>
-                  </div>
-
-                  <div className="growth-path-media">
-                    <div className="growth-path-media-frame">
-                      <span className="growth-path-frame-label">{frameLabel}</span>
-                      <Image src={image} alt={alt} width={900} height={720} className="growth-path-image" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="growth-path-content">
-                  <ul className="growth-path-points" aria-label={`${title} benefits`}>
-                    {points.map((point) => (
-                      <li className="growth-path-point" key={point}>
-                        <span className="growth-path-check">✓</span>
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="growth-path-footer">
-                    <p className="growth-path-fit">
-                      <strong>Best for:</strong> {fit}
-                    </p>
-                    <Link href="/contact" className="btn btn-orange growth-path-cta">
-                      {cta} ↗
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── 5. CASE STUDIES ── */}
       <section id="works" className="section-light section-padding">
         <div className="container">
@@ -599,6 +542,99 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 6.5. GROWTH PATHS ── */}
+      <section className="section-light section-padding growth-paths-section">
+        <div className="container">
+          <div className="growth-paths-header reveal">
+            <span className="section-label">How Can I Help</span>
+            <h2 className="section-title">
+              Choose Your <span className="text-orange">Growth Path</span>
+            </h2>
+            <p className="section-desc">
+              Pick the outcome first. Then build the system around it.
+            </p>
+          </div>
+
+          <div className="growth-paths-grid">
+            {[
+              {
+                eyebrow: "For Founders & B2B Teams",
+                choice: "I need qualified B2B pipeline",
+                title: "Build a Predictable Revenue Pipeline",
+                image: "/business path card img 2.png",
+                alt: "Business growth path illustration",
+                summary: "Turn scattered growth into a system that brings in qualified buyers.",
+                outcome: "More qualified leads. More booked calls.",
+                points: [
+                  "Rank for high-intent keywords that convert",
+                  "Build inbound plus outbound lead systems",
+                ],
+                fit: "SaaS, agencies, and high-ticket services",
+                cta: "Build My Growth System",
+                frameLabel: "Business Track",
+                theme: "business",
+              },
+              {
+                eyebrow: "For Creators & Freelancers",
+                choice: "I need better clients and positioning",
+                title: "Turn Skills Into Consistent Clients",
+                image: "/freelancer img.png",
+                alt: "Freelancer growth path illustration",
+                summary: "Build a stronger personal brand and inbound system for better clients.",
+                outcome: "Better positioning. Better inbound leads.",
+                points: [
+                  "Grow on LinkedIn and YouTube strategically",
+                  "Position yourself as a niche authority",
+                ],
+                fit: "Freelancers, creators, and personal brands",
+                cta: "Grow My Personal Brand",
+                frameLabel: "Creator Track",
+                theme: "creator",
+              },
+            ].map(({ eyebrow, choice, title, image, alt, summary, outcome, points, fit, cta, frameLabel, theme }, index) => (
+              <article className={`growth-path-card growth-path-card-${theme} reveal delay-${index + 1}`} key={title}>
+                <div className="growth-path-card-top">
+                  <div className="growth-path-copy">
+                    <span className="growth-path-eyebrow">{eyebrow}</span>
+                    <div className="growth-path-choice">{choice}</div>
+                    <h3>{title}</h3>
+                    <p className="growth-path-summary">{summary}</p>
+                    <p className="growth-path-outcome">{outcome}</p>
+                  </div>
+
+                  <div className="growth-path-media">
+                    <div className="growth-path-media-frame">
+                      <span className="growth-path-frame-label">{frameLabel}</span>
+                      <Image src={image} alt={alt} width={900} height={720} className="growth-path-image" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="growth-path-content">
+                  <ul className="growth-path-points" aria-label={`${title} benefits`}>
+                    {points.map((point) => (
+                      <li className="growth-path-point" key={point}>
+                        <span className="growth-path-check">✓</span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="growth-path-footer">
+                    <p className="growth-path-fit">
+                      <strong>Best for:</strong> {fit}
+                    </p>
+                    <Link href="/contact" className="btn btn-orange growth-path-cta">
+                      {cta} ↗
+                    </Link>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
         </div>
