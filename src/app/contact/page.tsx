@@ -173,7 +173,7 @@ export default function ContactPage() {
           </div>
 
           <footer className={styles.footer}>
-            <p>© 2026 Rehan Firoz Kadri. All rights reserved.</p>
+            <p>© 2026 The Rehan Kadri. All rights reserved.</p>
             <div className={styles.footerLinks}>
               <Link href="/">Home</Link>
               <a href="mailto:youtech280@gmail.com">Email</a>

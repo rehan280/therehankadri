@@ -11,8 +11,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: 'Rehan Firoz Kadri | Product & Growth Marketing Specialist',
-  description: 'Portfolio of Rehan Kadri, a Product and Growth Marketing Specialist with 8+ years of experience in digital marketing, content creation, and scaling platforms to 1M+ traffic.',
+  title: 'The Rehan Kadri | Product & Growth Marketing Specialist',
+  description: 'Portfolio of The Rehan Kadri, a Product and Growth Marketing Specialist focused on SEO, content systems, and predictable revenue growth.',
   manifest: '/favicon/site.webmanifest',
   icons: {
     icon: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: 'Rehan Firoz Kadri | Growth Marketing',
+    title: 'The Rehan Kadri | Growth Marketing',
     description: 'Scaling platforms, optimizing funnels, driving inbound leads.',
     type: 'website',
   },

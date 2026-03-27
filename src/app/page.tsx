@@ -1129,7 +1129,7 @@ export default function Home() {
             </div>
 
             <div className="footer-bottom">
-              <p>© 2026 Rehan Firoz Kadri. All rights reserved.</p>
+              <p>© 2026 The Rehan Kadri. All rights reserved.</p>
               <div className="footer-links">
                 <Link href="#services">Services</Link>
                 <Link href="#works">Results</Link>
