@@ -3,6 +3,7 @@ import { Manrope } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
+import SiteFooter from '@/components/SiteFooter';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -47,6 +48,7 @@ export default function RootLayout({
         <div className="bg-glow"></div>
         <div className="bg-glow-right"></div>
         {children}
+        <SiteFooter />
         <Analytics />
         <SpeedInsights />
       </body>

@@ -36,35 +36,6 @@ type ServiceDiagramIconKind =
   | "instagram"
   | "linkedin";
 
-const renderSocialIcon = (type: "email" | "linkedin" | "youtube" | "x") => {
-  switch (type) {
-    case "email":
-      return (
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M3 5.75A1.75 1.75 0 0 1 4.75 4h14.5A1.75 1.75 0 0 1 21 5.75v12.5A1.75 1.75 0 0 1 19.25 20H4.75A1.75 1.75 0 0 1 3 18.25V5.75Zm2 .24v.3l7 4.9 7-4.9v-.3a.25.25 0 0 0-.25-.25H5.25A.25.25 0 0 0 5 5.99Zm14 2.14-6.57 4.6a.75.75 0 0 1-.86 0L5 8.13v10.12c0 .14.11.25.25.25h13.5a.25.25 0 0 0 .25-.25V8.13Z" />
-        </svg>
-      );
-    case "linkedin":
-      return (
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M6.94 8.5H4.12V19h2.82V8.5ZM5.53 4C4.6 4 4 4.62 4 5.43c0 .8.59 1.42 1.5 1.42h.02c.94 0 1.52-.62 1.52-1.42C7.02 4.62 6.46 4 5.53 4ZM20 12.56c0-3.16-1.69-4.63-3.94-4.63-1.82 0-2.63 1-3.08 1.7V8.5h-2.82c.04.74 0 10.5 0 10.5h2.82v-5.87c0-.31.02-.62.11-.84.25-.61.82-1.24 1.78-1.24 1.25 0 1.75.94 1.75 2.33V19H20v-6.44Z" />
-        </svg>
-      );
-    case "youtube":
-      return (
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M21.58 7.19a2.96 2.96 0 0 0-2.08-2.1C17.67 4.6 12 4.6 12 4.6s-5.67 0-7.5.49a2.96 2.96 0 0 0-2.08 2.1C1.93 9.03 1.93 12 1.93 12s0 2.97.49 4.81a2.96 2.96 0 0 0 2.08 2.1c1.83.49 7.5.49 7.5.49s5.67 0 7.5-.49a2.96 2.96 0 0 0 2.08-2.1c.49-1.84.49-4.81.49-4.81s0-2.97-.49-4.81ZM10.18 14.98V9.02L15.41 12l-5.23 2.98Z" />
-        </svg>
-      );
-    case "x":
-      return (
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M18.9 3H21l-4.6 5.26L21.8 21h-4.94l-3.87-5.07L8.56 21H6.45l4.92-5.63L2.2 3h5.06l3.5 4.59L14.87 3Zm-.73 16.75h1.16L6.63 4.17H5.39l12.78 15.58Z" />
-        </svg>
-      );
-  }
-};
-
 const renderServiceDiagramIcon = (kind: ServiceDiagramIconKind) => {
   switch (kind) {
     case "keyword":
@@ -363,30 +334,6 @@ export default function Home() {
       h3: "Traffic proof that backs up the growth claim",
       p: "Search Console screenshots showing multi-million click and impression volume, added as direct evidence behind the 1M+ traffic case study.",
       features: [{ title: "Search Console Evidence", desc: "Direct click and impression screenshots reinforcing the 1M+ traffic performance claim." }],
-    },
-  ];
-
-  const socialLinks = [
-    {
-      type: "linkedin" as const,
-      name: "LinkedIn",
-      href: "https://www.linkedin.com/in/rehan-kadri-27b5b8231",
-      handle: "@rehan-kadri",
-      note: "Professional updates, B2B growth insights, and founder-focused strategy.",
-    },
-    {
-      type: "youtube" as const,
-      name: "YouTube",
-      href: "https://youtube.com/@rehanous?si=FDWGeBZ6MtP6oUcK",
-      handle: "@rehanous",
-      note: "Growth content, content systems, and audience-building breakdowns.",
-    },
-    {
-      type: "x" as const,
-      name: "X",
-      href: "https://x.com/rehanous",
-      handle: "@rehanous",
-      note: "Short-form thoughts on brand, pipeline, content, and execution.",
     },
   ];
 
@@ -1105,60 +1052,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-shell reveal">
-            <div className="footer-wrapper">
-              <div className="footer-left">
-                <div className="footer-brand" aria-label="The Rehan Kadri logo">
-                  <div className="footer-brand-copy">
-                    <span className="footer-brand-kicker">Revenue-first growth systems</span>
-                    <span className="footer-brand-name">
-                      <span className="footer-brand-the">The</span>
-                      <span className="footer-brand-rehan">Rehan</span>
-                      <span className="footer-brand-kadri">Kadri</span>
-                    </span>
-                    <span className="footer-brand-role">SEO • Content • Pipeline Design</span>
-                  </div>
-                </div>
-                <p className="footer-tagline">Growth marketer building systems that turn attention into qualified pipeline.</p>
-              </div>
-              <div className="footer-right">
-                <p className="footer-cta-label">Have a project in mind?</p>
-                <a href="mailto:youtech280@gmail.com" className="btn btn-orange">Start The Conversation ↗</a>
-              </div>
-            </div>
-
-            <div className="footer-social-strip">
-              {socialLinks.map(({ type, name, href, handle }) => (
-                <a
-                  key={name}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer-social-card"
-                >
-                  <span className="footer-social-icon">{renderSocialIcon(type)}</span>
-                  <span className="footer-social-meta">
-                    <strong>{name}</strong>
-                    <span>{handle}</span>
-                  </span>
-                </a>
-              ))}
-            </div>
-
-            <div className="footer-bottom">
-              <p>© 2026 The Rehan Kadri. All rights reserved.</p>
-              <div className="footer-links">
-                <Link href="#services">Services</Link>
-                <Link href="#works">Results</Link>
-                <Link href="/contact">Contact</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }

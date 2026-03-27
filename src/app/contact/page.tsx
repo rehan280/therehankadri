@@ -39,30 +39,41 @@ const socialLinks = [
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/rehan-kadri-27b5b8231",
     handle: "@rehan-kadri",
-    note: "Professional updates, B2B growth insights, and founder-focused strategy.",
+    note: "B2B growth strategy, founder insights, and pipeline thinking.",
   },
   {
     type: "youtube" as const,
     name: "YouTube",
     href: "https://youtube.com/@rehanous?si=FDWGeBZ6MtP6oUcK",
     handle: "@rehanous",
-    note: "Growth content, content systems, and audience-building breakdowns.",
+    note: "Content systems, YouTube growth, and audience-building breakdowns.",
   },
   {
     type: "x" as const,
     name: "X",
     href: "https://x.com/rehanous",
     handle: "@rehanous",
-    note: "Short-form thoughts on brand, pipeline, content, and execution.",
+    note: "Short-form ideas on positioning, pipeline, content, and execution.",
   },
+];
+
+const contactNavLinks = [
+  { href: "/#results", label: "Results" },
+  { href: "/#systems", label: "Systems" },
+  { href: "/#about", label: "About" },
+  { href: "/", label: "Home" },
 ];
 
 export default function ContactPage() {
   const [formResult, setFormResult] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = () => setMenuOpen(false);
 
   const onContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormResult("Sending message...");
+
     const formData = new FormData(event.currentTarget);
     formData.append("access_key", "c43eac91-aa20-47a0-97b3-2286e58da10f");
 
@@ -72,12 +83,13 @@ export default function ContactPage() {
         body: formData,
       });
       const data = await response.json();
+
       if (data.success) {
-        setFormResult("Form submitted successfully.");
+        setFormResult("Message sent successfully.");
         event.currentTarget.reset();
         setTimeout(() => setFormResult(""), 5000);
       } else {
-        setFormResult(data.message || "Error submitting form. Please try again.");
+        setFormResult(data.message || "Something went wrong. Please try again.");
       }
     } catch {
       setFormResult("Network error. Please try again later.");
@@ -86,38 +98,154 @@ export default function ContactPage() {
 
   return (
     <main className={styles.page}>
-      <section className={styles.hero}>
-        <div className={styles.container}>
-          <div className={styles.topbar}>
-            <Link href="/" className={styles.brand}>
-              REHAN<span>.</span>
-            </Link>
-            <Link href="/" className={styles.backLink}>
-              Back to home
-            </Link>
+      <header className={styles.header}>
+        <nav className={`navbar${menuOpen ? " menu-open" : ""}`}>
+          <Link href="/" className="nav-brand" aria-label="The Rehan Kadri home">
+            <span className="nav-brand-copy">
+              <span className="nav-brand-kicker">Revenue-first growth systems</span>
+              <span className="nav-brand-title">
+                <span className="nav-brand-the">The</span>
+                <span className="nav-brand-rehan">Rehan</span>
+                <span className="nav-brand-kadri">Kadri</span>
+              </span>
+            </span>
+          </Link>
+
+          <div className="desktop-links-shell">
+            <div className="desktop-links">
+              {contactNavLinks.map(({ href, label }) => (
+                <Link key={href} href={href}>
+                  {label}
+                </Link>
+              ))}
+            </div>
           </div>
 
-          <div className={styles.heroCopy}>
-            <span className={styles.eyebrow}>Contact Us</span>
-            <h1>Let&apos;s Turn Attention Into Qualified Pipeline.</h1>
+          <div className="nav-right">
+            <Link href="/#proofs" className="nav-secondary">
+              View Results
+            </Link>
+            <a href="mailto:youtech280@gmail.com" className="btn btn-orange nav-btn">
+              Email me
+            </a>
+            <button
+              className={`hamburger${menuOpen ? " open" : ""}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={menuOpen}
+              aria-controls="contact-mobile-nav-drawer"
+            >
+              <span /><span /><span />
+            </button>
+          </div>
+        </nav>
+
+        <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="contact-mobile-nav-drawer">
+          <div className="mobile-drawer-links">
+            <div className="mobile-drawer-top">
+              <p>SEO, content, and pipeline strategy for qualified revenue growth.</p>
+            </div>
+            {contactNavLinks.map(({ href, label }) => (
+              <Link key={href} href={href} onClick={closeMenu}>
+                {label}
+              </Link>
+            ))}
+            <a href="mailto:youtech280@gmail.com" className="btn btn-orange drawer-hire" onClick={closeMenu}>
+              Email me ↗
+            </a>
+          </div>
+        </div>
+        {menuOpen && <div className="drawer-overlay" onClick={closeMenu} />}
+      </header>
+
+      <section className={styles.hero}>
+        <div className={styles.container}>
+          <div className={styles.heroIntro}>
+            <span className={styles.eyebrow}>Contact</span>
+            <h1>You made it!</h1>
             <p>
-              Tell me what you&apos;re building, where growth is getting stuck, and what outcome you
-              need next. I&apos;ll respond with the clearest way forward.
+              Looking to build your brand, fix your pipeline, or create a stronger growth system?
             </p>
           </div>
 
-          <div className={styles.layout}>
-            <div className={styles.infoColumn}>
-              <div className={styles.emailCard}>
-                <span className={styles.kicker}>Best for direct outreach</span>
-                <a href="mailto:youtech280@gmail.com" className={styles.emailLink}>
-                  <span className={styles.iconWrap}>{renderSocialIcon("email")}</span>
-                  <span>youtech280@gmail.com</span>
-                </a>
-                <p>Share your offer, bottleneck, and growth target. Replies usually happen within 24-48 hours.</p>
+          <section className={styles.formSection} aria-labelledby="contact-form-title">
+            <div className={styles.formHeader}>
+              <span className={styles.formKicker}>Project inquiry</span>
+              <h2 id="contact-form-title">Tell me what you need</h2>
+              <p>Best for SEO, lead generation, content systems, and growth audits.</p>
+            </div>
+
+            <form className={styles.form} onSubmit={onContactSubmit}>
+              <div className={styles.fieldGrid}>
+                <div className={styles.field}>
+                  <label htmlFor="firstName">First name</label>
+                  <input id="firstName" name="first_name" type="text" placeholder="John" required />
+                </div>
+
+                <div className={styles.field}>
+                  <label htmlFor="lastName">Last name</label>
+                  <input id="lastName" name="last_name" type="text" placeholder="Doe" />
+                </div>
               </div>
 
-              <div className={styles.socialGrid}>
+              <div className={styles.fieldGrid}>
+                <div className={styles.field}>
+                  <label htmlFor="email">Work email</label>
+                  <input id="email" name="email" type="email" placeholder="john@company.com" required />
+                </div>
+
+                <div className={styles.field}>
+                  <label htmlFor="company">Company or brand</label>
+                  <input id="company" name="company" type="text" placeholder="Your company" />
+                </div>
+              </div>
+
+              <div className={styles.field}>
+                <label htmlFor="message">I&apos;m interested in...</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Tell me about your offer, bottleneck, and the result you want next."
+                  required
+                />
+              </div>
+
+              <div className={styles.formFooter}>
+                <button type="submit" className={styles.submitButton}>
+                  Send Inquiry
+                </button>
+                <p className={styles.formNote}>
+                  45-minute call if there&apos;s a fit. I&apos;ll show what to fix first.
+                </p>
+              </div>
+
+              {formResult ? <div className={styles.formStatus}>{formResult}</div> : null}
+            </form>
+          </section>
+
+          <section className={styles.connectSection} aria-labelledby="connect-title">
+            <div className={styles.connectSurface}>
+              <div className={styles.connectIntro}>
+                <span className={styles.connectKicker}>Connect with me</span>
+                <h2 id="connect-title">Prefer a direct channel?</h2>
+                <p>Email is best for serious inquiries. Social is best if you want to stay in touch.</p>
+              </div>
+
+              <a href="mailto:youtech280@gmail.com" className={styles.connectEmail}>
+                <div className={styles.connectEmailTop}>
+                  <span className={styles.connectEmailBadge}>Best for direct contact</span>
+                  <span className={styles.connectEmailArrow}>↗</span>
+                </div>
+                <div className={styles.connectEmailMain}>
+                  <span className={styles.connectEmailIcon}>{renderSocialIcon("email")}</span>
+                  <span className={styles.connectEmailCopy}>
+                    <strong>youtech280@gmail.com</strong>
+                    <small>Usually replies within 24-48 hours</small>
+                  </span>
+                </div>
+              </a>
+
+              <div className={styles.connectGrid}>
                 {socialLinks.map(({ type, name, href, handle, note }) => (
                   <a
                     key={name}
@@ -136,49 +264,8 @@ export default function ContactPage() {
                 ))}
               </div>
             </div>
+          </section>
 
-            <div className={styles.formWrap}>
-              <div className={styles.formCard}>
-                <div className={styles.formTop}>
-                  <span className={styles.formKicker}>Project inquiry</span>
-                  <h2>Tell me what you need</h2>
-                  <p>Use the form below if you want a focused strategy conversation.</p>
-                </div>
-
-                <form className={styles.form} onSubmit={onContactSubmit}>
-                  <div className={styles.field}>
-                    <label htmlFor="name">Full Name</label>
-                    <input id="name" name="name" type="text" placeholder="John Doe" required />
-                  </div>
-                  <div className={styles.field}>
-                    <label htmlFor="email">Work Email</label>
-                    <input id="email" name="email" type="email" placeholder="john@company.com" required />
-                  </div>
-                  <div className={styles.field}>
-                    <label htmlFor="message">Message</label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      placeholder="Tell me about your offer, audience, and where growth is getting stuck..."
-                      required
-                    />
-                  </div>
-                  <button type="submit" className={styles.submitButton}>
-                    Send Inquiry ↗
-                  </button>
-                  {formResult ? <div className={styles.formStatus}>{formResult}</div> : null}
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <footer className={styles.footer}>
-            <p>© 2026 The Rehan Kadri. All rights reserved.</p>
-            <div className={styles.footerLinks}>
-              <Link href="/">Home</Link>
-              <a href="mailto:youtech280@gmail.com">Email</a>
-            </div>
-          </footer>
         </div>
       </section>
     </main>
