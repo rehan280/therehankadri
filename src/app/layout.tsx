@@ -13,11 +13,27 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: 'Rehan Firoz Kadri | Product & Growth Marketing Specialist',
   description: 'Portfolio of Rehan Kadri, a Product and Growth Marketing Specialist with 8+ years of experience in digital marketing, content creation, and scaling platforms to 1M+ traffic.',
+  manifest: '/favicon/site.webmanifest',
+  icons: {
+    icon: [
+      { url: '/favicon/favicon.ico', sizes: 'any' },
+      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+    ],
+    shortcut: ['/favicon/favicon.ico'],
+    apple: [
+      { url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { rel: 'icon', url: '/favicon/web-app-manifest-192x192.png', sizes: '192x192', type: 'image/png' },
+      { rel: 'icon', url: '/favicon/web-app-manifest-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: 'Rehan Firoz Kadri | Growth Marketing',
     description: 'Scaling platforms, optimizing funnels, driving inbound leads.',
     type: 'website',
-  }
+  },
 };
 
 export default function RootLayout({
