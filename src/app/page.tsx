@@ -494,6 +494,26 @@ export default function Home() {
             <div className="premium-circle-wrapper">
               <Image src="/rehan.png" alt="Rehan Kadri" width={500} height={600} priority className="premium-portrait-img" />
             </div>
+            <div className="hero-social-card" aria-label="Social proof">
+              <div className="hero-social-top">
+                <div className="hero-social-icons">
+                  <span className="hero-social-icon hero-social-icon-youtube">
+                    {renderServiceDiagramIcon("youtube")}
+                  </span>
+                  <span className="hero-social-icon hero-social-icon-instagram">
+                    {renderServiceDiagramIcon("instagram")}
+                  </span>
+                  <span className="hero-social-icon hero-social-icon-linkedin">
+                    {renderServiceDiagramIcon("linkedin")}
+                  </span>
+                </div>
+                <span className="hero-social-kicker">Social growth</span>
+              </div>
+              <div className="hero-social-value">33K+</div>
+              <p className="hero-social-copy">
+                Audience built across YouTube, Instagram, and LinkedIn to turn attention into inbound trust.
+              </p>
+            </div>
             <div className="hero-analytics-card" aria-label="Traffic proof">
               <div className="hero-analytics-panel hero-analytics-panel-blue">
                 <div className="hero-analytics-label">
