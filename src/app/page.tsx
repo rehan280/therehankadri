@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import "./home.css";
 
 type ProofShot = {
   img: string;

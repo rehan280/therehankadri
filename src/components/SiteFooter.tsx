@@ -6,19 +6,16 @@ const socialLinks = [
     type: "linkedin" as const,
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/rehan-kadri-27b5b8231",
-    handle: "@rehan-kadri",
   },
   {
     type: "youtube" as const,
     name: "YouTube",
     href: "https://youtube.com/@rehanous?si=FDWGeBZ6MtP6oUcK",
-    handle: "@rehanous",
   },
   {
     type: "x" as const,
     name: "X",
     href: "https://x.com/rehanous",
-    handle: "@rehanous",
   },
 ];
 
@@ -57,7 +54,6 @@ export default function SiteFooter() {
               <span className={styles.brandRehan}>Rehan</span>
               <span className={styles.brandKadri}>Kadri</span>
             </div>
-            <span className={styles.brandRole}>SEO • Content • Pipeline Design</span>
             <p className={styles.tagline}>
               Growth systems designed to turn attention into qualified pipeline.
             </p>
@@ -68,25 +64,25 @@ export default function SiteFooter() {
             <Link href="/contact" className={styles.ctaButton}>
               Book a strategy call ↗
             </Link>
+            <div className={styles.socialInline}>
+              <span className={styles.socialLabel}>Follow me</span>
+              <div className={styles.socialRow}>
+                {socialLinks.map(({ type, name, href }) => (
+                  <a
+                    key={name}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.socialChip}
+                    aria-label={name}
+                    title={name}
+                  >
+                    <span className={styles.socialIcon}>{renderSocialIcon(type)}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div className={styles.socialGrid}>
-          {socialLinks.map(({ type, name, href, handle }) => (
-            <a
-              key={name}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialCard}
-            >
-              <span className={styles.socialIcon}>{renderSocialIcon(type)}</span>
-              <span className={styles.socialMeta}>
-                <strong>{name}</strong>
-                <span>{handle}</span>
-              </span>
-            </a>
-          ))}
         </div>
 
         <div className={styles.bottom}>
