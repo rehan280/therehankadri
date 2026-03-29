@@ -12,7 +12,7 @@
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 1.6rem;
-  padding: 0.34rem 1rem 0.34rem 1rem;
+  padding: 0.34rem max(1rem, calc((100% - 1200px) / 2));
   border-radius: 0;
   background: rgba(11, 11, 13, 0.96);
   backdrop-filter: blur(14px) saturate(125%);
@@ -4351,6 +4351,8 @@
   .navbar {
     width: 100%;
     top: 0;
+    left: 0;
+    transform: none;
     grid-template-columns: minmax(0, 1fr) auto;
     padding: 0.62rem 0.62rem 0.62rem 0.78rem;
     border-radius: 0;
