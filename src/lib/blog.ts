@@ -19,7 +19,7 @@ export type BlogCategory = {
 export type BlogAuthorSocials = {
   twitter?: string;
   linkedin?: string;
-  website?: string;
+  instagram?: string;
 };
 
 export type BlogAuthor = {
@@ -52,11 +52,11 @@ const author: BlogAuthor = {
   name: "Rehan Kadri",
   role: "Growth Marketing Strategist",
   image: "/rehan.png",
-  bio: "Rehan builds SEO, content, and pipeline systems that help B2B brands turn attention into qualified revenue.",
+  bio: "Rehan Kadri is an SEO specialist, content strategist, and growth marketer with 8+ years of hands-on experience. He started his journey at the age of 14 and has since grown a blog to 1M+ traffic and built an audience of 33K+ subscribers. He helps brands and creators scale through SEO, social media marketing, and data-driven strategies, with deep expertise in YouTube growth.",
   socials: {
-    twitter: "https://x.com/rehankadri",
+    twitter: "https://x.com/rehanous",
     linkedin: "https://www.linkedin.com/in/rehan-kadri/",
-    website: "https://rehankadri.com",
+    instagram: "https://www.instagram.com/therehankadri/",
   },
 };
 
@@ -569,6 +569,42 @@ export function getRelatedBlogPosts(currentSlug: string) {
   return blogPosts.filter((post) => post.slug !== currentSlug).slice(0, 3);
 }
 
+function countWords(text: string) {
+  return text
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+}
+
+function countBlockWords(block: BlogBlock) {
+  switch (block.type) {
+    case "paragraph":
+      return countWords(block.text);
+    case "list":
+      return block.items.reduce((total, item) => total + countWords(item), 0);
+    case "callout":
+      return countWords(block.title) + countWords(block.body);
+    case "quote":
+      return countWords(block.text) + countWords(block.author);
+  }
+}
+
+export function getBlogReadTime(post: BlogPost) {
+  const introWords = post.intro.reduce((total, paragraph) => total + countWords(paragraph), 0);
+  const sectionWords = post.sections.reduce(
+    (total, section) =>
+      total +
+      countWords(section.title) +
+      section.blocks.reduce((blockTotal, block) => blockTotal + countBlockWords(block), 0),
+    0
+  );
+
+  const totalWords = introWords + sectionWords;
+  const minutes = Math.max(1, Math.ceil(totalWords / 220));
+
+  return `${minutes} min read`;
+}
+
 export function formatBlogDate(value: string) {
   return new Intl.DateTimeFormat("en-US", {
     month: "long",
@@ -577,3 +613,6 @@ export function formatBlogDate(value: string) {
     timeZone: "UTC",
   }).format(new Date(`${value}T00:00:00Z`));
 }
+
+
+

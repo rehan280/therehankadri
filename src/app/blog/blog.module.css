@@ -3273,3 +3273,523 @@
     max-width: 160px !important;
   }
 }
+
+.shareRail {
+  display: none;
+}
+
+@media (min-width: 1320px) {
+  .postGrid {
+    grid-template-columns: minmax(230px, 280px) minmax(0, 650px) 52px !important;
+    gap: 2rem 2rem !important;
+  }
+
+  .shareRail {
+    display: block;
+    align-self: start;
+  }
+
+  .shareRailInner {
+    position: sticky;
+    top: 6.95rem;
+  }
+
+  .shareRailCard {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(21, 58, 107, 0.14);
+    border-radius: 0.28rem;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 16px 36px rgba(36, 50, 74, 0.08);
+  }
+
+  .shareRailLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-bottom: 1px solid rgba(21, 58, 107, 0.1);
+    background: #ffffff;
+    color: #22314d;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .shareRailLink:last-child {
+    border-bottom: 0;
+  }
+
+  .shareRailLink:hover {
+    background: #f7faff;
+  }
+
+  .shareRailLink:nth-child(1) {
+    color: #111111;
+  }
+
+  .shareRailLink:nth-child(2) {
+    color: #1877f2;
+  }
+
+  .shareRailLink:nth-child(3) {
+    color: #ff4500;
+  }
+
+  .shareRailLink:nth-child(4) {
+    color: #0a66c2;
+  }
+
+  .shareRailLink svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Final post-hero refinement: compact Authority-Hacker-like spacing without changing page structure */
+.postHero {
+  padding: 6rem 0 2.5rem !important;
+  background: linear-gradient(90deg, #ffad95 0%, #ff784f 50%, #ff5837 100%) !important;
+}
+
+.postHero::before {
+  opacity: 0.42 !important;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px) !important;
+  background-size: 48px 48px !important;
+}
+
+.postHero::after {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 18%, transparent 82%, rgba(76, 19, 5, 0.08)),
+    radial-gradient(circle at 50% -12%, rgba(255, 255, 255, 0.1), transparent 32%) !important;
+}
+
+.postHeroInner {
+  padding-top: 0.45rem !important;
+}
+
+.postHero .heroPill {
+  min-height: 2rem;
+  padding: 0.42rem 1.05rem;
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+}
+
+.postHero h1.postHeroTitle {
+  width: min(800px, 100%) !important;
+  max-width: 800px !important;
+  margin: 1rem auto 0 !important;
+  font-family: var(--font-hero), var(--font-display), "Plus Jakarta Sans", sans-serif !important;
+  font-size: clamp(1.75rem, 4.5vw, 3rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.postHeroLine,
+.postHeroLineSingle,
+.postHeroLineTop,
+.postHeroLineMiddle,
+.postHeroLineBottom {
+  width: auto !important;
+  max-width: 100%;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+.postHeroLine + .postHeroLine {
+  margin-top: 0 !important;
+}
+
+.postHero .authorRow {
+  gap: 0.95rem 1.45rem !important;
+  margin-top: 1rem !important;
+}
+
+.postHero .authorAvatarWrap {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.postHero .authorIdentity {
+  gap: 0.75rem;
+}
+
+.postHero .authorText strong {
+  font-size: 0.96rem;
+  font-weight: 700;
+}
+
+.postHero .authorText span {
+  font-size: 0.88rem;
+  line-height: 1.2;
+}
+
+.postHero .postMetaRow {
+  gap: 0.85rem;
+}
+
+.postHero .postMetaItem {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+}
+
+@media (max-width: 768px) {
+  .postHero {
+    padding: 5.25rem 0 2rem !important;
+  }
+
+  .postHeroInner {
+    padding-top: 0.2rem !important;
+  }
+
+  .postHero h1.postHeroTitle {
+    width: min(100%, 640px) !important;
+    margin-top: 0.9rem !important;
+    font-size: clamp(1.75rem, 9vw, 2.5rem) !important;
+    line-height: 1.1 !important;
+    padding-inline: 0.15rem;
+  }
+
+  .postHero .authorRow {
+    gap: 0.8rem 1rem !important;
+    margin-top: 0.9rem !important;
+  }
+
+  .postHero .authorIdentity {
+    gap: 0.65rem;
+  }
+
+  .postHero .authorText strong {
+    font-size: 0.93rem;
+  }
+
+  .postHero .authorText span {
+    font-size: 0.8rem;
+  }
+
+  .postHero .postMetaRow {
+    gap: 0.75rem;
+  }
+
+  .postHero .postMetaItem {
+    font-size: 0.74rem;
+    letter-spacing: 0.11em;
+  }
+
+  .postHeroLine,
+  .postHeroLineSingle,
+  .postHeroLineTop,
+  .postHeroLineMiddle,
+  .postHeroLineBottom {
+    white-space: nowrap !important;
+    text-wrap: nowrap;
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+}
+
+.hero,
+.postHero {
+  background: linear-gradient(180deg, #ff8c67 0%, #ff5a33 100%) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before,
+.postHero::before {
+  content: "";
+  z-index: 0;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 1 !important;
+  background-image:
+    linear-gradient(#ffffff0a 1px, #0000 1px),
+    linear-gradient(90deg, #ffffff0a 1px, #0000 1px),
+    linear-gradient(#ffffff12 1px, #0000 1px),
+    linear-gradient(90deg, #ffffff12 1px, #0000 1px) !important;
+  background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px !important;
+  background-position: 0 0, 0 0, 0 0, 0 0 !important;
+}
+
+.hero::after,
+.postHero::after {
+  background: none !important;
+}
+
+/* Final hero text + gradient tuning to match the lighter Authority-style rhythm */
+.hero,
+.postHero {
+  background: linear-gradient(180deg, #ff9b7d 0%, #ff7147 100%) !important;
+}
+
+.postHero .authorText strong {
+  color: #ffffff !important;
+  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 21px !important;
+}
+
+.postHero .authorText span {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+}
+
+.postHero .postMetaItem {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-family: var(--font-mono), ui-monospace, monospace !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+.postHero .postMetaItem svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Final compact blog-index hero */
+.blogIndexHero {
+  padding: 0 !important;
+}
+
+.blogIndexHeroShell {
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+
+.blogIndexHeroInner {
+  width: min(720px, 100%) !important;
+}
+
+.blogIndexTitle {
+  width: min(720px, 100%) !important;
+  margin-top: 0.95rem !important;
+  margin-bottom: 0 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.blogIndexLine:nth-child(1) {
+  font-size: 2.55rem !important;
+}
+
+.blogIndexLine:nth-child(2) {
+  margin-top: 0.18rem !important;
+  font-size: 2.25rem !important;
+}
+
+.blogIndexLine:nth-child(3) {
+  margin-top: 0.18rem !important;
+  font-size: 1.95rem !important;
+}
+
+.blogIndexLine {
+  width: auto !important;
+  max-width: 100%;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+.blogIndexCopy {
+  margin-top: 0.8rem !important;
+  max-width: 34rem !important;
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+}
+
+.blogIndexCategoryRow {
+  margin-top: 1rem !important;
+}
+
+.blogIndexMeta {
+  margin-top: 0.9rem !important;
+}
+
+@media (min-width: 768px) {
+  .blogIndexHeroShell {
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .blogIndexHeroShell {
+    padding: 0 !important;
+  }
+
+  .blogIndexTitle {
+    width: min(100%, 336px) !important;
+    max-width: 336px !important;
+    margin-top: 0.82rem !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .blogIndexLine:nth-child(1) {
+    font-size: 1.92rem !important;
+  }
+
+  .blogIndexLine:nth-child(2) {
+    font-size: 1.72rem !important;
+  }
+
+  .blogIndexLine:nth-child(3) {
+    font-size: 1.52rem !important;
+  }
+
+  .blogIndexCopy {
+    margin-top: 0.72rem !important;
+    max-width: 18rem !important;
+    font-size: 0.85rem !important;
+    line-height: 1.46 !important;
+  }
+
+  .blogIndexCategoryRow {
+    margin-top: 0.85rem !important;
+    gap: 0.5rem !important;
+  }
+
+  .blogIndexMeta {
+    margin-top: 0.8rem !important;
+  }
+}
+
+/* Final shared blog container + hero spacing frame */
+.heroInner,
+.postHeroInner,
+.heroInner.blogIndexHeroInner,
+.indexShell,
+.relatedShell,
+.postShell {
+  position: relative !important;
+  z-index: 10 !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+.postHero,
+.hero {
+  padding-top: 9rem !important;
+  padding-bottom: 3.5rem !important;
+}
+
+@media (min-width: 640px) {
+  .postHero,
+  .hero {
+    padding-bottom: 4rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroInner,
+  .postHeroInner,
+  .heroInner.blogIndexHeroInner,
+  .indexShell,
+  .relatedShell,
+  .postShell {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+
+/* Final compact post hero alignment */
+.blogIndexHero {
+  padding-top: 8rem !important;
+  padding-bottom: 2.75rem !important;
+}
+
+.blogIndexHeroInner {
+  padding-top: 0 !important;
+}
+
+.postHero {
+  padding-top: 8rem !important;
+  padding-bottom: 2.75rem !important;
+}
+
+.postHeroInner {
+  padding-top: 0 !important;
+}
+
+.postHero h1.postHeroTitle {
+  width: min(720px, 100%) !important;
+  max-width: 720px !important;
+  margin-top: 1.15rem !important;
+  margin-bottom: 1.55rem !important;
+}
+
+.postHero .authorRow {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 640px) {
+  .blogIndexHero {
+    padding-top: 5.15rem !important;
+    padding-bottom: 1.9rem !important;
+  }
+
+  .blogIndexHeroInner {
+    padding-top: 0 !important;
+  }
+
+  .postHero {
+    padding-top: 5.15rem !important;
+    padding-bottom: 1.9rem !important;
+  }
+
+  .postHeroInner {
+    padding-top: 0 !important;
+  }
+
+  .postHero .heroPill {
+    min-height: 1.8rem;
+    padding: 0.34rem 0.85rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+  }
+
+  .postHero h1.postHeroTitle {
+    width: min(100%, 800px) !important;
+    max-width: 800px !important;
+    margin-top: 20px !important;
+    margin-bottom: 26px !important;
+    font-family: var(--font-hero), Arial, sans-serif !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    line-height: 31.36px !important;
+    letter-spacing: -0.7px !important;
+    padding-inline: 0 !important;
+  }
+
+  .postHero .authorRow {
+    gap: 0.7rem 0.9rem !important;
+    margin-top: 0 !important;
+  }
+
+  .postHero .authorAvatarWrap {
+    width: 1.9rem !important;
+    height: 1.9rem !important;
+  }
+
+  .postHero .postMetaRow {
+    gap: 0.65rem !important;
+  }
+}

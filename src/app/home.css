@@ -6496,3 +6496,16 @@
     gap: 0.9rem;
   }
 }
+
+/* Final sitewide navbar content frame: full-width bar with 1200px centered container rhythm */
+.navbar {
+  padding-left: max(24px, calc((100% - 1200px) / 2 + 24px)) !important;
+  padding-right: max(24px, calc((100% - 1200px) / 2 + 24px)) !important;
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}

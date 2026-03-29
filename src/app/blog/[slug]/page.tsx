@@ -6,7 +6,7 @@ import {
   ArrowUpRight,
   CalendarDays,
   Clock3,
-  Globe,
+  Instagram,
   Linkedin,
   Twitter,
 } from "lucide-react";
@@ -16,6 +16,7 @@ import {
   blogPosts,
   type BlogBlock,
   formatBlogDate,
+  getBlogReadTime,
   getBlogPostBySlug,
   getRelatedBlogPosts,
 } from "@/lib/blog";
@@ -63,26 +64,32 @@ export async function generateMetadata({
 function buildHeroTitleLines(title: string) {
   const words = title.trim().split(/\s+/).filter(Boolean);
   const joinedLength = (items: string[]) => items.join(" ").length;
+  const longestWordLength = Math.max(...words.map((word) => word.length));
+  const buildLineGroups = (lineCount: number, maxLength: number) => {
+    const groups: string[][][] = [];
+
+    const visit = (startIndex: number, remainingLines: number, current: string[][]) => {
+      if (remainingLines === 1) {
+        const lastLine = words.slice(startIndex);
+        if (lastLine.length === 0 || joinedLength(lastLine) > maxLength) return;
+        groups.push([...current, lastLine]);
+        return;
+      }
+
+      const maxEnd = words.length - remainingLines + 1;
+      for (let endIndex = startIndex + 1; endIndex <= maxEnd; endIndex += 1) {
+        const nextLine = words.slice(startIndex, endIndex);
+        if (joinedLength(nextLine) > maxLength) break;
+        visit(endIndex, remainingLines - 1, [...current, nextLine]);
+      }
+    };
+
+    visit(0, lineCount, []);
+    return groups;
+  };
 
   if (words.length <= 3) return [title];
-
-  const twoLineOptions: string[][][] = [];
-  for (let i = 1; i < words.length; i += 1) {
-    const lines = [words.slice(0, i), words.slice(i)];
-    if (lines.some((line) => line.length === 0)) continue;
-    if (lines.some((line) => joinedLength(line) > 28)) continue;
-    twoLineOptions.push(lines);
-  }
-
-  const threeLineOptions: string[][][] = [];
-  for (let i = 1; i < words.length - 1; i += 1) {
-    for (let j = i + 1; j < words.length; j += 1) {
-      const lines = [words.slice(0, i), words.slice(i, j), words.slice(j)];
-      if (lines.some((line) => line.length === 0)) continue;
-      if (lines.some((line) => joinedLength(line) > 24)) continue;
-      threeLineOptions.push(lines);
-    }
-  }
+  if (longestWordLength > 18) return [title];
 
   const scoreLines = (lineGroups: string[][]) => {
     const lengths = lineGroups.map((line) => joinedLength(line));
@@ -90,25 +97,50 @@ function buildHeroTitleLines(title: string) {
     const maxLength = Math.max(...lengths);
     const minLength = Math.min(...lengths);
     const balancePenalty = maxLength - minLength;
-    const orphanPenalty = lengths[lengths.length - 1] < 8 ? 18 : 0;
-    const singleWordLastPenalty = wordsPerLine[wordsPerLine.length - 1] === 1 ? 16 : 0;
-    const staircasePenalty =
-      lineGroups.length === 3 && !(lengths[0] >= lengths[1] && lengths[1] >= lengths[2]) ? 10 : 0;
-    const overPyramidPenalty =
-      lineGroups.length === 3 && lengths[2] < lengths[1] * 0.45 ? 14 : 0;
-    const lineCountPenalty = lineGroups.length === 3 ? 6 : 0;
+    const orphanPenalty = lengths[lengths.length - 1] < 7 ? 18 : 0;
+    const singleWordLastPenalty = wordsPerLine[wordsPerLine.length - 1] === 1 ? 8 : 0;
+    const increasingPenalty = lengths.slice(1).reduce((total, length, index) => {
+      const previous = lengths[index];
+      return total + (length > previous ? (length - previous) * 2.5 : 0);
+    }, 0);
+    const squarePenalty =
+      lineGroups.length >= 4 && maxLength - minLength < 8 ? 18 : 0;
+    const bottomTooLongPenalty =
+      lineGroups.length >= 3 && lengths[lengths.length - 1] > lengths[0] * 0.92 ? 12 : 0;
+    const taperPenalty =
+      lineGroups.length >= 3 && lengths[0] - lengths[lengths.length - 1] < 6 ? 10 : 0;
+    const longLinePenalty = lengths.reduce((total, length) => {
+      if (length > 30) return total + (length - 30) * 12;
+      if (length > 28) return total + (length - 28) * 7;
+      if (length > 26) return total + (length - 26) * 4;
+      return total;
+    }, 0);
+    const twoLinePreference =
+      lineGroups.length === 2 && maxLength <= 30 ? -18 : 0;
+    const threeLinePreference =
+      lineGroups.length === 3 && maxLength <= 24 ? -8 : 0;
+    const lineCountPenalty =
+      lineGroups.length === 2 ? 0 : lineGroups.length === 3 ? 10 : 36;
 
     return (
       balancePenalty +
       orphanPenalty +
       singleWordLastPenalty +
-      staircasePenalty +
-      overPyramidPenalty +
+      increasingPenalty +
+      squarePenalty +
+      bottomTooLongPenalty +
+      taperPenalty +
+      longLinePenalty +
+      twoLinePreference +
+      threeLinePreference +
       lineCountPenalty
     );
   };
 
-  const candidateGroups = [...twoLineOptions, ...threeLineOptions];
+  const candidateGroups = [
+    ...buildLineGroups(2, 28),
+    ...buildLineGroups(3, 24),
+  ];
   if (candidateGroups.length === 0) return [title];
 
   const best = candidateGroups.reduce<string[][] | null>((currentBest, candidate) => {
@@ -171,6 +203,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const authorArticleCount = blogPosts.filter(
     (entry) => entry.author.name === post.author.name
   ).length;
+  const postReadTime = getBlogReadTime(post);
 
   return (
     <main className={styles.page}>
@@ -211,7 +244,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </span>
               <span className={styles.postMetaItem}>
                 <Clock3 size={16} strokeWidth={2.1} />
-                <span>{post.readTime}</span>
+                <span>{postReadTime}</span>
               </span>
             </div>
           </div>
@@ -289,10 +322,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                             <span>LinkedIn</span>
                           </Link>
                         ) : null}
-                        {post.author.socials?.website ? (
-                          <Link href={post.author.socials.website} className={styles.articleAuthorSocialLink} target="_blank" rel="noreferrer">
-                            <Globe size={14} strokeWidth={2} />
-                            <span>Web</span>
+                        {post.author.socials?.instagram ? (
+                          <Link href={post.author.socials.instagram} className={styles.articleAuthorSocialLink} target="_blank" rel="noreferrer">
+                            <Instagram size={14} strokeWidth={2} />
+                            <span>Instagram</span>
                           </Link>
                         ) : null}
                       </div>
@@ -324,7 +357,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <p className={styles.cardBlurb}>{relatedPost.cardBlurb}</p>
                   <div className={styles.cardMeta}>
                     <span>{formatBlogDate(relatedPost.publishedAt)}</span>
-                    <span>{relatedPost.readTime}</span>
+                    <span>{getBlogReadTime(relatedPost)}</span>
                   </div>
                   <Link href={`/blog/${relatedPost.slug}`} className={styles.cardLink}>
                     <span>Read article</span>
