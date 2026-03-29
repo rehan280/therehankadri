@@ -247,12 +247,27 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    // Reveal on scroll
-    const revealObserver = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("show"); }),
-      { threshold: 0.08 }
+    const motionSelector = [
+      ".motion-fade",
+      ".motion-rise",
+      ".motion-scale",
+      ".motion-slide-left",
+      ".motion-slide-right",
+      ".motion-spotlight",
+    ].join(", ");
+
+    const motionObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14, rootMargin: "0px 0px -10% 0px" }
     );
-    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+    document.querySelectorAll(motionSelector).forEach((el) => motionObserver.observe(el));
 
     // Active nav section tracking
     const sectionObserver = new IntersectionObserver(
@@ -271,7 +286,7 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      revealObserver.disconnect();
+      motionObserver.disconnect();
       sectionObserver.disconnect();
       window.removeEventListener("scroll", handleScroll);
     };
@@ -282,7 +297,6 @@ export default function Home() {
     { href: "#services", label: "Expertise" },
     { href: "#works", label: "Results" },
     { href: "#process", label: "Systems" },
-    { href: "/blog", label: "Blog" },
     { href: "#about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
@@ -405,12 +419,12 @@ export default function Home() {
       <section className="hero section-light">
         <div className="container hero-container">
           <div className="hero-text-col">
-            <h1 className="hero-title hero-title-desktop reveal delay-2">
+            <h1 className="hero-title hero-title-desktop">
               I help B2B brands rank <span className="text-orange">#1 on Google</span>
               <br />
               and scale <span className="text-orange">YouTube</span> into real leads.
             </h1>
-            <h1 className="hero-title hero-title-mobile reveal delay-2">
+            <h1 className="hero-title hero-title-mobile">
               <span className="hero-mobile-line">I help B2B brands</span>
               <span className="hero-mobile-line">
                 rank <span className="text-orange">#1 on Google</span>
@@ -420,24 +434,24 @@ export default function Home() {
               </span>
               <span className="hero-mobile-line">into real leads.</span>
             </h1>
-            <p className="hero-subtitle hero-subtitle-desktop reveal delay-3">
+            <p className="hero-subtitle hero-subtitle-desktop">
               Growth systems built to turn search visibility and content reach into qualified pipeline, not vanity metrics.
             </p>
-            <p className="hero-subtitle hero-subtitle-mobile reveal delay-3">
+            <p className="hero-subtitle hero-subtitle-mobile">
               Turn search visibility into qualified pipeline,
               <br />
               not vanity metrics.
             </p>
-            <div className="hero-cta reveal delay-3">
+            <div className="hero-cta">
               <Link href="/contact" className="btn btn-orange">Book a strategy call ↗</Link>
               <Link href="#proofs" className="btn btn-white">See Real Results</Link>
             </div>
-            <p className="hero-cta-note reveal delay-3">
+            <p className="hero-cta-note">
               45-minute call. We&apos;ll uncover what&apos;s slowing growth and how to fix it.
             </p>
           </div>
 
-          <div className="hero-portrait-col reveal delay-2">
+          <div className="hero-portrait-col">
             <div className="premium-circle-wrapper">
               <Image src="/rehan.png" alt="Rehan Kadri" width={500} height={600} priority className="premium-portrait-img" />
             </div>
@@ -486,7 +500,7 @@ export default function Home() {
       {/* ── 2. PROBLEM & SOLUTION ── */}
       <section className="section-dark section-padding problem-section">
         <div className="container">
-          <div className="problem-panel reveal">
+          <div className="problem-panel motion-spotlight">
             <div className="problem-intro">
               <span className="section-label">The Gap</span>
               <h2 className="problem-title">
@@ -583,7 +597,7 @@ export default function Home() {
       {/* ── 4. WHAT I DO ── */}
       <section id="services" className="section-gray section-padding services-section-compact">
         <div className="container">
-          <div className="services-premium-header reveal">
+          <div className="services-premium-header motion-fade">
             <div className="services-premium-copy">
               <span className="section-label">Growth Systems</span>
               <h2 className="section-title">
@@ -648,7 +662,7 @@ export default function Home() {
                 cta: "Explore Content Engine",
               },
             ].map(({ num, label, visual, title, desc, resultLine, outcomes, cta }, i) => (
-              <article className={`service-premium-card reveal delay-${i + 1}`} key={num}>
+              <article className={`service-premium-card motion-scale motion-delay-${i + 1}`} key={num}>
                 <div className="service-premium-top">
                   <div className="service-number-badge">{num}</div>
                   <div className="service-premium-label">{label}</div>
@@ -683,7 +697,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="services-conversion-close reveal">
+          <div className="services-conversion-close motion-rise motion-delay-1">
             <div className="services-conversion-copy">
               <h3>Not sure which system fits your business?</h3>
               <p>I will break down what is holding your growth back and what to fix first.</p>
@@ -699,14 +713,17 @@ export default function Home() {
       {/* ── 5. CASE STUDIES ── */}
       <section id="works" className="section-light section-padding">
         <div className="container">
-          <div className="section-header reveal">
+          <div className="section-header motion-fade">
             <span className="section-label">Case Studies</span>
             <h2 className="section-title">Predictable <span className="text-orange">Outcomes</span></h2>
             <p className="section-desc">Data-backed examples of how my systems transition stagnant metrics into exponential revenue growth.</p>
           </div>
           <div className="proof-showcase-list">
             {caseStudies.map(({ img, alt, tag, h3, p, proofShots, features }, i) => (
-              <div className={`proof-showcase-row reveal delay-${(i % 3) + 1}`} key={i}>
+              <div
+                className={`proof-showcase-row ${i % 2 === 0 ? "motion-slide-left" : "motion-slide-right"} motion-delay-${(i % 3) + 1}`}
+                key={i}
+              >
                 <div className="proof-showcase-img-container">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={img} alt={alt} />
@@ -743,14 +760,17 @@ export default function Home() {
       {/* ── 6. VISUAL PROOF ── */}
       <section id="proofs" className="section-dark section-padding">
         <div className="container">
-          <div className="section-header reveal">
+          <div className="section-header motion-fade">
             <span className="section-label">Undeniable Proof</span>
             <h2 className="section-title">The Data <span className="text-orange">Behind The Systems</span></h2>
             <p className="section-desc">Raw backend analytics verifying exponential growth trajectories.</p>
           </div>
           <div className="proof-showcase-list">
             {visualProofItems.map(({ img, alt, tag, h3, p, proofShots, features }, i) => (
-              <div className={`proof-showcase-row reveal delay-${(i % 3) + 1}`} key={i}>
+              <div
+                className={`proof-showcase-row ${i % 2 === 0 ? "motion-slide-left" : "motion-slide-right"} motion-delay-${(i % 3) + 1}`}
+                key={i}
+              >
                 <div className="proof-showcase-img-container">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={img} alt={alt} />
@@ -787,7 +807,7 @@ export default function Home() {
       {/* ── 6.5. GROWTH PATHS ── */}
       <section className="section-light section-padding growth-paths-section">
         <div className="container">
-          <div className="growth-paths-header reveal">
+          <div className="growth-paths-header motion-fade">
             <span className="section-label">How Can I Help</span>
             <h2 className="section-title">
               Choose Your <span className="text-orange">Growth Path</span>
@@ -834,7 +854,7 @@ export default function Home() {
                 theme: "creator",
               },
             ].map(({ eyebrow, choice, title, image, alt, summary, outcome, points, fit, cta, frameLabel, theme }, index) => (
-              <article className={`growth-path-card growth-path-card-${theme} reveal delay-${index + 1}`} key={title}>
+              <article className={`growth-path-card growth-path-card-${theme} motion-scale motion-delay-${index + 1}`} key={title}>
                 <div className="growth-path-card-top">
                   <div className="growth-path-copy">
                     <span className="growth-path-eyebrow">{eyebrow}</span>
@@ -880,7 +900,7 @@ export default function Home() {
       {/* ── 7. MY SYSTEM ── */}
       <section id="process" className="section-gray section-padding process-section">
         <div className="container">
-          <div className="process-header reveal">
+          <div className="process-header motion-fade">
             <div>
               <span className="section-label">The Process</span>
               <h2 className="section-title">
@@ -927,7 +947,7 @@ export default function Home() {
                 desc: "Tighten the handoff from attention to booked calls by improving every touchpoint that influences trust and action.",
               },
             ].map(({ step, tag, title, desc }, i) => (
-              <article className={`process-stage-card reveal delay-${i + 1}`} key={step}>
+              <article className={`process-stage-card motion-rise motion-delay-${i + 1}`} key={step}>
                 <div className="process-stage-top">
                   <span className="process-step-badge">Step {step}</span>
                   <span className="process-stage-tag">{tag}</span>
@@ -943,11 +963,11 @@ export default function Home() {
       {/* ── 8. ABOUT ME ── */}
       <section id="about" className="section-light section-padding">
         <div className="container why-hire-grid">
-          <div className="hire-image-wrapper reveal">
+          <div className="hire-image-wrapper motion-slide-left">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/rehan.png" alt="Rehan Kadri" className="hire-img" />
           </div>
-          <div className="hire-content reveal delay-1">
+          <div className="hire-content motion-slide-right motion-delay-1">
             <span className="section-label">About Me</span>
             <h2 className="section-title">Who Is <span className="text-orange">Rehan Kadri</span>?</h2>
             <p className="section-desc" style={{ marginBottom: "1.5rem", color: "var(--text-dark)", fontWeight: 700 }}>
@@ -977,11 +997,11 @@ export default function Home() {
       {/* ── 9. TESTIMONIALS & PROOF ── */}
       <section className="section-gray section-padding" style={{ paddingBottom: "2rem" }}>
         <div className="container">
-          <div className="section-header reveal" style={{ textAlign: "center", marginBottom: "3rem", margin: "0 auto 3rem auto" }}>
+          <div className="section-header motion-fade" style={{ textAlign: "center", marginBottom: "3rem", margin: "0 auto 3rem auto" }}>
             <span className="section-label">Client Feedback</span>
             <h2 className="section-title">The <span className="text-orange">Consensus</span></h2>
           </div>
-          <div className="testimonials-grid reveal">
+          <div className="testimonials-grid">
             {[
               {
                 quote:
@@ -998,7 +1018,7 @@ export default function Home() {
                 image: "/adill.webp",
               },
             ].map(({ quote, name, role, image }, index) => (
-              <article className={`testimonial-card reveal delay-${index + 1}`} key={name}>
+              <article className={`testimonial-card motion-scale motion-delay-${index + 1}`} key={name}>
                 <div className="testimonial-stars">★★★★★</div>
                 <p className="testimonial-quote">&quot;{quote}&quot;</p>
                 <div className="testimonial-person">
@@ -1019,7 +1039,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="marquee-container reveal fade-in" style={{ padding: "2rem 0" }}>
+        <div className="marquee-container motion-fade motion-delay-1" style={{ padding: "2rem 0" }}>
           <div className="marquee-track">
             <div className="marquee-content">
               {["Organic SEO Pipelines", "B2B Lead Generation Systems", "Content & Video Ops", "LinkedIn Outreach Systems", "YouTube Growth Systems",
@@ -1034,7 +1054,7 @@ export default function Home() {
       {/* ── 10. FINAL CTA SECTION ── */}
       <section className="section-dark cta-section">
         <div className="container">
-          <div className="cta-panel reveal">
+          <div className="cta-panel motion-spotlight">
             <div className="cta-copy">
               <span className="section-label">Final CTA</span>
               <h2 className="cta-title">
