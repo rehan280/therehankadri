@@ -947,17 +947,17 @@ export default function Home() {
             <img src="/rehan.png" alt="Rehan Kadri" className="hire-img" />
           </div>
           <div className="hire-content reveal delay-1">
-            <span className="section-label">The Architect</span>
-            <h2 className="section-title">Who Is <span className="text-orange">Rehan Kadri?</span></h2>
+            <span className="section-label">About Me</span>
+            <h2 className="section-title">Who Is <span className="text-orange">Rehan Kadri</span>?</h2>
             <p className="section-desc" style={{ marginBottom: "1.5rem", color: "var(--text-dark)", fontWeight: 700 }}>
-              I am Rehan Kadri, a growth marketer focused on building systems that turn traffic into real revenue.
+              I build simple growth systems that help the right people find you, trust you, and turn into real leads.
             </p>
             <p className="section-desc" style={{ marginBottom: "2.5rem" }}>
-              I started by experimenting with content and quickly realized that traffic alone does not matter. What matters is building a complete pipeline that attracts the right audience, builds trust, and converts them into qualified leads.
+              I got into this by testing content, SEO, and distribution for myself. Pretty quickly, I learned that traffic can look impressive and still do very little for a business.
               <br /><br />
-              I have scaled organic traffic to over 1M monthly visitors and built a YouTube audience of 33K subscribers using content and retention strategies. At Fuzen.io, I worked across the full growth funnel from SEO and content to LinkedIn and B2B lead generation.
+              That is why I care more about the system behind growth than the vanity of growth itself. I like building a clear path from discovery to trust to conversion, so the right people do not just find you, they actually move.
               <br /><br />
-              My approach is simple. Build systems, not hacks. Focus on intent, not vanity metrics. Create growth that compounds over time.
+              Over time, that approach has helped me scale organic traffic past 1M monthly visitors and build a YouTube audience of 33K+ subscribers. I focus on growth that compounds, feels practical, and keeps working long after the first spike.
             </p>
             <div className="hire-stats">
               <div className="hire-stat">
@@ -1054,3 +1054,6 @@ export default function Home() {
     </main>
   );
 }
+
+
+

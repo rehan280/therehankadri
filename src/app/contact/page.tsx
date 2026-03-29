@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import styles from "./contact.module.css";
 
-const renderSocialIcon = (type: "email" | "linkedin" | "youtube" | "x") => {
+const renderSocialIcon = (type: "email" | "linkedin" | "instagram" | "youtube" | "x") => {
   switch (type) {
     case "email":
       return (
@@ -16,6 +16,12 @@ const renderSocialIcon = (type: "email" | "linkedin" | "youtube" | "x") => {
       return (
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M6.94 8.5H4.12V19h2.82V8.5ZM5.53 4C4.6 4 4 4.62 4 5.43c0 .8.59 1.42 1.5 1.42h.02c.94 0 1.52-.62 1.52-1.42C7.02 4.62 6.46 4 5.53 4ZM20 12.56c0-3.16-1.69-4.63-3.94-4.63-1.82 0-2.63 1-3.08 1.7V8.5h-2.82c.04.74 0 10.5 0 10.5h2.82v-5.87c0-.31.02-.62.11-.84.25-.61.82-1.24 1.78-1.24 1.25 0 1.75.94 1.75 2.33V19H20v-6.44Z" />
+        </svg>
+      );
+    case "instagram":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm-.2 2A3.55 3.55 0 0 0 4 7.55v8.9A3.55 3.55 0 0 0 7.55 20h8.9A3.55 3.55 0 0 0 20 16.45v-8.9A3.55 3.55 0 0 0 16.45 4h-8.9Zm8.95 1.45a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3ZM12 7.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2Zm0 2A2.8 2.8 0 1 0 14.8 12 2.8 2.8 0 0 0 12 9.2Z" />
         </svg>
       );
     case "youtube":
@@ -37,23 +43,30 @@ const socialLinks = [
   {
     type: "linkedin" as const,
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/rehan-kadri-27b5b8231",
-    handle: "@rehan-kadri",
-    note: "B2B growth strategy, founder insights, and pipeline thinking.",
+    href: "https://www.linkedin.com/in/therehankadri/",
+    handle: "@therehankadri",
+    note: "Growth strategy and pipeline insights.",
+  },
+  {
+    type: "instagram" as const,
+    name: "Instagram",
+    href: "https://www.instagram.com/therehankadri/",
+    handle: "@therehankadri",
+    note: "Brand, content, and behind-the-scenes ideas.",
   },
   {
     type: "youtube" as const,
     name: "YouTube",
     href: "https://youtube.com/@rehanous?si=FDWGeBZ6MtP6oUcK",
     handle: "@rehanous",
-    note: "Content systems, YouTube growth, and audience-building breakdowns.",
+    note: "Content systems and YouTube growth.",
   },
   {
     type: "x" as const,
     name: "X",
     href: "https://x.com/rehanous",
     handle: "@rehanous",
-    note: "Short-form ideas on positioning, pipeline, content, and execution.",
+    note: "Short ideas on positioning and content.",
   },
 ];
 
@@ -279,3 +292,6 @@ export default function ContactPage() {
     </main>
   );
 }
+
+
+
