@@ -1,35 +1,10 @@
 import type { Metadata } from 'next';
-import { IBM_Plex_Sans, Manrope, Outfit } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import './home.css';
 import AppFrame from '@/components/AppFrame';
-
-const manrope = Manrope({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-sans',
-});
-
-const displayFont = Manrope({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-display',
-});
-
-const heroFont = Outfit({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-  variable: '--font-hero',
-});
-
-const copyFont = IBM_Plex_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-copy',
-});
-
+import { copyFont, displayFont, heroFont, monoFont, sansFont } from '@/lib/fonts';
 
 export const metadata: Metadata = {
   title: 'The Rehan Kadri | Product & Growth Marketing Specialist',
@@ -65,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${manrope.variable} ${displayFont.variable} ${heroFont.variable} ${copyFont.variable} antialiased`}
+        className={`${sansFont.variable} ${displayFont.variable} ${heroFont.variable} ${copyFont.variable} ${monoFont.variable} antialiased`}
         suppressHydrationWarning
       >
         <AppFrame>{children}</AppFrame>
@@ -75,5 +50,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-

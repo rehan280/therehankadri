@@ -1,16 +1,10 @@
 import Link from "next/link";
 import { Calendar } from "lucide-react";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import BlogHeader from "@/components/blog/BlogHeader";
 import BlogTopicSection from "@/components/blog/BlogTopicSection";
 import { blogPosts, formatBlogDate, getBlogCategories } from "@/lib/blog";
+import { blogFont } from "@/lib/fonts";
 import styles from "./blog.module.css";
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
 
 const topicCopyByCategory = {
   seo: {
@@ -42,7 +36,7 @@ export default function BlogIndexPage() {
   const overflowCategories = categories.slice(7);
 
   return (
-    <main className={`${styles.page} ${jakarta.className}`}>
+    <main className={`${styles.page} ${blogFont.className}`}>
       <section className={`${styles.hero} ${styles.blogIndexHero}`}>
         <BlogHeader />
 
