@@ -99,8 +99,9 @@ export default function SiteFooter() {
           <p>© 2026 The Rehan Kadri. All rights reserved.</p>
           <div className={styles.links}>
             <Link href="/">Home</Link>
-            <Link href="/#results">Results</Link>
-            <Link href="/#systems">Systems</Link>
+            <Link href="/#works">Results</Link>
+            <Link href="/#process">Systems</Link>
+            <Link href="/blog">Blog</Link>
             <Link href="/contact">Contact</Link>
           </div>
         </div>
@@ -108,6 +109,9 @@ export default function SiteFooter() {
     </footer>
   );
 }
+
+
+
 
 
 

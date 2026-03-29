@@ -71,10 +71,11 @@ const socialLinks = [
 ];
 
 const contactNavLinks = [
-  { href: "/#results", label: "Results" },
-  { href: "/#systems", label: "Systems" },
-  { href: "/#about", label: "About" },
   { href: "/", label: "Home" },
+  { href: "/#works", label: "Results" },
+  { href: "/#process", label: "Systems" },
+  { href: "/blog", label: "Blog" },
+  { href: "/#about", label: "About" },
 ];
 
 export default function ContactPage() {
@@ -292,6 +293,8 @@ export default function ContactPage() {
     </main>
   );
 }
+
+
 
 
 

@@ -282,6 +282,7 @@ export default function Home() {
     { href: "#services", label: "Expertise" },
     { href: "#works", label: "Results" },
     { href: "#process", label: "Systems" },
+    { href: "/blog", label: "Blog" },
     { href: "#about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
@@ -1054,6 +1055,9 @@ export default function Home() {
     </main>
   );
 }
+
+
+
 
 
 

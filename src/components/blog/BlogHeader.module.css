@@ -1,0 +1,115 @@
+.navSpacer {
+  height: 0;
+}
+
+:global(.navbar.blog-navbar.hero-blend) {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend::before) {
+  display: none !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend .nav-brand-kicker) {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend .nav-brand-title::after) {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.16), transparent) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend .nav-brand-kadri) {
+  background: none !important;
+  color: #000000 !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend .desktop-links a) {
+  color: rgba(255, 255, 255, 0.86) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend .desktop-links a::after) {
+  background: rgba(255, 255, 255, 0.92) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend .nav-secondary) {
+  color: rgba(255, 255, 255, 0.94) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.26) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend .nav-secondary:hover) {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.42) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend .nav-btn.btn-orange) {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  box-shadow: none !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend .nav-btn.btn-orange:hover) {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #ffffff !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend .hamburger) {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend .hamburger:hover) {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+:global(.navbar.blog-navbar) {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 80% !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@media (max-width: 980px) {
+  :global(.navbar.blog-navbar) {
+    left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+:global(.navbar.blog-navbar:not(.hero-blend)::before) {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  background: rgba(11, 11, 13, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  display: block !important;
+  z-index: -1;
+}
+
+:global(.navbar.blog-navbar.scrolled:not(.hero-blend)::before) {
+  background: rgba(6, 6, 8, 0.98);
+  border-top-color: rgba(255, 255, 255, 0.045);
+  border-bottom-color: rgba(255, 255, 255, 0.045);
+}

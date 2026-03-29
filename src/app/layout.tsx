@@ -1,16 +1,35 @@
 import type { Metadata } from 'next';
-import { Manrope } from 'next/font/google';
+import { IBM_Plex_Sans, Manrope, Outfit } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import './home.css';
-import SiteFooter from '@/components/SiteFooter';
+import AppFrame from '@/components/AppFrame';
 
 const manrope = Manrope({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
   variable: '--font-sans',
 });
+
+const displayFont = Manrope({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-display',
+});
+
+const heroFont = Outfit({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-hero',
+});
+
+const copyFont = IBM_Plex_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-copy',
+});
+
 
 export const metadata: Metadata = {
   title: 'The Rehan Kadri | Product & Growth Marketing Specialist',
@@ -45,14 +64,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${manrope.variable} antialiased`} suppressHydrationWarning>
-        <div className="bg-glow"></div>
-        <div className="bg-glow-right"></div>
-        {children}
-        <SiteFooter />
+      <body
+        className={`${manrope.variable} ${displayFont.variable} ${heroFont.variable} ${copyFont.variable} antialiased`}
+        suppressHydrationWarning
+      >
+        <AppFrame>{children}</AppFrame>
         <Analytics />
         <SpeedInsights />
       </body>
     </html>
   );
 }
+
+
