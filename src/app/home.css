@@ -6509,3 +6509,221 @@
     padding-right: 24px !important;
   }
 }
+.scroll-progress-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+
+.scroll-progress-indicator span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, rgba(255, 90, 54, 0.92), rgba(255, 171, 92, 0.95));
+  box-shadow: 0 0 18px rgba(255, 90, 54, 0.35);
+}
+
+.proof-showcase-row,
+.service-premium-card,
+.growth-path-card,
+.testimonial-card,
+.problem-mini-card {
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    filter 0.28s ease;
+}
+
+.service-premium-card:hover,
+.growth-path-card:hover,
+.testimonial-card:hover,
+.problem-mini-card:hover {
+  transform: translateY(-4px) scale(1.015);
+}
+
+.proof-showcase-row:hover {
+  transform: scale(1.01);
+}
+
+.proof-showcase-row:hover .proof-showcase-img-container {
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.14), 0 10px 22px rgba(255, 90, 54, 0.1);
+  border-color: rgba(255, 90, 54, 0.18);
+}
+
+.testimonial-card {
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    background 0.28s ease;
+}
+
+.testimonial-card:hover {
+  border-color: rgba(255, 90, 54, 0.16);
+  box-shadow:
+    0 26px 58px rgba(0, 0, 0, 0.08),
+    0 10px 22px rgba(255, 90, 54, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.74);
+  background:
+    radial-gradient(circle at top right, rgba(255, 90, 54, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 249, 245, 0.96));
+}
+
+.cta-panel-glow {
+  animation: ctaPanelGlow 4.8s ease-in-out infinite;
+}
+
+@keyframes ctaPanelGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 25px 70px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      0 0 0 rgba(255, 90, 54, 0.08);
+  }
+
+  50% {
+    box-shadow:
+      0 28px 76px rgba(0, 0, 0, 0.48),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 0 42px rgba(255, 90, 54, 0.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-panel-glow {
+    animation: none;
+  }
+
+  .scroll-progress-indicator span {
+    transition: none;
+  }
+}
+.hero-line-static {
+  display: block;
+}
+
+.hero-analytics-card,
+.hero-social-card,
+.service-number-badge,
+.marquee-content,
+.cta-panel,
+.cta-panel-glow {
+  animation: none !important;
+}
+
+.scroll-progress-indicator {
+  display: none !important;
+}
+
+.marquee-container {
+  display: none;
+}
+/* Static homepage refinement inspired by Ahrefs / Backlinko */
+.hero-analytics-card,
+.hero-social-card,
+.service-number-badge,
+.marquee-content,
+.cta-panel,
+.cta-panel-glow,
+.premium-circle-wrapper,
+.premium-portrait-img,
+.service-premium-card,
+.growth-path-card,
+.testimonial-card,
+.problem-mini-card,
+.process-stage-card,
+.proof-showcase-img-container,
+.hire-img,
+.service-diagram-node,
+.service-diagram-icon,
+.service-cta-button,
+.services-audit-button,
+.growth-path-image,
+.cta-button,
+.growth-path-cta,
+.problem-build-step {
+  animation: none !important;
+}
+
+.hero-analytics-card,
+.hero-social-card,
+.premium-circle-wrapper,
+.service-premium-card,
+.growth-path-card,
+.testimonial-card,
+.problem-mini-card,
+.process-stage-card,
+.proof-showcase-row,
+.proof-showcase-img-container,
+.hire-img,
+.service-diagram-node,
+.service-diagram-icon,
+.service-cta-button,
+.services-audit-button,
+.growth-path-image,
+.cta-button,
+.growth-path-cta,
+.problem-build-step {
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease, color 0.22s ease !important;
+  transform: none !important;
+}
+
+.premium-circle-wrapper:hover,
+.premium-circle-wrapper:hover .premium-portrait-img,
+.service-premium-card:hover,
+.service-premium-card:hover .service-diagram-node,
+.service-premium-card:hover .service-diagram-icon,
+.service-premium-card:hover .service-cta-button,
+.growth-path-card:hover,
+.problem-mini-card:hover,
+.process-stage-card:hover,
+.proof-showcase-row:hover,
+.proof-showcase-img-container:hover,
+.hire-image-wrapper:hover .hire-img,
+.testimonial-card:hover,
+.services-audit-button:hover,
+.growth-path-cta:hover,
+.cta-button:hover,
+.btn:hover {
+  transform: none !important;
+}
+
+.marquee-container {
+  display: none !important;
+}
+
+.scroll-progress-indicator {
+  display: none !important;
+}
+
+.hero-line-static {
+  display: block;
+}
+
+.hero-analytics-card,
+.hero-social-card {
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.12),
+    0 6px 16px rgba(255, 90, 54, 0.06) !important;
+}
+
+.service-premium-card:hover,
+.growth-path-card:hover,
+.testimonial-card:hover,
+.problem-mini-card:hover,
+.process-stage-card:hover,
+.proof-showcase-row:hover .proof-showcase-img-container {
+  border-color: rgba(255, 90, 54, 0.12) !important;
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.06),
+    0 6px 14px rgba(255, 90, 54, 0.04) !important;
+}
