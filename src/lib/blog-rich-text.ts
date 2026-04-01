@@ -119,6 +119,107 @@ function splitParagraphs(text: string) {
     .filter(Boolean);
 }
 
+function decodeHtmlEntities(value: string) {
+  return value
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">");
+}
+
+function normalizeMarkupSource(source: string) {
+  const withoutImports = source.replace(/^\s*import[^\n]*\n/gm, "");
+  const firstTagIndex = withoutImports.search(
+    /<(?:React\.Fragment|Fragment|article|main|section|div|header|footer|aside|p|h1|h2|h3|blockquote|ul|ol)/i
+  );
+  const trimmed = firstTagIndex >= 0 ? withoutImports.slice(firstTagIndex) : withoutImports;
+
+  return trimmed
+    .replace(/<\/?(?:React\.Fragment|Fragment|article|main|section|div|header|footer|aside)[^>]*>/gi, "")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .trim();
+}
+
+function stripMarkupToText(value: string) {
+  return decodeHtmlEntities(
+    value
+      .replace(/\{["'`](.*?)["'`]\}/g, "$1")
+      .replace(/\{\s*['"]?\s*['"]?\s*\}/g, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+\n/g, "\n")
+      .replace(/\n\s+/g, "\n")
+      .replace(/[ \t]{2,}/g, " ")
+      .trim()
+  );
+}
+
+export function buildRichTextBodyFromMarkup(source: string): SerializedRichTextState {
+  const normalizedSource = normalizeMarkupSource(source);
+  const nodes: RichTextElementNode[] = [];
+  const blockPattern = /<(h1|h2|h3|p|blockquote|ul|ol)[^>]*>([\s\S]*?)<\/\1>/gi;
+
+  let match: RegExpExecArray | null;
+  while ((match = blockPattern.exec(normalizedSource))) {
+    const tagName = match[1].toLowerCase();
+    const innerContent = match[2];
+
+    if (tagName === "ul" || tagName === "ol") {
+      const listItems = Array.from(innerContent.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi))
+        .map((itemMatch) => stripMarkupToText(itemMatch[1]))
+        .filter(Boolean);
+
+      if (listItems.length) {
+        nodes.push(createListNode(listItems));
+      }
+
+      continue;
+    }
+
+    const textContent = stripMarkupToText(innerContent);
+    if (!textContent) {
+      continue;
+    }
+
+    if (tagName === "h1" || tagName === "h2") {
+      nodes.push(createHeadingNode(textContent, "h2"));
+      continue;
+    }
+
+    if (tagName === "h3") {
+      nodes.push(createHeadingNode(textContent, "h3"));
+      continue;
+    }
+
+    if (tagName === "blockquote") {
+      nodes.push(createQuoteNode(textContent));
+      continue;
+    }
+
+    splitParagraphs(textContent).forEach((paragraph) => {
+      nodes.push(createParagraphNode(paragraph));
+    });
+  }
+
+  if (!nodes.length) {
+    splitParagraphs(stripMarkupToText(normalizedSource)).forEach((paragraph) => {
+      nodes.push(createParagraphNode(paragraph));
+    });
+  }
+
+  return {
+    root: {
+      children: nodes,
+      direction: "ltr",
+      format: "",
+      indent: 0,
+      type: "root",
+      version: 1,
+    },
+  };
+}
+
 export function slugifyHeading(value: string) {
   return value
     .trim()
@@ -236,4 +337,3 @@ export function buildRichTextBodyFromLegacyPost(post: BlogPost): SerializedRichT
     },
   };
 }
-

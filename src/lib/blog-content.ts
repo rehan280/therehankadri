@@ -1,24 +1,25 @@
 import "server-only";
 
-import { cache } from "react";
-import { blogPosts as legacyBlogPosts } from "@/lib/blog";
+import type { BlogCategory, BlogPost } from "@/lib/blog";
+import {
+  getVisibleBlogCategories,
+  getVisibleBlogPostBySlug,
+  getVisibleManagedBlogPosts,
+  getVisibleRelatedBlogPosts,
+} from "@/lib/blog-cms";
 
-export const getAllBlogPosts = cache(async () => legacyBlogPosts);
+export async function getAllBlogPosts(): Promise<BlogPost[]> {
+  return (await getVisibleManagedBlogPosts()) as BlogPost[];
+}
 
-export const getBlogPostBySlug = cache(async (slug: string) =>
-  legacyBlogPosts.find((post) => post.slug === slug)
-);
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
+  return (await getVisibleBlogPostBySlug(slug)) as BlogPost | undefined;
+}
 
-export const getBlogCategories = cache(async () => {
-  const categoryMap = new Map<string, (typeof legacyBlogPosts)[number]["category"]>();
+export async function getBlogCategories(): Promise<BlogCategory[]> {
+  return (await getVisibleBlogCategories()) as BlogCategory[];
+}
 
-  legacyBlogPosts.forEach((post) => {
-    categoryMap.set(post.category.slug, post.category);
-  });
-
-  return Array.from(categoryMap.values());
-});
-
-export const getRelatedBlogPosts = cache(async (currentSlug: string) =>
-  legacyBlogPosts.filter((post) => post.slug !== currentSlug).slice(0, 3)
-);
+export async function getRelatedBlogPosts(currentSlug: string): Promise<BlogPost[]> {
+  return (await getVisibleRelatedBlogPosts(currentSlug)) as BlogPost[];
+}

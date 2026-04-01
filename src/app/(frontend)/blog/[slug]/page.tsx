@@ -16,6 +16,8 @@ import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
 import { getRichTextHeadingItems } from "@/lib/blog-rich-text";
 import {
   type BlogBlock,
+  type BlogPost,
+  defaultBlogAuthor,
   formatBlogDate,
   getBlogReadTime,
 } from "@/lib/blog";
@@ -44,23 +46,26 @@ export async function generateMetadata({
     };
   }
 
+  const currentPost = post as BlogPost;
+  const postAuthor = currentPost.author ?? defaultBlogAuthor;
+
   return {
-    title: `${post.title} | The Rehan Kadri`,
-    description: post.seoDescription,
+    title: `${currentPost.metaTitle ?? currentPost.title} | The Rehan Kadri`,
+    description: currentPost.seoDescription,
+    keywords: currentPost.keywords,
     alternates: {
-      canonical: `/blog/${post.slug}`,
+      canonical: `/blog/${currentPost.slug}`,
     },
     openGraph: {
-      title: post.title,
-      description: post.seoDescription,
+      title: currentPost.metaTitle ?? currentPost.title,
+      description: currentPost.seoDescription,
       type: "article",
-      url: `/blog/${post.slug}`,
-      publishedTime: `${post.publishedAt}T00:00:00Z`,
-      authors: [post.author.name],
+      url: `/blog/${currentPost.slug}`,
+      publishedTime: `${currentPost.publishedAt}T00:00:00Z`,
+      authors: [postAuthor.name],
     },
   };
 }
-
 function buildHeroTitleLines(title: string) {
   const words = title.trim().split(/\s+/).filter(Boolean);
   const joinedLength = (items: string[]) => items.join(" ").length;
@@ -201,15 +206,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const relatedPosts = await getRelatedBlogPosts(post.slug);
-  const heroTitleLines = buildHeroTitleLines(post.title);
-  const authorArticleCount = allPosts.filter(
-    (entry) => entry.author.name === post.author.name
+  const currentPost = post as BlogPost;
+  const normalizedPosts = allPosts as BlogPost[];
+  const postAuthor = currentPost.author ?? defaultBlogAuthor;
+  const relatedPosts = (await getRelatedBlogPosts(currentPost.slug)) as BlogPost[];
+  const heroTitleLines = buildHeroTitleLines(currentPost.title);
+  const authorArticleCount = normalizedPosts.filter(
+    (entry) => (entry.author ?? defaultBlogAuthor).name === postAuthor.name
   ).length;
-  const postReadTime = getBlogReadTime(post);
-  const tableOfContentsItems = post.body
-    ? getRichTextHeadingItems(post.body)
-    : post.sections.map((section) => ({
+  const postReadTime = getBlogReadTime(currentPost);
+  const tableOfContentsItems = currentPost.body
+    ? getRichTextHeadingItems(currentPost.body)
+    : currentPost.sections.map((section) => ({
         id: section.id,
         title: section.title,
       }));
@@ -220,7 +228,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <BlogHeader />
 
         <div className={`${styles.heroInner} ${styles.postHeroInner}`}>
-          <span className={styles.heroPill}>{post.category.name}</span>
+          <span className={styles.heroPill}>{currentPost.category.name}</span>
           <h1 className={styles.postHeroTitle}>
             {heroTitleLines.map((line, index) => (
               <span key={`${line}-${index}`} className={`${styles.postHeroLine} ${getHeroLineClass(index, heroTitleLines.length)}`}>
@@ -233,23 +241,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <div className={styles.authorIdentity}>
               <div className={styles.authorAvatarWrap}>
                 <Image
-                  src={post.author.image}
-                  alt={post.author.name}
+                  src={postAuthor.image}
+                  alt={postAuthor.name}
                   width={80}
                   height={80}
                   className={styles.authorAvatar}
                 />
               </div>
               <div className={styles.authorText}>
-                <strong>By {post.author.name}</strong>
-                <span>{post.author.role}</span>
+                <strong>By {postAuthor.name}</strong>
+                <span>{postAuthor.role}</span>
               </div>
             </div>
 
             <div className={styles.postMetaRow}>
               <span className={styles.postMetaItem}>
                 <CalendarDays size={16} strokeWidth={2.1} />
-                <span>{formatBlogDate(post.publishedAt)}</span>
+                <span>{formatBlogDate(currentPost.publishedAt)}</span>
               </span>
               <span className={styles.postMetaItem}>
                 <Clock3 size={16} strokeWidth={2.1} />
@@ -275,18 +283,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             <article className={`${styles.articleCopy} authority-post-copy`}>
               <div className={styles.articleProse}>
-                {post.body ? (
+                {currentPost.body ? (
                   <BlogRichText
-                    data={post.body}
+                    data={currentPost.body}
                     headingIds={tableOfContentsItems.map((item) => item.id)}
                   />
                 ) : (
                   <>
-                    {post.intro.map((paragraph) => (
+                    {currentPost.intro.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
 
-                    {post.sections.map((section) => (
+                    {currentPost.sections.map((section) => (
                       <section key={section.id} id={section.id} className={styles.articleSection}>
                         <h2>{section.title}</h2>
                         {section.blocks.map((block, index) =>
@@ -311,36 +319,36 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className={styles.articleAuthorInner}>
                   <div className={styles.articleAuthorIdentity}>
                     <Image
-                      src={post.author.image}
-                      alt={post.author.name}
+                      src={postAuthor.image}
+                      alt={postAuthor.name}
                       width={150}
                       height={150}
                       className={styles.articleAuthorImage}
                     />
                     <div className={styles.articleAuthorIdentityText}>
-                      <strong>{post.author.name}</strong>
-                      <span>{post.author.role}</span>
+                      <strong>{postAuthor.name}</strong>
+                      <span>{postAuthor.role}</span>
                     </div>
                   </div>
 
                   <div className={styles.articleAuthorInfo}>
-                    <p>{post.author.bio}</p>
+                    <p>{postAuthor.bio}</p>
                     <div className={styles.articleAuthorFooter}>
                       <div className={styles.articleAuthorSocials}>
-                        {post.author.socials?.twitter ? (
-                          <Link href={post.author.socials.twitter} className={styles.articleAuthorSocialLink} target="_blank" rel="noreferrer">
+                        {postAuthor.socials?.twitter ? (
+                          <Link href={postAuthor.socials.twitter} className={styles.articleAuthorSocialLink} target="_blank" rel="noreferrer">
                             <Twitter size={14} strokeWidth={2} />
                             <span>Twitter</span>
                           </Link>
                         ) : null}
-                        {post.author.socials?.linkedin ? (
-                          <Link href={post.author.socials.linkedin} className={styles.articleAuthorSocialLink} target="_blank" rel="noreferrer">
+                        {postAuthor.socials?.linkedin ? (
+                          <Link href={postAuthor.socials.linkedin} className={styles.articleAuthorSocialLink} target="_blank" rel="noreferrer">
                             <Linkedin size={14} strokeWidth={2} />
                             <span>LinkedIn</span>
                           </Link>
                         ) : null}
-                        {post.author.socials?.instagram ? (
-                          <Link href={post.author.socials.instagram} className={styles.articleAuthorSocialLink} target="_blank" rel="noreferrer">
+                        {postAuthor.socials?.instagram ? (
+                          <Link href={postAuthor.socials.instagram} className={styles.articleAuthorSocialLink} target="_blank" rel="noreferrer">
                             <Instagram size={14} strokeWidth={2} />
                             <span>Instagram</span>
                           </Link>
@@ -367,7 +375,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <div className={styles.articleGrid}>
               {relatedPosts.map((relatedPost) => (
                 <article key={relatedPost.slug} className={styles.listingCard}>
-                  <span className={styles.cardEyebrow}>{relatedPost.category.name}</span>
+                  <span className={styles.cardEyebrow}>
+                    {relatedPost.category?.name ?? "Blog"}
+                  </span>
                   <h2>
                     <Link href={`/blog/${relatedPost.slug}`}>{relatedPost.title}</Link>
                   </h2>
@@ -389,3 +399,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

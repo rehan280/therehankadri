@@ -36,8 +36,10 @@ export type BlogAuthor = {
 export type BlogPost = {
   slug: string;
   title: string;
+  metaTitle?: string;
   category: BlogCategory;
   subcategories: string[];
+  keywords?: string[];
   coverImage?: string;
   excerpt: string;
   cardBlurb: string;
@@ -52,7 +54,7 @@ export type BlogPost = {
   sections: BlogSection[];
 };
 
-const author: BlogAuthor = {
+export const defaultBlogAuthor: BlogAuthor = {
   name: "Rehan Kadri",
   role: "Growth Marketing Strategist",
   image: "/rehan.png",
@@ -103,7 +105,7 @@ const blogPostSource: BlogPost[] = [
       "Learn how to structure B2B SEO around revenue pages, supporting content, and conversion pathways that create qualified pipeline.",
     publishedAt: "2026-03-28",
     readTime: "12 min read",
-    author,
+    author: defaultBlogAuthor,
     summaryPoints: [
       "Start with bottom-funnel pages before scaling editorial output.",
       "Map every supporting article to a specific conversion path.",
@@ -227,7 +229,7 @@ const blogPostSource: BlogPost[] = [
       "Build a repeatable content repurposing engine across YouTube, LinkedIn, and SEO with one workflow and stronger editorial consistency.",
     publishedAt: "2026-03-25",
     readTime: "10 min read",
-    author,
+    author: defaultBlogAuthor,
     summaryPoints: [
       "Anchor every content cycle around one core idea with depth.",
       "Write transformation rules for each channel before production starts.",
@@ -339,7 +341,7 @@ const blogPostSource: BlogPost[] = [
       "Learn how to build a lead qualification funnel for high-ticket B2B offers with better pre-qualification, stronger offers, and cleaner handoffs to sales.",
     publishedAt: "2026-03-20",
     readTime: "11 min read",
-    author,
+    author: defaultBlogAuthor,
     summaryPoints: [
       "Clarify the offer and the fit before optimizing conversion rates.",
       "Use content and landing pages to pre-sell the next step.",
@@ -460,7 +462,7 @@ const blogPostSource: BlogPost[] = [
       "Build founder authority across LinkedIn, YouTube, and Google with a consistent message, stronger proof, and a practical publishing cadence.",
     publishedAt: "2026-03-15",
     readTime: "9 min read",
-    author,
+    author: defaultBlogAuthor,
     summaryPoints: [
       "Choose a clear market belief before creating more content.",
       "Use platform-specific formats while keeping one strategic message.",
@@ -624,6 +626,8 @@ export function formatBlogDate(value: string) {
     timeZone: "UTC",
   }).format(new Date(`${value}T00:00:00Z`));
 }
+
+
 
 
 
