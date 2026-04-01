@@ -23,10 +23,6 @@ import {
 } from "@/lib/github-publisher";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import {
-  getVercelDeployStatus,
-  triggerVercelDeploy,
-} from "@/lib/vercel-deploy";
 
 function buildAdminLocation(params?: Record<string, string | undefined>) {
   const searchParams = new URLSearchParams();
@@ -50,27 +46,12 @@ function parseCommaSeparatedValue(value: FormDataEntryValue | null) {
 
 function getPublishOutcomeMessage() {
   const githubStatus = getGitHubPublishStatus();
-  const vercelStatus = getVercelDeployStatus();
-
-  const messages: string[] = [];
 
   if (githubStatus.enabled) {
-    messages.push(`Synced to GitHub (${githubStatus.repo}@${githubStatus.branch}).`);
-  } else {
-    messages.push("Saved locally only because GitHub sync is not configured yet.");
+    return `Synced to GitHub (${githubStatus.repo}@${githubStatus.branch}). Vercel should redeploy automatically through the Git integration.`;
   }
 
-  if (vercelStatus.enabled) {
-    messages.push(
-      `Triggered a Vercel deploy${vercelStatus.projectName ? ` for ${vercelStatus.projectName}` : ""}.`
-    );
-  } else {
-    messages.push(
-      "If your GitHub repo is connected to Vercel, the GitHub commit should still redeploy automatically."
-    );
-  }
-
-  return messages.join(" ");
+  return "Saved locally only because GitHub sync is not configured yet.";
 }
 
 async function getRequestOrigin() {
@@ -215,19 +196,6 @@ export async function publishCmsPostAction(formData: FormData) {
       redirect(destination);
     }
 
-    try {
-      await triggerVercelDeploy();
-    } catch (error) {
-      destination = buildAdminLocation({
-        type: "error",
-        message:
-          error instanceof Error
-            ? `Published and synced to GitHub, but Vercel deploy trigger failed: ${error.message}`
-            : "Published and synced to GitHub, but Vercel deploy trigger failed.",
-      });
-      redirect(destination);
-    }
-
     revalidatePath("/blog");
     revalidatePath("/blog/[slug]", "page");
     revalidatePath("/admin/jsx-upload");
@@ -256,9 +224,10 @@ export async function deleteCmsPostAction(slug: string) {
     await requireCmsSessionUser();
 
     const existingPost = (await getAllManagedBlogPosts()).find((entry) => entry.slug === slug);
-    const cmsDeletePaths = existingPost?.source === "cms"
-      ? [getCmsPostFilePath(slug), ...(await getCmsUploadCopyFilePaths(slug))]
-      : [];
+    const cmsDeletePaths =
+      existingPost?.source === "cms"
+        ? [getCmsPostFilePath(slug), ...(await getCmsUploadCopyFilePaths(slug))]
+        : [];
 
     const deletedSource = await deleteManagedBlogPost(slug);
 
@@ -281,19 +250,6 @@ export async function deleteCmsPostAction(slug: string) {
           error instanceof Error
             ? `Deleted locally, but GitHub sync failed: ${error.message}`
             : "Deleted locally, but GitHub sync failed.",
-      });
-      redirect(destination);
-    }
-
-    try {
-      await triggerVercelDeploy();
-    } catch (error) {
-      destination = buildAdminLocation({
-        type: "error",
-        message:
-          error instanceof Error
-            ? `Deleted and synced to GitHub, but Vercel deploy trigger failed: ${error.message}`
-            : "Deleted and synced to GitHub, but Vercel deploy trigger failed.",
       });
       redirect(destination);
     }

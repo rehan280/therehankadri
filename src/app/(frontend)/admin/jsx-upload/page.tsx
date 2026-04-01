@@ -13,7 +13,6 @@ import {
 } from "@/lib/cms-auth";
 import { getGitHubPublishStatus } from "@/lib/github-publisher";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
-import { getVercelDeployStatus } from "@/lib/vercel-deploy";
 import {
   deleteCmsPostAction,
   publishCmsPostAction,
@@ -52,7 +51,6 @@ export default async function BlogJsxUploadPage({ searchParams }: AdminPageProps
   const statusMessage = readSearchParam(query, "message");
   const storageSummary = getCmsStorageSummary();
   const githubStatus = getGitHubPublishStatus();
-  const vercelStatus = getVercelDeployStatus();
   const livePosts = managedPosts.filter((post) => !post.isHidden);
   const hiddenPosts = managedPosts.length - livePosts.length;
   const cmsPosts = managedPosts.filter((post) => post.source === "cms");
@@ -308,9 +306,7 @@ export default async function BlogJsxUploadPage({ searchParams }: AdminPageProps
                   : "GitHub sync is currently off, so this admin will save to local content files only until GitHub env vars are configured."}
               </p>
               <p className={styles.storageMeta}>
-                {vercelStatus.enabled
-                  ? `Vercel deploy hook is active${vercelStatus.projectName ? ` for ${vercelStatus.projectName}` : ""}. Publishing or deleting will trigger a redeploy from this CMS.`
-                  : "Vercel deploy hook is not configured. If this repo is linked to Vercel, GitHub commits should still redeploy automatically."}
+                Vercel should redeploy automatically from the GitHub integration after each successful GitHub commit.
               </p>
             </section>
 
