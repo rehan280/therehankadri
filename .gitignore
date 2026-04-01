@@ -24,6 +24,8 @@
 .DS_Store
 *.pem
 .codex
+payload.db*
+ahrefs-*.html
 
 # debug
 npm-debug.log*

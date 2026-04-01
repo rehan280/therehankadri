@@ -11,32 +11,32 @@ import {
   Twitter,
 } from "lucide-react";
 import BlogHeader from "@/components/blog/BlogHeader";
+import BlogRichText from "@/components/blog/BlogRichText";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
+import { getRichTextHeadingItems } from "@/lib/blog-rich-text";
 import {
-  blogPosts,
   type BlogBlock,
   formatBlogDate,
   getBlogReadTime,
+} from "@/lib/blog";
+import {
+  getAllBlogPosts,
   getBlogPostBySlug,
   getRelatedBlogPosts,
-} from "@/lib/blog";
+} from "@/lib/blog-content";
 import styles from "../blog.module.css";
+
+export const dynamic = "force-dynamic";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) {
     return {
@@ -192,18 +192,27 @@ function renderBlock(block: BlogBlock, key: string) {
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const [post, allPosts] = await Promise.all([
+    getBlogPostBySlug(slug),
+    getAllBlogPosts(),
+  ]);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = getRelatedBlogPosts(post.slug);
+  const relatedPosts = await getRelatedBlogPosts(post.slug);
   const heroTitleLines = buildHeroTitleLines(post.title);
-  const authorArticleCount = blogPosts.filter(
+  const authorArticleCount = allPosts.filter(
     (entry) => entry.author.name === post.author.name
   ).length;
   const postReadTime = getBlogReadTime(post);
+  const tableOfContentsItems = post.body
+    ? getRichTextHeadingItems(post.body)
+    : post.sections.map((section) => ({
+        id: section.id,
+        title: section.title,
+      }));
 
   return (
     <main className={styles.page}>
@@ -253,32 +262,40 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       <section className={styles.postSection}>
         <div className={styles.postShell}>
-          <div className={styles.postGrid}>
-            <aside className={styles.sidebar}>
-              <div className={styles.sidebarStack}>
-                <BlogTableOfContents
-                  items={post.sections.map((section) => ({
-                    id: section.id,
-                    title: section.title,
-                  }))}
-                />
-              </div>
-            </aside>
+          <div
+            className={`${styles.postGrid} ${tableOfContentsItems.length ? "" : styles.postGridNoSidebar}`}
+          >
+            {tableOfContentsItems.length ? (
+              <aside className={styles.sidebar}>
+                <div className={styles.sidebarStack}>
+                  <BlogTableOfContents items={tableOfContentsItems} />
+                </div>
+              </aside>
+            ) : null}
 
             <article className={`${styles.articleCopy} authority-post-copy`}>
               <div className={styles.articleProse}>
-                {post.intro.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
+                {post.body ? (
+                  <BlogRichText
+                    data={post.body}
+                    headingIds={tableOfContentsItems.map((item) => item.id)}
+                  />
+                ) : (
+                  <>
+                    {post.intro.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
 
-                {post.sections.map((section) => (
-                  <section key={section.id} id={section.id} className={styles.articleSection}>
-                    <h2>{section.title}</h2>
-                    {section.blocks.map((block, index) =>
-                      renderBlock(block, `${section.id}-${index}`)
-                    )}
-                  </section>
-                ))}
+                    {post.sections.map((section) => (
+                      <section key={section.id} id={section.id} className={styles.articleSection}>
+                        <h2>{section.title}</h2>
+                        {section.blocks.map((block, index) =>
+                          renderBlock(block, `${section.id}-${index}`)
+                        )}
+                      </section>
+                    ))}
+                  </>
+                )}
               </div>
 
               <aside className={styles.articleAuthorCard}>
@@ -372,8 +389,3 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
-
-
-
-
-

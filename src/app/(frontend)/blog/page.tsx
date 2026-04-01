@@ -2,9 +2,11 @@ import Link from "next/link";
 import { Calendar } from "lucide-react";
 import BlogHeader from "@/components/blog/BlogHeader";
 import BlogTopicSection from "@/components/blog/BlogTopicSection";
-import { blogPosts, formatBlogDate, getBlogCategories } from "@/lib/blog";
-import { blogFont } from "@/lib/fonts";
+import { formatBlogDate } from "@/lib/blog";
+import { getAllBlogPosts, getBlogCategories } from "@/lib/blog-content";
 import styles from "./blog.module.css";
+
+export const dynamic = "force-dynamic";
 
 const topicCopyByCategory = {
   seo: {
@@ -29,61 +31,24 @@ const topicCopyByCategory = {
   },
 } as const;
 
-export default function BlogIndexPage() {
-  const categories = getBlogCategories();
+export default async function BlogIndexPage() {
+  const [blogPosts, categories] = await Promise.all([
+    getAllBlogPosts(),
+    getBlogCategories(),
+  ]);
   const latestPosts = blogPosts.slice(0, 4);
-  const visibleCategories = categories.slice(0, 7);
-  const overflowCategories = categories.slice(7);
 
   return (
-    <main className={`${styles.page} ${blogFont.className}`}>
+    <main className={styles.page}>
       <section className={`${styles.hero} ${styles.blogIndexHero}`}>
         <BlogHeader />
 
-        <div className={styles.blogIndexHeroShell}>
-          <div className={`${styles.heroInner} ${styles.blogIndexHeroInner}`}>
-            <span className={`${styles.heroPill} ${styles.blogIndexPill}`}>The Rehan Kadri Blog</span>
+        <div className={`${styles.heroInner} ${styles.blogIndexHeroInner}`}>
+          <h1 className={styles.blogIndexTitle}>The Rehan Kadri Blog</h1>
 
-            <h1 className={styles.blogIndexTitle}>
-              <span className={styles.blogIndexLine}>Growth systems notes</span>
-              <span className={styles.blogIndexLine}>for brands building</span>
-              <span className={styles.blogIndexLine}>predictable pipeline.</span>
-            </h1>
-
-            <p className={styles.blogIndexCopy}>
-              Practical writing on SEO, content distribution, authority, and conversion infrastructure for teams that want growth to compound.
-            </p>
-
-            <div className={styles.blogIndexCategoryRow} aria-label="Blog categories">
-              {visibleCategories.map((category) => (
-                <a key={category.slug} href={`#${category.slug}`} className={styles.blogIndexCategoryChip}>
-                  {category.name}
-                </a>
-              ))}
-
-              {overflowCategories.length ? (
-                <details className={styles.blogIndexCategoryOverflow}>
-                  <summary className={styles.blogIndexCategoryChip}>Other</summary>
-                  <div className={styles.blogIndexCategoryOverflowMenu}>
-                    {overflowCategories.map((category) => (
-                      <a
-                        key={category.slug}
-                        href={`#${category.slug}`}
-                        className={styles.blogIndexCategoryOverflowLink}
-                      >
-                        {category.name}
-                      </a>
-                    ))}
-                  </div>
-                </details>
-              ) : null}
-            </div>
-
-            <div className={styles.blogIndexMeta}>
-              <span>{blogPosts.length} articles published</span>
-              <span>{categories.length} categories</span>
-            </div>
-          </div>
+          <p className={styles.blogIndexCopy}>
+            Practical writing on SEO, content distribution, authority, and conversion infrastructure for teams that want growth to compound.
+          </p>
         </div>
       </section>
 
@@ -143,3 +108,6 @@ export default function BlogIndexPage() {
     </main>
   );
 }
+
+
+

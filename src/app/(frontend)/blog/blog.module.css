@@ -454,6 +454,10 @@
   align-items: start;
 }
 
+.postGridNoSidebar {
+  grid-template-columns: minmax(0, 650px);
+}
+
 .sidebar {
   position: relative;
   align-self: start;
@@ -2677,6 +2681,25 @@
   margin-bottom: 1.35em;
 }
 
+.articleProse a {
+  color: #ef5b2f;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.16em;
+}
+
+.articleProse a:hover {
+  color: #d84b23;
+}
+
+.articleProse strong {
+  color: rgb(26, 26, 46);
+  font-weight: 700;
+}
+
+.articleProse em {
+  font-style: italic;
+}
+
 .articleProse h2 {
   width: 100%;
   max-width: 650px;
@@ -2690,6 +2713,10 @@
   line-height: 40.7px;
   letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
+  scroll-margin-top: 100px;
+}
+
+.richTextSubheading {
   scroll-margin-top: 100px;
 }
 
@@ -2708,907 +2735,35 @@
   scroll-margin-top: 100px;
 }
 
+.articleProse ul,
+.articleProse ol {
+  margin-bottom: 1.6rem;
+  padding-left: 1.35rem;
+}
+
+.articleProse blockquote {
+  margin-bottom: 1.6rem;
+}
+
 .articleProse .articleList,
-.articleProse .callout,
-.articleProse .quoteBlock {
-  max-width: 650px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (max-width: 768px) {
-  .articleProse,
-  .articleProse p,
-  .articleProse li,
-  .articleProse h2,
-  .articleProse h3 {
-    max-width: 100%;
-  }
-}
-
-.heroInner,
-.indexShell,
-.relatedShell,
-.postShell {
-  width: 80% !important;
-  max-width: 1200px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.postHeroInner,
-.heroInner.blogIndexHeroInner {
-  width: 80% !important;
-  max-width: 1200px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-@media (max-width: 980px) {
-  .heroInner,
-  .postHeroInner,
-  .heroInner.blogIndexHeroInner,
-  .indexShell,
-  .relatedShell,
-  .postShell {
-    width: min(100%, calc(100% - 1.5rem)) !important;
-    max-width: none !important;
-  }
-}
-
-.articleAuthorCard {
-  max-width: 748px;
-  margin: 2.4rem auto 0;
-  overflow: hidden;
-  border: 1px solid rgba(206, 223, 245, 0.92);
-  border-radius: 1.35rem;
-  background:
-    radial-gradient(circle at top right, rgba(226, 236, 255, 0.48), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(251, 253, 255, 0.98));
-  box-shadow:
-    0 12px 28px rgba(88, 113, 153, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.98);
-}
-
-.articleAuthorCard .windowBar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  min-height: 0;
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(223, 231, 243, 0.95);
-}
-
-.articleAuthorCard .windowFile {
-  color: rgb(110, 110, 126);
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 11.5px;
-  font-weight: 400;
-  letter-spacing: 0.115px;
-  line-height: 17.25px;
-}
-
-.articleAuthorInner {
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
-  padding: 20px 24px;
-}
-
-.articleAuthorIdentity {
-  flex: 0 0 146px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.articleAuthorImage {
-  width: 132px;
-  height: 132px;
-  border-radius: 1.75rem;
-  object-fit: cover;
-  box-shadow: none;
-}
-
-.articleAuthorIdentityText {
-  display: flex;
-  flex-direction: column;
-  gap: 0.18rem;
-  margin-top: 0.75rem;
-}
-
-.articleAuthorIdentityText strong {
-  color: rgb(26, 26, 46);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.28;
-  letter-spacing: -0.02em;
-}
-
-.articleAuthorIdentityText span {
-  color: rgb(122, 132, 153);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.55;
-}
-
-.articleAuthorInfo {
-  flex: 1 1 auto;
-  min-width: 0;
-  padding-left: 24px;
-  border-left: 1px solid rgba(223, 231, 243, 0.95);
-}
-
-.articleAuthorInfo p {
-  max-width: none;
-  margin: 0;
-  color: rgb(90, 90, 110);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.75;
-}
-
-.articleAuthorFooter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 16px;
-}
-
-.articleAuthorSocials {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.55rem;
-  margin-top: 0;
-}
-
-.articleAuthorSocialLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.42rem;
-  min-height: 1.85rem;
-  padding: 0.32rem 0.68rem;
-  border: 1px solid rgba(232, 236, 243, 0.98);
-  border-radius: 0.42rem;
-  background: #f6f9fd;
-  color: rgb(110, 110, 126);
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1;
-  text-decoration: none;
-}
-
-.articleAuthorSocialLink:hover {
-  color: rgb(68, 68, 84);
-  background: #eef4fc;
-}
-
-.articleAuthorCount {
-  display: inline-flex;
-  align-items: center;
-  margin-left: auto;
-  color: rgb(153, 166, 186);
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.4;
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
-  .articleAuthorCard {
-    max-width: min(100%, 440px);
-    margin-top: 2rem;
-  }
-
-  .articleAuthorInner {
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    padding: 18px 20px 20px;
-  }
-
-  .articleAuthorIdentity {
-    flex: 0 0 auto;
-    width: 100%;
-    align-items: center;
-    text-align: center;
-  }
-
-  .articleAuthorImage {
-    width: 124px;
-    height: 124px;
-    border-radius: 1.5rem;
-  }
-
-  .articleAuthorIdentityText {
-    align-items: center;
-    margin-top: 0.85rem;
-  }
-
-  .articleAuthorIdentityText strong {
-    font-size: 1.45rem;
-    line-height: 1.05;
-  }
-
-  .articleAuthorInfo {
-    width: 100%;
-    margin-top: 18px;
-    padding-top: 18px;
-    padding-left: 0;
-    border-left: 0;
-    border-top: 1px solid rgba(223, 231, 243, 0.95);
-    text-align: center;
-  }
-
-  .articleAuthorInfo p {
-    max-width: 30ch;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 15px;
-    line-height: 1.75;
-  }
-
-  .articleAuthorFooter {
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.9rem;
-  }
-
-  .articleAuthorSocials {
-    justify-content: center;
-  }
-
-  .articleAuthorCount {
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .articleAuthorCard .windowBar {
-    padding: 10px 14px;
-  }
-
-  .articleAuthorInner {
-    padding: 16px 18px 18px;
-  }
-
-  .articleAuthorImage {
-    width: 112px;
-    height: 112px;
-  }
-
-  .articleAuthorIdentityText strong {
-    font-size: 1.35rem;
-  }
-}
-
-.articleAuthorIdentityText strong {
-  color: rgb(26, 26, 46) !important;
-  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif !important;
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  line-height: 1.35 !important;
-  letter-spacing: -0.01em !important;
-}
-
-.articleAuthorIdentityText span {
-  color: rgb(110, 110, 126) !important;
-  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif !important;
-  font-size: 14px !important;
+.callout p,
+.quoteBlock p,
+.authority-post-copy p,
+.authority-post-copy li {
+  font-family: var(--blog-copy-family) !important;
+  font-size: 18px !important;
+  font-style: normal !important;
+  line-height: 29px !important;
   font-weight: 400 !important;
-  line-height: 1.5 !important;
   letter-spacing: 0 !important;
-}
-
-.articleAuthorInfo p {
-  color: rgb(90, 90, 110) !important;
-  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif !important;
-  font-size: 17px !important;
-  font-weight: 400 !important;
-  line-height: 1.75 !important;
-  letter-spacing: 0 !important;
-}
-
-@media (max-width: 768px) {
-  .articleAuthorIdentityText strong {
-    font-size: 16px !important;
-    line-height: 1.3 !important;
-  }
-
-  .articleAuthorIdentityText span {
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-  }
-
-  .articleAuthorInfo p {
-    font-size: 16px !important;
-    line-height: 1.75 !important;
-  }
-}
-
-.articleAuthorCard {
-  background: rgba(255, 255, 255, 0.6) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(206, 223, 245, 0.92) !important;
-  border-radius: 16px !important;
-  overflow: hidden !important;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease !important;
-}
-
-.articleAuthorCard:hover {
-  box-shadow: 0 8px 32px rgba(9, 127, 232, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04) !important;
-  border-color: rgba(9, 127, 232, 0.15) !important;
-}
-
-.articleAuthorCard .windowBar {
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-  padding: 10px 16px !important;
-  background: rgba(26, 26, 46, 0.03) !important;
-  border-bottom: 1px solid rgba(223, 231, 243, 0.95) !important;
-}
-
-.articleAuthorCard .windowFile {
-  font-family: var(--font-mono), ui-monospace, monospace !important;
-  font-size: 11.5px !important;
-  font-weight: 400 !important;
-  color: rgb(110, 110, 126) !important;
-  letter-spacing: 0.01em !important;
-  line-height: 1.5 !important;
-}
-
-.articleAuthorInner {
-  display: flex !important;
-  align-items: flex-start !important;
-  gap: 24px !important;
-  padding: 20px 24px !important;
-}
-
-.articleAuthorIdentity {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 8px !important;
-  text-align: center !important;
-  flex-shrink: 0 !important;
-  min-width: 120px !important;
-  flex-basis: 120px !important;
-}
-
-.articleAuthorImage {
-  width: 130px !important;
-  height: 130px !important;
-  border-radius: 32px !important;
-  object-fit: cover !important;
-  box-shadow: 0 4px 16px rgba(9, 127, 232, 0.12) !important;
-}
-
-.articleAuthorIdentityText {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 0 !important;
-  margin-top: 0 !important;
-}
-
-.articleAuthorIdentityText strong {
-  font-family: var(--font-display), var(--font-copy), Arial, sans-serif !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  color: rgb(26, 26, 46) !important;
-  line-height: 1.2 !important;
-  letter-spacing: 0 !important;
-}
-
-.articleAuthorIdentityText span {
-  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif !important;
-  font-size: 11px !important;
-  font-weight: 400 !important;
-  color: rgb(110, 110, 126) !important;
-  line-height: 1.4 !important;
-  letter-spacing: 0 !important;
-  margin-top: -4px !important;
-}
-
-.articleAuthorInfo {
-  flex: 1 !important;
-  min-width: 0 !important;
-  border-left: 1px solid rgba(223, 231, 243, 0.95) !important;
-  padding-left: 24px !important;
-}
-
-.articleAuthorInfo p {
-  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif !important;
-  font-size: 15px !important;
-  font-weight: 400 !important;
-  line-height: 1.65 !important;
-  color: rgb(90, 90, 110) !important;
-  margin: 0 0 12px !important;
-  letter-spacing: 0 !important;
-}
-
-.articleAuthorFooter {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 6px !important;
-  margin-top: 0 !important;
-}
-
-.articleAuthorSocials {
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-  flex-wrap: wrap !important;
-  margin-top: 0 !important;
-}
-
-.articleAuthorSocialLink {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 5px !important;
-  padding: 4px 10px !important;
-  min-height: 0 !important;
-  border-radius: 6px !important;
-  font-family: var(--font-mono), ui-monospace, monospace !important;
-  font-size: 11px !important;
-  font-weight: 400 !important;
-  color: rgb(110, 110, 126) !important;
-  background: rgba(9, 127, 232, 0.04) !important;
-  border: 1px solid transparent !important;
-  text-decoration: none !important;
-  line-height: 1.2 !important;
-}
-
-.articleAuthorSocialLink:hover {
-  color: rgb(9, 127, 232) !important;
-  background: rgba(9, 127, 232, 0.08) !important;
-  border-color: rgba(9, 127, 232, 0.12) !important;
-}
-
-.articleAuthorCount {
-  font-family: var(--font-mono), ui-monospace, monospace !important;
-  font-size: 11px !important;
-  font-weight: 400 !important;
-  color: rgb(110, 110, 126) !important;
-  margin-left: auto !important;
-  opacity: 0.7 !important;
-  line-height: 1.4 !important;
-  white-space: nowrap !important;
-}
-
-@media (max-width: 640px) {
-  .articleAuthorInner {
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 16px !important;
-    padding: 20px 18px !important;
-  }
-
-  .articleAuthorImage {
-    width: 96px !important;
-    height: 96px !important;
-    border-radius: 26px !important;
-  }
-
-  .articleAuthorInfo {
-    border-left: none !important;
-    padding-left: 0 !important;
-    border-top: 1px solid rgba(223, 231, 243, 0.95) !important;
-    padding-top: 16px !important;
-    text-align: center !important;
-    width: 100% !important;
-  }
-
-  .articleAuthorFooter {
-    flex-direction: column !important;
-    justify-content: center !important;
-    gap: 10px !important;
-  }
-
-  .articleAuthorSocials {
-    justify-content: center !important;
-  }
-
-  .articleAuthorCount {
-    margin-left: 0 !important;
-  }
-}
-
-.articleAuthorIdentity {
-  min-width: 138px !important;
-  flex-basis: 138px !important;
-}
-
-.articleAuthorIdentityText {
-  width: 100% !important;
-  max-width: 142px !important;
-  margin-top: 2px !important;
-}
-
-.articleAuthorIdentityText strong {
-  display: block !important;
-  width: 100% !important;
-  font-family: var(--font-display), var(--font-copy), Arial, sans-serif !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  line-height: 1.2 !important;
-  text-align: center !important;
-  text-wrap: balance !important;
-}
-
-.articleAuthorIdentityText span {
-  display: block !important;
-  width: 100% !important;
-  max-width: 142px !important;
-  margin-top: 2px !important;
-  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif !important;
-  font-size: 11px !important;
-  font-weight: 400 !important;
-  line-height: 1.35 !important;
-  text-align: center !important;
-  text-wrap: balance !important;
-}
-
-@media (max-width: 640px) {
-  .articleAuthorIdentity {
-    min-width: 0 !important;
-    flex-basis: auto !important;
-  }
-
-  .articleAuthorIdentityText {
-    max-width: 160px !important;
-  }
-
-  .articleAuthorIdentityText span {
-    max-width: 160px !important;
-  }
-}
-
-.shareRail {
-  display: none;
-}
-
-@media (min-width: 1320px) {
-  .postGrid {
-    grid-template-columns: minmax(230px, 280px) minmax(0, 650px) 52px !important;
-    gap: 2rem 2rem !important;
-  }
-
-  .shareRail {
-    display: block;
-    align-self: start;
-  }
-
-  .shareRailInner {
-    position: sticky;
-    top: 6.95rem;
-  }
-
-  .shareRailCard {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border: 1px solid rgba(21, 58, 107, 0.14);
-    border-radius: 0.28rem;
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: 0 16px 36px rgba(36, 50, 74, 0.08);
-  }
-
-  .shareRailLink {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    border-bottom: 1px solid rgba(21, 58, 107, 0.1);
-    background: #ffffff;
-    color: #22314d;
-    text-decoration: none;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-
-  .shareRailLink:last-child {
-    border-bottom: 0;
-  }
-
-  .shareRailLink:hover {
-    background: #f7faff;
-  }
-
-  .shareRailLink:nth-child(1) {
-    color: #111111;
-  }
-
-  .shareRailLink:nth-child(2) {
-    color: #1877f2;
-  }
-
-  .shareRailLink:nth-child(3) {
-    color: #ff4500;
-  }
-
-  .shareRailLink:nth-child(4) {
-    color: #0a66c2;
-  }
-
-  .shareRailLink svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-/* Final post-hero refinement: compact Authority-Hacker-like spacing without changing page structure */
-.postHero {
-  padding: 6rem 0 2.5rem !important;
-  background: linear-gradient(90deg, #ffad95 0%, #ff784f 50%, #ff5837 100%) !important;
-}
-
-.postHero::before {
-  opacity: 0.42 !important;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px) !important;
-  background-size: 48px 48px !important;
-}
-
-.postHero::after {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 18%, transparent 82%, rgba(76, 19, 5, 0.08)),
-    radial-gradient(circle at 50% -12%, rgba(255, 255, 255, 0.1), transparent 32%) !important;
-}
-
-.postHeroInner {
-  padding-top: 0.45rem !important;
-}
-
-.postHero .heroPill {
-  min-height: 2rem;
-  padding: 0.42rem 1.05rem;
-  border-color: rgba(255, 255, 255, 0.34);
-  background: rgba(255, 255, 255, 0.08);
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
-}
-
-.postHero h1.postHeroTitle {
-  width: min(800px, 100%) !important;
-  max-width: 800px !important;
-  margin: 1rem auto 0 !important;
-  font-family: var(--font-hero), var(--font-display), "Plus Jakarta Sans", sans-serif !important;
-  font-size: clamp(1.75rem, 4.5vw, 3rem) !important;
-  font-weight: 700 !important;
-  line-height: 1.12 !important;
-  letter-spacing: -0.025em !important;
-}
-
-.postHeroLine,
-.postHeroLineSingle,
-.postHeroLineTop,
-.postHeroLineMiddle,
-.postHeroLineBottom {
-  width: auto !important;
-  max-width: 100%;
-  font-size: inherit !important;
-  line-height: inherit !important;
-  letter-spacing: inherit !important;
-}
-
-.postHeroLine + .postHeroLine {
-  margin-top: 0 !important;
-}
-
-.postHero .authorRow {
-  gap: 0.95rem 1.45rem !important;
-  margin-top: 1rem !important;
-}
-
-.postHero .authorAvatarWrap {
-  width: 2.25rem;
-  height: 2.25rem;
-}
-
-.postHero .authorIdentity {
-  gap: 0.75rem;
-}
-
-.postHero .authorText strong {
-  font-size: 0.96rem;
-  font-weight: 700;
-}
-
-.postHero .authorText span {
-  font-size: 0.88rem;
-  line-height: 1.2;
-}
-
-.postHero .postMetaRow {
-  gap: 0.85rem;
-}
-
-.postHero .postMetaItem {
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-}
-
-@media (max-width: 768px) {
-  .postHero {
-    padding: 5.25rem 0 2rem !important;
-  }
-
-  .postHeroInner {
-    padding-top: 0.2rem !important;
-  }
-
-  .postHero h1.postHeroTitle {
-    width: min(100%, 640px) !important;
-    margin-top: 0.9rem !important;
-    font-size: clamp(1.75rem, 9vw, 2.5rem) !important;
-    line-height: 1.1 !important;
-    padding-inline: 0.15rem;
-  }
-
-  .postHero .authorRow {
-    gap: 0.8rem 1rem !important;
-    margin-top: 0.9rem !important;
-  }
-
-  .postHero .authorIdentity {
-    gap: 0.65rem;
-  }
-
-  .postHero .authorText strong {
-    font-size: 0.93rem;
-  }
-
-  .postHero .authorText span {
-    font-size: 0.8rem;
-  }
-
-  .postHero .postMetaRow {
-    gap: 0.75rem;
-  }
-
-  .postHero .postMetaItem {
-    font-size: 0.74rem;
-    letter-spacing: 0.11em;
-  }
-
-  .postHeroLine,
-  .postHeroLineSingle,
-  .postHeroLineTop,
-  .postHeroLineMiddle,
-  .postHeroLineBottom {
-    white-space: nowrap !important;
-    text-wrap: nowrap;
-    overflow-wrap: normal;
-    word-break: keep-all;
-  }
-}
-
-.hero,
-.postHero {
-  background: linear-gradient(180deg, #ff8c67 0%, #ff5a33 100%) !important;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before,
-.postHero::before {
-  content: "";
-  z-index: 0;
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  opacity: 1 !important;
-  background-image:
-    linear-gradient(#ffffff0a 1px, #0000 1px),
-    linear-gradient(90deg, #ffffff0a 1px, #0000 1px),
-    linear-gradient(#ffffff12 1px, #0000 1px),
-    linear-gradient(90deg, #ffffff12 1px, #0000 1px) !important;
-  background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px !important;
-  background-position: 0 0, 0 0, 0 0, 0 0 !important;
-}
-
-.hero::after,
-.postHero::after {
-  background: none !important;
-}
-
-/* Final hero text + gradient tuning to match the lighter Authority-style rhythm */
-.hero,
-.postHero {
-  background: linear-gradient(180deg, #ff9b7d 0%, #ff7147 100%) !important;
-}
-
-.postHero .authorText strong {
-  color: #ffffff !important;
-  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  line-height: 21px !important;
-}
-
-.postHero .authorText span {
-  color: rgba(255, 255, 255, 0.75) !important;
-  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif !important;
-  font-size: 12px !important;
-  font-weight: 400 !important;
-  line-height: 18px !important;
-}
-
-.postHero .postMetaItem {
-  color: rgba(255, 255, 255, 0.75) !important;
-  font-family: var(--font-mono), ui-monospace, monospace !important;
-  font-size: 12px !important;
-  font-weight: 400 !important;
-  line-height: 18px !important;
-  letter-spacing: 0.08em !important;
-  text-transform: uppercase !important;
-}
-
-.postHero .postMetaItem svg {
-  width: 14px;
-  height: 14px;
-}
-
-/* Final compact blog-index hero */
-.blogIndexHero {
-  padding: 0 !important;
-}
-
-.blogIndexHeroShell {
-  min-height: 0 !important;
-  padding: 0 !important;
-}
-
-.blogIndexHeroInner {
-  width: min(720px, 100%) !important;
-}
-
-.blogIndexTitle {
-  width: min(720px, 100%) !important;
-  margin-top: 0.95rem !important;
-  margin-bottom: 0 !important;
-  line-height: 1.08 !important;
-  letter-spacing: -0.02em !important;
-}
-
-.blogIndexLine:nth-child(1) {
-  font-size: 2.55rem !important;
-}
-
-.blogIndexLine:nth-child(2) {
-  margin-top: 0.18rem !important;
-  font-size: 2.25rem !important;
-}
-
-.blogIndexLine:nth-child(3) {
-  margin-top: 0.18rem !important;
-  font-size: 1.95rem !important;
-}
-
-.blogIndexLine {
-  width: auto !important;
-  max-width: 100%;
-  line-height: inherit !important;
-  letter-spacing: inherit !important;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 .blogIndexCopy {
-  margin-top: 0.8rem !important;
-  max-width: 34rem !important;
-  font-size: 0.88rem !important;
-  line-height: 1.5 !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  max-width: 680px !important;
+  margin-top: 8px !important;
 }
 
 .blogIndexCategoryRow {
@@ -3792,4 +2947,716 @@
   .postHero .postMetaRow {
     gap: 0.65rem !important;
   }
+}
+
+
+/* Blog typography test: Ahrefs-inspired type system using therehankadri + Inter */
+.page {
+  --blog-display-family: var(--font-therehankadri), var(--font-hero), var(--font-display), Arial, sans-serif;
+  --blog-copy-family: var(--font-copy), "IBM Plex Sans", Arial, ui-sans-serif, system-ui, sans-serif;
+  --blog-heading-color: rgb(26, 26, 46);
+  --blog-body-color: rgb(51, 51, 51);
+  --blog-meta-color: rgb(110, 110, 126);
+  font-synthesis: none;
+}
+
+.heroPill,
+.blogIndexPill,
+.cardEyebrow,
+.latestCardEyebrow,
+.relatedLabel {
+  font-family: var(--blog-display-family) !important;
+  font-size: 16px !important;
+  line-height: 22px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+.blogIndexTitle,
+.postHero h1.postHeroTitle,
+.latestCardTitle,
+.listingCard h2,
+.relatedHeader h2,
+.blogCtaPanel h3,
+.inlineCta h3,
+.articleCopy h2,
+.articleSection h2,
+.authority-post-copy h2,
+.articleCopy h3,
+.authority-post-copy h3,
+.richTextSubheading,
+.articleCopy h4,
+.authority-post-copy h4,
+.callout strong {
+  font-family: var(--blog-display-family) !important;
+  letter-spacing: 0 !important;
+}
+
+.blogIndexHero .blogIndexTitle,
+.postHero h1.postHeroTitle {
+  color: #ffffff !important;
+}
+
+.blogIndexTitle,
+.postHero h1.postHeroTitle {
+  font-size: 50px !important;
+  line-height: 54px !important;
+  font-weight: 700 !important;
+}
+
+.postHero h1.postHeroTitle {
+  width: min(900px, 100%) !important;
+  max-width: 900px !important;
+  text-wrap: balance;
+}
+
+.blogIndexLine,
+.postHeroLine,
+.postHeroLineSingle,
+.postHeroLineTop,
+.postHeroLineMiddle,
+.postHeroLineBottom {
+  font-size: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+.latestCardTitle,
+.listingCard h2,
+.relatedHeader h2,
+.blogCtaPanel h3,
+.inlineCta h3 {
+  color: var(--blog-heading-color) !important;
+  font-size: 38px !important;
+  line-height: 42px !important;
+  font-weight: 700 !important;
+}
+
+.blogIndexCopy,
+.cardBlurb,
+.latestCardExcerpt,
+.blogCtaPanel p,
+.inlineCta p,
+.authorCardCopy p,
+.articleAuthorInfo p,
+.articleCopy p,
+.articleCopy ul,
+.articleCopy ol,
+.articleCopy li,
+.articleList,
+.callout p,
+.quoteBlock p,
+.authority-post-copy p,
+.authority-post-copy li {
+  font-family: var(--blog-copy-family) !important;
+  font-size: 18px !important;
+  font-style: normal !important;
+  line-height: 29px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+.blogIndexCopy {
+  color: rgba(255, 255, 255, 0.92) !important;
+  max-width: 680px !important;
+  margin-top: 8px !important;
+}
+
+.blogIndexMeta,
+.latestCardMeta,
+.cardMeta,
+.windowFile,
+.quoteBlock cite,
+.articleAuthorIdentityText strong,
+.articleAuthorIdentityText span,
+.articleAuthorSocialLink,
+.articleAuthorCount {
+  font-family: var(--blog-copy-family) !important;
+  font-size: 16px !important;
+  line-height: 22px !important;
+  letter-spacing: 0 !important;
+}
+
+.blogIndexMeta,
+.latestCardMeta,
+.cardMeta,
+.windowFile,
+.quoteBlock cite,
+.articleAuthorIdentityText span,
+.articleAuthorSocialLink,
+.articleAuthorCount {
+  color: var(--blog-meta-color) !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+}
+
+.postHero .authorText strong,
+.postHero .authorText span,
+.postHero .postMetaItem {
+  font-family: var(--blog-copy-family) !important;
+  font-size: 16px !important;
+  line-height: 22px !important;
+  letter-spacing: 0 !important;
+}
+
+.postHero .authorText strong {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.postHero .authorText span,
+.postHero .postMetaItem {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+}
+
+.articleCopy,
+.articleCopy p,
+.articleCopy ul,
+.articleCopy ol,
+.articleCopy li,
+.articleList,
+.callout p,
+.quoteBlock p,
+.authority-post-copy p,
+.authority-post-copy li {
+  color: var(--blog-body-color) !important;
+}
+
+.articleCopy h2,
+.articleSection h2,
+.authority-post-copy h2 {
+  color: var(--blog-heading-color) !important;
+  font-size: 50px !important;
+  line-height: 54px !important;
+  font-weight: 700 !important;
+  margin: 65px 0 25px !important;
+}
+
+.articleCopy h3,
+.authority-post-copy h3,
+.richTextSubheading {
+  color: var(--blog-heading-color) !important;
+  font-size: 38px !important;
+  line-height: 42px !important;
+  font-weight: 700 !important;
+  margin: 35px 0 20px !important;
+}
+
+.articleCopy h4,
+.authority-post-copy h4,
+.callout strong {
+  color: var(--blog-heading-color) !important;
+  font-size: 24px !important;
+  line-height: 28px !important;
+  font-weight: 700 !important;
+  margin: 30px 0 14px !important;
+}
+
+.articleCopy strong,
+.authority-post-copy strong {
+  font-family: inherit !important;
+  font-weight: 700 !important;
+}
+
+.articleAuthorIdentityText strong {
+  color: var(--blog-heading-color) !important;
+  font-weight: 700 !important;
+}
+
+.articleList {
+  display: block !important;
+  margin: 13px 0 18px !important;
+  padding: 0 0 0 7px !important;
+  overflow: hidden;
+}
+
+.articleList li {
+  position: relative;
+  margin: 0 !important;
+  padding: 2px 0 0 24px !important;
+  list-style: none !important;
+}
+
+.articleList li::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.quoteBlock p {
+  font-style: italic;
+}
+
+@media (max-width: 599px) {
+  .blogIndexTitle,
+  .postHero h1.postHeroTitle,
+  .articleCopy h2,
+  .articleSection h2,
+  .authority-post-copy h2 {
+    font-size: 38px !important;
+    line-height: 40px !important;
+  }
+
+  .latestCardTitle,
+  .listingCard h2,
+  .relatedHeader h2,
+  .blogCtaPanel h3,
+  .inlineCta h3,
+  .articleCopy h3,
+  .authority-post-copy h3,
+  .richTextSubheading {
+    font-size: 32px !important;
+    line-height: 34px !important;
+  }
+
+  .articleCopy h2,
+  .articleSection h2,
+  .authority-post-copy h2 {
+    margin: 50px 0 25px !important;
+  }
+}
+
+
+
+
+/* Local Ahrefs font pass: use uploaded display, condensed, and IBM Plex blog fonts */
+.page {
+  --blog-display-family: var(--font-blog-plex), var(--font-copy), "IBM Plex Sans", Arial, ui-sans-serif, system-ui, sans-serif;
+  --blog-display-condensed-family: var(--font-blog-plex), var(--font-copy), "IBM Plex Sans", Arial, ui-sans-serif, system-ui, sans-serif;
+  --blog-copy-family: var(--font-blog-plex), var(--font-copy), "IBM Plex Sans", Arial, ui-sans-serif, system-ui, sans-serif;
+  --blog-body-color: rgb(51, 51, 51);
+}
+
+.heroPill,
+.blogIndexPill,
+.cardEyebrow,
+.latestCardEyebrow,
+.relatedLabel,
+.blogIndexCategoryChip,
+.blogIndexCategoryOverflowLink {
+  font-family: var(--blog-display-condensed-family) !important;
+  letter-spacing: 0.03em !important;
+}
+
+.blogIndexTitle,
+.postHero h1.postHeroTitle,
+.latestCardTitle,
+.listingCard h2,
+.relatedHeader h2,
+.blogCtaPanel h3,
+.inlineCta h3,
+.articleCopy h2,
+.articleSection h2,
+.authority-post-copy h2,
+.articleCopy h3,
+.authority-post-copy h3,
+.richTextSubheading,
+.articleCopy h4,
+.authority-post-copy h4,
+.callout strong {
+  font-family: var(--blog-display-family) !important;
+}
+
+.articleCopy,
+.articleProse {
+  max-width: 680px !important;
+}
+
+.articleProse {
+  color: var(--blog-body-color) !important;
+  font-family: var(--blog-copy-family) !important;
+  font-size: 18px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 29px !important;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+.articleProse p,
+.articleProse li,
+.articleProse ul,
+.articleProse ol {
+  max-width: 680px !important;
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-style: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+
+.blogIndexCopy,
+.cardBlurb,
+.latestCardExcerpt,
+.blogCtaPanel p,
+.inlineCta p,
+.authorCardCopy p,
+.articleAuthorInfo p,
+.articleCopy p,
+.articleCopy ul,
+.articleCopy ol,
+.articleCopy li,
+.articleList,
+.callout p,
+.quoteBlock p,
+.authority-post-copy p,
+.authority-post-copy li {
+  font-family: var(--blog-copy-family) !important;
+  font-size: 18px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 29px !important;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+.blogIndexCopy {
+  max-width: 680px !important;
+  margin-top: 8px !important;
+  text-align: center !important;
+}
+
+
+/* Final live Ahrefs typography mapping based on downloaded /blog/ and /blog/what-is-seo CSS */
+.page {
+  --blog-ahrefs-family: var(--font-therehankadri), var(--font-therehankadri-display), Arial, sans-serif;
+  --blog-ahrefs-display-family: var(--font-therehankadri-display), var(--font-therehankadri), Arial, sans-serif;
+  --blog-ahrefs-condensed-family: var(--font-therehankadri-condensed), var(--font-therehankadri), Arial, sans-serif;
+  --blog-copy-family: var(--font-blog-plex), var(--font-copy), "IBM Plex Sans", Arial, ui-sans-serif, system-ui, sans-serif;
+  --blog-text-primary: rgb(51, 51, 51);
+  --blog-text-secondary: rgba(51, 51, 51, 0.7);
+}
+
+.blogIndexHero .blogIndexTitle,
+.postHero h1.postHeroTitle {
+  color: #ffffff !important;
+  font-family: var(--blog-ahrefs-display-family) !important;
+}
+
+.blogIndexTitle,
+.articleCopy h2,
+.articleSection h2,
+.authority-post-copy h2,
+.topicTitle {
+  font-family: var(--blog-ahrefs-family) !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 50px !important;
+  line-height: 54px !important;
+  letter-spacing: 0 !important;
+}
+
+.latestCardTitle,
+.relatedHeader h2,
+.blogCtaPanel h3,
+.inlineCta h3,
+.articleCopy h3,
+.authority-post-copy h3,
+.richTextSubheading {
+  font-family: var(--blog-ahrefs-family) !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 38px !important;
+  line-height: 42px !important;
+  letter-spacing: 0 !important;
+}
+
+.relatedSection .listingCard h2,
+.articleCopy h4,
+.authority-post-copy h4,
+.callout strong,
+.authorCardCopy h3 {
+  font-family: var(--blog-ahrefs-family) !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 28px !important;
+  letter-spacing: 0 !important;
+}
+
+.heroPill,
+.blogIndexPill,
+.cardEyebrow,
+.latestCardEyebrow,
+.relatedLabel,
+.blogIndexCategoryChip,
+.blogIndexCategoryOverflowLink {
+  font-family: var(--blog-ahrefs-condensed-family) !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  line-height: 24px !important;
+  letter-spacing: 0.03em !important;
+  text-transform: uppercase !important;
+}
+
+.articleCopy,
+.articleProse {
+  max-width: 650px !important;
+}
+
+.articleProse,
+.articleProse p,
+.articleProse li,
+.articleProse ul,
+.articleProse ol,
+.blogIndexCopy,
+.cardBlurb,
+.latestCardExcerpt,
+.blogCtaPanel p,
+.inlineCta p,
+.authorCardCopy p,
+.articleAuthorInfo p,
+.articleCopy p,
+.articleCopy ul,
+.articleCopy ol,
+.articleCopy li,
+.articleList,
+.callout p,
+.quoteBlock p,
+.authority-post-copy p,
+.authority-post-copy li {
+  color: var(--blog-text-primary) !important;
+  font-family: var(--blog-copy-family) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 18px !important;
+  line-height: 29px !important;
+  letter-spacing: 0 !important;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+.blogIndexCopy {
+  max-width: 460px !important;
+  margin: 0 auto 16px !important;
+  color: #ffffff !important;
+  text-align: center !important;
+}
+
+.blogIndexMeta {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.blogIndexMeta span + span::before {
+  background: rgba(255, 255, 255, 0.72) !important;
+}
+
+.heroInner.blogIndexHeroInner {
+  width: min(820px, 100%) !important;
+  display: grid !important;
+  justify-items: center !important;
+  align-content: start !important;
+  row-gap: 0 !important;
+  padding-top: 1.1rem !important;
+}
+
+.blogIndexTitle {
+  display: block !important;
+  width: min(720px, 100%) !important;
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  text-wrap: balance;
+  font-family: var(--blog-ahrefs-display-family) !important;
+  font-size: 50px !important;
+  line-height: 54px !important;
+  letter-spacing: 0 !important;
+}
+
+.blogIndexMeta,
+.latestCardMeta,
+.cardMeta,
+.windowFile,
+.quoteBlock cite,
+.articleAuthorIdentityText strong,
+.articleAuthorIdentityText span,
+.articleAuthorSocialLink,
+.articleAuthorCount,
+.postHero .authorText strong,
+.postHero .authorText span,
+.postHero .postMetaItem {
+  font-family: var(--blog-copy-family) !important;
+  font-style: normal !important;
+  font-size: 16px !important;
+  line-height: 22px !important;
+  letter-spacing: 0 !important;
+}
+
+.blogIndexMeta,
+.latestCardMeta,
+.cardMeta,
+.windowFile,
+.quoteBlock cite,
+.articleAuthorIdentityText span,
+.articleAuthorSocialLink,
+.articleAuthorCount {
+  color: var(--blog-text-secondary) !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+}
+
+.blogIndexCopy {
+  max-width: 560px !important;
+  margin: 24px auto 0 !important;
+  color: #ffffff !important;
+  text-align: center !important;
+}
+
+.blogIndexMeta {
+  margin-top: 24px !important;
+}
+
+.articleAuthorIdentityText strong {
+  color: var(--blog-text-primary) !important;
+  font-weight: 700 !important;
+}
+
+.postHero .authorText strong {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.postHero .authorText span,
+.postHero .postMetaItem {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+}
+
+@media (max-width: 599px) {
+  .blogIndexTitle,
+  .postHero h1.postHeroTitle,
+  .articleCopy h2,
+  .articleSection h2,
+  .authority-post-copy h2,
+  .topicTitle {
+    font-size: 38px !important;
+    line-height: 40px !important;
+  }
+
+  .latestCardTitle,
+  .relatedHeader h2,
+  .blogCtaPanel h3,
+  .inlineCta h3,
+  .articleCopy h3,
+  .authority-post-copy h3,
+  .richTextSubheading {
+    font-size: 32px !important;
+    line-height: 34px !important;
+  }
+
+  .relatedSection .listingCard h2,
+  .articleCopy h4,
+  .authority-post-copy h4,
+  .callout strong,
+  .authorCardCopy h3 {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+
+  .heroPill,
+  .blogIndexPill,
+  .cardEyebrow,
+  .latestCardEyebrow,
+  .relatedLabel,
+  .blogIndexCategoryChip,
+  .blogIndexCategoryOverflowLink {
+    font-size: 16px !important;
+    line-height: 20px !important;
+  }
+
+  .blogIndexCopy {
+    max-width: 335px !important;
+    margin-top: 18px !important;
+  }
+
+  .blogIndexMeta {
+    margin-top: 14px !important;
+  }
+}
+
+/* Brand color remap from Ahrefs blue/orange to Rehan orange/black */
+.page {
+  --blog-text-primary: rgb(18, 18, 18) !important;
+  --blog-text-secondary: rgba(18, 18, 18, 0.7) !important;
+}
+
+.blogIndexTitle,
+.postHero h1.postHeroTitle,
+.articleCopy h2,
+.articleSection h2,
+.authority-post-copy h2,
+.topicTitle,
+.latestCardTitle,
+.relatedHeader h2,
+.blogCtaPanel h3,
+.inlineCta h3,
+.articleCopy h3,
+.authority-post-copy h3,
+.richTextSubheading,
+.relatedSection .listingCard h2,
+.articleCopy h4,
+.authority-post-copy h4,
+.callout strong,
+.authorCardCopy h3,
+.cardEyebrow,
+.latestCardEyebrow,
+.relatedLabel,
+.blogCtaLabel,
+.inlineCtaLabel,
+.authorCardLabel,
+.cardLink,
+.inlineCtaLink,
+.authorCardLink {
+  color: var(--blog-text-primary) !important;
+}
+
+.blogIndexHero .blogIndexTitle,
+.postHero h1.postHeroTitle {
+  color: #ffffff !important;
+}
+
+.latestCardExcerpt,
+.cardBlurb,
+.blogCtaPanel p,
+.inlineCta p,
+.authorCardCopy p,
+.articleAuthorInfo p,
+.articleCopy p,
+.articleCopy ul,
+.articleCopy ol,
+.articleCopy li,
+.articleList,
+.callout p,
+.quoteBlock p,
+.authority-post-copy p,
+.authority-post-copy li,
+.windowFile,
+.quoteBlock cite,
+.articleAuthorIdentityText span,
+.articleAuthorSocialLink,
+.articleAuthorCount {
+  color: var(--blog-text-secondary) !important;
+}
+
+.articleAuthorIdentityText strong {
+  color: var(--blog-text-primary) !important;
+}
+
+.blogCtaLink {
+  background: rgb(18, 18, 18) !important;
+  color: #ffffff !important;
 }

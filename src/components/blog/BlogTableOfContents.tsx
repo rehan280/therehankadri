@@ -45,6 +45,10 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
     };
   }, [sectionIds]);
 
+  if (!items.length) {
+    return null;
+  }
+
   return (
     <div className={styles.tocCard}>
       <div className={styles.windowBar}>
@@ -78,3 +82,4 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
     </div>
   );
 }
+

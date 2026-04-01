@@ -1,3 +1,6 @@
+import { countRichTextWords } from "@/lib/blog-rich-text";
+import type { SerializedRichTextState } from "@/lib/blog-rich-text";
+
 export type BlogBlock =
   | { type: "paragraph"; text: string }
   | { type: "list"; items: string[] }
@@ -43,6 +46,7 @@ export type BlogPost = {
   publishedAt: string;
   readTime: string;
   author: BlogAuthor;
+  body?: SerializedRichTextState | null;
   summaryPoints: string[];
   intro: string[];
   sections: BlogSection[];
@@ -590,6 +594,13 @@ function countBlockWords(block: BlogBlock) {
 }
 
 export function getBlogReadTime(post: BlogPost) {
+  if (post.body) {
+    const totalWords = countRichTextWords(post.body);
+    const minutes = Math.max(1, Math.ceil(totalWords / 220));
+
+    return `${minutes} min read`;
+  }
+
   const introWords = post.intro.reduce((total, paragraph) => total + countWords(paragraph), 0);
   const sectionWords = post.sections.reduce(
     (total, section) =>
@@ -613,6 +624,13 @@ export function formatBlogDate(value: string) {
     timeZone: "UTC",
   }).format(new Date(`${value}T00:00:00Z`));
 }
+
+
+
+
+
+
+
 
 
 

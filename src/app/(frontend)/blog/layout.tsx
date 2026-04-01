@@ -1,4 +1,10 @@
 import type { Metadata } from "next";
+import {
+  blogPlexFont,
+  therehankadriCondensedFont,
+  therehankadriDisplayFont,
+  therehankadriFont,
+} from "@/lib/fonts";
 
 export const metadata: Metadata = {
   title: "Blog | The Rehan Kadri",
@@ -17,5 +23,11 @@ export default function BlogLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <div
+      className={`${therehankadriFont.variable} ${therehankadriDisplayFont.variable} ${therehankadriCondensedFont.variable} ${blogPlexFont.variable}`}
+    >
+      {children}
+    </div>
+  );
 }
