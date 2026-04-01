@@ -55,8 +55,22 @@ function getPublishOutcomeMessage() {
 }
 
 async function getRequestOrigin() {
+  const configuredOrigin = normalizeOrigin(
+    process.env.CMS_SITE_URL ??
+      process.env.NEXT_PUBLIC_SITE_URL ??
+      process.env.NEXT_PUBLIC_APP_URL ??
+      process.env.APP_URL ??
+      process.env.VERCEL_PROJECT_PRODUCTION_URL ??
+      process.env.VERCEL_URL ??
+      ""
+  );
+
+  if (configuredOrigin) {
+    return configuredOrigin;
+  }
+
   const headerStore = await headers();
-  const explicitOrigin = headerStore.get("origin");
+  const explicitOrigin = normalizeOrigin(headerStore.get("origin") ?? "");
 
   if (explicitOrigin) {
     return explicitOrigin;
@@ -65,7 +79,21 @@ async function getRequestOrigin() {
   const host = headerStore.get("x-forwarded-host") ?? headerStore.get("host");
   const protocol = headerStore.get("x-forwarded-proto") ?? "http";
 
-  return host ? `${protocol}://${host}` : "http://localhost:3000";
+  return normalizeOrigin(host ? `${protocol}://${host}` : "") || "http://localhost:3000";
+}
+
+function normalizeOrigin(value: string) {
+  const trimmedValue = value.trim();
+
+  if (!trimmedValue) {
+    return "";
+  }
+
+  if (trimmedValue.startsWith("http://") || trimmedValue.startsWith("https://")) {
+    return trimmedValue.replace(/\/$/, "");
+  }
+
+  return `https://${trimmedValue.replace(/\/$/, "")}`;
 }
 
 export async function requestCmsMagicLink(formData: FormData) {
