@@ -144,7 +144,7 @@ function normalizeBlogPost(rawPost: Record<string, unknown>): BlogPost {
   };
 }
 
-async function ensureCmsStorage() {
+async function ensureCmsStorageForWrites() {
   await fs.mkdir(cmsPostsDir, { recursive: true });
   await fs.mkdir(cmsUploadsDir, { recursive: true });
 
@@ -181,8 +181,6 @@ async function writeJsonFile(filePath: string, value: unknown) {
 }
 
 async function readAdminState(): Promise<BlogAdminState> {
-  await ensureCmsStorage();
-
   const storedState = await readJsonFile<Partial<BlogAdminState>>(adminStateFile);
 
   return {
@@ -191,16 +189,31 @@ async function readAdminState(): Promise<BlogAdminState> {
 }
 
 async function writeAdminState(state: BlogAdminState) {
-  await ensureCmsStorage();
+  await ensureCmsStorageForWrites();
   await writeJsonFile(adminStateFile, {
     hiddenSlugs: uniqueStringList(state.hiddenSlugs),
   });
 }
 
 async function loadCmsPostsFromDisk() {
-  await ensureCmsStorage();
+  const directoryEntries = await fs
+    .readdir(cmsPostsDir, { withFileTypes: true })
+    .catch((error: unknown) => {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        (error as NodeJS.ErrnoException).code === "ENOENT"
+      ) {
+        return null;
+      }
 
-  const directoryEntries = await fs.readdir(cmsPostsDir, { withFileTypes: true });
+      throw error;
+    });
+
+  if (!directoryEntries) {
+    return [];
+  }
+
   const jsonFiles = directoryEntries.filter(
     (entry) => entry.isFile() && entry.name.toLowerCase().endsWith(".json")
   );
@@ -308,7 +321,7 @@ function buildCmsPostFilePath(slug: string) {
 }
 
 export async function createCmsBlogPost(input: CreateCmsBlogPostInput) {
-  await ensureCmsStorage();
+  await ensureCmsStorageForWrites();
 
   const slug = input.slug.trim().toLowerCase();
   const title = input.title.trim();
@@ -469,8 +482,6 @@ export function getCmsAdminStateFilePath() {
 }
 
 export async function getCmsUploadCopyFilePaths(slug: string) {
-  await ensureCmsStorage();
-
   try {
     const entries = await fs.readdir(cmsUploadsDir, { withFileTypes: true });
 
@@ -489,3 +500,4 @@ export async function getCmsUploadCopyFilePaths(slug: string) {
     throw error;
   }
 }
+
