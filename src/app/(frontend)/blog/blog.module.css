@@ -4854,3 +4854,26 @@
   }
 }
 
+/* Mobile reading width pass: keep a single gutter like Ahrefs instead of double-padding the article body */
+@media (max-width: 768px) {
+  .postSection,
+  .relatedSection {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .postShell,
+  .relatedShell {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .postShell,
+  .relatedShell {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
