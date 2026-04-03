@@ -76,10 +76,33 @@ async function getRequestOrigin() {
     return explicitOrigin;
   }
 
+  const refererOrigin = normalizeOrigin(headerStore.get("referer") ?? "");
+
+  if (refererOrigin) {
+    return refererOrigin;
+  }
+
+  const forwardedOrigin = getOriginFromForwardedHeader(headerStore.get("forwarded") ?? "");
+
+  if (forwardedOrigin) {
+    return forwardedOrigin;
+  }
+
   const host = headerStore.get("x-forwarded-host") ?? headerStore.get("host");
   const protocol = headerStore.get("x-forwarded-proto") ?? "http";
+  const derivedOrigin = normalizeOrigin(host ? `${protocol}://${host}` : "");
 
-  return normalizeOrigin(host ? `${protocol}://${host}` : "") || "http://localhost:3000";
+  if (derivedOrigin) {
+    return derivedOrigin;
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    return "http://localhost:3000";
+  }
+
+  throw new Error(
+    "CMS magic links need a public site URL. Set CMS_SITE_URL (recommended) or NEXT_PUBLIC_SITE_URL."
+  );
 }
 
 function normalizeOrigin(value: string) {
@@ -94,6 +117,24 @@ function normalizeOrigin(value: string) {
   }
 
   return `https://${trimmedValue.replace(/\/$/, "")}`;
+}
+
+function getOriginFromForwardedHeader(value: string) {
+  const forwardedEntry = value
+    .split(",")
+    .map((entry) => entry.trim())
+    .find(Boolean);
+
+  if (!forwardedEntry) {
+    return "";
+  }
+
+  const protocolMatch = forwardedEntry.match(/proto=([^;]+)/i);
+  const hostMatch = forwardedEntry.match(/host=([^;]+)/i);
+  const protocol = protocolMatch?.[1]?.replace(/^"|"$/g, "");
+  const host = hostMatch?.[1]?.replace(/^"|"$/g, "");
+
+  return normalizeOrigin(protocol && host ? `${protocol}://${host}` : "");
 }
 
 export async function requestCmsMagicLink(formData: FormData) {
