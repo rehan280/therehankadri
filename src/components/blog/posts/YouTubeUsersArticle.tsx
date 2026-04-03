@@ -208,6 +208,20 @@ function StatDeck({ items }: { items: MetricCard[] }) {
       ))}
     </section>
   );
+}function formatVerticalScaleValue(value: number, sampleLabel: string) {
+  const hasCurrency = sampleLabel.includes("$");
+  const hasPercent = sampleLabel.includes("%");
+  const suffixMatch = sampleLabel.match(/([A-Za-z]+)$/);
+  const suffix = hasPercent ? "%" : suffixMatch?.[1] ?? "";
+  const decimals = value >= 100 || Number.isInteger(value) ? 0 : value >= 10 ? 1 : 2;
+  const rounded = Number(value.toFixed(decimals));
+  const numberText = Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(decimals).replace(/0+$/, "").replace(/\.$/, "");
+
+  return `${hasCurrency ? "$" : ""}${numberText}${suffix}`;
+}
+
+function buildVerticalScale(maxValue: number, sampleLabel: string) {
+  return [1, 0.75, 0.5, 0.25, 0].map((ratio) => formatVerticalScaleValue(maxValue * ratio, sampleLabel));
 }
 
 function VerticalBarChart({
@@ -224,6 +238,7 @@ function VerticalBarChart({
   tone: ChartTone;
 }) {
   const maxValue = Math.max(...items.map((item) => item.value));
+  const scaleLabels = buildVerticalScale(maxValue, items.find((item) => item.value === maxValue)?.valueLabel ?? items[items.length - 1]?.valueLabel ?? "");
   const chartStyle = {
     "--chart-start": tone.start,
     "--chart-end": tone.end,
@@ -241,20 +256,29 @@ function VerticalBarChart({
           {summary ? <p className={styles.youtubeVisualSummary}>{summary}</p> : null}
         </div>
       </div>
-      <div className={styles.youtubeChartViewport}>
-        <div className={styles.youtubeBarChart} style={chartStyle}>
-          {items.map((item) => (
-            <div key={item.label} className={styles.youtubeBarColumn}>
-              <span className={styles.youtubeBarValue}>{item.valueLabel}</span>
-              <div
-                className={styles.youtubeBarTrack}
-                style={{ "--bar-size": `${(item.value / maxValue) * 100}%` } as CSSProperties}
-              >
-                <span className={styles.youtubeBarFill} />
-              </div>
-              <span className={styles.youtubeBarLabel}>{item.label}</span>
-            </div>
+      <div className={styles.youtubeBarChartShell}>
+        <div className={styles.youtubeBarAxis} aria-hidden="true">
+          {scaleLabels.map((label) => (
+            <span key={`${title}-${label}`}>{label}</span>
           ))}
+        </div>
+        <div className={styles.youtubeChartViewportCompact}>
+          <div className={styles.youtubeChartViewport}>
+            <div className={styles.youtubeBarChart} style={chartStyle}>
+              {items.map((item) => (
+                <div key={item.label} className={styles.youtubeBarColumn}>
+                  <span className={styles.youtubeBarValue}>{item.valueLabel}</span>
+                  <div
+                    className={styles.youtubeBarTrack}
+                    style={{ "--bar-size": `${(item.value / maxValue) * 100}%` } as CSSProperties}
+                  >
+                    <span className={styles.youtubeBarFill} />
+                  </div>
+                  <span className={styles.youtubeBarLabel}>{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -542,9 +566,3 @@ export default function YouTubeUsersArticle({ data }: { data: YouTubeUsersArticl
     </>
   );
 }
-
-
-
-
-
-
