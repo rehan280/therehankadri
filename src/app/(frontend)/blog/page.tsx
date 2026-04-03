@@ -63,7 +63,7 @@ export default async function BlogIndexPage() {
                 </div>
 
                 <h2 className={styles.latestCardTitle}>
-                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                  <Link href={`/blog/${post.slug}`} prefetch>{post.title}</Link>
                 </h2>
 
                 <p className={styles.latestCardExcerpt}>{post.excerpt}</p>
@@ -106,6 +106,7 @@ export default async function BlogIndexPage() {
     </main>
   );
 }
+
 
 
 

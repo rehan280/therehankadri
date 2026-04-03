@@ -3773,3 +3773,214 @@
     gap: 0.55rem !important;
   }
 }
+
+.loadingScreen {
+  min-height: 100vh;
+}
+
+.loadingSection {
+  position: relative;
+}
+
+.loadingSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top left, rgba(240, 91, 47, 0.05), transparent 30%);
+}
+
+.loadingBlock {
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.2));
+  background-size: 220% 100%;
+  animation: blogShimmer 1.8s ease-in-out infinite;
+}
+
+.loadingBlock::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 55%);
+  mix-blend-mode: screen;
+}
+
+.loadingHeroTitle {
+  width: min(33rem, 92%);
+  height: clamp(3.5rem, 8vw, 4.9rem);
+  margin-top: 1.55rem;
+}
+
+.loadingHeroTitleShort {
+  width: min(22rem, 62%);
+  height: 2rem;
+  margin-top: 1rem;
+}
+
+.loadingHeroCopyWide {
+  width: min(34rem, 92%);
+  height: 1rem;
+  margin-top: 1.3rem;
+}
+
+.loadingHeroCopyNarrow {
+  width: min(25rem, 68%);
+  height: 1rem;
+  margin-top: 0.75rem;
+}
+
+.loadingLatestGrid {
+  gap: 1.7rem 2.85rem;
+}
+
+.loadingLatestCard,
+.loadingTopicCard,
+.loadingRelatedCard,
+.loadingSidebarPanel,
+.loadingArticlePanel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(21, 58, 107, 0.07);
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.72)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(250, 244, 238, 0.82));
+  box-shadow: 0 20px 48px rgba(24, 41, 72, 0.07);
+  backdrop-filter: blur(14px);
+}
+
+.loadingMetaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 0.4rem;
+}
+
+.loadingMetaPill {
+  width: 8.4rem;
+  height: 0.9rem;
+}
+
+.loadingMetaPillShort {
+  width: 5.8rem;
+  height: 0.9rem;
+}
+
+.loadingTopicSection {
+  padding: 0 1.5rem 4.75rem;
+  background: #fffaf8;
+}
+
+.loadingTopicShell {
+  width: min(1152px, 100%);
+  margin: 0 auto;
+}
+
+.loadingTopicHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.loadingSectionTitle {
+  width: min(19rem, 72%);
+  height: 2.6rem;
+  margin-top: 0.8rem;
+}
+
+.loadingTopicGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.loadingTopicCard {
+  gap: 1rem;
+  padding: 1.05rem;
+}
+
+.loadingTopicImage {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 0.85rem;
+}
+
+.loadingArticlePanel {
+  gap: 1rem;
+}
+
+.loadingArticleLead {
+  width: 100%;
+  height: 1.25rem;
+}
+
+.loadingArticleLeadShort {
+  width: 72%;
+  height: 1.25rem;
+  margin-bottom: 0.35rem;
+}
+
+.loadingQuotePanel {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+  padding: 1.35rem;
+  border-radius: 1.2rem;
+  background: linear-gradient(180deg, rgba(255, 247, 243, 0.9), rgba(255, 255, 255, 0.82));
+  border: 1px solid rgba(240, 91, 47, 0.12);
+}
+
+.loadingRelatedHeader {
+  display: grid;
+  gap: 0.85rem;
+  margin-bottom: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .loadingTopicSection {
+    padding: 0 1rem 3.75rem;
+  }
+
+  .loadingTopicGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .loadingLatestGrid,
+  .articleGrid {
+    gap: 1rem;
+  }
+
+  .loadingHeroTitle {
+    width: min(20rem, 92%);
+  }
+
+  .loadingHeroTitleShort {
+    width: min(15rem, 70%);
+  }
+
+  .loadingHeroCopyWide {
+    width: min(19rem, 92%);
+  }
+
+  .loadingHeroCopyNarrow {
+    width: min(14rem, 76%);
+  }
+
+  .loadingSectionTitle {
+    width: min(14rem, 78%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loadingBlock {
+    animation: none;
+    background-position: 50% 0;
+  }
+}
+

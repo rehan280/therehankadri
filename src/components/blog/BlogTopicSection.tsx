@@ -74,7 +74,7 @@ export default function BlogTopicSection({
                 ) : null}
 
                 {post.coverImage ? (
-                  <Link href={`/blog/${post.slug}`} className={styles.topicCardImageLink}>
+                  <Link href={`/blog/${post.slug}`} prefetch className={styles.topicCardImageLink}>
                     <div className={styles.topicCardImageWrap}>
                       <Image
                         src={post.coverImage}
@@ -89,7 +89,7 @@ export default function BlogTopicSection({
 
                 <div className={styles.topicCardBody}>
                   <h3 className={styles.topicCardTitle}>
-                    <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                    <Link href={`/blog/${post.slug}`} prefetch>{post.title}</Link>
                   </h3>
 
                   <p className={styles.topicCardExcerpt}>{post.excerpt}</p>
@@ -107,3 +107,4 @@ export default function BlogTopicSection({
     </section>
   );
 }
+

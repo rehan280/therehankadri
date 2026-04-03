@@ -35,7 +35,7 @@ export default function BlogHeader() {
       <nav
         className={`navbar blog-navbar${scrolled ? " scrolled" : ""}${menuOpen ? " menu-open" : ""}${blendIntoHero ? " hero-blend" : ""}`}
       >
-        <Link href="/" className="nav-brand" aria-label="The Rehan Kadri home">
+        <Link href="/" prefetch className="nav-brand" aria-label="The Rehan Kadri home">
           <span className="nav-brand-copy">
             <span className="nav-brand-kicker">Revenue-first growth systems</span>
             <span className="nav-brand-title">
@@ -52,6 +52,7 @@ export default function BlogHeader() {
               <Link
                 key={href}
                 href={href}
+                prefetch={href.startsWith("/")}
                 className={href === "/blog" && pathname.startsWith("/blog") ? "active" : ""}
               >
                 {label}
@@ -61,10 +62,10 @@ export default function BlogHeader() {
         </div>
 
         <div className="nav-right">
-          <Link href="/#proofs" className="nav-secondary">
+          <Link href="/#proofs" prefetch className="nav-secondary">
             View Results
           </Link>
-          <Link href="/contact" className="btn btn-orange nav-btn">
+          <Link href="/contact" prefetch className="btn btn-orange nav-btn">
             Book a strategy call
           </Link>
           <button
@@ -87,11 +88,11 @@ export default function BlogHeader() {
             <p>SEO, content, and pipeline strategy for qualified revenue growth.</p>
           </div>
           {navLinks.map(({ href, label }) => (
-            <Link key={href} href={href} onClick={closeMenu}>
+            <Link key={href} href={href} prefetch={href === "/blog" || href === "/"} onClick={closeMenu}>
               {label}
             </Link>
           ))}
-          <Link href="/contact" className="btn btn-orange drawer-hire" onClick={closeMenu}>
+          <Link href="/contact" prefetch className="btn btn-orange drawer-hire" onClick={closeMenu}>
             Book a strategy call ↗
           </Link>
         </div>
@@ -102,3 +103,5 @@ export default function BlogHeader() {
     </>
   );
 }
+
+

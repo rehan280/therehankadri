@@ -386,14 +386,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     {relatedPost.category?.name ?? "Blog"}
                   </span>
                   <h2>
-                    <Link href={`/blog/${relatedPost.slug}`}>{relatedPost.title}</Link>
+                    <Link href={`/blog/${relatedPost.slug}`} prefetch>{relatedPost.title}</Link>
                   </h2>
                   <p className={styles.cardBlurb}>{relatedPost.cardBlurb}</p>
                   <div className={styles.cardMeta}>
                     <span>{formatBlogDate(relatedPost.publishedAt)}</span>
                     <span>{getBlogReadTime(relatedPost)}</span>
                   </div>
-                  <Link href={`/blog/${relatedPost.slug}`} className={styles.cardLink}>
+                  <Link href={`/blog/${relatedPost.slug}`} prefetch className={styles.cardLink}>
                     <span>Read article</span>
                     <ArrowUpRight size={17} strokeWidth={2.2} />
                   </Link>
@@ -406,6 +406,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
+
 
 
 

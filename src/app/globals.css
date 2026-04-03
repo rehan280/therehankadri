@@ -29,7 +29,6 @@ html, body {
   color: var(--text-dark);
   line-height: 1.6;
   overflow-x: clip;
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -37,6 +36,8 @@ html {
   min-height: 100%;
   overflow-y: auto;
   scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6.5rem;
 }
 
 body {
@@ -463,3 +464,10 @@ h1, h2, h3, h4, h5, h6 {
   transform: none !important;
   transition: none !important;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+

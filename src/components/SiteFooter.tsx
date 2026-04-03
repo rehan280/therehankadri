@@ -71,7 +71,7 @@ export default function SiteFooter() {
 
           <div className={styles.ctaBlock}>
             <span className={styles.ctaLabel}>Have a project in mind?</span>
-            <Link href="/contact" className={styles.ctaButton}>
+            <Link href="/contact" prefetch className={styles.ctaButton}>
               Book a strategy call ↗
             </Link>
             <div className={styles.socialInline}>
@@ -98,17 +98,18 @@ export default function SiteFooter() {
         <div className={styles.bottom}>
           <p>© 2026 The Rehan Kadri. All rights reserved.</p>
           <div className={styles.links}>
-            <Link href="/">Home</Link>
-            <Link href="/#works">Results</Link>
-            <Link href="/#process">Systems</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="/contact">Contact</Link>
+            <Link href="/" prefetch>Home</Link>
+            <Link href="/#works" prefetch>Results</Link>
+            <Link href="/#process" prefetch>Systems</Link>
+            <Link href="/blog" prefetch>Blog</Link>
+            <Link href="/contact" prefetch>Contact</Link>
           </div>
         </div>
       </div>
     </footer>
   );
 }
+
 
 
 
