@@ -1,7 +1,6 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import HomeNavbar from "@/components/HomeNavbar";
 
 type ProofShot = {
   img: string;
@@ -35,6 +34,17 @@ type ServiceDiagramIconKind =
   | "instagram"
   | "linkedin";
 
+const showcaseImageDimensions: Record<string, { width: number; height: number }> = {
+  "/rehanous-website.webp": { width: 508, height: 461 },
+  "/Rehanous%20channel.webp": { width: 1280, height: 720 },
+  "/traffic shot 4million.webp": { width: 1280, height: 720 },
+  "/ranked-website-proof.webp": { width: 3264, height: 2772 },
+  "/youtube-proof.webp": { width: 3000, height: 2412 },
+};
+
+function getShowcaseImageDimensions(src: string) {
+  return showcaseImageDimensions[src] ?? { width: 1200, height: 900 };
+}
 const renderServiceDiagramIcon = (kind: ServiceDiagramIconKind) => {
   switch (kind) {
     case "keyword":
@@ -242,53 +252,9 @@ const renderServiceVisual = (kind: ServiceVisualKind) => {
 };
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const sectionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px" }
-    );
-
-    ["services", "works", "proofs", "process", "about"].forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) sectionObserver.observe(el);
-    });
-
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      sectionObserver.disconnect();
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-
-  const closeMenu = () => setMenuOpen(false);
-  const navLinks = [
-    { href: "#services", label: "Expertise" },
-    { href: "#works", label: "Results" },
-    { href: "#process", label: "Systems" },
-    { href: "#about", label: "About" },
-    { href: "/contact", label: "Contact" },
-  ];
-
   const caseStudies: ProofShowcase[] = [
     {
-      img: "/rehanous-website.png", alt: "B2B Growth Infrastructure",
+      img: "/rehanous-website.webp", alt: "B2B Growth Infrastructure",
       tag: "B2B SEO & Content Ops",
       h3: "Scaling to 1M+ Monthly Organic Visitors",
       p: "Built an SEO system that took the site from near-zero visibility to 1M+ monthly organic visitors.",
@@ -314,14 +280,14 @@ export default function Home() {
 
   const visualProofItems: ProofShowcase[] = [
     {
-      img: "/ranked-website-proof.jpeg", alt: "Ranked Website Proof",
+      img: "/ranked-website-proof.webp", alt: "Ranked Website Proof",
       tag: "SEO Dominance • B2B Rankings",
       h3: "#1 Ranked Global Websites",
       p: "Secured the absolute top search spots globally for high-intent keywords connecting product value directly to enterprise search intent.",
       features: [{ title: "Search Monopoly", desc: "Consistently outranking massive enterprise competitors globally." }],
     },
     {
-      img: "/youtube-proof.jpeg", alt: "YouTube Analytics",
+      img: "/youtube-proof.webp", alt: "YouTube Analytics",
       tag: "Growth Scaling • Backend",
       h3: "Massive Impression Scaling",
       p: "The backend dashboard proving exponential growth patterns. Millions of targeted impressions scaling dramatically week over week through systemic editorial ops.",
@@ -338,68 +304,7 @@ export default function Home() {
 
   return (
     <main className="site-shell">
-
-      {/* ── NAVBAR ── */}
-      <nav className={`navbar${scrolled ? " scrolled" : ""}${menuOpen ? " menu-open" : ""}`}>
-        <Link href="/" className="nav-brand" aria-label="The Rehan Kadri home">
-          <span className="nav-brand-copy">
-            <span className="nav-brand-kicker">Revenue-first growth systems</span>
-            <span className="nav-brand-title">
-              <span className="nav-brand-the">The</span>
-              <span className="nav-brand-rehan">Rehan</span>
-              <span className="nav-brand-kadri">Kadri</span>
-            </span>
-          </span>
-        </Link>
-
-        <div className="desktop-links-shell">
-          <div className="desktop-links">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className={href.startsWith("#") && activeSection === href.slice(1) ? "active" : ""}
-              >
-                {label}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <div className="nav-right">
-          <Link href="#proofs" className="nav-secondary">
-            View Results
-          </Link>
-          <Link href="/contact" className="btn btn-orange nav-btn">
-            Book a strategy call
-          </Link>
-          <button
-            className={`hamburger${menuOpen ? " open" : ""}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-            aria-controls="mobile-nav-drawer"
-          >
-            <span /><span /><span />
-          </button>
-        </div>
-      </nav>
-
-      {/* ── MOBILE DRAWER ── */}
-      <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="mobile-nav-drawer">
-        <div className="mobile-drawer-links">
-          <div className="mobile-drawer-top">
-            <p>SEO, content, and pipeline strategy for qualified revenue growth.</p>
-          </div>
-          {navLinks.map(({ href, label }) => (
-            <Link key={href} href={href} onClick={closeMenu}>{label}</Link>
-          ))}
-          <Link href="/contact" className="btn btn-orange drawer-hire" onClick={closeMenu}>
-            Book a strategy call ↗
-          </Link>
-        </div>
-      </div>
-      {menuOpen && <div className="drawer-overlay" onClick={closeMenu} />}
+      <HomeNavbar />
 
       {/* ── 1. HERO ── */}
       <section className="hero section-light">
@@ -710,14 +615,26 @@ export default function Home() {
                 key={i}
               >
                 <div className="proof-showcase-img-container">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={img} alt={alt} />
+                  <Image
+                    src={img}
+                    alt={alt}
+                    width={getShowcaseImageDimensions(img).width}
+                    height={getShowcaseImageDimensions(img).height}
+                    sizes="(max-width: 640px) 100vw, 520px"
+                    className="proof-showcase-image"
+                  />
                   {proofShots ? (
                     <div className="proof-shot-grid">
                       {proofShots.map((shot) => (
                         <div className="proof-shot-card" key={shot.img}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={shot.img} alt={shot.alt} />
+                          <Image
+                            src={shot.img}
+                            alt={shot.alt}
+                            width={getShowcaseImageDimensions(shot.img).width}
+                            height={getShowcaseImageDimensions(shot.img).height}
+                            sizes="(max-width: 640px) 100vw, 300px"
+                            className="proof-shot-image"
+                          />
                         </div>
                       ))}
                     </div>
@@ -757,14 +674,26 @@ export default function Home() {
                 key={i}
               >
                 <div className="proof-showcase-img-container">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={img} alt={alt} />
+                  <Image
+                    src={img}
+                    alt={alt}
+                    width={getShowcaseImageDimensions(img).width}
+                    height={getShowcaseImageDimensions(img).height}
+                    sizes="(max-width: 640px) 100vw, 520px"
+                    className="proof-showcase-image"
+                  />
                   {proofShots ? (
                     <div className="proof-shot-grid">
                       {proofShots.map((shot) => (
                         <div className="proof-shot-card" key={shot.img}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={shot.img} alt={shot.alt} />
+                          <Image
+                            src={shot.img}
+                            alt={shot.alt}
+                            width={getShowcaseImageDimensions(shot.img).width}
+                            height={getShowcaseImageDimensions(shot.img).height}
+                            sizes="(max-width: 640px) 100vw, 300px"
+                            className="proof-shot-image"
+                          />
                         </div>
                       ))}
                     </div>
@@ -808,7 +737,7 @@ export default function Home() {
                 eyebrow: "For Founders & B2B Teams",
                 choice: "I need qualified B2B pipeline",
                 title: "Build a Predictable Revenue Pipeline",
-                image: "/business path card img 2.png",
+                image: "/business path card img 2.webp",
                 alt: "Business growth path illustration",
                 summary: "Turn scattered growth into a system that brings in qualified buyers.",
                 outcome: "More qualified leads. More booked calls.",
@@ -825,7 +754,7 @@ export default function Home() {
                 eyebrow: "For Creators & Freelancers",
                 choice: "I need better clients and positioning",
                 title: "Turn Skills Into Consistent Clients",
-                image: "/freelancer img.png",
+                image: "/freelancer img.webp",
                 alt: "Freelancer growth path illustration",
                 summary: "Build a stronger personal brand and inbound system for better clients.",
                 outcome: "Better positioning. Better inbound leads.",
@@ -852,7 +781,14 @@ export default function Home() {
                   <div className="growth-path-media">
                     <div className="growth-path-media-frame">
                       <span className="growth-path-frame-label">{frameLabel}</span>
-                      <Image src={image} alt={alt} width={900} height={720} className="growth-path-image" />
+                      <Image
+                        src={image}
+                        alt={alt}
+                        width={798}
+                        height={724}
+                        sizes="(max-width: 760px) 260px, 320px"
+                        className="growth-path-image"
+                      />
                     </div>
                   </div>
                 </div>
@@ -949,8 +885,14 @@ export default function Home() {
       <section id="about" className="section-light section-padding">
         <div className="container why-hire-grid">
           <div className="hire-image-wrapper">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/rehan.png" alt="Rehan Kadri" className="hire-img" />
+            <Image
+              src="/rehan.png"
+              alt="Rehan Kadri"
+              width={1237}
+              height={2199}
+              sizes="(max-width: 640px) 80vw, 320px"
+              className="hire-img"
+            />
           </div>
           <div className="hire-content">
             <span className="section-label">About Me</span>
@@ -1060,6 +1002,13 @@ export default function Home() {
     </main>
   );
 }
+
+
+
+
+
+
+
 
 
 

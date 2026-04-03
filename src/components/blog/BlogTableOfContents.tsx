@@ -18,30 +18,40 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
   const sectionIds = useMemo(() => items.map((item) => item.id), [items]);
 
   useEffect(() => {
-    const updateActiveSection = () => {
-      const offset = 160;
-      let currentId = sectionIds[0] ?? "";
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => section !== null);
 
-      sectionIds.forEach((id) => {
-        const section = document.getElementById(id);
-        if (!section) return;
+    if (!sections.length) {
+      return;
+    }
 
-        const top = section.getBoundingClientRect().top + window.scrollY;
-        if (window.scrollY + offset >= top) {
-          currentId = id;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (firstEntry, secondEntry) =>
+              firstEntry.boundingClientRect.top - secondEntry.boundingClientRect.top
+          );
+
+        const nextActiveId = visibleEntries[0]?.target.id;
+        if (!nextActiveId) {
+          return;
         }
-      });
 
-      setActiveId(currentId);
-    };
+        setActiveId((current) => (current === nextActiveId ? current : nextActiveId));
+      },
+      {
+        rootMargin: "-18% 0px -62% 0px",
+        threshold: 0,
+      }
+    );
 
-    updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
-    window.addEventListener("resize", updateActiveSection);
+    sections.forEach((section) => observer.observe(section));
 
     return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
+      observer.disconnect();
     };
   }, [sectionIds]);
 
@@ -82,4 +92,3 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
     </div>
   );
 }
-

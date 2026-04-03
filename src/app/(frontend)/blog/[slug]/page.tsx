@@ -28,8 +28,6 @@ import {
 } from "@/lib/blog-content";
 import styles from "../blog.module.css";
 
-export const dynamic = "force-dynamic";
-
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -66,6 +64,15 @@ export async function generateMetadata({
     },
   };
 }
+
+export async function generateStaticParams() {
+  const posts = await getAllBlogPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 function buildHeroTitleLines(title: string) {
   const words = title.trim().split(/\s+/).filter(Boolean);
   const joinedLength = (items: string[]) => items.join(" ").length;
@@ -399,6 +406,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
+
 
 
 

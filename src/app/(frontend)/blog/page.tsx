@@ -6,8 +6,6 @@ import { formatBlogDate } from "@/lib/blog";
 import { getAllBlogPosts, getBlogCategories } from "@/lib/blog-content";
 import styles from "./blog.module.css";
 
-export const dynamic = "force-dynamic";
-
 const topicCopyByCategory = {
   seo: {
     eyebrow: "Revenue-first growth systems",
@@ -108,6 +106,7 @@ export default async function BlogIndexPage() {
     </main>
   );
 }
+
 
 
 

@@ -1,5 +1,3 @@
-'use client';
-
 import SiteFooter from './SiteFooter';
 
 export default function AppFrame({ children }: { children: React.ReactNode }) {
@@ -12,3 +10,4 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
     </>
   );
 }
+

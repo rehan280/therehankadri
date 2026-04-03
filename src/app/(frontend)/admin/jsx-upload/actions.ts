@@ -24,6 +24,8 @@ import {
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
+const DEFAULT_CMS_SITE_URL = "https://therehankadri.site";
+
 function buildAdminLocation(params?: Record<string, string | undefined>) {
   const searchParams = new URLSearchParams();
 
@@ -62,7 +64,7 @@ async function getRequestOrigin() {
       process.env.APP_URL ??
       process.env.VERCEL_PROJECT_PRODUCTION_URL ??
       process.env.VERCEL_URL ??
-      ""
+      DEFAULT_CMS_SITE_URL
   );
 
   if (configuredOrigin) {
@@ -96,13 +98,7 @@ async function getRequestOrigin() {
     return derivedOrigin;
   }
 
-  if (process.env.NODE_ENV !== "production") {
-    return "http://localhost:3000";
-  }
-
-  throw new Error(
-    "CMS magic links need a public site URL. Set CMS_SITE_URL (recommended) or NEXT_PUBLIC_SITE_URL."
-  );
+  return DEFAULT_CMS_SITE_URL;
 }
 
 function normalizeOrigin(value: string) {

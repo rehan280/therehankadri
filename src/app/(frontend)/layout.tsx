@@ -4,6 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import '../globals.css';
 import '../home.css';
 import AppFrame from '@/components/AppFrame';
+import CmsMagicLinkRedirectGuard from '@/components/cms/CmsMagicLinkRedirectGuard';
 import { copyFont, displayFont, heroFont, monoFont, sansFont } from '@/lib/fonts';
 
 export const metadata: Metadata = {
@@ -43,6 +44,7 @@ export default function RootLayout({
         className={`${sansFont.variable} ${displayFont.variable} ${heroFont.variable} ${copyFont.variable} ${monoFont.variable} antialiased`}
         suppressHydrationWarning
       >
+        <CmsMagicLinkRedirectGuard />
         <AppFrame>{children}</AppFrame>
         <Analytics />
         <SpeedInsights />
