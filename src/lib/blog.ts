@@ -596,6 +596,10 @@ function countBlockWords(block: BlogBlock) {
 }
 
 export function getBlogReadTime(post: BlogPost) {
+  if (post.readTime.trim()) {
+    return post.readTime;
+  }
+
   if (post.body) {
     const totalWords = countRichTextWords(post.body);
     const minutes = Math.max(1, Math.ceil(totalWords / 220));
@@ -626,6 +630,7 @@ export function formatBlogDate(value: string) {
     timeZone: "UTC",
   }).format(new Date(`${value}T00:00:00Z`));
 }
+
 
 
 

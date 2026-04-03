@@ -12,8 +12,10 @@ import {
 } from "lucide-react";
 import BlogHeader from "@/components/blog/BlogHeader";
 import BlogRichText from "@/components/blog/BlogRichText";
+import YouTubeUsersArticle from "@/components/blog/posts/YouTubeUsersArticle";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
 import { getRichTextHeadingItems } from "@/lib/blog-rich-text";
+import { getYouTubeUsersArticleData } from "@/lib/youtube-users-article";
 import {
   type BlogBlock,
   type BlogPost,
@@ -32,6 +34,8 @@ type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+const siteUrl = "https://therehankadri.site";
+
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
@@ -46,21 +50,39 @@ export async function generateMetadata({
 
   const currentPost = post as BlogPost;
   const postAuthor = currentPost.author ?? defaultBlogAuthor;
+  const canonicalUrl = `${siteUrl}/blog/${currentPost.slug}`;
+  const socialImage = currentPost.coverImage
+    ? `${siteUrl}${currentPost.coverImage.startsWith("/") ? currentPost.coverImage : `/${currentPost.coverImage}`}`
+    : undefined;
 
   return {
     title: `${currentPost.metaTitle ?? currentPost.title} | The Rehan Kadri`,
     description: currentPost.seoDescription,
     keywords: currentPost.keywords,
     alternates: {
-      canonical: `/blog/${currentPost.slug}`,
+      canonical: canonicalUrl,
     },
     openGraph: {
       title: currentPost.metaTitle ?? currentPost.title,
       description: currentPost.seoDescription,
       type: "article",
-      url: `/blog/${currentPost.slug}`,
+      url: canonicalUrl,
       publishedTime: `${currentPost.publishedAt}T00:00:00Z`,
       authors: [postAuthor.name],
+      images: socialImage
+        ? [
+            {
+              url: socialImage,
+              alt: currentPost.title,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: socialImage ? "summary_large_image" : "summary",
+      title: currentPost.metaTitle ?? currentPost.title,
+      description: currentPost.seoDescription,
+      images: socialImage ? [socialImage] : undefined,
     },
   };
 }
@@ -217,20 +239,63 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const normalizedPosts = allPosts as BlogPost[];
   const postAuthor = currentPost.author ?? defaultBlogAuthor;
   const relatedPosts = (await getRelatedBlogPosts(currentPost.slug)) as BlogPost[];
+  const youtubeUsersArticleData =
+    currentPost.slug === "youtube-users" ? await getYouTubeUsersArticleData() : null;
   const heroTitleLines = buildHeroTitleLines(currentPost.title);
   const authorArticleCount = normalizedPosts.filter(
     (entry) => (entry.author ?? defaultBlogAuthor).name === postAuthor.name
   ).length;
   const postReadTime = getBlogReadTime(currentPost);
-  const tableOfContentsItems = currentPost.body
-    ? getRichTextHeadingItems(currentPost.body)
-    : currentPost.sections.map((section) => ({
-        id: section.id,
-        title: section.title,
-      }));
+  const canonicalUrl = `${siteUrl}/blog/${currentPost.slug}`;
+  const socialImage = currentPost.coverImage
+    ? `${siteUrl}${currentPost.coverImage.startsWith("/") ? currentPost.coverImage : `/${currentPost.coverImage}`}`
+    : undefined;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: currentPost.metaTitle ?? currentPost.title,
+    description: currentPost.seoDescription,
+    mainEntityOfPage: canonicalUrl,
+    datePublished: `${currentPost.publishedAt}T00:00:00Z`,
+    dateModified: `${currentPost.publishedAt}T00:00:00Z`,
+    articleSection: currentPost.category.name,
+    keywords: currentPost.keywords?.join(", "),
+    timeRequired: `PT${Number.parseInt(postReadTime, 10) || 1}M`,
+    wordCount: currentPost.slug === "youtube-users" ? 4814 : undefined,
+    image: socialImage ? [socialImage] : undefined,
+    author: {
+      "@type": "Person",
+      name: postAuthor.name,
+      url: postAuthor.socials?.linkedin,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "The Rehan Kadri",
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/favicon/web-app-manifest-512x512.png`,
+      },
+    },
+  };
+  const tableOfContentsItems = youtubeUsersArticleData
+    ? youtubeUsersArticleData.headings
+    : currentPost.body
+      ? getRichTextHeadingItems(currentPost.body)
+      : currentPost.sections.map((section) => ({
+          id: section.id,
+          title: section.title,
+        }));
 
   return (
-    <main className={styles.page}>
+    <main className={`${styles.page} ${styles.postPage}`}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+
       <section className={`${styles.hero} ${styles.postHero}`}>
         <BlogHeader />
 
@@ -290,7 +355,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             <article className={`${styles.articleCopy} authority-post-copy`}>
               <div className={styles.articleProse}>
-                {currentPost.body ? (
+                {youtubeUsersArticleData ? (
+                  <YouTubeUsersArticle data={youtubeUsersArticleData} />
+                ) : currentPost.body ? (
                   <BlogRichText
                     data={currentPost.body}
                     headingIds={tableOfContentsItems.map((item) => item.id)}
@@ -406,19 +473,3 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
