@@ -33,7 +33,7 @@ type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-const siteUrl = "https://therehankadri.site";
+const siteUrl = "https://therehankadri.com";
 
 export async function generateMetadata({
   params,

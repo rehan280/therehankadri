@@ -8,7 +8,7 @@ import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
 import blogStyles from "../blog/blog.module.css";
 import aboutStyles from "./about.module.css";
 
-const siteUrl = "https://therehankadri.site";
+const siteUrl = "https://therehankadri.com";
 const canonicalUrl = `${siteUrl}/about`;
 const socialImage = `${siteUrl}/rehanous-website.webp`;
 

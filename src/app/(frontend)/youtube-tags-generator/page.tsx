@@ -4,7 +4,7 @@ import YouTubeTagGeneratorClient from "./YouTubeTagGeneratorClient";
 import { youtubeTagGeneratorArticle } from "./article-content";
 import styles from "./page.module.css";
 
-const siteUrl = "https://therehankadri.site";
+const siteUrl = "https://therehankadri.com";
 const canonicalUrl = `${siteUrl}/youtube-tags-generator`;
 const pageTitle = "YouTube Tag Generator + 2026 SEO Guide | The Rehan Kadri";
 const pageDescription =

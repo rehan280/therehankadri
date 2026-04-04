@@ -24,7 +24,7 @@ import {
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-const DEFAULT_CMS_SITE_URL = "https://therehankadri.site";
+const DEFAULT_CMS_SITE_URL = "https://therehankadri.com";
 
 function buildAdminLocation(params?: Record<string, string | undefined>) {
   const searchParams = new URLSearchParams();
