@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import '../globals.css';
 import '../home.css';
 import AppFrame from '@/components/AppFrame';
+import DeferredClientFeatures from '@/components/DeferredClientFeatures';
 import HomeNavbar from '@/components/HomeNavbar';
-import CmsMagicLinkRedirectGuard from '@/components/cms/CmsMagicLinkRedirectGuard';
 import { copyFont, heroFont, sansFont } from '@/lib/fonts';
 import {
   GOOGLE_SITE_VERIFICATION,
@@ -20,24 +18,24 @@ export const metadata: Metadata = {
   description: 'Portfolio of The Rehan Kadri, a Product and Growth Marketing Specialist focused on SEO, content systems, and predictable revenue growth.',
   metadataBase: new URL(SITE_URL),
   applicationName: SITE_NAME,
-  manifest: '/favicon/site.webmanifest',
+  manifest: '/site.webmanifest',
   verification: {
     google: GOOGLE_SITE_VERIFICATION,
   },
   robots: createIndexRobots(),
   icons: {
     icon: [
-      { url: '/favicon/favicon.ico', sizes: 'any' },
-      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
     ],
-    shortcut: ['/favicon/favicon.ico'],
+    shortcut: ['/favicon.ico'],
     apple: [
-      { url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
     other: [
-      { rel: 'icon', url: '/favicon/web-app-manifest-192x192.png', sizes: '192x192', type: 'image/png' },
-      { rel: 'icon', url: '/favicon/web-app-manifest-512x512.png', sizes: '512x512', type: 'image/png' },
+      { rel: 'icon', url: '/web-app-manifest-192x192.png', sizes: '192x192', type: 'image/png' },
+      { rel: 'icon', url: '/web-app-manifest-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
   },
   openGraph: {
@@ -72,15 +70,12 @@ export default function RootLayout({
         className={`${sansFont.variable} ${heroFont.variable} ${copyFont.variable} antialiased`}
         suppressHydrationWarning
       >
-        <CmsMagicLinkRedirectGuard />
         <AppFrame>
           <HomeNavbar />
           {children}
         </AppFrame>
-        <Analytics />
-        <SpeedInsights />
+        <DeferredClientFeatures />
       </body>
     </html>
   );
 }
-
