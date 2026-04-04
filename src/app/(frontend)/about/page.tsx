@@ -282,19 +282,6 @@ export default function AboutPage() {
                       </span>
                       <span>100K+ Followers</span>
                     </span>
-                    <span className={aboutStyles.heroStat}>
-                      <span className={aboutStyles.heroStatIcon} aria-hidden="true">
-                        <svg viewBox="0 0 16 16" fill="none">
-                          <path
-                            d="M8 2.6L9.2 6.1L12.7 7.3L9.2 8.5L8 12L6.8 8.5L3.3 7.3L6.8 6.1L8 2.6Z"
-                            stroke="currentColor"
-                            strokeWidth="1.6"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </span>
-                      <span>150% Watch Time</span>
-                    </span>
                   </div>
                 </div>
               </div>
