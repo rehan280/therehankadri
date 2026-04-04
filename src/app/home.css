@@ -3364,7 +3364,7 @@
 }
 
 /* NUMBER */
-.hire-stat h4 {
+.hire-stat-value {
   font-size: clamp(1.8rem, 3vw, 2.6rem);
   margin-bottom: 0.3rem;
 
@@ -3377,7 +3377,7 @@
 }
 
 /* LABEL */
-.hire-stat p {
+.hire-stat-label {
   color: var(--text-gray);
   font-weight: 600;
   font-size: 0.9rem;
@@ -3407,7 +3407,7 @@
     height: 100%;
   }
 
-  .hire-stat h4 {
+  .hire-stat-value {
     font-size: 1.6rem;
   }
 }
@@ -6951,5 +6951,6 @@
     min-width: 10.8rem;
   }
 }
+
 
 

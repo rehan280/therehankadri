@@ -248,29 +248,30 @@ export function getRichTextHeadingItems(
   }
 
   const counts = new Map<string, number>();
+  const headings: HeadingItem[] = [];
 
-  return body.root.children.flatMap((node) => {
+  body.root.children.forEach((node) => {
     const richTextNode = node as RichTextElementNode;
     if (richTextNode.type !== "heading") {
-      return [];
+      return;
     }
 
     const title = getLexicalNodeText(richTextNode).trim();
     if (!title) {
-      return [];
+      return;
     }
 
     const baseId = slugifyHeading(title) || "section";
     const nextCount = (counts.get(baseId) ?? 0) + 1;
     counts.set(baseId, nextCount);
 
-    return [
-      {
-        id: nextCount === 1 ? baseId : `${baseId}-${nextCount}`,
-        title,
-      },
-    ];
+    headings.push({
+      id: nextCount === 1 ? baseId : `${baseId}-${nextCount}`,
+      title,
+    });
   });
+
+  return headings;
 }
 
 export function countRichTextWords(body?: SerializedRichTextState | null) {
@@ -337,3 +338,4 @@ export function buildRichTextBodyFromLegacyPost(post: BlogPost): SerializedRichT
     },
   };
 }
+

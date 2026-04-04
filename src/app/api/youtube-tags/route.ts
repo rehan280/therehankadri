@@ -181,12 +181,17 @@ export async function GET(request: NextRequest) {
     Promise.all(queries.map((query) => fetchSuggestionSet(query))),
     fetchSearchResultVideos(keyword),
   ]);
+  const autocompleteSuggestions = suggestionGroups.reduce<string[]>(
+    (allSuggestions, group) => allSuggestions.concat(group),
+    []
+  );
 
   return Response.json(
     generateYouTubeTags(keyword, {
       seed,
-      autocompleteSuggestions: suggestionGroups.flat(),
+      autocompleteSuggestions,
       serpVideos,
     })
   );
 }
+

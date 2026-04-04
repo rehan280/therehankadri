@@ -450,6 +450,8 @@ export default function Home() {
                     <img
                       src="/arrow%20funnel.png"
                       alt="Traffic leaking away illustration"
+                      width={388}
+                      height={636}
                       className="problem-image"
                     />
                   </div>
@@ -495,6 +497,8 @@ export default function Home() {
                     <img
                       src="/what%20i%20build%20funnel).png"
                       alt="Qualified pipeline funnel illustration"
+                      width={475}
+                      height={815}
                       className="problem-image"
                     />
                   </div>
@@ -935,12 +939,12 @@ export default function Home() {
             </p>
             <div className="hire-stats">
               <div className="hire-stat">
-                <h4>1M+</h4>
-                <p>Traffic Scaled</p>
+                <p className="hire-stat-value">1M+</p>
+                <p className="hire-stat-label">Traffic Scaled</p>
               </div>
               <div className="hire-stat">
-                <h4>33k+</h4>
-                <p>Audience Built</p>
+                <p className="hire-stat-value">33k+</p>
+                <p className="hire-stat-label">Audience Built</p>
               </div>
             </div>
           </div>
@@ -1028,4 +1032,7 @@ export default function Home() {
     </main>
   );
 }
+
+
+
 
