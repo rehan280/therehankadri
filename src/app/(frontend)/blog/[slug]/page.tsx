@@ -27,13 +27,19 @@ import {
   getBlogPostBySlug,
   getRelatedBlogPosts,
 } from "@/lib/blog-content";
+import {
+  SITE_URL,
+  createArticleMetadata,
+  createPublisherJsonLd,
+  buildAbsoluteImageUrl,
+  buildCanonicalUrl,
+} from "@/lib/seo";
 import styles from "../blog.module.css";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-const siteUrl = "https://www.therehankadri.com";
 
 export async function generateMetadata({
   params,
@@ -49,41 +55,18 @@ export async function generateMetadata({
 
   const currentPost = post as BlogPost;
   const postAuthor = currentPost.author ?? defaultBlogAuthor;
-  const canonicalUrl = `${siteUrl}/blog/${currentPost.slug}`;
-  const socialImage = currentPost.coverImage
-    ? `${siteUrl}${currentPost.coverImage.startsWith("/") ? currentPost.coverImage : `/${currentPost.coverImage}`}`
-    : undefined;
+  const socialImage = currentPost.coverImage ?? undefined;
 
-  return {
+  return createArticleMetadata({
     title: `${currentPost.metaTitle ?? currentPost.title} | The Rehan Kadri`,
     description: currentPost.seoDescription,
+    path: `/blog/${currentPost.slug}`,
     keywords: currentPost.keywords,
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      title: currentPost.metaTitle ?? currentPost.title,
-      description: currentPost.seoDescription,
-      type: "article",
-      url: canonicalUrl,
-      publishedTime: `${currentPost.publishedAt}T00:00:00Z`,
-      authors: [postAuthor.name],
-      images: socialImage
-        ? [
-            {
-              url: socialImage,
-              alt: currentPost.title,
-            },
-          ]
-        : undefined,
-    },
-    twitter: {
-      card: socialImage ? "summary_large_image" : "summary",
-      title: currentPost.metaTitle ?? currentPost.title,
-      description: currentPost.seoDescription,
-      images: socialImage ? [socialImage] : undefined,
-    },
-  };
+    imagePath: socialImage,
+    imageAlt: currentPost.title,
+    publishedTime: `${currentPost.publishedAt}T00:00:00Z`,
+    authors: [postAuthor.name],
+  });
 }
 
 export async function generateStaticParams() {
@@ -245,10 +228,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     (entry) => (entry.author ?? defaultBlogAuthor).name === postAuthor.name
   ).length;
   const postReadTime = getBlogReadTime(currentPost);
-  const canonicalUrl = `${siteUrl}/blog/${currentPost.slug}`;
-  const socialImage = currentPost.coverImage
-    ? `${siteUrl}${currentPost.coverImage.startsWith("/") ? currentPost.coverImage : `/${currentPost.coverImage}`}`
-    : undefined;
+  const canonicalUrl = buildCanonicalUrl(`/blog/${currentPost.slug}`);
+  const socialImage = buildAbsoluteImageUrl(currentPost.coverImage ?? undefined);
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -261,21 +242,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     keywords: currentPost.keywords?.join(", "),
     timeRequired: `PT${Number.parseInt(postReadTime, 10) || 1}M`,
     wordCount: currentPost.slug === "youtube-users" ? 4814 : undefined,
-    image: socialImage ? [socialImage] : undefined,
+    image: [socialImage],
     author: {
       "@type": "Person",
       name: postAuthor.name,
       url: postAuthor.socials?.linkedin,
     },
-    publisher: {
-      "@type": "Organization",
-      name: "The Rehan Kadri",
-      url: siteUrl,
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/favicon/web-app-manifest-512x512.png`,
-      },
-    },
+    publisher: createPublisherJsonLd(),
   };
   const tableOfContentsItems = youtubeUsersArticleData
     ? youtubeUsersArticleData.headings
@@ -471,4 +444,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
+
+
+
+
+
 

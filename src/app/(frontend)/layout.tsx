@@ -7,11 +7,24 @@ import AppFrame from '@/components/AppFrame';
 import HomeNavbar from '@/components/HomeNavbar';
 import CmsMagicLinkRedirectGuard from '@/components/cms/CmsMagicLinkRedirectGuard';
 import { copyFont, displayFont, heroFont, monoFont, sansFont } from '@/lib/fonts';
+import {
+  GOOGLE_SITE_VERIFICATION,
+  SITE_NAME,
+  SITE_URL,
+  buildAbsoluteImageUrl,
+  createIndexRobots,
+} from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'The Rehan Kadri | Product & Growth Marketing Specialist',
   description: 'Portfolio of The Rehan Kadri, a Product and Growth Marketing Specialist focused on SEO, content systems, and predictable revenue growth.',
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
   manifest: '/favicon/site.webmanifest',
+  verification: {
+    google: GOOGLE_SITE_VERIFICATION,
+  },
+  robots: createIndexRobots(),
   icons: {
     icon: [
       { url: '/favicon/favicon.ico', sizes: 'any' },
@@ -28,9 +41,23 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: 'The Rehan Kadri | Growth Marketing',
+    title: `${SITE_NAME} | Growth Marketing`,
     description: 'Scaling platforms, optimizing funnels, driving inbound leads.',
+    url: SITE_URL,
+    siteName: SITE_NAME,
     type: 'website',
+    images: [
+      {
+        url: buildAbsoluteImageUrl(),
+        alt: `${SITE_NAME} growth marketing portfolio`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE_NAME} | Growth Marketing`,
+    description: 'Scaling platforms, optimizing funnels, driving inbound leads.',
+    images: [buildAbsoluteImageUrl()],
   },
 };
 

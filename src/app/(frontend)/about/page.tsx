@@ -5,12 +5,12 @@ import {
   Check,
 } from "lucide-react";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
+import { SITE_URL, buildAbsoluteImageUrl, buildCanonicalUrl, createPageMetadata } from "@/lib/seo";
 import blogStyles from "../blog/blog.module.css";
 import aboutStyles from "./about.module.css";
 
-const siteUrl = "https://www.therehankadri.com";
-const canonicalUrl = `${siteUrl}/about`;
-const socialImage = `${siteUrl}/rehanous-website.webp`;
+const canonicalUrl = buildCanonicalUrl("/about");
+const socialImage = buildAbsoluteImageUrl();
 
 const tableOfContentsItems = [
   { id: "who-am-i", title: "So, who am I?" },
@@ -41,10 +41,13 @@ function getAboutHeroLineClass(index: number, total: number) {
   return aboutStyles.heroTitleLineMiddle;
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "About Rehan Kadri | Growth Marketer, SEO Nerd, and Growth Strategist",
   description:
     "Learn more about Rehan Kadri, the growth marketer behind tested SEO, content, and audience growth systems used to scale Rehanous.com to 1M+ monthly organic visitors.",
+  path: "/about",
+  type: "profile",
+  imageAlt: "Growth proof from The Rehan Kadri",
   keywords: [
     "about Rehan Kadri",
     "Rehan Kadri",
@@ -55,34 +58,7 @@ export const metadata: Metadata = {
     "YouTube growth",
     "AI marketing workflows",
   ],
-  alternates: {
-    canonical: canonicalUrl,
-  },
-  openGraph: {
-    title: "About Rehan Kadri",
-    description:
-      "Meet Rehan Kadri, a growth marketer sharing tested playbooks from building real brands, ranking websites, and growing audiences from zero.",
-    url: canonicalUrl,
-    type: "profile",
-    images: [
-      {
-        url: socialImage,
-        alt: "Growth proof from The Rehan Kadri",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "About Rehan Kadri",
-    description:
-      "Growth Marketer. SEO nerd. And the guy who tests marketing strategies so you don't have to.",
-    images: [socialImage],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+});
 
 const aboutPageJsonLd = {
   "@context": "https://schema.org",
@@ -94,8 +70,8 @@ const aboutPageJsonLd = {
   mainEntity: {
     "@type": "Person",
     name: "Rehan Kadri",
-    url: siteUrl,
-    image: `${siteUrl}/rehan.png`,
+    url: SITE_URL,
+    image: buildAbsoluteImageUrl("/rehan.png"),
     description:
       "Growth Marketer. SEO nerd. And the guy who tests marketing strategies so you don't have to.",
     jobTitle: "Growth Marketer",
@@ -126,10 +102,10 @@ const aboutPageJsonLd = {
   publisher: {
     "@type": "Organization",
     name: "The Rehan Kadri",
-    url: siteUrl,
+    url: SITE_URL,
     logo: {
       "@type": "ImageObject",
-      url: `${siteUrl}/favicon/web-app-manifest-512x512.png`,
+      url: buildAbsoluteImageUrl("/favicon/web-app-manifest-512x512.png"),
     },
   },
 };
@@ -440,4 +416,5 @@ export default function AboutPage() {
     </main>
   );
 }
+
 

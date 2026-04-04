@@ -5,18 +5,15 @@ import {
   therehankadriDisplayFont,
   therehankadriFont,
 } from "@/lib/fonts";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Blog | The Rehan Kadri",
   description:
     "Practical writing on SEO, content systems, demand capture, and founder authority for teams building qualified pipeline.",
-  openGraph: {
-    title: "Blog | The Rehan Kadri",
-    description:
-      "Practical writing on SEO, content systems, demand capture, and founder authority for teams building qualified pipeline.",
-    type: "website",
-  },
-};
+  path: "/blog",
+  imageAlt: "The Rehan Kadri blog",
+});
 
 export default function BlogLayout({
   children,

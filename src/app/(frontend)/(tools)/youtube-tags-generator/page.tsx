@@ -1,52 +1,39 @@
 import type { Metadata } from "next";
+import { SITE_NAME, SITE_URL, buildAbsoluteImageUrl, buildCanonicalUrl, createPageMetadata } from "@/lib/seo";
 import YouTubeTagsArticle from "./YouTubeTagsArticle";
 import YouTubeTagGeneratorClient from "./YouTubeTagGeneratorClient";
 import { youtubeTagGeneratorArticle } from "./article-content";
 import styles from "./page.module.css";
 
-const siteUrl = "https://www.therehankadri.com";
-const canonicalUrl = `${siteUrl}/youtube-tags-generator`;
+const canonicalUrl = buildCanonicalUrl("/youtube-tags-generator");
 const pageTitle = "YouTube Tag Generator + 2026 SEO Guide | The Rehan Kadri";
 const pageDescription =
   "Generate YouTube tags from a title or keyword, then read the full 2026 guide on YouTube SEO tags, strategy, mistakes, and FAQs.";
+const socialImage = buildAbsoluteImageUrl();
 
 export const metadata: Metadata = {
-  title: pageTitle,
-  description: pageDescription,
-  alternates: {
-    canonical: canonicalUrl,
-  },
-  category: "SEO Tools",
-  authors: [{ name: "The Rehan Kadri", url: siteUrl }],
-  creator: "The Rehan Kadri",
-  publisher: "The Rehan Kadri",
-  keywords: [
-    "youtube tag generator",
-    "youtube tags",
-    "youtube seo tags",
-    "video tag generator",
-    "youtube keyword tags",
-    "youtube tags seo guide",
-    "best tags for youtube videos",
-    "youtube shorts tags",
-    "how to generate tags for youtube videos",
-  ],
-  robots: {
-    index: true,
-    follow: true,
-  },
-  openGraph: {
+  ...createPageMetadata({
     title: pageTitle,
     description: pageDescription,
+    path: "/youtube-tags-generator",
     type: "article",
-    url: canonicalUrl,
-    siteName: "The Rehan Kadri",
-  },
-  twitter: {
-    card: "summary",
-    title: pageTitle,
-    description: pageDescription,
-  },
+    imageAlt: "YouTube Tag Generator by The Rehan Kadri",
+    keywords: [
+      "youtube tag generator",
+      "youtube tags",
+      "youtube seo tags",
+      "video tag generator",
+      "youtube keyword tags",
+      "youtube tags seo guide",
+      "best tags for youtube videos",
+      "youtube shorts tags",
+      "how to generate tags for youtube videos",
+    ],
+  }),
+  category: "SEO Tools",
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
 };
 
 export default function YouTubeTagGeneratorPage() {
@@ -74,8 +61,8 @@ export default function YouTubeTagGeneratorPage() {
     ],
     publisher: {
       "@type": "Organization",
-      name: "The Rehan Kadri",
-      url: siteUrl,
+      name: SITE_NAME,
+      url: SITE_URL,
     },
   };
   const articleJsonLd = {
@@ -98,18 +85,19 @@ export default function YouTubeTagGeneratorPage() {
     ],
     author: {
       "@type": "Person",
-      name: "The Rehan Kadri",
-      url: siteUrl,
+      name: SITE_NAME,
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",
-      name: "The Rehan Kadri",
-      url: siteUrl,
+      name: SITE_NAME,
+      url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${siteUrl}/favicon/web-app-manifest-512x512.png`,
+        url: buildAbsoluteImageUrl("/favicon/web-app-manifest-512x512.png"),
       },
     },
+    image: [socialImage],
   };
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -161,4 +149,5 @@ export default function YouTubeTagGeneratorPage() {
     </main>
   );
 }
+
 

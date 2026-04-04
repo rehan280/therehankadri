@@ -23,8 +23,9 @@ import {
 } from "@/lib/github-publisher";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { SITE_URL } from "@/lib/seo";
 
-const DEFAULT_CMS_SITE_URL = "https://www.therehankadri.com";
+const DEFAULT_CMS_SITE_URL = SITE_URL;
 
 function buildAdminLocation(params?: Record<string, string | undefined>) {
   const searchParams = new URLSearchParams();
@@ -339,3 +340,6 @@ export async function deleteCmsPostAction(slug: string) {
 
   redirect(destination);
 }
+
+
+

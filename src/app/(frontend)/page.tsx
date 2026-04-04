@@ -1,5 +1,24 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "The Rehan Kadri | SEO, YouTube Growth, and Revenue-Focused Marketing",
+  description:
+    "SEO, YouTube growth, and content systems designed to turn visibility into qualified pipeline for B2B brands.",
+  path: "/",
+  imageAlt: "The Rehan Kadri growth marketing portfolio",
+  keywords: [
+    "Rehan Kadri",
+    "SEO consultant",
+    "YouTube growth strategist",
+    "B2B SEO",
+    "content systems",
+    "pipeline marketing",
+    "growth marketing strategist",
+  ],
+});
 
 type ProofShot = {
   img: string;
@@ -1000,6 +1019,7 @@ export default function Home() {
     </main>
   );
 }
+
 
 
 

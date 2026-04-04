@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import blogStyles from "../blog/blog.module.css";
+import blogStyles from "../../blog/blog.module.css";
 import PremiumFaq from "@/components/content/PremiumFaq";
 import {
   youtubeTagGeneratorArticle,
