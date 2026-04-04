@@ -1,9 +1,9 @@
 import {
   blogPlexFont,
-  therehankadriCondensedFont,
   therehankadriDisplayFont,
   therehankadriFont,
-} from "@/lib/fonts";
+} from "@/lib/blog-fonts";
+import { monoFont } from "@/lib/mono-font";
 
 export default function AboutLayout({
   children,
@@ -12,7 +12,7 @@ export default function AboutLayout({
 }) {
   return (
     <div
-      className={`${therehankadriFont.variable} ${therehankadriDisplayFont.variable} ${therehankadriCondensedFont.variable} ${blogPlexFont.variable}`}
+      className={`${therehankadriFont.variable} ${therehankadriDisplayFont.variable} ${blogPlexFont.variable} ${monoFont.variable}`}
     >
       {children}
     </div>

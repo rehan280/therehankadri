@@ -24,6 +24,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
+  --font-display: var(--font-sans);
   font-family: var(--font-sans), sans-serif;
   background-color: var(--page-shell);
   color: var(--text-dark);
@@ -470,4 +471,5 @@ h1, h2, h3, h4, h5, h6 {
     scroll-behavior: auto;
   }
 }
+
 

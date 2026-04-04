@@ -4,7 +4,8 @@ import {
   therehankadriCondensedFont,
   therehankadriDisplayFont,
   therehankadriFont,
-} from "@/lib/fonts";
+} from "@/lib/blog-fonts";
+import { monoFont } from "@/lib/mono-font";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -22,7 +23,7 @@ export default function BlogLayout({
 }) {
   return (
     <div
-      className={`${therehankadriFont.variable} ${therehankadriDisplayFont.variable} ${therehankadriCondensedFont.variable} ${blogPlexFont.variable}`}
+      className={`${therehankadriFont.variable} ${therehankadriDisplayFont.variable} ${therehankadriCondensedFont.variable} ${blogPlexFont.variable} ${monoFont.variable}`}
     >
       {children}
     </div>

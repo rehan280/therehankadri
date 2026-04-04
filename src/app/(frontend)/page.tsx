@@ -360,7 +360,16 @@ export default function Home() {
 
           <div className="hero-portrait-col">
             <div className="premium-circle-wrapper">
-              <Image src="/rehan.png" alt="Rehan Kadri" width={500} height={600} priority className="premium-portrait-img" />
+              <Image
+                src="/rehan.png"
+                alt="Rehan Kadri"
+                width={500}
+                height={600}
+                loading="eager"
+                fetchPriority="high"
+                sizes="(max-width: 640px) 252px, (max-width: 960px) 285px, 370px"
+                className="premium-portrait-img"
+              />
             </div>
             <div className="hero-social-card" aria-label="Social proof">
               <div className="hero-social-top">
@@ -1019,27 +1028,4 @@ export default function Home() {
     </main>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

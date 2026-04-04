@@ -6,7 +6,7 @@ import '../home.css';
 import AppFrame from '@/components/AppFrame';
 import HomeNavbar from '@/components/HomeNavbar';
 import CmsMagicLinkRedirectGuard from '@/components/cms/CmsMagicLinkRedirectGuard';
-import { copyFont, displayFont, heroFont, monoFont, sansFont } from '@/lib/fonts';
+import { copyFont, heroFont, sansFont } from '@/lib/fonts';
 import {
   GOOGLE_SITE_VERIFICATION,
   SITE_NAME,
@@ -69,7 +69,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${sansFont.variable} ${displayFont.variable} ${heroFont.variable} ${copyFont.variable} ${monoFont.variable} antialiased`}
+        className={`${sansFont.variable} ${heroFont.variable} ${copyFont.variable} antialiased`}
         suppressHydrationWarning
       >
         <CmsMagicLinkRedirectGuard />
@@ -83,3 +83,4 @@ export default function RootLayout({
     </html>
   );
 }
+
