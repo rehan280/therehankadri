@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-
-export const SITE_NAME = "The Rehan Kadri";
-export const SITE_URL = "https://www.therehankadri.com";
-export const DEFAULT_SOCIAL_IMAGE_PATH = "/rehanous-website.webp";
-export const GOOGLE_SITE_VERIFICATION = "-iqotlS2yoMry14iyOTphf1XHwjiHO4lOvjAU9o7Hpg";
+import {
+  DEFAULT_SOCIAL_IMAGE_PATH,
+  SITE_NAME,
+  buildAbsoluteImageUrl,
+  buildCanonicalUrl,
+} from "./config";
 
 type PageType = "website" | "article" | "profile";
 type TwitterCard = "summary" | "summary_large_image";
@@ -29,22 +30,6 @@ type CreateArticleMetadataOptions = {
   publishedTime?: string;
   authors?: string[];
 };
-
-export function buildCanonicalUrl(path = "") {
-  if (!path || path === "/") {
-    return SITE_URL;
-  }
-
-  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
-}
-
-export function buildAbsoluteImageUrl(imagePath = DEFAULT_SOCIAL_IMAGE_PATH) {
-  if (/^https?:\/\//.test(imagePath)) {
-    return imagePath;
-  }
-
-  return `${SITE_URL}${imagePath.startsWith("/") ? imagePath : `/${imagePath}`}`;
-}
 
 export function createIndexRobots(): NonNullable<Metadata["robots"]> {
   return {
@@ -149,18 +134,6 @@ export function createArticleMetadata({
       title,
       description,
       images: [socialImage],
-    },
-  };
-}
-
-export function createPublisherJsonLd() {
-  return {
-    "@type": "Organization",
-    name: SITE_NAME,
-    url: SITE_URL,
-    logo: {
-      "@type": "ImageObject",
-      url: buildAbsoluteImageUrl("/favicon/web-app-manifest-512x512.png"),
     },
   };
 }
