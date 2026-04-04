@@ -1,4 +1,3 @@
-import BlogHeader from "@/components/blog/BlogHeader";
 import styles from "../blog.module.css";
 
 const articleLines = Array.from({ length: 8 });
@@ -8,7 +7,6 @@ export default function BlogPostLoading() {
   return (
     <main className={`${styles.page} ${styles.loadingScreen}`}>
       <section className={`${styles.hero} ${styles.postHero}`}>
-        <BlogHeader />
 
         <div className={`${styles.heroInner} ${styles.postHeroInner} ${styles.loadingHeroInner}`}>
           <span className={`${styles.loadingBlock} ${styles.loadingPill}`} />
@@ -81,3 +79,4 @@ export default function BlogPostLoading() {
     </main>
   );
 }
+

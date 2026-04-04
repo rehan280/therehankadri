@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import HomeNavbar from "@/components/HomeNavbar";
 import YouTubeTagsArticle from "./YouTubeTagsArticle";
 import YouTubeTagGeneratorClient from "./YouTubeTagGeneratorClient";
 import { youtubeTagGeneratorArticle } from "./article-content";
@@ -138,7 +137,6 @@ export default function YouTubeTagGeneratorPage() {
         }}
       />
 
-      <HomeNavbar />
 
       <section className={styles.heroSection}>
         <div className={styles.wrap}>
@@ -163,3 +161,4 @@ export default function YouTubeTagGeneratorPage() {
     </main>
   );
 }
+

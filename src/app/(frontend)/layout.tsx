@@ -4,6 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import '../globals.css';
 import '../home.css';
 import AppFrame from '@/components/AppFrame';
+import HomeNavbar from '@/components/HomeNavbar';
 import CmsMagicLinkRedirectGuard from '@/components/cms/CmsMagicLinkRedirectGuard';
 import { copyFont, displayFont, heroFont, monoFont, sansFont } from '@/lib/fonts';
 
@@ -45,7 +46,10 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <CmsMagicLinkRedirectGuard />
-        <AppFrame>{children}</AppFrame>
+        <AppFrame>
+          <HomeNavbar />
+          {children}
+        </AppFrame>
         <Analytics />
         <SpeedInsights />
       </body>

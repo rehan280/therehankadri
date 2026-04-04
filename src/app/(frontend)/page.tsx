@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import HomeNavbar from "@/components/HomeNavbar";
 
 type ProofShot = {
   img: string;
@@ -304,7 +303,6 @@ export default function Home() {
 
   return (
     <main className="site-shell">
-      <HomeNavbar />
 
       {/* ── 1. HERO ── */}
       <section className="hero section-light">
@@ -719,7 +717,7 @@ export default function Home() {
       </section>
 
       {/* ── 6.5. GROWTH PATHS ── */}
-      <section className="section-light section-padding growth-paths-section">
+      <section id="growth" className="section-light section-padding growth-paths-section">
         <div className="container">
           <div className="growth-paths-header">
             <span className="section-label">How Can I Help</span>
@@ -1002,6 +1000,8 @@ export default function Home() {
     </main>
   );
 }
+
+
 
 
 

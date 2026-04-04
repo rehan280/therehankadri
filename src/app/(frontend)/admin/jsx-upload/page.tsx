@@ -1,5 +1,4 @@
 import Link from "next/link";
-import BlogHeader from "@/components/blog/BlogHeader";
 import { formatBlogDate } from "@/lib/blog";
 import { blogCategoryOptions } from "@/lib/blog-taxonomy";
 import {
@@ -64,7 +63,6 @@ export default async function BlogJsxUploadPage({ searchParams }: AdminPageProps
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
-        <BlogHeader />
 
         <div className={styles.heroInner}>
           <span className={styles.eyebrow}>Blog CMS Workspace</span>
@@ -394,3 +392,4 @@ export default async function BlogJsxUploadPage({ searchParams }: AdminPageProps
     </main>
   );
 }
+

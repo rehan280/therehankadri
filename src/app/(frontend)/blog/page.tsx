@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Calendar } from "lucide-react";
-import BlogHeader from "@/components/blog/BlogHeader";
 import BlogTopicSection from "@/components/blog/BlogTopicSection";
 import { formatBlogDate } from "@/lib/blog";
 import { getAllBlogPosts, getBlogCategories } from "@/lib/blog-content";
@@ -39,7 +38,6 @@ export default async function BlogIndexPage() {
   return (
     <main className={styles.page}>
       <section className={`${styles.hero} ${styles.blogIndexHero}`}>
-        <BlogHeader />
 
         <div className={`${styles.heroInner} ${styles.blogIndexHeroInner}`}>
           <h1 className={styles.blogIndexTitle}>The Rehan Kadri Blog</h1>
@@ -106,6 +104,7 @@ export default async function BlogIndexPage() {
     </main>
   );
 }
+
 
 
 

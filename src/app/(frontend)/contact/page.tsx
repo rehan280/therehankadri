@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { FormEvent, useState } from "react";
 import styles from "./contact.module.css";
 
@@ -70,19 +69,8 @@ const socialLinks = [
   },
 ];
 
-const contactNavLinks = [
-  { href: "/", label: "Home" },
-  { href: "/#works", label: "Results" },
-  { href: "/#process", label: "Systems" },
-  { href: "/blog", label: "Blog" },
-  { href: "/#about", label: "About" },
-];
-
 export default function ContactPage() {
   const [formResult, setFormResult] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const closeMenu = () => setMenuOpen(false);
 
   const onContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -120,66 +108,6 @@ export default function ContactPage() {
 
   return (
     <main className={styles.page}>
-      <header className={styles.header}>
-        <nav className={`navbar${menuOpen ? " menu-open" : ""}`}>
-          <Link href="/" className="nav-brand" aria-label="The Rehan Kadri home">
-            <span className="nav-brand-copy">
-              <span className="nav-brand-kicker">Revenue-first growth systems</span>
-              <span className="nav-brand-title">
-                <span className="nav-brand-the">The</span>
-                <span className="nav-brand-rehan">Rehan</span>
-                <span className="nav-brand-kadri">Kadri</span>
-              </span>
-            </span>
-          </Link>
-
-          <div className="desktop-links-shell">
-            <div className="desktop-links">
-              {contactNavLinks.map(({ href, label }) => (
-                <Link key={href} href={href}>
-                  {label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="nav-right">
-            <Link href="/#proofs" className="nav-secondary">
-              View Results
-            </Link>
-            <a href="mailto:youtech280@gmail.com" className="btn btn-orange nav-btn">
-              Email me
-            </a>
-            <button
-              className={`hamburger${menuOpen ? " open" : ""}`}
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
-              aria-expanded={menuOpen}
-              aria-controls="contact-mobile-nav-drawer"
-            >
-              <span /><span /><span />
-            </button>
-          </div>
-        </nav>
-
-        <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="contact-mobile-nav-drawer">
-          <div className="mobile-drawer-links">
-            <div className="mobile-drawer-top">
-              <p>SEO, content, and pipeline strategy for qualified revenue growth.</p>
-            </div>
-            {contactNavLinks.map(({ href, label }) => (
-              <Link key={href} href={href} onClick={closeMenu}>
-                {label}
-              </Link>
-            ))}
-            <a href="mailto:youtech280@gmail.com" className="btn btn-orange drawer-hire" onClick={closeMenu}>
-              Email me ↗
-            </a>
-          </div>
-        </div>
-        {menuOpen && <div className="drawer-overlay" onClick={closeMenu} />}
-      </header>
-
       <section className={styles.hero}>
         <div className={styles.container}>
           <div className={styles.heroIntro}>
@@ -258,43 +186,26 @@ export default function ContactPage() {
                   <span className={styles.connectEmailBadge}>Best for direct contact</span>
                   <span className={styles.connectEmailArrow}>↗</span>
                 </div>
-                <div className={styles.connectEmailMain}>
-                  <span className={styles.connectEmailIcon}>{renderSocialIcon("email")}</span>
-                  <span className={styles.connectEmailCopy}>
-                    <strong>youtech280@gmail.com</strong>
-                    <small>Usually replies within 24-48 hours</small>
-                  </span>
-                </div>
+                <strong>youtech280@gmail.com</strong>
+                <span>Reply window: usually within 24 hours.</span>
               </a>
 
-              <div className={styles.connectGrid}>
+              <div className={styles.socialGrid}>
                 {socialLinks.map(({ type, name, href, handle, note }) => (
-                  <a
-                    key={name}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.socialCard}
-                  >
+                  <a key={name} href={href} target="_blank" rel="noreferrer" className={styles.socialCard}>
                     <span className={styles.socialIcon}>{renderSocialIcon(type)}</span>
-                    <span className={styles.socialCopy}>
+                    <div className={styles.socialCopy}>
                       <strong>{name}</strong>
                       <span>{handle}</span>
                       <small>{note}</small>
-                    </span>
+                    </div>
                   </a>
                 ))}
               </div>
             </div>
           </section>
-
         </div>
       </section>
     </main>
   );
 }
-
-
-
-
-

@@ -1,4 +1,3 @@
-import BlogHeader from "@/components/blog/BlogHeader";
 import styles from "./blog.module.css";
 
 const latestCards = Array.from({ length: 4 });
@@ -8,7 +7,6 @@ export default function BlogLoading() {
   return (
     <main className={`${styles.page} ${styles.loadingScreen}`}>
       <section className={`${styles.hero} ${styles.blogIndexHero}`}>
-        <BlogHeader />
 
         <div className={`${styles.heroInner} ${styles.blogIndexHeroInner}`}>
           <span className={`${styles.loadingBlock} ${styles.loadingPill}`} />
@@ -79,3 +77,4 @@ export default function BlogLoading() {
     </main>
   );
 }
+

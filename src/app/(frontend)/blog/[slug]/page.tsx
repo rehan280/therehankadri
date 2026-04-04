@@ -10,7 +10,6 @@ import {
   Linkedin,
   Twitter,
 } from "lucide-react";
-import BlogHeader from "@/components/blog/BlogHeader";
 import BlogRichText from "@/components/blog/BlogRichText";
 import YouTubeUsersArticle from "@/components/blog/posts/YouTubeUsersArticle";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
@@ -297,7 +296,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       />
 
       <section className={`${styles.hero} ${styles.postHero}`}>
-        <BlogHeader />
 
         <div className={`${styles.heroInner} ${styles.postHeroInner}`}>
           <span className={styles.heroPill}>{currentPost.category.name}</span>
@@ -473,3 +471,4 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
+

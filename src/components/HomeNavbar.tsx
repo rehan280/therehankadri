@@ -1,46 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const navLinks = [
-  { href: "#services", label: "Expertise" },
-  { href: "#works", label: "Results" },
-  { href: "#process", label: "Systems" },
-  { href: "#about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
-
-const observedSections = ["services", "works", "proofs", "process", "about"];
+const blogHref = "/blog";
+const serviceHref = "/#services";
+const proofsHref = "/#proofs";
+const aboutHref = "/about";
+const contactHref = "/contact";
 
 export default function HomeNavbar() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const sectionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          setActiveSection((current) =>
-            current === entry.target.id ? current : entry.target.id
-          );
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px" }
-    );
-
-    observedSections.forEach((id) => {
-      const section = document.getElementById(id);
-      if (section) {
-        sectionObserver.observe(section);
-      }
-    });
-
     const handleScroll = () => {
       const nextScrolled = window.scrollY > 30;
       setScrolled((current) => (current === nextScrolled ? current : nextScrolled));
@@ -50,12 +25,18 @@ export default function HomeNavbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      sectionObserver.disconnect();
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
   const closeMenu = () => setMenuOpen(false);
+  const isBlogActive = pathname.startsWith(blogHref);
+  const isAboutActive = pathname === aboutHref || pathname === contactHref;
+  const isContactActive = pathname === contactHref;
 
   return (
     <>
@@ -73,25 +54,38 @@ export default function HomeNavbar() {
 
         <div className="desktop-links-shell">
           <div className="desktop-links">
-            {navLinks.map(({ href, label }) => (
+            <Link
+              href={blogHref}
+              className={isBlogActive ? "active" : ""}
+              aria-current={isBlogActive ? "page" : undefined}
+            >
+              Blog
+            </Link>
+            <Link href={serviceHref}>Service</Link>
+            <Link href={proofsHref}>Proofs</Link>
+
+            <div className={`desktop-links-group${isAboutActive ? " active" : ""}`}>
               <Link
-                key={href}
-                href={href}
-                className={href.startsWith("#") && activeSection === href.slice(1) ? "active" : ""}
+                href={aboutHref}
+                className={isAboutActive ? "active" : ""}
+                aria-current={pathname === aboutHref ? "page" : undefined}
               >
-                {label}
+                About Us
               </Link>
-            ))}
+              <div className="desktop-submenu" aria-label="About Us submenu">
+                <Link
+                  href={contactHref}
+                  className={isContactActive ? "active" : ""}
+                  aria-current={isContactActive ? "page" : undefined}
+                >
+                  Contact Us
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="nav-right">
-          <Link href="#proofs" className="nav-secondary">
-            View Results
-          </Link>
-          <Link href="/contact" className="btn btn-orange nav-btn">
-            Book a strategy call
-          </Link>
           <button
             className={`hamburger${menuOpen ? " open" : ""}`}
             onClick={() => setMenuOpen((open) => !open)}
@@ -109,16 +103,36 @@ export default function HomeNavbar() {
       <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="mobile-nav-drawer">
         <div className="mobile-drawer-links">
           <div className="mobile-drawer-top">
-            <p>SEO, content, and pipeline strategy for qualified revenue growth.</p>
+            <p>Browse the blog, explore services and proofs, or learn more about Rehan.</p>
           </div>
-          {navLinks.map(({ href, label }) => (
-            <Link key={href} href={href} onClick={closeMenu}>
-              {label}
-            </Link>
-          ))}
-          <Link href="/contact" className="btn btn-orange drawer-hire" onClick={closeMenu}>
-            Book a strategy call ↗
+          <Link
+            href={blogHref}
+            onClick={closeMenu}
+            className={isBlogActive ? "active" : ""}
+            aria-current={isBlogActive ? "page" : undefined}
+          >
+            Blog
           </Link>
+          <Link href={serviceHref} onClick={closeMenu}>Service</Link>
+          <Link href={proofsHref} onClick={closeMenu}>Proofs</Link>
+          <div className="mobile-nav-group">
+            <Link
+              href={aboutHref}
+              onClick={closeMenu}
+              className={isAboutActive ? "active" : ""}
+              aria-current={pathname === aboutHref ? "page" : undefined}
+            >
+              About Us
+            </Link>
+            <Link
+              href={contactHref}
+              onClick={closeMenu}
+              className={`mobile-sub-link${isContactActive ? " active" : ""}`}
+              aria-current={isContactActive ? "page" : undefined}
+            >
+              Contact Us
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -126,3 +140,4 @@ export default function HomeNavbar() {
     </>
   );
 }
+
