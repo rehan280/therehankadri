@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllBlogPosts } from "@/lib/blog-content";
 
-const siteUrl = "https://therehankadri.com";
+const siteUrl = "https://www.therehankadri.com";
 
 const staticRoutes: MetadataRoute.Sitemap = [
   {
