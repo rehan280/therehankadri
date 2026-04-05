@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./BlogHeader.module.css";
 
 const navLinks = [
@@ -15,25 +15,17 @@ const navLinks = [
 
 export default function BlogHeader() {
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [menuState, setMenuState] = useState({ open: false, path: pathname });
+  const menuOpen = menuState.path === pathname ? menuState.open : false;
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 36);
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const closeMenu = () => setMenuOpen(false);
-  const blendIntoHero = !scrolled && !menuOpen;
+  const closeMenu = () => setMenuState({ open: false, path: pathname });
+  const toggleMenu = () => setMenuState({ open: !menuOpen, path: pathname });
+  const blendIntoHero = !menuOpen;
 
   return (
     <>
       <nav
-        className={`navbar blog-navbar${scrolled ? " scrolled" : ""}${menuOpen ? " menu-open" : ""}${blendIntoHero ? " hero-blend" : ""}`}
+        className={`navbar blog-navbar${menuOpen ? " menu-open" : ""}${blendIntoHero ? " hero-blend" : ""}`}
       >
         <Link href="/" prefetch className="nav-brand" aria-label="The Rehan Kadri home">
           <span className="nav-brand-copy">
@@ -54,6 +46,7 @@ export default function BlogHeader() {
                 href={href}
                 prefetch={href.startsWith("/")}
                 className={href === "/blog" && pathname.startsWith("/blog") ? "active" : ""}
+                aria-current={href === "/blog" && pathname.startsWith("/blog") ? "page" : undefined}
               >
                 {label}
               </Link>
@@ -70,7 +63,7 @@ export default function BlogHeader() {
           </Link>
           <button
             className={`hamburger${menuOpen ? " open" : ""}`}
-            onClick={() => setMenuOpen((open) => !open)}
+            onClick={toggleMenu}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
             aria-controls="blog-mobile-nav-drawer"
@@ -103,5 +96,3 @@ export default function BlogHeader() {
     </>
   );
 }
-
-

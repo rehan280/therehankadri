@@ -14,6 +14,8 @@ import {
 import BlogRichText from "@/components/blog/BlogRichText";
 import YouTubeUsersArticle from "@/components/blog/posts/YouTubeUsersArticle";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
+import ArticleSocialShare from "@/components/blog/ArticleSocialShare";
+import PremiumFaq from "@/components/content/PremiumFaq";
 import { getRichTextHeadingItems } from "@/lib/blog-rich-text";
 import { getYouTubeUsersArticleData } from "@/lib/youtube-users-article";
 import {
@@ -254,6 +256,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
     publisher: createPublisherJsonLd(),
   };
+  const faqSection = currentPost.faqEntries?.length ? (
+    <PremiumFaq
+      id="faq"
+      title="Frequently Asked Questions"
+      eyebrow={null}
+      intro={`Quick answers to the most common questions about YouTube users, revenue, and daily activity in ${new Date(`${currentPost.publishedAt}T00:00:00Z`).getUTCFullYear()}.`}
+      className={styles.articleFaqSection}
+      items={currentPost.faqEntries.map((entry) => ({
+        question: entry.question,
+        answer: entry.answer,
+      }))}
+    />
+  ) : null;
   const tableOfContentsItems = youtubeUsersArticleData
     ? youtubeUsersArticleData.headings
     : currentPost.body
@@ -365,7 +380,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <article className={`${styles.articleCopy} authority-post-copy`}>
               <div className={styles.articleProse}>
                 {youtubeUsersArticleData ? (
-                  <YouTubeUsersArticle data={youtubeUsersArticleData} />
+                  <YouTubeUsersArticle
+                    data={youtubeUsersArticleData}
+                    insertBeforeHeadingId="the-bottom-line"
+                    insertNode={faqSection}
+                  />
                 ) : currentPost.body ? (
                   <BlogRichText
                     data={currentPost.body}
@@ -387,7 +406,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     ))}
                   </>
                 )}
+
+                {!youtubeUsersArticleData ? faqSection : null}
               </div>
+
+              <aside className={`${styles.shareRail} ${styles.shareRailMobile}`}>
+                <div className={styles.shareRailInner}>
+                  <ArticleSocialShare
+                    slug={currentPost.slug}
+                    title={currentPost.metaTitle ?? currentPost.title}
+                    url={canonicalUrl}
+                  />
+                </div>
+              </aside>
 
               <aside className={styles.articleAuthorCard}>
                 <div className={styles.windowBar}>
@@ -443,6 +474,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
               </aside>
             </article>
+
+            <aside className={`${styles.sidebar} ${styles.shareRail} ${styles.shareRailDesktop}`}>
+              <div className={`${styles.sidebarStack} ${styles.shareRailInner}`}>
+                <ArticleSocialShare
+                  slug={currentPost.slug}
+                  title={currentPost.metaTitle ?? currentPost.title}
+                  url={canonicalUrl}
+                />
+              </div>
+            </aside>
           </div>
         </div>
       </section>
@@ -482,3 +523,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
+
+
+

@@ -10,7 +10,6 @@ import blogStyles from "../blog/blog.module.css";
 import aboutStyles from "./about.module.css";
 
 const canonicalUrl = buildCanonicalUrl("/about");
-const socialImage = buildAbsoluteImageUrl();
 
 const tableOfContentsItems = [
   { id: "who-am-i", title: "So, who am I?" },
@@ -416,5 +415,7 @@ export default function AboutPage() {
     </main>
   );
 }
+
+
 
 

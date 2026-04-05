@@ -10,7 +10,7 @@ export type PremiumFaqItem = {
 type PremiumFaqProps = {
   className?: string;
   defaultOpenFirst?: boolean;
-  eyebrow?: string;
+  eyebrow?: ReactNode;
   id?: string;
   intro?: ReactNode;
   items: PremiumFaqItem[];
@@ -45,7 +45,7 @@ export default function PremiumFaq({
       aria-labelledby={id ? `${id}-title` : undefined}
     >
       <div className={styles.header}>
-        <span className={styles.eyebrow}>{eyebrow}</span>
+        {eyebrow ? <span className={styles.eyebrow}>{eyebrow}</span> : null}
         <h2 className={styles.title} id={id ? `${id}-title` : undefined}>
           {title}
         </h2>
@@ -76,3 +76,5 @@ export default function PremiumFaq({
     </section>
   );
 }
+
+

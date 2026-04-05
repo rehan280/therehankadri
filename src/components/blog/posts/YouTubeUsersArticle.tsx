@@ -546,7 +546,24 @@ function renderBlock(block: YouTubeUsersBlock) {
   }
 }
 
-export default function YouTubeUsersArticle({ data }: { data: YouTubeUsersArticleData }) {
+type YouTubeUsersArticleProps = {
+  data: YouTubeUsersArticleData;
+  insertBeforeHeadingId?: string;
+  insertNode?: ReactNode;
+};
+
+export default function YouTubeUsersArticle({
+  data,
+  insertBeforeHeadingId,
+  insertNode,
+}: YouTubeUsersArticleProps) {
+  const insertionIndex =
+    insertNode && insertBeforeHeadingId
+      ? data.blocks.findIndex(
+          (block) => block.type === "heading" && block.id === insertBeforeHeadingId
+        )
+      : -1;
+
   return (
     <>
       {data.blocks.map((block, index) => {
@@ -555,14 +572,22 @@ export default function YouTubeUsersArticle({ data }: { data: YouTubeUsersArticl
         const shouldRenderVisual =
           block.type !== "heading" && (!nextBlock || nextBlock.type === "heading");
         const visual = shouldRenderVisual ? renderSectionVisual(sectionId) : null;
+        const shouldInsertNodeBeforeBlock = Boolean(insertNode) && index === insertionIndex;
 
         return (
-          <div key={`${block.type}-${index}`} className={styles.youtubeArticleBlock}>
-            {renderBlock(block)}
-            {visual}
+          <div key={`${block.type}-${index}`}>
+            {shouldInsertNodeBeforeBlock ? insertNode : null}
+            <div className={styles.youtubeArticleBlock}>
+              {renderBlock(block)}
+              {visual}
+            </div>
           </div>
         );
       })}
+      {insertionIndex === -1 && insertNode ? insertNode : null}
     </>
   );
 }
+
+
+

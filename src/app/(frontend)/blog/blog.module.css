@@ -172,6 +172,10 @@
   margin: 0 auto;
 }
 
+.postShell {
+  position: relative;
+}
+
 .articleGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -461,12 +465,35 @@
 .sidebar {
   position: relative;
   align-self: start;
+  width: 100%;
+  min-width: 0;
 }
 
 .sidebarStack {
+  display: grid;
+  gap: 1rem;
   position: sticky;
-  top: 6.9rem;
+  top: 2rem;
   width: 100%;
+  min-width: 0;
+}
+
+.shareRail {
+  margin-top: 1.5rem;
+  position: relative;
+  align-self: start;
+}
+
+.shareRailInner {
+  width: 100%;
+}
+
+.shareRailDesktop {
+  display: none;
+}
+
+.shareRailMobile {
+  display: block;
 }
 
 .tocCard,
@@ -1564,9 +1591,11 @@
 
 .sidebar {
   position: sticky;
-  top: 6.9rem;
+  top: 2rem;
   align-self: start;
   height: fit-content;
+  width: 100%;
+  min-width: 0;
 }
 
 .sidebarStack {
@@ -1574,6 +1603,7 @@
   display: grid;
   gap: 1rem;
   width: 100%;
+  min-width: 0;
 }
 
 .sidebarAuthorCard {
@@ -1693,9 +1723,11 @@
 
 .sidebar {
   position: sticky;
-  top: 6.9rem;
+  top: 2rem;
   align-self: start;
   height: fit-content;
+  width: 100%;
+  min-width: 0;
 }
 
 .sidebarStack {
@@ -1703,6 +1735,7 @@
   display: grid;
   gap: 1rem;
   width: 100%;
+  min-width: 0;
 }
 
 .sidebarAuthorCard {
@@ -1864,14 +1897,17 @@
 
 .sidebar {
   position: sticky;
-  top: 6.9rem;
+  top: 2rem;
   align-self: start;
   height: fit-content;
+  width: 100%;
+  min-width: 0;
 }
 
 .sidebarStack {
   position: static;
   width: 100%;
+  min-width: 0;
 }
 
 .articleAuthorCard {
@@ -4776,20 +4812,38 @@
   }
 
   .postGrid {
-    grid-template-columns: minmax(220px, 260px) minmax(0, 650px) minmax(220px, 260px) !important;
+    grid-template-columns: minmax(220px, 260px) minmax(0, 650px) minmax(88px, 110px) !important;
     justify-content: center !important;
     gap: 2rem clamp(2rem, 4vw, 3.5rem) !important;
   }
 
   .postGridNoSidebar {
-    grid-template-columns: minmax(0, 650px) !important;
+    grid-template-columns: minmax(0, 650px) minmax(88px, 110px) !important;
   }
 
   .sidebar {
     grid-column: 1 !important;
+    grid-row: 1 !important;
     width: 100% !important;
     max-width: 260px !important;
     justify-self: end !important;
+  }
+
+  .shareRailDesktop {
+    display: block !important;
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    position: sticky !important;
+    top: 2rem !important;
+    align-self: start !important;
+    width: 100%;
+    margin-top: 0;
+    max-width: 110px !important;
+    justify-self: start !important;
+  }
+
+  .shareRailMobile {
+    display: none !important;
   }
 
   .sidebarStack,
@@ -4798,8 +4852,15 @@
     max-width: 260px !important;
   }
 
+  .shareRailDesktop .shareRailInner {
+    width: 100% !important;
+    max-width: 110px !important;
+  }
+
   .articleCopy {
+    align-self: start !important;
     grid-column: 2 !important;
+    grid-row: 1 !important;
     width: 100% !important;
     max-width: 650px !important;
     margin-left: auto !important;
@@ -4810,6 +4871,16 @@
   .articleAuthorCard {
     max-width: 650px !important;
   }
+
+  .postGridNoSidebar .articleCopy {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  .postGridNoSidebar .shareRailDesktop {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
 }
 
 /* Final desktop reading width pass: keep the whole blog article shell tighter */
@@ -4819,18 +4890,23 @@
   }
 
   .postGrid {
-    grid-template-columns: minmax(240px, 280px) minmax(0, 800px) minmax(220px, 240px) !important;
+    grid-template-columns: minmax(240px, 280px) minmax(0, 800px) minmax(88px, 110px) !important;
     gap: 2rem clamp(2.25rem, 3.8vw, 3.5rem) !important;
   }
 
   .postGridNoSidebar {
-    grid-template-columns: minmax(0, 800px) !important;
+    grid-template-columns: minmax(0, 800px) minmax(88px, 110px) !important;
   }
 
   .sidebar,
   .sidebarStack,
   .tocCard {
     max-width: 280px !important;
+  }
+
+  .shareRailDesktop,
+  .shareRailDesktop .shareRailInner {
+    max-width: 110px !important;
   }
 
   .articleCopy,
@@ -4852,6 +4928,67 @@
   .articleSection h2,
   .richTextSubheading {
     max-width: 800px !important;
+  }
+
+  .articleCopy {
+    align-self: start !important;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1179px) {
+  .postGrid {
+    grid-template-columns: minmax(220px, 250px) minmax(0, 650px) minmax(88px, 110px) !important;
+    gap: 1.6rem 2rem !important;
+  }
+
+  .postGridNoSidebar {
+    grid-template-columns: minmax(0, 650px) minmax(88px, 110px) !important;
+  }
+
+  .sidebar {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    max-width: 250px !important;
+    width: 100% !important;
+    justify-self: end !important;
+  }
+
+  .shareRailDesktop {
+    display: block !important;
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    position: sticky !important;
+    top: 2rem !important;
+    align-self: start !important;
+    width: 100%;
+    margin-top: 0;
+    max-width: 110px !important;
+    justify-self: start !important;
+  }
+
+  .shareRailMobile {
+    display: none !important;
+  }
+
+  .shareRailDesktop .shareRailInner {
+    width: 100% !important;
+    max-width: 110px !important;
+  }
+
+  .articleCopy {
+    align-self: start !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+
+  .postGridNoSidebar .articleCopy {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  .postGridNoSidebar .shareRailDesktop {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
   }
 }
 
@@ -5130,3 +5267,10 @@
     gap: 0.5rem 0.9rem !important;
   }
 }
+
+.articleFaqSection {
+  margin-top: 0.9rem;
+  scroll-margin-top: 7rem;
+}
+
+

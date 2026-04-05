@@ -33,6 +33,11 @@ export type BlogAuthor = {
   socials?: BlogAuthorSocials;
 };
 
+export type BlogFaqEntry = {
+  question: string;
+  answer: string;
+};
+
 export type BlogPostHero = {
   image?: string;
   imageAlt?: string;
@@ -53,9 +58,11 @@ export type BlogPost = {
   heroDescription: string;
   seoDescription: string;
   publishedAt: string;
+  modifiedAt?: string;
   readTime: string;
   author: BlogAuthor;
   body?: SerializedRichTextState | null;
+  faqEntries?: BlogFaqEntry[];
   summaryPoints: string[];
   intro: string[];
   sections: BlogSection[];
@@ -152,4 +159,6 @@ export function formatBlogDate(value: string) {
     timeZone: "UTC",
   }).format(new Date(`${value}T00:00:00Z`));
 }
+
+
 

@@ -12,10 +12,16 @@ const contactHref = "/contact";
 
 export default function HomeNavbar() {
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuState, setMenuState] = useState({ open: false, path: pathname });
   const [scrolled, setScrolled] = useState(false);
+  const shouldHideNavbar = pathname.startsWith(blogHref);
+  const menuOpen = menuState.path === pathname ? menuState.open : false;
 
   useEffect(() => {
+    if (shouldHideNavbar) {
+      return;
+    }
+
     const handleScroll = () => {
       const nextScrolled = window.scrollY > 30;
       setScrolled((current) => (current === nextScrolled ? current : nextScrolled));
@@ -27,16 +33,17 @@ export default function HomeNavbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [shouldHideNavbar]);
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  const closeMenu = () => setMenuOpen(false);
+  const closeMenu = () => setMenuState({ open: false, path: pathname });
+  const toggleMenu = () => setMenuState({ open: !menuOpen, path: pathname });
   const isBlogActive = pathname.startsWith(blogHref);
   const isAboutActive = pathname === aboutHref || pathname === contactHref;
   const isContactActive = pathname === contactHref;
+
+  if (shouldHideNavbar) {
+    return null;
+  }
 
   return (
     <>
@@ -88,7 +95,7 @@ export default function HomeNavbar() {
         <div className="nav-right">
           <button
             className={`hamburger${menuOpen ? " open" : ""}`}
-            onClick={() => setMenuOpen((open) => !open)}
+            onClick={toggleMenu}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
             aria-controls="mobile-nav-drawer"
@@ -140,4 +147,3 @@ export default function HomeNavbar() {
     </>
   );
 }
-

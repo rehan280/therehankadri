@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import BlogHeader from "@/components/blog/BlogHeader";
 import {
   blogPlexFont,
   therehankadriCondensedFont,
@@ -25,6 +26,7 @@ export default function BlogLayout({
     <div
       className={`${therehankadriFont.variable} ${therehankadriDisplayFont.variable} ${therehankadriCondensedFont.variable} ${blogPlexFont.variable} ${monoFont.variable}`}
     >
+      <BlogHeader />
       {children}
     </div>
   );

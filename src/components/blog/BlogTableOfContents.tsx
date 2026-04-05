@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import styles from "./BlogTableOfContents.module.css";
 
 type TocItem = {
@@ -14,6 +14,8 @@ type BlogTableOfContentsProps = {
 
 export default function BlogTableOfContents({ items }: BlogTableOfContentsProps) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? "");
+
+  const listRef = useRef<HTMLOListElement>(null);
 
   const sectionIds = useMemo(() => items.map((item) => item.id), [items]);
 
@@ -55,6 +57,17 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
     };
   }, [sectionIds]);
 
+  useEffect(() => {
+    if (!activeId || !listRef.current) return;
+    const activeElement = listRef.current.querySelector<HTMLAnchorElement>(`a[href="#${activeId}"]`);
+    if (activeElement) {
+      const container = listRef.current;
+      const elementTop = activeElement.offsetTop;
+      const containerHalf = container.clientHeight / 2;
+      container.scrollTo({ top: elementTop - containerHalf, behavior: "smooth" });
+    }
+  }, [activeId]);
+
   if (!items.length) {
     return null;
   }
@@ -71,8 +84,8 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
       </div>
 
       <nav aria-label="Table of contents">
-        <ol className={styles.tocList}>
-          {items.map((item) => {
+        <ol className={styles.tocList} ref={listRef}>
+          {items.map((item, index) => {
             const active = item.id === activeId;
 
             return (
@@ -82,7 +95,8 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
                   className={active ? styles.tocLinkActive : styles.tocLink}
                   aria-current={active ? "true" : undefined}
                 >
-                  {item.title}
+                  <span className={styles.tocNumber}>{index + 1}.</span>
+                  <span className={styles.tocText}>{item.title}</span>
                 </a>
               </li>
             );

@@ -5,6 +5,7 @@ import path from "node:path";
 import {
   defaultBlogAuthor,
   blogPosts as legacyBlogPosts,
+  type BlogFaqEntry,
   type BlogPost,
 } from "@/lib/blog";
 import { buildRichTextBodyFromMarkup } from "@/lib/blog-rich-text";
@@ -108,6 +109,33 @@ function normalizeBlogPostHero(value: unknown): BlogPost["hero"] {
   };
 }
 
+function normalizeFaqEntries(value: unknown): BlogFaqEntry[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.flatMap((entry) => {
+    if (typeof entry !== "object" || entry === null) {
+      return [];
+    }
+
+    const question =
+      typeof entry.question === "string" && entry.question.trim()
+        ? entry.question.trim()
+        : "";
+    const answer =
+      typeof entry.answer === "string" && entry.answer.trim()
+        ? entry.answer.trim()
+        : "";
+
+    if (!question || !answer) {
+      return [];
+    }
+
+    return [{ question, answer }];
+  });
+}
+
 function normalizeBlogPost(rawPost: Record<string, unknown>): BlogPost {
   const slug = typeof rawPost.slug === "string" ? rawPost.slug : "";
   const title = typeof rawPost.title === "string" ? rawPost.title : slug;
@@ -156,6 +184,10 @@ function normalizeBlogPost(rawPost: Record<string, unknown>): BlogPost {
       typeof rawPost.publishedAt === "string" && rawPost.publishedAt.trim()
         ? rawPost.publishedAt
         : new Date().toISOString().slice(0, 10),
+    modifiedAt:
+      typeof rawPost.modifiedAt === "string" && rawPost.modifiedAt.trim()
+        ? rawPost.modifiedAt
+        : undefined,
     readTime: typeof rawPost.readTime === "string" ? rawPost.readTime : "",
     author:
       typeof rawPost.author === "object" && rawPost.author !== null
@@ -168,6 +200,7 @@ function normalizeBlogPost(rawPost: Record<string, unknown>): BlogPost {
       typeof rawPost.body === "object" && rawPost.body !== null
         ? (rawPost.body as BlogPost["body"])
         : null,
+    faqEntries: normalizeFaqEntries(rawPost.faqEntries),
     summaryPoints: normalizeStringArray(rawPost.summaryPoints),
     intro: normalizeStringArray(rawPost.intro),
     sections: Array.isArray(rawPost.sections)
@@ -402,9 +435,11 @@ export async function createCmsBlogPost(input: CreateCmsBlogPostInput) {
     heroDescription: input.heroDescription.trim() || excerpt,
     seoDescription: input.seoDescription.trim() || excerpt,
     publishedAt,
+    modifiedAt: publishedAt,
     readTime: "",
     author: defaultBlogAuthor,
     body,
+    faqEntries: [],
     summaryPoints: [],
     intro: [],
     sections: [],
@@ -533,6 +568,11 @@ export async function getCmsUploadCopyFilePaths(slug: string) {
     throw error;
   }
 }
+
+
+
+
+
 
 
 
