@@ -689,7 +689,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 6. VISUAL PROOF ── */}
+      {/* ── 6. VISUAL PROOF ──
       <section id="proofs" className="section-dark section-padding">
         <div className="container">
           <div className="section-header">
@@ -747,6 +747,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      */}
 
       {/* ── 6.5. GROWTH PATHS ── */}
       <section id="growth" className="section-light section-padding growth-paths-section">

@@ -8,7 +8,6 @@ import styles from "./BlogHeader.module.css";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/#services", label: "Services" },
-  { href: "/#works", label: "Work" },
   { href: "/blog", label: "Blog" },
   { href: "/#about", label: "About" },
 ];
@@ -55,7 +54,7 @@ export default function BlogHeader() {
         </div>
 
         <div className="nav-right">
-          <Link href="/#proofs" prefetch className="nav-secondary">
+          <Link href="/#works" prefetch className="nav-secondary">
             View Results
           </Link>
           <Link href="/contact" prefetch className="btn btn-orange nav-btn">

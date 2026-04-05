@@ -69,7 +69,7 @@ export default function HomeNavbar() {
               Blog
             </Link>
             <Link href={serviceHref}>Service</Link>
-            <Link href={proofsHref}>Proofs</Link>
+            {/* <Link href={proofsHref}>Proofs</Link> */}
 
             <div className={`desktop-links-group${isAboutActive ? " active" : ""}`}>
               <Link
@@ -93,6 +93,12 @@ export default function HomeNavbar() {
         </div>
 
         <div className="nav-right">
+          <Link href="/#works" className="nav-secondary">
+            View Results
+          </Link>
+          <Link href="/contact" className="btn btn-orange nav-btn">
+            Book A Strategy Call
+          </Link>
           <button
             className={`hamburger${menuOpen ? " open" : ""}`}
             onClick={toggleMenu}
@@ -110,7 +116,7 @@ export default function HomeNavbar() {
       <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="mobile-nav-drawer">
         <div className="mobile-drawer-links">
           <div className="mobile-drawer-top">
-            <p>Browse the blog, explore services and proofs, or learn more about Rehan.</p>
+            <p>Browse the blog, explore services, or learn more about Rehan.</p>
           </div>
           <Link
             href={blogHref}
@@ -121,7 +127,7 @@ export default function HomeNavbar() {
             Blog
           </Link>
           <Link href={serviceHref} onClick={closeMenu}>Service</Link>
-          <Link href={proofsHref} onClick={closeMenu}>Proofs</Link>
+          {/* <Link href={proofsHref} onClick={closeMenu}>Proofs</Link> */}
           <div className="mobile-nav-group">
             <Link
               href={aboutHref}
