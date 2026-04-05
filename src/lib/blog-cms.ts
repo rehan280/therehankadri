@@ -36,6 +36,7 @@ export type CreateCmsBlogPostInput = {
   seoDescription: string;
   publishedAt: string;
   coverImage?: string;
+  hero?: BlogPost["hero"];
   jsxSource: string;
   originalFileName?: string;
 };
@@ -77,6 +78,36 @@ function normalizeStringArray(value: unknown) {
   return uniqueStringList(value.filter((item): item is string => typeof item === "string"));
 }
 
+function normalizeBlogPostHero(value: unknown): BlogPost["hero"] {
+  if (typeof value !== "object" || value === null) {
+    return undefined;
+  }
+
+  const heroValue = value as Record<string, unknown>;
+  const image =
+    typeof heroValue.image === "string" && heroValue.image.trim()
+      ? heroValue.image.trim()
+      : undefined;
+  const imageAlt =
+    typeof heroValue.imageAlt === "string" && heroValue.imageAlt.trim()
+      ? heroValue.imageAlt.trim()
+      : undefined;
+  const background =
+    typeof heroValue.background === "string" && heroValue.background.trim()
+      ? heroValue.background.trim()
+      : undefined;
+
+  if (!image && !imageAlt && !background) {
+    return undefined;
+  }
+
+  return {
+    image,
+    imageAlt,
+    background,
+  };
+}
+
 function normalizeBlogPost(rawPost: Record<string, unknown>): BlogPost {
   const slug = typeof rawPost.slug === "string" ? rawPost.slug : "";
   const title = typeof rawPost.title === "string" ? rawPost.title : slug;
@@ -116,6 +147,7 @@ function normalizeBlogPost(rawPost: Record<string, unknown>): BlogPost {
       typeof rawPost.coverImage === "string" && rawPost.coverImage.trim()
         ? rawPost.coverImage
         : undefined,
+    hero: normalizeBlogPostHero(rawPost.hero),
     excerpt,
     cardBlurb,
     heroDescription,
@@ -364,6 +396,7 @@ export async function createCmsBlogPost(input: CreateCmsBlogPostInput) {
     subcategories: uniqueStringList(input.subcategories),
     keywords: uniqueStringList(input.keywords),
     coverImage: input.coverImage?.trim() || undefined,
+    hero: normalizeBlogPostHero(input.hero),
     excerpt,
     cardBlurb: input.cardBlurb.trim() || excerpt,
     heroDescription: input.heroDescription.trim() || excerpt,
@@ -500,4 +533,10 @@ export async function getCmsUploadCopyFilePaths(slug: string) {
     throw error;
   }
 }
+
+
+
+
+
+
 

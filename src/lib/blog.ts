@@ -33,6 +33,12 @@ export type BlogAuthor = {
   socials?: BlogAuthorSocials;
 };
 
+export type BlogPostHero = {
+  image?: string;
+  imageAlt?: string;
+  background?: string;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -41,6 +47,7 @@ export type BlogPost = {
   subcategories: string[];
   keywords?: string[];
   coverImage?: string;
+  hero?: BlogPostHero;
   excerpt: string;
   cardBlurb: string;
   heroDescription: string;
@@ -145,3 +152,4 @@ export function formatBlogDate(value: string) {
     timeZone: "UTC",
   }).format(new Date(`${value}T00:00:00Z`));
 }
+

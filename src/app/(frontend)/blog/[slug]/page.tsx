@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,7 +29,6 @@ import {
   getRelatedBlogPosts,
 } from "@/lib/blog-content";
 import {
-  SITE_URL,
   createArticleMetadata,
   createPublisherJsonLd,
   buildAbsoluteImageUrl,
@@ -39,7 +39,6 @@ import styles from "../blog.module.css";
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
 };
-
 
 export async function generateMetadata({
   params,
@@ -218,6 +217,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const currentPost = post as BlogPost;
+  const customHero = currentPost.hero;
+  const hasFeatureHeroLayout = Boolean(customHero?.image);
+  const heroSectionStyle = customHero?.background
+    ? ({ "--post-hero-custom-background": customHero.background } as CSSProperties)
+    : undefined;
   const normalizedPosts = allPosts as BlogPost[];
   const postAuthor = currentPost.author ?? defaultBlogAuthor;
   const relatedPosts = (await getRelatedBlogPosts(currentPost.slug)) as BlogPost[];
@@ -268,46 +272,80 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         }}
       />
 
-      <section className={`${styles.hero} ${styles.postHero}`}>
+      <section
+        className={`${styles.hero} ${styles.postHero}${hasFeatureHeroLayout ? ` ${styles.postHeroFeature}` : ""}${customHero?.background ? ` ${styles.postHeroCustomBackground}` : ""}`}
+        style={heroSectionStyle}
+      >
+        <div
+          className={`${styles.heroInner} ${styles.postHeroInner}${hasFeatureHeroLayout ? ` ${styles.postHeroGrid}` : ""}`}
+        >
+          <div className={styles.postHeroContent}>
+            {hasFeatureHeroLayout ? null : (
+              <span className={styles.heroPill}>{currentPost.category.name}</span>
+            )}
+            <h1
+              className={`${styles.postHeroTitle}${hasFeatureHeroLayout ? ` ${styles.postHeroTitleSplit}` : ""}`}
+            >
+              {hasFeatureHeroLayout ? (
+                currentPost.title
+              ) : (
+                heroTitleLines.map((line, index) => (
+                  <span
+                    key={`${line}-${index}`}
+                    className={`${styles.postHeroLine} ${getHeroLineClass(index, heroTitleLines.length)}`}
+                  >
+                    {line}
+                  </span>
+                ))
+              )}
+            </h1>
 
-        <div className={`${styles.heroInner} ${styles.postHeroInner}`}>
-          <span className={styles.heroPill}>{currentPost.category.name}</span>
-          <h1 className={styles.postHeroTitle}>
-            {heroTitleLines.map((line, index) => (
-              <span key={`${line}-${index}`} className={`${styles.postHeroLine} ${getHeroLineClass(index, heroTitleLines.length)}`}>
-                {line}
-              </span>
-            ))}
-          </h1>
-
-          <div className={styles.authorRow}>
-            <div className={styles.authorIdentity}>
-              <div className={styles.authorAvatarWrap}>
-                <Image
-                  src={postAuthor.image}
-                  alt={postAuthor.name}
-                  width={80}
-                  height={80}
-                  className={styles.authorAvatar}
-                />
+            <div className={styles.authorRow}>
+              <div className={styles.authorIdentity}>
+                {hasFeatureHeroLayout ? null : (
+                  <div className={styles.authorAvatarWrap}>
+                    <Image
+                      src={postAuthor.image}
+                      alt={postAuthor.name}
+                      width={80}
+                      height={80}
+                      className={styles.authorAvatar}
+                    />
+                  </div>
+                )}
+                <div className={styles.authorText}>
+                  <strong>By {postAuthor.name}</strong>
+                  {hasFeatureHeroLayout ? null : <span>{postAuthor.role}</span>}
+                </div>
               </div>
-              <div className={styles.authorText}>
-                <strong>By {postAuthor.name}</strong>
-                <span>{postAuthor.role}</span>
-              </div>
-            </div>
 
-            <div className={styles.postMetaRow}>
-              <span className={styles.postMetaItem}>
-                <CalendarDays size={16} strokeWidth={2.1} />
-                <span>{formatBlogDate(currentPost.publishedAt)}</span>
-              </span>
-              <span className={styles.postMetaItem}>
-                <Clock3 size={16} strokeWidth={2.1} />
-                <span>{postReadTime}</span>
-              </span>
+              <div className={styles.postMetaRow}>
+                <span className={styles.postMetaItem}>
+                  <CalendarDays size={16} strokeWidth={2.1} />
+                  <span>{formatBlogDate(currentPost.publishedAt)}</span>
+                </span>
+                <span className={styles.postMetaItem}>
+                  <Clock3 size={16} strokeWidth={2.1} />
+                  <span>{postReadTime}</span>
+                </span>
+              </div>
             </div>
           </div>
+
+          {customHero?.image ? (
+            <div className={styles.postHeroArtworkWrap}>
+              <div className={styles.postHeroArtworkFrame}>
+                <Image
+                  src={customHero.image}
+                  alt={customHero.imageAlt ?? currentPost.title}
+                  fill
+                  preload
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 44vw, 620px"
+                  className={styles.postHeroArtwork}
+                />
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
 
@@ -444,9 +482,3 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
-
-
-
-
-
-

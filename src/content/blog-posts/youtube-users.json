@@ -18,6 +18,12 @@
     "youtube algorithm statistics",
     "youtube marketing statistics"
   ],
+  "coverImage": "/blog/youtube-users/social.webp",
+  "hero": {
+    "image": "/blog/youtube-users/hero.webp",
+    "imageAlt": "Illustration for YouTube statistics showing platform growth and audience data",
+    "background": "linear-gradient(135deg, #ff4b43 0%, #ff3838 48%, #ff2923 100%)"
+  },
   "excerpt": "150+ verified YouTube statistics for 2026 covering users, revenue, Shorts, creator income, CPM, watch time, TV share, and marketing ROI.",
   "cardBlurb": "An exact, full-length breakdown of the YouTube numbers that matter in 2026, from user growth and Shorts to CPMs, creator income, TV share, and algorithm benchmarks.",
   "heroDescription": "150+ verified YouTube statistics for 2026 on users, revenue, Shorts, creator income, CPM, algorithm performance, and marketing ROI.",
@@ -40,3 +46,4 @@
   "intro": [],
   "sections": []
 }
+

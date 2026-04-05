@@ -4812,24 +4812,25 @@
   }
 }
 
-/* Final desktop reading width pass: widen centered article without pulling TOC back in */
+/* Final desktop reading width pass: keep the whole blog article shell tighter */
 @media (min-width: 1180px) {
   .postShell {
-    max-width: 1560px !important;
+    max-width: 1440px !important;
   }
 
   .postGrid {
-    grid-template-columns: minmax(220px, 250px) minmax(0, 760px) minmax(220px, 250px) !important;
+    grid-template-columns: minmax(240px, 280px) minmax(0, 800px) minmax(220px, 240px) !important;
+    gap: 2rem clamp(2.25rem, 3.8vw, 3.5rem) !important;
   }
 
   .postGridNoSidebar {
-    grid-template-columns: minmax(0, 760px) !important;
+    grid-template-columns: minmax(0, 800px) !important;
   }
 
   .sidebar,
   .sidebarStack,
   .tocCard {
-    max-width: 250px !important;
+    max-width: 280px !important;
   }
 
   .articleCopy,
@@ -4850,7 +4851,7 @@
   .articleCopy li,
   .articleSection h2,
   .richTextSubheading {
-    max-width: 760px !important;
+    max-width: 800px !important;
   }
 }
 
@@ -4877,3 +4878,255 @@
   }
 }
 
+/* Optional custom hero system: posts without custom data keep the original orange hero */
+.postHeroCustomBackground {
+  background: var(--post-hero-custom-background) !important;
+}
+
+.postHeroContent {
+  width: 100%;
+}
+
+.postHeroFeature {
+  padding-top: clamp(4.2rem, 5.2vw, 4.95rem) !important;
+  padding-bottom: clamp(1.1rem, 2vw, 1.45rem) !important;
+}
+
+.postHeroGrid {
+  width: min(1480px, 100%) !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.94fr) minmax(360px, 0.86fr);
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: center !important;
+}
+
+.postHeroFeature .postHeroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 0;
+}
+
+.postHeroFeature .heroPill {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+.postHeroFeature h1.postHeroTitle.postHeroTitleSplit {
+  width: min(100%, 38rem) !important;
+  max-width: 38rem !important;
+  margin: 0.5rem 0 0.7rem !important;
+  font-size: clamp(2.35rem, 4.2vw, 3.85rem) !important;
+  line-height: 1.03 !important;
+  letter-spacing: -0.038em !important;
+  text-align: left !important;
+  text-wrap: balance;
+}
+
+.postHeroFeature .authorRow {
+  width: auto !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 0.85rem 1.4rem !important;
+  margin-top: 0 !important;
+}
+
+.postHeroFeature .authorIdentity,
+.postHeroFeature .authorText,
+.postHeroFeature .authorText strong,
+.postHeroFeature .authorText span {
+  text-align: left !important;
+}
+
+.postHeroFeature .postMetaRow {
+  justify-content: flex-start !important;
+  gap: 0.85rem !important;
+}
+
+.postHeroFeature .postMetaItem {
+  font-size: 0.8rem !important;
+  letter-spacing: 0.08em !important;
+}
+
+.postHeroArtworkWrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.postHeroArtworkFrame {
+  position: relative;
+  width: min(100%, 31rem);
+  height: clamp(180px, 19vw, 280px);
+}
+
+.postHeroArtwork {
+  object-fit: contain;
+  object-position: center right;
+}
+
+@media (max-width: 1180px) {
+  .postHeroFeature {
+    padding-top: 4.9rem !important;
+    padding-bottom: 1.35rem !important;
+  }
+
+  .postHeroGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.55rem !important;
+  }
+
+  .postHeroFeature .postHeroContent {
+    order: 2;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-start;
+  }
+
+  .postHeroArtworkWrap {
+    order: 1;
+  }
+
+  .postHeroArtworkWrap {
+    justify-content: center;
+  }
+
+  .postHeroArtwork {
+    object-position: center;
+  }
+
+  .postHeroFeature .heroPill {
+    align-self: center;
+  }
+
+  .postHeroFeature h1.postHeroTitle.postHeroTitleSplit {
+    margin-top: 0.4rem !important;
+    margin-bottom: 0.75rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+
+  .postHeroFeature .authorRow {
+    width: 100% !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .postHeroFeature .authorIdentity {
+    justify-content: center;
+  }
+
+  .postHeroFeature .authorText {
+    align-items: center;
+    text-align: center !important;
+  }
+
+  .postHeroFeature .authorText strong,
+  .postHeroFeature .authorText span {
+    text-align: center !important;
+  }
+
+  .postHeroFeature .postMetaRow {
+    justify-content: center !important;
+  }
+
+  .postHeroArtworkFrame {
+    width: min(100%, 28rem);
+    height: clamp(140px, 24vw, 220px);
+  }
+}
+
+@media (max-width: 768px) {
+  .postHeroFeature {
+    padding-top: 5.6rem !important;
+    padding-bottom: 1.75rem !important;
+  }
+
+  .postHeroFeature .postHeroInner {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .postHeroFeature h1.postHeroTitle.postHeroTitleSplit {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0.95rem 0 1.05rem !important;
+    font-size: clamp(2rem, 10vw, 3rem) !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .postHeroFeature .authorRow {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.65rem 0.9rem !important;
+  }
+
+  .postHeroFeature .authorIdentity {
+    flex: 0 1 auto;
+    min-width: 0;
+    justify-content: center !important;
+  }
+
+  .postHeroFeature .authorText {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .postHeroFeature .authorText strong {
+    font-size: clamp(0.92rem, 3.8vw, 1rem) !important;
+  }
+
+  .postHeroFeature .postMetaRow {
+    flex-wrap: wrap !important;
+    min-width: 0;
+    justify-content: center !important;
+    gap: 0.45rem 0.8rem !important;
+  }
+
+  .postHeroFeature .postMetaItem {
+    white-space: nowrap;
+    font-size: clamp(0.68rem, 2.9vw, 0.78rem) !important;
+    letter-spacing: 0.06em !important;
+  }
+
+  .postHeroArtworkFrame {
+    width: min(100%, 24rem);
+    height: clamp(160px, 46vw, 220px);
+  }
+}
+
+@media (max-width: 420px) {
+  .postHeroFeature .authorRow {
+    flex-direction: column !important;
+    gap: 0.55rem !important;
+  }
+
+  .postHeroFeature .postMetaRow {
+    gap: 0.4rem 0.7rem !important;
+  }
+
+  .postHeroFeature .postHeroInner {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .postHeroFeature .authorRow {
+    flex-wrap: nowrap !important;
+    gap: 0.55rem 0.9rem !important;
+  }
+
+  .postHeroFeature .postMetaRow {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem 0.9rem !important;
+  }
+}

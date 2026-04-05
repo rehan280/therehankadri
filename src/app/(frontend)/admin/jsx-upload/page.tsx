@@ -239,6 +239,33 @@ export default async function BlogJsxUploadPage({ searchParams }: AdminPageProps
                       placeholder="/images/blog/cover.webp"
                     />
                   </div>
+                  <div className={styles.field}>
+                    <label htmlFor="post-hero-image">Custom hero image URL</label>
+                    <input
+                      id="post-hero-image"
+                      name="heroImage"
+                      className={styles.input}
+                      placeholder="/blog/your-post/hero.webp"
+                    />
+                  </div>
+                  <div className={styles.field}>
+                    <label htmlFor="post-hero-image-alt">Custom hero image alt</label>
+                    <input
+                      id="post-hero-image-alt"
+                      name="heroImageAlt"
+                      className={styles.input}
+                      placeholder="Describe the hero artwork"
+                    />
+                  </div>
+                  <div className={styles.field}>
+                    <label htmlFor="post-hero-background">Custom hero background</label>
+                    <input
+                      id="post-hero-background"
+                      name="heroBackground"
+                      className={styles.input}
+                      placeholder="linear-gradient(135deg, #ff4d45 0%, #ff2f2f 100%)"
+                    />
+                  </div>
                 </div>
 
                 <div className={styles.fieldGrid}>
@@ -392,4 +419,5 @@ export default async function BlogJsxUploadPage({ searchParams }: AdminPageProps
     </main>
   );
 }
+
 

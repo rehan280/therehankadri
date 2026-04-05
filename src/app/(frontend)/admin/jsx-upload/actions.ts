@@ -237,6 +237,11 @@ export async function publishCmsPostAction(formData: FormData) {
         String(formData.get("publishedAt") ?? "").trim() ||
         new Date().toISOString().slice(0, 10),
       coverImage: String(formData.get("coverImage") ?? ""),
+      hero: {
+        image: String(formData.get("heroImage") ?? ""),
+        imageAlt: String(formData.get("heroImageAlt") ?? ""),
+        background: String(formData.get("heroBackground") ?? ""),
+      },
       jsxSource,
       originalFileName,
     });
@@ -340,6 +345,7 @@ export async function deleteCmsPostAction(slug: string) {
 
   redirect(destination);
 }
+
 
 
 
