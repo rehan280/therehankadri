@@ -2,14 +2,12 @@ import type { ReactNode } from "react";
 import blogStyles from "../../blog/blog.module.css";
 import PremiumFaq from "@/components/content/PremiumFaq";
 import {
-  youtubeTagGeneratorArticle,
+  type ArticleBlock,
+  type ArticleSection,
+  type ParsedArticle,
   youtubeTagGeneratorArticleStats,
 } from "./article-content";
 import styles from "./page.module.css";
-
-type ArticleBlock =
-  (typeof youtubeTagGeneratorArticle.sections)[number]["blocks"][number];
-type ArticleSection = (typeof youtubeTagGeneratorArticle.sections)[number];
 
 type HighlightCard = {
   title: string;
@@ -17,6 +15,7 @@ type HighlightCard = {
 };
 
 type CardVariant = "steps" | "strategy" | "warning";
+type ComparisonTone = "positive" | "limited" | "negative";
 
 function getRenderableBlocks(blocks: ArticleBlock[]) {
   return blocks.filter(
@@ -130,6 +129,104 @@ function parseFeatureCardTitle(title: string, variant: CardVariant) {
   };
 }
 
+function parseComparisonCell(text: string) {
+  const normalized = text.replace(/\uFE0F/g, "").trim();
+
+  if (normalized.startsWith("✅")) {
+    return {
+      tone: "positive" as ComparisonTone,
+      label: normalized.replace(/^✅\s*/, ""),
+    };
+  }
+
+  if (normalized.startsWith("⚠")) {
+    return {
+      tone: "limited" as ComparisonTone,
+      label: normalized.replace(/^⚠\s*/, ""),
+    };
+  }
+
+  if (normalized.startsWith("❌")) {
+    return {
+      tone: "negative" as ComparisonTone,
+      label: normalized.replace(/^❌\s*/, ""),
+    };
+  }
+
+  return null;
+}
+
+function ComparisonStatusIcon({ tone }: { tone: ComparisonTone }) {
+  if (tone === "positive") {
+    return (
+      <svg viewBox="0 0 16 16" aria-hidden="true">
+        <path
+          d="M4 8.2 6.7 11 12 5.5"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.8"
+        />
+      </svg>
+    );
+  }
+
+  if (tone === "limited") {
+    return (
+      <svg viewBox="0 0 16 16" aria-hidden="true">
+        <path
+          d="M8 3.1 13 12.4H3L8 3.1Z"
+          fill="none"
+          stroke="currentColor"
+          strokeLinejoin="round"
+          strokeWidth="1.4"
+        />
+        <path
+          d="M8 6.4v2.8"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeWidth="1.6"
+        />
+        <circle cx="8" cy="11.15" r="0.85" fill="currentColor" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <path
+        d="M5 5 11 11M11 5 5 11"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
+
+function renderComparisonCellContent(text: string) {
+  const status = parseComparisonCell(text);
+
+  if (!status) {
+    return renderInlineMarkdown(text);
+  }
+
+  return (
+    <span
+      className={styles.articleStatusBadge}
+      data-tone={status.tone}
+    >
+      <span className={styles.articleStatusIcon}>
+        <ComparisonStatusIcon tone={status.tone} />
+      </span>
+      <span>{status.label}</span>
+    </span>
+  );
+}
+
 function renderBlock(block: ArticleBlock, sectionId?: string) {
   switch (block.type) {
     case "paragraph":
@@ -156,11 +253,74 @@ function renderBlock(block: ArticleBlock, sectionId?: string) {
           ))}
         </ul>
       );
+    case "table":
+      return (
+        <div className={styles.articleComparisonTableWrap}>
+          <table className={styles.articleComparisonTable}>
+            <thead>
+              <tr>
+                {block.headers.map((header, index) => (
+                  <th
+                    key={header}
+                    className={
+                      index === 0
+                        ? styles.articleComparisonLeadHeader
+                        : index === 1
+                          ? styles.articleComparisonPrimaryHeader
+                          : undefined
+                    }
+                    scope="col"
+                  >
+                    {index === 1 ? (
+                      <span className={styles.articleComparisonWinnerHeader}>
+                        <span className={styles.articleComparisonWinnerLabel}>
+                          Best overall
+                        </span>
+                        <span>{renderInlineMarkdown(header)}</span>
+                      </span>
+                    ) : (
+                      renderInlineMarkdown(header)
+                    )}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row, rowIndex) => (
+                <tr key={`${rowIndex}-${row.join("-")}`}>
+                  {row.map((cell, cellIndex) =>
+                    cellIndex === 0 ? (
+                      <th
+                        key={`${cell}-${cellIndex}`}
+                        className={styles.articleComparisonLeadCell}
+                        scope="row"
+                      >
+                        {renderInlineMarkdown(cell)}
+                      </th>
+                    ) : (
+                      <td
+                        key={`${cell}-${cellIndex}`}
+                        className={cellIndex === 1 ? styles.articleComparisonPrimaryCell : undefined}
+                      >
+                        {renderComparisonCellContent(cell)}
+                      </td>
+                    )
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
   }
 }
 
 function renderStandardSection(section: ArticleSection) {
   const renderableBlocks = getRenderableBlocks(section.blocks);
+  const titleClassName =
+    section.id === "best-youtube-tag-generator-comparison"
+      ? styles.articleComparisonSectionTitle
+      : undefined;
 
   return (
     <section
@@ -168,7 +328,7 @@ function renderStandardSection(section: ArticleSection) {
       id={section.id}
       className={`${blogStyles.articleSection} ${styles.articleSection}`}
     >
-      <h2>{section.title}</h2>
+      <h2 className={titleClassName}>{section.title}</h2>
       <div className={styles.articleFlow}>
         {renderableBlocks.map((block, index) => (
           <div key={`${section.id}-${block.type}-${index}`}>
@@ -306,9 +466,9 @@ function renderExampleSection(section: ArticleSection) {
   );
 }
 
-function renderSection(section: ArticleSection) {
+function renderSection(section: ArticleSection, article: ParsedArticle) {
   switch (section.id) {
-    case "how-to-use-the-youtube-tag-generator":
+    case "how-to-use-this-tool":
       return renderCardSection(section, styles.articleStepGrid, "steps");
     case "the-perfect-youtube-tag-strategy-pro-tips":
       return renderCardSection(section, styles.articleStrategyGrid, "strategy");
@@ -321,7 +481,7 @@ function renderSection(section: ArticleSection) {
           title={section.title}
           eyebrow="Common Questions"
           className={styles.articleFaqSection}
-          items={youtubeTagGeneratorArticle.faqEntries.map((entry) => ({
+          items={article.faqEntries.map((entry) => ({
             question: entry.question,
             answer: entry.answer,
           }))}
@@ -334,7 +494,7 @@ function renderSection(section: ArticleSection) {
   }
 }
 
-export default function YouTubeTagsArticle() {
+export default function YouTubeTagsArticle({ article }: { article: ParsedArticle }) {
   return (
     <div className={blogStyles.postPage}>
       <section className={blogStyles.postSection} aria-label="YouTube tag generator article">
@@ -353,16 +513,16 @@ export default function YouTubeTagsArticle() {
                 ))}
               </div>
 
-              {youtubeTagGeneratorArticle.sections.map((section) => renderSection(section))}
+              {article.sections.map((section) => renderSection(section, article))}
 
-              {youtubeTagGeneratorArticle.conclusionBlocks.length ? (
+              {article.conclusionBlocks.length ? (
                 <section
                   id="conclusion"
                   className={`${blogStyles.articleSection} ${styles.articleSection} ${styles.articleConclusionSection}`}
                 >
                   <h2>Conclusion</h2>
                   <div className={styles.articleFlow}>
-                    {youtubeTagGeneratorArticle.conclusionBlocks.map((block, index) => (
+                    {article.conclusionBlocks.map((block, index) => (
                       <div key={`conclusion-${block.type}-${index}`}>
                         {renderBlock(block)}
                       </div>

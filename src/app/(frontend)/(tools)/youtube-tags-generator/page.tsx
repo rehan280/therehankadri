@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SITE_NAME, SITE_URL, buildAbsoluteImageUrl, buildCanonicalUrl, createPageMetadata } from "@/lib/seo";
 import YouTubeTagsArticle from "./YouTubeTagsArticle";
 import YouTubeTagGeneratorClient from "./YouTubeTagGeneratorClient";
-import { youtubeTagGeneratorArticle } from "./article-content";
+import { getYouTubeTagGeneratorArticle } from "./article-content";
 import styles from "./page.module.css";
 
 const canonicalUrl = buildCanonicalUrl("/youtube-tags-generator");
@@ -36,8 +36,10 @@ export const metadata: Metadata = {
   publisher: SITE_NAME,
 };
 
-export default function YouTubeTagGeneratorPage() {
+export default async function YouTubeTagGeneratorPage() {
+  const article = await getYouTubeTagGeneratorArticle();
   const publishedDate = "2026-04-04";
+  const modifiedDate = "2026-04-05";
   const softwareApplicationJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -68,13 +70,13 @@ export default function YouTubeTagGeneratorPage() {
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: youtubeTagGeneratorArticle.title,
+    headline: article.title,
     description: pageDescription,
     mainEntityOfPage: canonicalUrl,
     url: canonicalUrl,
     datePublished: publishedDate,
-    dateModified: publishedDate,
-    wordCount: youtubeTagGeneratorArticle.wordCount,
+    dateModified: modifiedDate,
+    wordCount: article.wordCount,
     articleSection: "YouTube SEO",
     keywords: [
       "youtube tag generator",
@@ -102,7 +104,7 @@ export default function YouTubeTagGeneratorPage() {
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: youtubeTagGeneratorArticle.faqEntries.map((entry) => ({
+    mainEntity: article.faqEntries.map((entry) => ({
       "@type": "Question",
       name: entry.question,
       acceptedAnswer: {
@@ -145,7 +147,7 @@ export default function YouTubeTagGeneratorPage() {
         </div>
       </section>
 
-      <YouTubeTagsArticle />
+      <YouTubeTagsArticle article={article} />
     </main>
   );
 }
