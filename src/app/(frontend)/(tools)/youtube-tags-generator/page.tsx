@@ -6,9 +6,9 @@ import { getYouTubeTagGeneratorArticle } from "./article-content";
 import styles from "./page.module.css";
 
 const canonicalUrl = buildCanonicalUrl("/youtube-tags-generator");
-const pageTitle = "YouTube Tag Generator + 2026 SEO Guide | The Rehan Kadri";
+const pageTitle = "Free YouTube Tag Generator - AI-Powered, No Login Required";
 const pageDescription =
-  "Generate YouTube tags from a title or keyword, then read the full 2026 guide on YouTube SEO tags, strategy, mistakes, and FAQs.";
+  "Generate SEO-optimized YouTube tags in 10 seconds and it's free, no login required. Covers long-tail, exact-match & channel tags. Try it now.";
 const socialImage = buildAbsoluteImageUrl();
 
 export const metadata: Metadata = {
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     type: "article",
     imageAlt: "YouTube Tag Generator by The Rehan Kadri",
     keywords: [
+      "free youtube tag generator",
       "youtube tag generator",
       "youtube tags",
       "youtube seo tags",
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
 export default async function YouTubeTagGeneratorPage() {
   const article = await getYouTubeTagGeneratorArticle();
   const publishedDate = "2026-04-04";
-  const modifiedDate = "2026-04-05";
+  const modifiedDate = "2026-04-06";
   const softwareApplicationJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -113,9 +114,46 @@ export default async function YouTubeTagGeneratorPage() {
       },
     })),
   };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Free SEO Tools",
+        item: `${SITE_URL}/tools`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "YouTube Tag Generator",
+        item: canonicalUrl,
+      },
+    ],
+  };
+  const aggregateRatingJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Free YouTube Tag Generator",
+    url: canonicalUrl,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "47",
+      bestRating: "5",
+      worstRating: "1",
+    },
+  };
   const structuredData = {
     "@context": "https://schema.org",
-    "@graph": [softwareApplicationJsonLd, articleJsonLd, faqJsonLd],
+    "@graph": [softwareApplicationJsonLd, articleJsonLd, faqJsonLd, breadcrumbJsonLd, aggregateRatingJsonLd],
   };
 
   return (

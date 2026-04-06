@@ -8,7 +8,7 @@ You type in your main keyword. The tool spits out a list of relevant tags. You c
 
 That's it.
 
-Instead of spending 20 minutes figuring out how to generate tags for YouTube videos manually, this free video tag tool gets you a full, optimized list in about 10 seconds. It works as both a tag generator and optimizer — covering everything from exact-match keywords to long-tail variations in one shot.
+Instead of spending 20 minutes figuring out how to generate tags for YouTube videos manually, this free video tag tool gets you a full, optimized list in about 10 seconds. It works as both a tag generator and optimizer are covering everything from exact-match keywords to long-tail variations in one shot.
 
 ---
 
@@ -42,7 +42,7 @@ Using this tool takes about 30 seconds. Here's exactly how it works:
 Type the topic of your video into the input box above. Keep it simple. "How to lose weight fast" or "home studio setup" works perfectly. One keyword is all this AI tag tool needs to get started.
 
 **Step #2: Click generate.**
-Hit the button. This tool does the heavy lifting automatically. It works like a competitor tag extractor combined with an AI tag builder — pulling a full list of relevant tags based on real search data, no guessing required.
+Hit the button. This tool does the heavy lifting automatically. It works like a competitor tag extractor combined with an AI tag builder and pulling a full list of relevant tags based on real search data, no guessing required.
 
 **Step #3: Copy your tags.**
 Scan the list. Select the tags that match your video. Or just copy the whole set and trim from there.
@@ -155,7 +155,7 @@ vidIQ is a FULL YouTube analytics suite. Channel analytics, competitor tracking,
 
 But that's also the problem.
 
-If you just want a fast, free tag tool, vidIQ buries it inside a platform that pushes you toward paid plans starting at $7.50/month. Their free tier gets restrictive quickly. (Some users have flagged that even AI credits on paid plans drain fast — spending 25 credits just to ask the AI one question.) For a tag generator specifically, that's overkill.
+If you just want a fast, free tag tool, vidIQ buries it inside a platform that pushes you toward paid plans starting at $7.50/month. Their free tier gets restrictive quickly. (Some users have flagged that even AI credits on paid plans drain fast and spending 25 credits just to ask the AI one question.) For a tag generator specifically, that's overkill.
 
 This tool doesn't ask you to subscribe to an analytics platform just to get a list of tags. It does one thing and does it well. For free.
 
