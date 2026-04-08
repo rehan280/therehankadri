@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
+import Link from "next/link";
 import styles from "@/app/(frontend)/blog/blog.module.css";
 
 type MetricCard = {
@@ -431,7 +432,7 @@ const articleBlocks: ArticleBlock[] = [
   { type: "heading", id: "youtube-user-stats", text: "YouTube User Stats" },
   {
     type: "paragraph",
-    text: "**YouTube has 2.85 billion Monthly Active Users in 2026.**",
+    text: "YouTube has [2.85 billion](/stats/youtube/users) Monthly Active Users in 2026.",
     sectionId: "youtube-user-stats",
   },
   {
@@ -658,7 +659,7 @@ const articleBlocks: ArticleBlock[] = [
 
 function renderInlineMarkdown(text: string): ReactNode[] {
   const fragments: ReactNode[] = [];
-  const pattern = /\*\*(.+?)\*\*/g;
+  const pattern = /(\*\*(.+?)\*\*)|(\[([^\]]+)\]\(([^)]+)\))/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 
@@ -667,7 +668,16 @@ function renderInlineMarkdown(text: string): ReactNode[] {
       fragments.push(text.slice(lastIndex, match.index));
     }
 
-    fragments.push(<strong key={`${match[1]}-${match.index}`}>{match[1]}</strong>);
+    if (match[2]) {
+      fragments.push(<strong key={`strong-${match.index}`}>{match[2]}</strong>);
+    } else if (match[4] && match[5]) {
+      fragments.push(
+        <Link key={`link-${match.index}`} href={match[5]}>
+          {match[4]}
+        </Link>
+      );
+    }
+
     lastIndex = match.index + match[0].length;
   }
 
