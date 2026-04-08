@@ -21,11 +21,17 @@ const getWarmRoutes = (pathname: string) => {
     return ["/", "/blog"];
   }
 
-  if (pathname === "/blog" || pathname.startsWith("/blog/")) {
+  if (
+    pathname === "/blog" ||
+    pathname.startsWith("/blog/") ||
+    pathname === "/stats/youtube" ||
+    pathname === "/stats/youtube/channel" ||
+    pathname.startsWith("/stats/")
+  ) {
     return ["/", "/contact"];
   }
 
-  return ["/blog", "/contact"];
+  return ["/blog", "/stats/youtube/channel", "/contact"];
 };
 
 export default function RouteWarmup() {

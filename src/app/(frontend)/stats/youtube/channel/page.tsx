@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import {
   ArrowUpRight,
   CalendarDays,
@@ -42,25 +42,17 @@ import {
 } from "@/lib/seo";
 import {
   getPostPath,
-  isStatsPostSlug,
   YOUTUBE_CHANNEL_STATISTICS_SLUG,
 } from "@/lib/post-paths";
-import styles from "../blog.module.css";
-
-type BlogPostPageProps = {
-  params: Promise<{ slug: string }>;
-};
+import styles from "../../../blog/blog.module.css";
 
 const YOUTUBE_HERO_BACKGROUND = "linear-gradient(135deg, #ff4b43 0%, #ff3838 48%, #ff2923 100%)";
 
 function isYouTubePost(slug: string) {
   return slug.startsWith("youtube");
 }
-export async function generateMetadata({
-  params,
-}: BlogPostPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+export async function generateMetadata(): Promise<Metadata> {
+  const post = await getBlogPostBySlug(YOUTUBE_CHANNEL_STATISTICS_SLUG);
 
   if (!post) {
     return {
@@ -84,15 +76,7 @@ export async function generateMetadata({
   });
 }
 
-export async function generateStaticParams() {
-  const posts = await getAllBlogPosts();
 
-  return posts
-    .filter((post) => !isStatsPostSlug(post.slug))
-    .map((post) => ({
-      slug: post.slug,
-    }));
-}
 
 function buildHeroTitleLines(title: string) {
   const words = title.trim().split(/\s+/).filter(Boolean);
@@ -258,14 +242,11 @@ function getWordCountForPost(post: BlogPost) {
   return introWords + sectionWords;
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params;
-
-  if (isStatsPostSlug(slug)) {
-    redirect(getPostPath(slug));
-  }
-
-  const [post, allPosts] = await Promise.all([getBlogPostBySlug(slug), getAllBlogPosts()]);
+export default async function YouTubeStatsPage() {
+  const [post, allPosts] = await Promise.all([
+    getBlogPostBySlug(YOUTUBE_CHANNEL_STATISTICS_SLUG),
+    getAllBlogPosts(),
+  ]);
 
   if (!post) {
     notFound();
@@ -350,8 +331,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Blog",
-        item: buildCanonicalUrl("/blog"),
+        name: "Stats",
+        item: buildCanonicalUrl("/stats"),
       },
       {
         "@type": "ListItem",
@@ -649,6 +630,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
+
+
+
+
+
+
+
+
 
 
 

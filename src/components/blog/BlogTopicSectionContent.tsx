@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { type BlogCategory, type BlogPost, formatBlogDate } from "@/lib/blog";
+import { getPostPath } from "@/lib/post-paths";
 import styles from "./BlogTopicSection.module.css";
 
 type BlogTopicSectionContentProps = {
@@ -63,7 +64,7 @@ export default function BlogTopicSectionContent({
                 ) : null}
 
                 {post.coverImage ? (
-                  <Link href={`/blog/${post.slug}`} prefetch className={styles.topicCardImageLink}>
+                  <Link href={getPostPath(post.slug)} prefetch className={styles.topicCardImageLink}>
                     <div className={styles.topicCardImageWrap}>
                       <Image
                         src={post.coverImage}
@@ -78,7 +79,7 @@ export default function BlogTopicSectionContent({
 
                 <div className={styles.topicCardBody}>
                   <h3 className={styles.topicCardTitle}>
-                    <Link href={`/blog/${post.slug}`} prefetch>{post.title}</Link>
+                    <Link href={getPostPath(post.slug)} prefetch>{post.title}</Link>
                   </h3>
 
                   <p className={styles.topicCardExcerpt}>{post.excerpt}</p>
@@ -96,3 +97,4 @@ export default function BlogTopicSectionContent({
     </section>
   );
 }
+

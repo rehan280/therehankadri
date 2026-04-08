@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { formatBlogDate } from "@/lib/blog";
+import { getPostPath } from "@/lib/post-paths";
 import { blogCategoryOptions } from "@/lib/blog-taxonomy";
 import {
   getAllManagedBlogPosts,
@@ -390,7 +391,7 @@ export default async function BlogJsxUploadPage({ searchParams }: AdminPageProps
                           <td>
                             <div className={styles.rowActions}>
                               {!post.isHidden ? (
-                                <Link href={`/blog/${post.slug}`} className={styles.linkButton}>
+                                <Link href={getPostPath(post.slug)} className={styles.linkButton}>
                                   Open
                                 </Link>
                               ) : null}
@@ -419,5 +420,6 @@ export default async function BlogJsxUploadPage({ searchParams }: AdminPageProps
     </main>
   );
 }
+
 
 

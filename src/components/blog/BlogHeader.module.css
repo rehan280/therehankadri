@@ -73,6 +73,57 @@
   background: rgba(255, 255, 255, 0.12) !important;
 }
 
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .nav-brand-kicker) {
+  color: rgba(255, 56, 56, 0.92) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .nav-brand-title::after) {
+  background: linear-gradient(90deg, rgba(255, 56, 56, 0.55), rgba(255, 56, 56, 0.14), transparent) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .nav-brand-the),
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .nav-brand-rehan),
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .desktop-links a) {
+  color: rgba(26, 26, 46, 0.9) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .desktop-links a::after) {
+  background: rgba(255, 56, 56, 0.92) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .nav-secondary) {
+  color: rgba(26, 26, 46, 0.88) !important;
+  background: rgba(255, 255, 255, 0.58) !important;
+  border-color: rgba(26, 26, 46, 0.12) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .nav-secondary:hover) {
+  color: #1a1a2e !important;
+  background: rgba(255, 255, 255, 0.78) !important;
+  border-color: rgba(26, 26, 46, 0.2) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .nav-btn.btn-orange) {
+  background: linear-gradient(135deg, #ff4b43 0%, #ff3838 48%, #ff2923 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 56, 56, 0.12) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .nav-btn.btn-orange:hover) {
+  background: linear-gradient(135deg, #ff5a52 0%, #ff4740 48%, #ff332c 100%) !important;
+  color: #ffffff !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .hamburger) {
+  background: rgba(255, 255, 255, 0.52) !important;
+  border-color: rgba(26, 26, 46, 0.12) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .hamburger:hover) {
+  border-color: rgba(26, 26, 46, 0.2) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+}
+
 :global(.navbar.blog-navbar) {
   position: absolute !important;
   top: 0 !important;
@@ -158,6 +209,29 @@
     border-color: rgba(255, 255, 255, 0.3) !important;
     background: rgba(255, 255, 255, 0.12) !important;
   }
+
+  :global(.navbar.blog-navbar.hero-blend.hero-blend-light .nav-brand-kicker) {
+    color: rgba(255, 56, 56, 0.92) !important;
+  }
+
+  :global(.navbar.blog-navbar.hero-blend.hero-blend-light .nav-brand-title::after) {
+    background: linear-gradient(90deg, rgba(255, 56, 56, 0.55), rgba(255, 56, 56, 0.14), transparent) !important;
+  }
+
+  :global(.navbar.blog-navbar.hero-blend.hero-blend-light .nav-brand-the),
+  :global(.navbar.blog-navbar.hero-blend.hero-blend-light .nav-brand-rehan) {
+    color: rgba(26, 26, 46, 0.9) !important;
+  }
+
+  :global(.navbar.blog-navbar.hero-blend.hero-blend-light .hamburger) {
+    background: rgba(255, 255, 255, 0.52) !important;
+    border-color: rgba(26, 26, 46, 0.12) !important;
+  }
+
+  :global(.navbar.blog-navbar.hero-blend.hero-blend-light .hamburger:hover) {
+    border-color: rgba(26, 26, 46, 0.2) !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+  }
 }
 
 :global(.navbar.blog-navbar:not(.hero-blend)::before) {
@@ -165,4 +239,61 @@
 }
 
 
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .nav-brand-kicker) {
+  color: rgba(241, 90, 48, 0.92) !important;
+}
 
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .nav-brand-title::after) {
+  background: linear-gradient(90deg, rgba(241, 90, 48, 0.55), rgba(241, 90, 48, 0.14), transparent) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .nav-brand-the),
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .nav-brand-rehan),
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .desktop-links a) {
+  color: rgba(26, 26, 46, 0.9) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .desktop-links a::after) {
+  background: rgba(241, 90, 48, 0.92) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .nav-secondary) {
+  color: rgba(26, 26, 46, 0.88) !important;
+  background: rgba(255, 255, 255, 0.58) !important;
+  border-color: rgba(26, 26, 46, 0.12) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .nav-secondary:hover) {
+  color: #1a1a2e !important;
+  background: rgba(255, 255, 255, 0.78) !important;
+  border-color: rgba(26, 26, 46, 0.2) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .nav-btn.btn-orange) {
+  background: linear-gradient(135deg, #ff8d57 0%, #f15a30 45%, #e04b22 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(224, 75, 34, 0.08) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .nav-btn.btn-orange:hover) {
+  background: linear-gradient(135deg, #ff9969 0%, #f46b43 45%, #e75930 100%) !important;
+  color: #ffffff !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .hamburger) {
+  background: rgba(255, 255, 255, 0.52) !important;
+  border-color: rgba(26, 26, 46, 0.12) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .hamburger:hover) {
+  border-color: rgba(26, 26, 46, 0.2) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-light .hamburger span) {
+  background: rgba(26, 26, 46, 0.88) !important;
+}
+
+:global(.navbar.blog-navbar.hero-blend.hero-blend-warm .hamburger span) {
+  background: rgba(26, 26, 46, 0.88) !important;
+}

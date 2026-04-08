@@ -21,6 +21,11 @@ export const blogCategoryMap = {
     name: "SEO",
     description: "Search systems designed for revenue, not vanity traffic.",
   },
+  statistics: {
+    slug: "statistics",
+    name: "Statistics",
+    description: "Research-backed platform and market statistics pages.",
+  },
 } satisfies Record<string, BlogCategory>;
 
 export const blogCategoryOptions = Object.values(blogCategoryMap).map((category) => ({

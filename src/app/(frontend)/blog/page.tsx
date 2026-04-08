@@ -3,6 +3,7 @@ import { Calendar } from "lucide-react";
 import BlogTopicSection from "@/components/blog/BlogTopicSection";
 import { formatBlogDate } from "@/lib/blog";
 import { getAllBlogPosts, getBlogCategories } from "@/lib/blog-content";
+import { getPostPath, isStatsPostSlug } from "@/lib/post-paths";
 import styles from "./blog.module.css";
 
 const topicCopyByCategory = {
@@ -29,10 +30,11 @@ const topicCopyByCategory = {
 } as const;
 
 export default async function BlogIndexPage() {
-  const [blogPosts, categories] = await Promise.all([
+  const [allPosts, categories] = await Promise.all([
     getAllBlogPosts(),
     getBlogCategories(),
   ]);
+  const blogPosts = allPosts.filter((post) => !isStatsPostSlug(post.slug));
   const latestPosts = blogPosts.slice(0, 4);
 
   return (
@@ -61,7 +63,7 @@ export default async function BlogIndexPage() {
                 </div>
 
                 <h2 className={styles.latestCardTitle}>
-                  <Link href={`/blog/${post.slug}`} prefetch>{post.title}</Link>
+                  <Link href={getPostPath(post.slug)} prefetch>{post.title}</Link>
                 </h2>
 
                 <p className={styles.latestCardExcerpt}>{post.excerpt}</p>
@@ -104,6 +106,9 @@ export default async function BlogIndexPage() {
     </main>
   );
 }
+
+
+
 
 
 

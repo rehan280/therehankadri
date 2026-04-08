@@ -1,0 +1,37 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="48" fill="url(#bg)"/>
+  <circle cx="1035" cy="145" r="128" fill="url(#glow1)" fill-opacity=".55"/>
+  <circle cx="180" cy="740" r="180" fill="url(#glow2)" fill-opacity=".34"/>
+  <rect x="84" y="86" width="676" height="728" rx="34" fill="rgba(255,255,255,.13)" stroke="rgba(255,255,255,.28)" stroke-width="2"/>
+  <text x="138" y="190" fill="#FFF6EE" font-size="38" font-family="Arial, sans-serif" letter-spacing="4">YOUTUBE STATISTICS</text>
+  <text x="138" y="296" fill="white" font-size="88" font-weight="700" font-family="Arial, sans-serif">138M</text>
+  <text x="138" y="354" fill="#FFF3E8" font-size="34" font-family="Arial, sans-serif">active channels in 2026</text>
+  <rect x="138" y="414" width="568" height="116" rx="26" fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.26)" stroke-width="2"/>
+  <text x="180" y="474" fill="#FFF6EE" font-size="28" font-family="Arial, sans-serif">Monthly users</text>
+  <text x="180" y="516" fill="white" font-size="44" font-weight="700" font-family="Arial, sans-serif">2.85B</text>
+  <rect x="138" y="560" width="568" height="116" rx="26" fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.26)" stroke-width="2"/>
+  <text x="180" y="620" fill="#FFF6EE" font-size="28" font-family="Arial, sans-serif">Daily Shorts views</text>
+  <text x="180" y="662" fill="white" font-size="44" font-weight="700" font-family="Arial, sans-serif">200B</text>
+  <rect x="792" y="160" width="312" height="228" rx="34" fill="#FFF7F1"/>
+  <path d="M883 235C883 220.641 898.641 211.954 910.667 219.624L987.287 268.499C998.406 275.59 998.406 291.81 987.287 298.901L910.667 347.776C898.641 355.446 883 346.759 883 332.4V235Z" fill="#F15A30"/>
+  <text x="824" y="444" fill="#5E2817" font-size="24" font-family="Arial, sans-serif">TV viewing share in the US</text>
+  <text x="824" y="498" fill="#111111" font-size="60" font-weight="700" font-family="Arial, sans-serif">12.8%</text>
+  <rect x="792" y="540" width="312" height="178" rx="34" fill="rgba(255,247,241,.9)"/>
+  <text x="824" y="604" fill="#5E2817" font-size="24" font-family="Arial, sans-serif">Revenue</text>
+  <text x="824" y="668" fill="#111111" font-size="72" font-weight="700" font-family="Arial, sans-serif">$60B</text>
+  <defs>
+    <linearGradient id="bg" x1="1200" y1="0" x2="0" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFB56D"/>
+      <stop offset=".45" stop-color="#FF7A45"/>
+      <stop offset="1" stop-color="#D94124"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1035 145) rotate(90) scale(128)">
+      <stop stop-color="#FFF6D5"/>
+      <stop offset="1" stop-color="#FFF6D5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(180 740) rotate(90) scale(180)">
+      <stop stop-color="#FFD8B1"/>
+      <stop offset="1" stop-color="#FFD8B1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

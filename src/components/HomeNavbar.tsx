@@ -5,17 +5,24 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const blogHref = "/blog";
+const statsHref = "/stats";
 const serviceHref = "/#services";
-const proofsHref = "/#proofs";
 const aboutHref = "/about";
 const contactHref = "/contact";
+
+const navLinks = [
+  { href: statsHref, label: "Stats" },
+  { href: serviceHref, label: "Service" },
+  { href: aboutHref, label: "About Us" },
+] as const;
 
 export default function HomeNavbar() {
   const pathname = usePathname();
   const [menuState, setMenuState] = useState({ open: false, path: pathname });
   const [scrolled, setScrolled] = useState(false);
-  const shouldHideNavbar = pathname.startsWith(blogHref);
+  const shouldHideNavbar = pathname.startsWith(blogHref) || pathname.startsWith(statsHref);
   const menuOpen = menuState.path === pathname ? menuState.open : false;
+  const useTransparentHeroNavbar = pathname === aboutHref;
 
   useEffect(() => {
     if (shouldHideNavbar) {
@@ -37,9 +44,9 @@ export default function HomeNavbar() {
 
   const closeMenu = () => setMenuState({ open: false, path: pathname });
   const toggleMenu = () => setMenuState({ open: !menuOpen, path: pathname });
-  const isBlogActive = pathname.startsWith(blogHref);
+  const isStatsActive = pathname.startsWith(statsHref);
+  const isServiceActive = pathname === "/";
   const isAboutActive = pathname === aboutHref || pathname === contactHref;
-  const isContactActive = pathname === contactHref;
 
   if (shouldHideNavbar) {
     return null;
@@ -47,7 +54,7 @@ export default function HomeNavbar() {
 
   return (
     <>
-      <nav className={`navbar${scrolled ? " scrolled" : ""}${menuOpen ? " menu-open" : ""}`}>
+      <nav className={`navbar${scrolled ? " scrolled" : ""}${menuOpen ? " menu-open" : ""}${useTransparentHeroNavbar && !menuOpen ? " hero-blend" : ""}`}>
         <Link href="/" className="nav-brand" aria-label="The Rehan Kadri home">
           <span className="nav-brand-copy">
             <span className="nav-brand-kicker">Revenue-first growth systems</span>
@@ -61,34 +68,25 @@ export default function HomeNavbar() {
 
         <div className="desktop-links-shell">
           <div className="desktop-links">
-            <Link
-              href={blogHref}
-              className={isBlogActive ? "active" : ""}
-              aria-current={isBlogActive ? "page" : undefined}
-            >
-              Blog
-            </Link>
-            <Link href={serviceHref}>Service</Link>
-            {/* <Link href={proofsHref}>Proofs</Link> */}
+            {navLinks.map(({ href, label }) => {
+              const isActive =
+                href === statsHref
+                  ? isStatsActive
+                  : href === serviceHref
+                    ? isServiceActive
+                    : isAboutActive;
 
-            <div className={`desktop-links-group${isAboutActive ? " active" : ""}`}>
-              <Link
-                href={aboutHref}
-                className={isAboutActive ? "active" : ""}
-                aria-current={pathname === aboutHref ? "page" : undefined}
-              >
-                About Us
-              </Link>
-              <div className="desktop-submenu" aria-label="About Us submenu">
+              return (
                 <Link
-                  href={contactHref}
-                  className={isContactActive ? "active" : ""}
-                  aria-current={isContactActive ? "page" : undefined}
+                  key={href}
+                  href={href}
+                  className={isActive ? "active" : ""}
+                  aria-current={isActive ? "page" : undefined}
                 >
-                  Contact Us
+                  {label}
                 </Link>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
 
@@ -116,36 +114,36 @@ export default function HomeNavbar() {
       <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="mobile-nav-drawer">
         <div className="mobile-drawer-links">
           <div className="mobile-drawer-top">
-            <p>Browse the blog, explore services, or learn more about Rehan.</p>
+            <p>Browse stats, services, and company pages.</p>
           </div>
+          {navLinks.map(({ href, label }) => {
+            const isActive =
+              href === statsHref
+                ? isStatsActive
+                : href === serviceHref
+                  ? isServiceActive
+                  : isAboutActive;
+
+            return (
+              <Link
+                key={href}
+                href={href}
+                onClick={closeMenu}
+                className={isActive ? "active" : ""}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {label}
+              </Link>
+            );
+          })}
           <Link
-            href={blogHref}
+            href={contactHref}
             onClick={closeMenu}
-            className={isBlogActive ? "active" : ""}
-            aria-current={isBlogActive ? "page" : undefined}
+            className={`mobile-sub-link${pathname === contactHref ? " active" : ""}`}
+            aria-current={pathname === contactHref ? "page" : undefined}
           >
-            Blog
+            Contact Us
           </Link>
-          <Link href={serviceHref} onClick={closeMenu}>Service</Link>
-          {/* <Link href={proofsHref} onClick={closeMenu}>Proofs</Link> */}
-          <div className="mobile-nav-group">
-            <Link
-              href={aboutHref}
-              onClick={closeMenu}
-              className={isAboutActive ? "active" : ""}
-              aria-current={pathname === aboutHref ? "page" : undefined}
-            >
-              About Us
-            </Link>
-            <Link
-              href={contactHref}
-              onClick={closeMenu}
-              className={`mobile-sub-link${isContactActive ? " active" : ""}`}
-              aria-current={isContactActive ? "page" : undefined}
-            >
-              Contact Us
-            </Link>
-          </div>
         </div>
       </div>
 
