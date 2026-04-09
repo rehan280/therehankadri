@@ -9,7 +9,7 @@ import { buildCanonicalUrl, createPageMetadata } from "@/lib/seo";
 import styles from "./stats-hub.module.css";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Statistics Hub | The Rehan Kadri",
+  title: "Statistics Hub | Rehan Kadri",
   description:
     "Browse research-driven statistics pages on YouTube, platform trends, growth data, and digital benchmarks in one place.",
   path: "/stats",
@@ -154,3 +154,4 @@ export default async function StatsHubPage() {
     </main>
   );
 }
+

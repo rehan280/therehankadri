@@ -10,7 +10,7 @@ import { monoFont } from "@/lib/mono-font";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Blog | The Rehan Kadri",
+  title: "SEO Blog | Rehan Kadri",
   description:
     "Practical writing on SEO, content systems, demand capture, and founder authority for teams building qualified pipeline.",
   path: "/blog",
@@ -31,3 +31,4 @@ export default function BlogLayout({
     </div>
   );
 }
+

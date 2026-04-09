@@ -6,37 +6,31 @@ import { SITE_URL } from "@/lib/seo";
 const staticRoutes: MetadataRoute.Sitemap = [
   {
     url: SITE_URL,
-    lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 1,
   },
   {
     url: `${SITE_URL}/about`,
-    lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.8,
   },
   {
     url: `${SITE_URL}/blog`,
-    lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.9,
   },
   {
     url: `${SITE_URL}/stats`,
-    lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.8,
   },
   {
     url: `${SITE_URL}/contact`,
-    lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.7,
   },
   {
     url: `${SITE_URL}/youtube-tags-generator`,
-    lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.8,
   },
@@ -47,10 +41,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${SITE_URL}${getPostPath(post.slug)}`,
-    lastModified: new Date(`${post.publishedAt}T00:00:00Z`),
+    lastModified: new Date(`${(post.modifiedAt ?? post.publishedAt)}T00:00:00Z`),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
   return [...staticRoutes, ...blogRoutes];
 }
+

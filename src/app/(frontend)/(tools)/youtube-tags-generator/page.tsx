@@ -6,7 +6,7 @@ import { getYouTubeTagGeneratorArticle } from "./article-content";
 import styles from "./page.module.css";
 
 const canonicalUrl = buildCanonicalUrl("/youtube-tags-generator");
-const pageTitle = "Free YouTube Tag Generator - AI-Powered, No Login Required";
+const pageTitle = "Free YouTube Tag Generator | No Login Required";
 const pageDescription =
   "Generate SEO-optimized YouTube tags in 10 seconds and it's free, no login required. Covers long-tail, exact-match & channel tags. Try it now.";
 const socialImage = buildAbsoluteImageUrl();
@@ -87,7 +87,7 @@ export default async function YouTubeTagGeneratorPage() {
       "youtube shorts tags",
     ],
     author: {
-      "@type": "Person",
+      "@type": "Organization",
       name: SITE_NAME,
       url: SITE_URL,
     },
@@ -127,33 +127,14 @@ export default async function YouTubeTagGeneratorPage() {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Free SEO Tools",
-        item: `${SITE_URL}/tools`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
         name: "YouTube Tag Generator",
         item: canonicalUrl,
       },
     ],
   };
-  const aggregateRatingJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "Free YouTube Tag Generator",
-    url: canonicalUrl,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "47",
-      bestRating: "5",
-      worstRating: "1",
-    },
-  };
   const structuredData = {
     "@context": "https://schema.org",
-    "@graph": [softwareApplicationJsonLd, articleJsonLd, faqJsonLd, breadcrumbJsonLd, aggregateRatingJsonLd],
+    "@graph": [softwareApplicationJsonLd, articleJsonLd, faqJsonLd, breadcrumbJsonLd],
   };
 
   return (
@@ -189,5 +170,4 @@ export default async function YouTubeTagGeneratorPage() {
     </main>
   );
 }
-
 

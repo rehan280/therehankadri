@@ -114,6 +114,7 @@ export function createArticleMetadata({
     alternates: {
       canonical: canonicalUrl,
     },
+    robots: createIndexRobots(),
     openGraph: {
       title,
       description,
@@ -137,3 +138,4 @@ export function createArticleMetadata({
     },
   };
 }
+
