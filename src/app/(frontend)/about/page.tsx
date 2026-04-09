@@ -41,7 +41,7 @@ function getAboutHeroLineClass(index: number, total: number) {
 }
 
 export const metadata: Metadata = createPageMetadata({
-  title: "About Rehan Kadri | Growth Marketer, SEO Nerd, and Growth Strategist",
+  title: "About Rehan Kadri | SEO & Growth Strategist",
   description:
     "Learn more about Rehan Kadri, the growth marketer behind tested SEO, content, and audience growth systems used to scale Rehanous.com to 1M+ monthly organic visitors.",
   path: "/about",

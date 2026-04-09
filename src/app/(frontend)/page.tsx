@@ -4,7 +4,7 @@ import Link from "next/link";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "The Rehan Kadri | SEO, YouTube Growth, and Revenue-Focused Marketing",
+  title: "Rehan Kadri | SEO & YouTube Growth Strategist",
   description:
     "SEO, YouTube growth, and content systems designed to turn visibility into qualified pipeline for B2B brands.",
   path: "/",

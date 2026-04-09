@@ -66,7 +66,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const socialImage = currentPost.coverImage ?? undefined;
 
   return createArticleMetadata({
-    title: `${currentPost.metaTitle ?? currentPost.title} | The Rehan Kadri`,
+    title: currentPost.metaTitle ?? currentPost.title,
     description: currentPost.seoDescription,
     path: getPostPath(currentPost.slug),
     keywords: currentPost.keywords,
