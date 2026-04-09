@@ -975,10 +975,10 @@ export default function Home() {
             {[
               {
                 quote:
-                  "Rehan built a real growth pipeline for Fuzen.io, not just better SEO. He connected search, content, and conversion into one system that improved both traffic quality and qualified leads.",
-                name: "Pushkar Gaikwad",
-                role: "Founder, Fuzen.io",
-                image: "/pushkar.webp",
+                  "Rehan helped us turn SEO into a real growth channel, not just a visibility play. He connected search, content, and conversion into one system that improved lead quality and gave us a much stronger pipeline.",
+                name: "Julius Frac",
+                role: "Founder, Trinity Web",
+                image: "/julius frac.png",
               },
               {
                 quote:
