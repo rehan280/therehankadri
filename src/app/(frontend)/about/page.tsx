@@ -5,7 +5,13 @@ import {
   Check,
 } from "lucide-react";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
-import { SITE_URL, buildAbsoluteImageUrl, buildCanonicalUrl, createPageMetadata } from "@/lib/seo";
+import {
+  SITE_URL,
+  buildAbsoluteImageUrl,
+  buildCanonicalUrl,
+  createBreadcrumbJsonLd,
+  createPageMetadata,
+} from "@/lib/seo";
 import blogStyles from "../blog/blog.module.css";
 import aboutStyles from "./about.module.css";
 
@@ -108,6 +114,14 @@ const aboutPageJsonLd = {
     },
   },
 };
+const aboutBreadcrumbJsonLd = createBreadcrumbJsonLd([
+  { name: "Home", url: SITE_URL },
+  { name: "About", url: canonicalUrl },
+]);
+const aboutStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [aboutPageJsonLd, aboutBreadcrumbJsonLd],
+};
 
 export default function AboutPage() {
   const aboutHeroLines = buildAboutHeroLines();
@@ -117,7 +131,7 @@ export default function AboutPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(aboutPageJsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(aboutStructuredData).replace(/</g, "\\u003c"),
         }}
       />
 

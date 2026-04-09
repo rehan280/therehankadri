@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Tags } from "lucide-react";
-import { ORGANIZATION_ID, buildCanonicalUrl, createPageMetadata } from "@/lib/seo";
+import {
+  ORGANIZATION_ID,
+  SITE_URL,
+  buildCanonicalUrl,
+  createBreadcrumbJsonLd,
+  createPageMetadata,
+} from "@/lib/seo";
 import styles from "./page.module.css";
 
 const canonicalUrl = buildCanonicalUrl("/tools");
@@ -55,13 +61,21 @@ export default function ToolsPage() {
       })),
     },
   };
+  const breadcrumbJsonLd = createBreadcrumbJsonLd([
+    { name: "Home", url: SITE_URL },
+    { name: "Tools", url: canonicalUrl },
+  ]);
+  const toolsStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [toolsPageJsonLd, breadcrumbJsonLd],
+  };
 
   return (
     <main className={styles.page}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(toolsPageJsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(toolsStructuredData).replace(/</g, "\\u003c"),
         }}
       />
 

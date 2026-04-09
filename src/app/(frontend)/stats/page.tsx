@@ -5,7 +5,13 @@ import { ArrowRight } from "lucide-react";
 import type { BlogPost } from "@/lib/blog";
 import { getAllBlogPosts } from "@/lib/blog-content";
 import { getPostPath, isStatsPostSlug } from "@/lib/post-paths";
-import { buildCanonicalUrl, createPageMetadata } from "@/lib/seo";
+import {
+  ORGANIZATION_ID,
+  SITE_URL,
+  buildCanonicalUrl,
+  createBreadcrumbJsonLd,
+  createPageMetadata,
+} from "@/lib/seo";
 import styles from "./stats-hub.module.css";
 
 export const metadata: Metadata = createPageMetadata({
@@ -20,12 +26,17 @@ export const metadata: Metadata = createPageMetadata({
 const hubIntro =
   "A focused library of platform statistics pages built to help you find reliable numbers, growth benchmarks, and trend snapshots faster.";
 
+const hubCanonicalUrl = buildCanonicalUrl("/stats");
+
 const hubJsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   name: "Statistics Hub",
-  url: buildCanonicalUrl("/stats"),
+  url: hubCanonicalUrl,
   description: hubIntro,
+  about: {
+    "@id": ORGANIZATION_ID,
+  },
 };
 
 function getStatsPosts(posts: BlogPost[]) {
@@ -68,13 +79,35 @@ export default async function StatsHubPage() {
   const posts = await getAllBlogPosts();
   const statsPosts = getStatsPosts(posts as BlogPost[]);
   const groupedPosts = groupStatsPosts(statsPosts);
+  const breadcrumbJsonLd = createBreadcrumbJsonLd([
+    { name: "Home", url: SITE_URL },
+    { name: "Statistics", url: hubCanonicalUrl },
+  ]);
+  const hubStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        ...hubJsonLd,
+        mainEntity: {
+          "@type": "ItemList",
+          itemListElement: statsPosts.slice(0, 8).map((post, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: post.title,
+            url: buildCanonicalUrl(getPostPath(post.slug)),
+          })),
+        },
+      },
+      breadcrumbJsonLd,
+    ],
+  };
 
   return (
     <main className={styles.page}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(hubJsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(hubStructuredData).replace(/</g, "\\u003c"),
         }}
       />
 

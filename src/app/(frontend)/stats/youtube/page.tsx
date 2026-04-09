@@ -5,7 +5,13 @@ import { ArrowRight } from "lucide-react";
 import type { BlogPost } from "@/lib/blog";
 import { getAllBlogPosts } from "@/lib/blog-content";
 import { getPostPath, isStatsPostSlug } from "@/lib/post-paths";
-import { buildCanonicalUrl, createPageMetadata } from "@/lib/seo";
+import {
+  ORGANIZATION_ID,
+  SITE_URL,
+  buildCanonicalUrl,
+  createBreadcrumbJsonLd,
+  createPageMetadata,
+} from "@/lib/seo";
 import styles from "./youtube-stats.module.css";
 
 export const metadata: Metadata = createPageMetadata({
@@ -20,12 +26,17 @@ export const metadata: Metadata = createPageMetadata({
 const hubIntro =
   "Whether you're researching audience size, channel growth, or platform trends, this hub organizes our YouTube statistics pages in one place.";
 
+const hubCanonicalUrl = buildCanonicalUrl("/stats/youtube");
+
 const hubJsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   name: "YouTube Statistics Hub",
-  url: buildCanonicalUrl("/stats/youtube"),
+  url: hubCanonicalUrl,
   description: hubIntro,
+  about: {
+    "@id": ORGANIZATION_ID,
+  },
 };
 
 function getYouTubeStatsPosts(posts: BlogPost[]) {
@@ -38,13 +49,36 @@ export default async function YouTubeStatsHubPage() {
   const posts = await getAllBlogPosts();
   const youtubePosts = getYouTubeStatsPosts(posts as BlogPost[]);
   const featuredPost = youtubePosts[0];
+  const breadcrumbJsonLd = createBreadcrumbJsonLd([
+    { name: "Home", url: SITE_URL },
+    { name: "Statistics", url: buildCanonicalUrl("/stats") },
+    { name: "YouTube Statistics", url: hubCanonicalUrl },
+  ]);
+  const hubStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        ...hubJsonLd,
+        mainEntity: {
+          "@type": "ItemList",
+          itemListElement: youtubePosts.map((post, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: post.title,
+            url: buildCanonicalUrl(getPostPath(post.slug)),
+          })),
+        },
+      },
+      breadcrumbJsonLd,
+    ],
+  };
 
   return (
     <main className={styles.page}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(hubJsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(hubStructuredData).replace(/</g, "\\u003c"),
         }}
       />
 

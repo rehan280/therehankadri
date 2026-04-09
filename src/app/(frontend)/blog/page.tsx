@@ -4,7 +4,12 @@ import BlogTopicSection from "@/components/blog/BlogTopicSection";
 import { formatBlogDate } from "@/lib/blog";
 import { getAllBlogPosts, getBlogCategories } from "@/lib/blog-content";
 import { getPostPath, isStatsPostSlug } from "@/lib/post-paths";
-import { ORGANIZATION_ID, buildCanonicalUrl } from "@/lib/seo";
+import {
+  ORGANIZATION_ID,
+  SITE_URL,
+  buildCanonicalUrl,
+  createBreadcrumbJsonLd,
+} from "@/lib/seo";
 import styles from "./blog.module.css";
 
 const canonicalUrl = buildCanonicalUrl("/blog");
@@ -59,13 +64,21 @@ export default async function BlogIndexPage() {
       })),
     },
   };
+  const blogBreadcrumbJsonLd = createBreadcrumbJsonLd([
+    { name: "Home", url: SITE_URL },
+    { name: "Blog", url: canonicalUrl },
+  ]);
+  const blogStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [blogIndexJsonLd, blogBreadcrumbJsonLd],
+  };
 
   return (
     <main className={styles.page}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(blogIndexJsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(blogStructuredData).replace(/</g, "\\u003c"),
         }}
       />
       <section className={`${styles.hero} ${styles.blogIndexHero}`}>

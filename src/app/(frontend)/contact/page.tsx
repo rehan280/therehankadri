@@ -1,4 +1,10 @@
-import { ORGANIZATION_ID, PERSON_ID, buildCanonicalUrl } from "@/lib/seo";
+import {
+  ORGANIZATION_ID,
+  PERSON_ID,
+  SITE_URL,
+  buildCanonicalUrl,
+  createBreadcrumbJsonLd,
+} from "@/lib/seo";
 import ContactForm from "./ContactForm";
 import styles from "./contact.module.css";
 
@@ -53,6 +59,14 @@ const contactPageJsonLd = {
     "@id": ORGANIZATION_ID,
   },
 };
+const contactBreadcrumbJsonLd = createBreadcrumbJsonLd([
+  { name: "Home", url: SITE_URL },
+  { name: "Contact", url: canonicalUrl },
+]);
+const contactStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [contactPageJsonLd, contactBreadcrumbJsonLd],
+};
 
 const renderSocialIcon = (type: "email" | "linkedin" | "instagram" | "youtube" | "x") => {
   switch (type) {
@@ -95,7 +109,7 @@ export default function ContactPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(contactPageJsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(contactStructuredData).replace(/</g, "\\u003c"),
         }}
       />
       <section className={styles.hero}>
