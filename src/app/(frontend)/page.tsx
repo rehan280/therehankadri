@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { createPageMetadata } from "@/lib/seo";
+import { createHomePageStructuredData, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Rehan Kadri | SEO & YouTube Growth Strategist",
@@ -18,6 +18,12 @@ export const metadata: Metadata = createPageMetadata({
     "pipeline marketing",
     "growth marketing strategist",
   ],
+});
+
+const homePageStructuredData = createHomePageStructuredData({
+  title: "Rehan Kadri | SEO & YouTube Growth Strategist",
+  description:
+    "SEO, YouTube growth, and content systems designed to turn visibility into qualified pipeline for B2B brands.",
 });
 
 type ProofShot = {
@@ -322,6 +328,12 @@ export default function Home() {
 
   return (
     <main className="site-shell">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(homePageStructuredData).replace(/</g, "\\u003c"),
+        }}
+      />
 
       {/* ── 1. HERO ── */}
       <section className="hero section-light">
@@ -1033,7 +1045,4 @@ export default function Home() {
     </main>
   );
 }
-
-
-
 
