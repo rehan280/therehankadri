@@ -4,7 +4,10 @@ import BlogTopicSection from "@/components/blog/BlogTopicSection";
 import { formatBlogDate } from "@/lib/blog";
 import { getAllBlogPosts, getBlogCategories } from "@/lib/blog-content";
 import { getPostPath, isStatsPostSlug } from "@/lib/post-paths";
+import { ORGANIZATION_ID, buildCanonicalUrl } from "@/lib/seo";
 import styles from "./blog.module.css";
+
+const canonicalUrl = buildCanonicalUrl("/blog");
 
 const topicCopyByCategory = {
   seo: {
@@ -36,11 +39,36 @@ export default async function BlogIndexPage() {
   ]);
   const blogPosts = allPosts.filter((post) => !isStatsPostSlug(post.slug));
   const latestPosts = blogPosts.slice(0, 4);
+  const blogIndexJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "SEO Blog | Rehan Kadri",
+    url: canonicalUrl,
+    description:
+      "Practical writing on SEO, content systems, demand capture, and founder authority for teams building qualified pipeline.",
+    about: {
+      "@id": ORGANIZATION_ID,
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: latestPosts.map((post, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: buildCanonicalUrl(getPostPath(post.slug)),
+        name: post.title,
+      })),
+    },
+  };
 
   return (
     <main className={styles.page}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(blogIndexJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <section className={`${styles.hero} ${styles.blogIndexHero}`}>
-
         <div className={`${styles.heroInner} ${styles.blogIndexHeroInner}`}>
           <h1 className={styles.blogIndexTitle}>The Rehan Kadri Blog</h1>
 
@@ -106,12 +134,3 @@ export default async function BlogIndexPage() {
     </main>
   );
 }
-
-
-
-
-
-
-
-
-

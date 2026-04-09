@@ -1,5 +1,58 @@
+import { ORGANIZATION_ID, PERSON_ID, buildCanonicalUrl } from "@/lib/seo";
 import ContactForm from "./ContactForm";
 import styles from "./contact.module.css";
+
+const socialLinks = [
+  {
+    type: "linkedin" as const,
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/therehankadri/",
+    handle: "@therehankadri",
+    note: "Growth strategy and pipeline insights.",
+  },
+  {
+    type: "instagram" as const,
+    name: "Instagram",
+    href: "https://www.instagram.com/therehankadri/",
+    handle: "@therehankadri",
+    note: "Brand, content, and behind-the-scenes ideas.",
+  },
+  {
+    type: "youtube" as const,
+    name: "YouTube",
+    href: "https://youtube.com/@rehanous?si=FDWGeBZ6MtP6oUcK",
+    handle: "@rehanous",
+    note: "Content systems and YouTube growth.",
+  },
+  {
+    type: "x" as const,
+    name: "X",
+    href: "https://x.com/rehanous",
+    handle: "@rehanous",
+    note: "Short ideas on positioning and content.",
+  },
+];
+
+const canonicalUrl = buildCanonicalUrl("/contact");
+
+const contactPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact Rehan Kadri",
+  url: canonicalUrl,
+  description:
+    "Contact Rehan Kadri to discuss SEO, YouTube growth, content systems, and pipeline-focused marketing strategy.",
+  mainEntity: {
+    "@type": "Person",
+    "@id": PERSON_ID,
+    name: "Rehan Kadri",
+    email: "youtech280@gmail.com",
+    sameAs: socialLinks.map((link) => link.href),
+  },
+  about: {
+    "@id": ORGANIZATION_ID,
+  },
+};
 
 const renderSocialIcon = (type: "email" | "linkedin" | "instagram" | "youtube" | "x") => {
   switch (type) {
@@ -36,40 +89,15 @@ const renderSocialIcon = (type: "email" | "linkedin" | "instagram" | "youtube" |
   }
 };
 
-const socialLinks = [
-  {
-    type: "linkedin" as const,
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/in/therehankadri/",
-    handle: "@therehankadri",
-    note: "Growth strategy and pipeline insights.",
-  },
-  {
-    type: "instagram" as const,
-    name: "Instagram",
-    href: "https://www.instagram.com/therehankadri/",
-    handle: "@therehankadri",
-    note: "Brand, content, and behind-the-scenes ideas.",
-  },
-  {
-    type: "youtube" as const,
-    name: "YouTube",
-    href: "https://youtube.com/@rehanous?si=FDWGeBZ6MtP6oUcK",
-    handle: "@rehanous",
-    note: "Content systems and YouTube growth.",
-  },
-  {
-    type: "x" as const,
-    name: "X",
-    href: "https://x.com/rehanous",
-    handle: "@rehanous",
-    note: "Short ideas on positioning and content.",
-  },
-];
-
 export default function ContactPage() {
   return (
     <main className={styles.page}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(contactPageJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <section className={styles.hero}>
         <div className={styles.container}>
           <div className={styles.heroIntro}>
