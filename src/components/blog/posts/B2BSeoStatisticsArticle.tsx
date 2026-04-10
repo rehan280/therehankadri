@@ -442,6 +442,33 @@ const insightStatPattern =
   /(\$?\d[\d,.]*(?:\.\d+)?(?:\s?(?:billion|million|trillion|buyers|marketers|leaders|spend|leads|ROI|M|B|x))?|\d[\d,.]*(?:\.\d+)?%|\d[\d,.]*(?:\.\d+)?x)/gi;
 
 function renderInlineMarkdown(text: string): ReactNode[] {
+  const renderLinks = (value: string, keyPrefix: string): ReactNode[] => {
+    const linkFragments: ReactNode[] = [];
+    const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
+    let linkLastIndex = 0;
+    let linkMatch: RegExpExecArray | null;
+
+    while ((linkMatch = linkPattern.exec(value))) {
+      if (linkMatch.index > linkLastIndex) {
+        linkFragments.push(value.slice(linkLastIndex, linkMatch.index));
+      }
+
+      linkFragments.push(
+        <a key={`${keyPrefix}-link-${linkMatch.index}`} href={linkMatch[2]}>
+          {linkMatch[1]}
+        </a>
+      );
+
+      linkLastIndex = linkMatch.index + linkMatch[0].length;
+    }
+
+    if (linkLastIndex < value.length) {
+      linkFragments.push(value.slice(linkLastIndex));
+    }
+
+    return linkFragments.length ? linkFragments : [value];
+  };
+
   const fragments: ReactNode[] = [];
   const pattern = /(\*\*(.+?)\*\*)|(\[([^\]]+)\]\(([^)]+)\))/g;
   let lastIndex = 0;
@@ -453,7 +480,11 @@ function renderInlineMarkdown(text: string): ReactNode[] {
     }
 
     if (match[2]) {
-      fragments.push(<strong key={`strong-${match.index}`}>{match[2]}</strong>);
+      fragments.push(
+        <strong key={`strong-${match.index}`}>
+          {renderLinks(match[2], `strong-${match.index}`)}
+        </strong>
+      );
     } else if (match[4] && match[5]) {
       fragments.push(
         <a key={`link-${match.index}`} href={match[5]}>
