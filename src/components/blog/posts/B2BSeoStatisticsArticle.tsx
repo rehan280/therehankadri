@@ -70,7 +70,7 @@ These are the stats that matter most. They show exactly where the industry is he
 
 **80% of users now rely on AI-generated summaries to distill complex information** (Bain & Company, 2026)
 
-**[95% of B2B marketers now use AI](/stats/b2b)** (Commonplaces, 2026)
+**95% of B2B marketers now use AI** (Commonplaces, 2026)
 
 **61% of B2B buyers prefer an overall rep-free buying experience** (Gartner, 2026)
 
@@ -90,7 +90,7 @@ These are the stats that matter most. They show exactly where the industry is he
 
 ## 1. AI and Answer Engine Optimization (AEO)
 
-This is the BIGGEST shift in B2B SEO right now.
+This is the BIGGEST shift in **[B2B](/stats/b2b)** SEO right now.
 
 Buyers aren't searching Google the way they used to. They're asking ChatGPT, Perplexity, and Google's AI Overviews to summarize the market for them. If your brand doesn't show up in those AI answers, you're invisible.
 
