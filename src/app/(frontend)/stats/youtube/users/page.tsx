@@ -46,6 +46,7 @@ import {
 } from "@/lib/post-paths";
 import { YOUTUBE_CHANNEL_STATISTICS_SLUG } from "@/lib/post-paths";
 import styles from "../../../blog/blog.module.css";
+import themeStyles from "../youtube-stats-page.module.css";
 
 const YOUTUBE_HERO_BACKGROUND = "linear-gradient(135deg, #ff4b43 0%, #ff3838 48%, #ff2923 100%)";
 
@@ -349,7 +350,7 @@ export default async function YouTubeStatsPage() {
       title="Frequently Asked Questions"
       eyebrow={null}
       intro="Quick answers to the most common questions from this article."
-      className={styles.articleFaqSection}
+      className={`${styles.articleFaqSection} ${themeStyles.faqTheme}`}
       items={currentPost.faqEntries.map((entry) => ({
         question: entry.question,
         answer: entry.answer,
@@ -368,7 +369,7 @@ export default async function YouTubeStatsPage() {
           }));
 
   return (
-    <main className={`${styles.page} ${styles.postPage}`}>
+    <main className={`${styles.page} ${styles.postPage} ${themeStyles.pageTheme}`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -399,7 +400,7 @@ export default async function YouTubeStatsPage() {
         >
           <div className={styles.postHeroContent}>
             {hasFeatureHeroLayout ? null : (
-              <span className={styles.heroPill}>{currentPost.category.name}</span>
+              <span className={`${styles.heroPill} ${themeStyles.heroPill}`}>{currentPost.category.name}</span>
             )}
             <h1
               className={`${styles.postHeroTitle}${hasFeatureHeroLayout ? ` ${styles.postHeroTitleSplit}` : ""}`}
@@ -438,11 +439,11 @@ export default async function YouTubeStatsPage() {
               </div>
 
               <div className={styles.postMetaRow}>
-                <span className={styles.postMetaItem}>
+                <span className={`${styles.postMetaItem} ${themeStyles.postMetaItem}`}>
                   <CalendarDays size={16} strokeWidth={2.1} />
                   <span>{formatBlogDate(currentPost.publishedAt)}</span>
                 </span>
-                <span className={styles.postMetaItem}>
+                <span className={`${styles.postMetaItem} ${themeStyles.postMetaItem}`}>
                   <Clock3 size={16} strokeWidth={2.1} />
                   <span>{postReadTime}</span>
                 </span>
@@ -474,14 +475,14 @@ export default async function YouTubeStatsPage() {
           >
             {tableOfContentsItems.length ? (
               <aside className={styles.sidebar}>
-                <div className={styles.sidebarStack}>
+                <div className={`${styles.sidebarStack} ${themeStyles.tocTheme}`}>
                   <BlogTableOfContents items={tableOfContentsItems} />
                 </div>
               </aside>
             ) : null}
 
             <article className={`${styles.articleCopy} authority-post-copy`}>
-              <div className={styles.articleProse}>
+              <div className={`${styles.articleProse} ${themeStyles.articleProse}`}>
                 {youtubeUsersArticleData ? (
                   <YouTubeUsersArticle
                     data={youtubeUsersArticleData}
@@ -528,7 +529,7 @@ export default async function YouTubeStatsPage() {
                 </div>
               </aside>
 
-              <aside className={styles.articleAuthorCard}>
+              <aside className={`${styles.articleAuthorCard} ${themeStyles.articleAuthorCard}`}>
                 <div className={styles.windowBar}>
                   <div className={styles.windowDots} aria-hidden="true">
                     <span className={`${styles.windowDot} ${styles.windowDotOrange}`} />
@@ -558,19 +559,19 @@ export default async function YouTubeStatsPage() {
                     <div className={styles.articleAuthorFooter}>
                       <div className={styles.articleAuthorSocials}>
                         {postAuthor.socials?.twitter ? (
-                          <Link href={postAuthor.socials.twitter} className={styles.articleAuthorSocialLink} target="_blank" rel="noreferrer">
+                          <Link href={postAuthor.socials.twitter} className={`${styles.articleAuthorSocialLink} ${themeStyles.articleAuthorSocialLink}`} target="_blank" rel="noreferrer">
                             <Twitter size={14} strokeWidth={2} />
                             <span>Twitter</span>
                           </Link>
                         ) : null}
                         {postAuthor.socials?.linkedin ? (
-                          <Link href={postAuthor.socials.linkedin} className={styles.articleAuthorSocialLink} target="_blank" rel="noreferrer">
+                          <Link href={postAuthor.socials.linkedin} className={`${styles.articleAuthorSocialLink} ${themeStyles.articleAuthorSocialLink}`} target="_blank" rel="noreferrer">
                             <Linkedin size={14} strokeWidth={2} />
                             <span>LinkedIn</span>
                           </Link>
                         ) : null}
                         {postAuthor.socials?.instagram ? (
-                          <Link href={postAuthor.socials.instagram} className={styles.articleAuthorSocialLink} target="_blank" rel="noreferrer">
+                          <Link href={postAuthor.socials.instagram} className={`${styles.articleAuthorSocialLink} ${themeStyles.articleAuthorSocialLink}`} target="_blank" rel="noreferrer">
                             <Instagram size={14} strokeWidth={2} />
                             <span>Instagram</span>
                           </Link>
@@ -600,14 +601,14 @@ export default async function YouTubeStatsPage() {
         <section className={styles.relatedSection}>
           <div className={styles.relatedShell}>
             <div className={styles.relatedHeader}>
-              <span className={styles.relatedLabel}>More from the blog</span>
+              <span className={`${styles.relatedLabel} ${themeStyles.relatedLabel}`}>More from the blog</span>
               <h2>Keep reading</h2>
             </div>
 
             <div className={styles.articleGrid}>
               {relatedPosts.map((relatedPost) => (
                 <article key={relatedPost.slug} className={styles.listingCard}>
-                  <span className={styles.cardEyebrow}>
+                  <span className={`${styles.cardEyebrow} ${themeStyles.cardEyebrow}`}>
                     {relatedPost.category?.name ?? "Blog"}
                   </span>
                   <h2>

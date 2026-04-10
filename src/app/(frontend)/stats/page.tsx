@@ -39,12 +39,18 @@ const hubJsonLd = {
   },
 };
 
+const defaultStatsGroups = ["YouTube", "B2B"] as const;
+
 function getStatsPosts(posts: BlogPost[]) {
   return posts.filter((post) => isStatsPostSlug(post.slug));
 }
 
 function groupStatsPosts(posts: BlogPost[]) {
   const groups = new Map<string, BlogPost[]>();
+
+  defaultStatsGroups.forEach((groupName) => {
+    groups.set(groupName, []);
+  });
 
   posts.forEach((post) => {
     const key = post.subcategories[0] ?? "Statistics";
@@ -60,16 +66,28 @@ function groupStatsPosts(posts: BlogPost[]) {
 }
 
 function getHubPathForSubcategory(name: string) {
-  if (name.toLowerCase() === "youtube") {
+  const normalizedName = name.toLowerCase();
+
+  if (normalizedName === "youtube") {
     return "/stats/youtube";
+  }
+
+  if (normalizedName === "b2b") {
+    return "/stats/b2b/seo";
   }
 
   return "/stats";
 }
 
 function getGroupDescription(name: string) {
-  if (name.toLowerCase() === "youtube") {
+  const normalizedName = name.toLowerCase();
+
+  if (normalizedName === "youtube") {
     return "Find YouTube audience numbers, channel growth stats, usage trends, Shorts signals, and the benchmark pages we update for marketers and creators.";
+  }
+
+  if (normalizedName === "b2b") {
+    return "Find B2B SEO statistics on AI discovery, buyer behavior, LinkedIn lead capture, content ROI, and the budget trends shaping 2026 demand generation.";
   }
 
   return `Find the latest ${name.toLowerCase()} statistics, benchmark pages, and trend snapshots curated for marketers, SEO teams, and growth operators.`;
@@ -164,15 +182,22 @@ export default async function StatsHubPage() {
                     <span className={styles.topicMiniHeading}>
                       {visibleItems.length} {visibleItems.length === 1 ? "resource" : "resources"}
                     </span>
-                    <ul className={styles.resourceList}>
-                      {visibleItems.map((post) => (
-                        <li key={post.slug} className={styles.resourceItem}>
-                          <Link href={getPostPath(post.slug)} className={styles.resourceLink}>
-                            {post.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
+                    {visibleItems.length ? (
+                      <ul className={styles.resourceList}>
+                        {visibleItems.map((post) => (
+                          <li key={post.slug} className={styles.resourceItem}>
+                            <Link href={getPostPath(post.slug)} className={styles.resourceLink}>
+                              {post.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className={styles.topicLearnCopy}>
+                        This hub page is live now, and new posts tagged under {group.name} will
+                        show here automatically.
+                      </p>
+                    )}
                     <Link href={hubPath} className={styles.moreLink}>
                       <span>{group.name} Statistics</span>
                       <ArrowRight size={16} strokeWidth={2.1} />

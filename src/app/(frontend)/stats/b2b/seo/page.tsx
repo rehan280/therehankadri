@@ -11,19 +11,14 @@ import {
   Linkedin,
   Twitter,
 } from "lucide-react";
-import BlogRichText from "@/components/blog/BlogRichText";
-import YouTubeChannelStatisticsArticle, {
-  youtubeChannelStatisticsHeadingItems,
-  youtubeChannelStatisticsWordCount,
-} from "@/components/blog/posts/YouTubeChannelStatisticsArticle";
-import YouTubeUsersArticle from "@/components/blog/posts/YouTubeUsersArticle";
+import B2BSeoStatisticsArticle, {
+  b2bSeoStatisticsHeadingItems,
+  b2bSeoStatisticsWordCount,
+} from "@/components/blog/posts/B2BSeoStatisticsArticle";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
 import ArticleSocialShare from "@/components/blog/ArticleSocialShare";
 import PremiumFaq from "@/components/content/PremiumFaq";
-import { countRichTextWords, getRichTextHeadingItems } from "@/lib/blog-rich-text";
-import { getYouTubeUsersArticleData } from "@/lib/youtube-users-article";
 import {
-  type BlogBlock,
   type BlogPost,
   defaultBlogAuthor,
   formatBlogDate,
@@ -41,43 +36,14 @@ import {
   buildCanonicalUrl,
 } from "@/lib/seo";
 import {
+  B2B_SEO_STATISTICS_SLUG,
   getPostPath,
-  YOUTUBE_CHANNEL_STATISTICS_SLUG,
 } from "@/lib/post-paths";
 import styles from "../../../blog/blog.module.css";
-import themeStyles from "../youtube-stats-page.module.css";
+import themeStyles from "../b2b-stats-page.module.css";
 
-const YOUTUBE_HERO_BACKGROUND = "linear-gradient(135deg, #ff4b43 0%, #ff3838 48%, #ff2923 100%)";
-
-function isYouTubePost(slug: string) {
-  return slug.startsWith("youtube");
-}
-export async function generateMetadata(): Promise<Metadata> {
-  const post = await getBlogPostBySlug(YOUTUBE_CHANNEL_STATISTICS_SLUG);
-
-  if (!post) {
-    return {
-      title: "Blog Post | The Rehan Kadri",
-    };
-  }
-
-  const currentPost = post as BlogPost;
-  const postAuthor = currentPost.author ?? defaultBlogAuthor;
-  const socialImage = currentPost.coverImage ?? undefined;
-
-  return createArticleMetadata({
-    title: currentPost.metaTitle ?? currentPost.title,
-    description: currentPost.seoDescription,
-    path: getPostPath(currentPost.slug),
-    keywords: currentPost.keywords,
-    imagePath: socialImage,
-    imageAlt: currentPost.title,
-    publishedTime: `${currentPost.publishedAt}T00:00:00Z`,
-    authors: [postAuthor.name],
-  });
-}
-
-
+const B2B_SEO_HERO_BACKGROUND =
+  "linear-gradient(135deg, #73a0ff 0%, #598bfa 48%, #4b79dc 100%)";
 
 function buildHeroTitleLines(title: string) {
   const words = title.trim().split(/\s+/).filter(Boolean);
@@ -174,78 +140,33 @@ function getHeroLineClass(index: number, totalLines: number) {
   return styles.postHeroLineBottom;
 }
 
-function renderBlock(block: BlogBlock, key: string) {
-  switch (block.type) {
-    case "paragraph":
-      return <p key={key}>{block.text}</p>;
-    case "list":
-      return (
-        <ul key={key} className={styles.articleList}>
-          {block.items.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      );
-    case "callout":
-      return (
-        <aside key={key} className={styles.callout}>
-          <strong>{block.title}</strong>
-          <p>{block.body}</p>
-        </aside>
-      );
-    case "quote":
-      return (
-        <blockquote key={key} className={styles.quoteBlock}>
-          <p>{block.text}</p>
-          <cite>{block.author}</cite>
-        </blockquote>
-      );
+export async function generateMetadata(): Promise<Metadata> {
+  const post = await getBlogPostBySlug(B2B_SEO_STATISTICS_SLUG);
+
+  if (!post) {
+    return {
+      title: "Blog Post | The Rehan Kadri",
+    };
   }
+
+  const currentPost = post as BlogPost;
+  const postAuthor = currentPost.author ?? defaultBlogAuthor;
+
+  return createArticleMetadata({
+    title: currentPost.metaTitle ?? currentPost.title,
+    description: currentPost.seoDescription,
+    path: getPostPath(currentPost.slug),
+    keywords: currentPost.keywords,
+    imagePath: currentPost.coverImage,
+    imageAlt: currentPost.title,
+    publishedTime: `${currentPost.publishedAt}T00:00:00Z`,
+    authors: [postAuthor.name],
+  });
 }
 
-function getWordCountForPost(post: BlogPost) {
-  if (post.slug === "youtube-users") {
-    return 4814;
-  }
-
-  if (post.slug === YOUTUBE_CHANNEL_STATISTICS_SLUG) {
-    return youtubeChannelStatisticsWordCount;
-  }
-
-  if (post.body) {
-    return countRichTextWords(post.body);
-  }
-
-  const introWords = post.intro
-    .join(" ")
-    .split(/\s+/)
-    .filter(Boolean).length;
-  const sectionWords = post.sections
-    .flatMap((section) => [
-      section.title,
-      ...section.blocks.flatMap((block) => {
-        switch (block.type) {
-          case "paragraph":
-            return [block.text];
-          case "list":
-            return block.items;
-          case "callout":
-            return [block.title, block.body];
-          case "quote":
-            return [block.text, block.author];
-        }
-      }),
-    ])
-    .join(" ")
-    .split(/\s+/)
-    .filter(Boolean).length;
-
-  return introWords + sectionWords;
-}
-
-export default async function YouTubeStatsPage() {
+export default async function B2BSeoStatsPage() {
   const [post, allPosts] = await Promise.all([
-    getBlogPostBySlug(YOUTUBE_CHANNEL_STATISTICS_SLUG),
+    getBlogPostBySlug(B2B_SEO_STATISTICS_SLUG),
     getAllBlogPosts(),
   ]);
 
@@ -254,26 +175,21 @@ export default async function YouTubeStatsPage() {
   }
 
   const currentPost = post as BlogPost;
-  const customHero = isYouTubePost(currentPost.slug)
-    ? currentPost.hero
-      ? {
-          ...currentPost.hero,
-          background: YOUTUBE_HERO_BACKGROUND,
-        }
-      : {
-          background: YOUTUBE_HERO_BACKGROUND,
-        }
-    : currentPost.hero;
-  const hasFeatureHeroLayout = Boolean(customHero?.image);
-  const heroSectionStyle = customHero?.background
+  const customHero = currentPost.hero
+    ? {
+        ...currentPost.hero,
+        background: B2B_SEO_HERO_BACKGROUND,
+      }
+    : {
+        background: B2B_SEO_HERO_BACKGROUND,
+      };
+  const hasFeatureHeroLayout = Boolean(customHero.image);
+  const heroSectionStyle = customHero.background
     ? ({ "--post-hero-custom-background": customHero.background } as CSSProperties)
     : undefined;
   const normalizedPosts = allPosts as BlogPost[];
   const postAuthor = currentPost.author ?? defaultBlogAuthor;
   const relatedPosts = (await getRelatedBlogPosts(currentPost.slug)) as BlogPost[];
-  const youtubeUsersArticleData =
-    currentPost.slug === "youtube-users" ? await getYouTubeUsersArticleData() : null;
-  const isYouTubeChannelStatisticsPost = currentPost.slug === YOUTUBE_CHANNEL_STATISTICS_SLUG;
   const heroTitleLines = buildHeroTitleLines(currentPost.title);
   const authorArticleCount = normalizedPosts.filter(
     (entry) => (entry.author ?? defaultBlogAuthor).name === postAuthor.name
@@ -281,7 +197,6 @@ export default async function YouTubeStatsPage() {
   const postReadTime = getBlogReadTime(currentPost);
   const canonicalUrl = buildCanonicalUrl(getPostPath(currentPost.slug));
   const socialImage = buildAbsoluteImageUrl(currentPost.coverImage ?? undefined);
-  const wordCount = getWordCountForPost(currentPost);
   const datePublished = `${currentPost.publishedAt}T00:00:00Z`;
   const dateModified = `${currentPost.modifiedAt ?? currentPost.publishedAt}T00:00:00Z`;
   const articleJsonLd = {
@@ -294,9 +209,9 @@ export default async function YouTubeStatsPage() {
     datePublished,
     dateModified,
     articleSection: currentPost.category.name,
-    keywords: currentPost.keywords?.join(", "),
+    keywords: currentPost.keywords,
     timeRequired: `PT${Number.parseInt(postReadTime, 10) || 1}M`,
-    wordCount,
+    wordCount: b2bSeoStatisticsWordCount,
     image: [socialImage],
     author: {
       "@type": "Person",
@@ -338,7 +253,7 @@ export default async function YouTubeStatsPage() {
       {
         "@type": "ListItem",
         position: 3,
-        name: currentPost.title,
+        name: "B2B SEO Statistics",
         item: canonicalUrl,
       },
     ],
@@ -356,16 +271,6 @@ export default async function YouTubeStatsPage() {
       }))}
     />
   ) : null;
-  const tableOfContentsItems = youtubeUsersArticleData
-    ? youtubeUsersArticleData.headings
-    : isYouTubeChannelStatisticsPost
-      ? youtubeChannelStatisticsHeadingItems
-      : currentPost.body
-        ? getRichTextHeadingItems(currentPost.body)
-        : currentPost.sections.map((section) => ({
-            id: section.id,
-            title: section.title,
-          }));
 
   return (
     <main className={`${styles.page} ${styles.postPage} ${themeStyles.pageTheme}`}>
@@ -391,7 +296,7 @@ export default async function YouTubeStatsPage() {
       ) : null}
 
       <section
-        className={`${styles.hero} ${styles.postHero}${hasFeatureHeroLayout ? ` ${styles.postHeroFeature}` : ""}${customHero?.background ? ` ${styles.postHeroCustomBackground}` : ""}`}
+        className={`${styles.hero} ${styles.postHero}${hasFeatureHeroLayout ? ` ${styles.postHeroFeature}` : ""}${customHero.background ? ` ${styles.postHeroCustomBackground}` : ""}`}
         style={heroSectionStyle}
       >
         <div
@@ -450,7 +355,7 @@ export default async function YouTubeStatsPage() {
             </div>
           </div>
 
-          {customHero?.image ? (
+          {customHero.image ? (
             <div className={styles.postHeroArtworkWrap}>
               <div className={styles.postHeroArtworkFrame}>
                 <Image
@@ -469,53 +374,17 @@ export default async function YouTubeStatsPage() {
 
       <section className={styles.postSection}>
         <div className={styles.postShell}>
-          <div
-            className={`${styles.postGrid} ${tableOfContentsItems.length ? "" : styles.postGridNoSidebar}`}
-          >
-            {tableOfContentsItems.length ? (
-              <aside className={styles.sidebar}>
-                <div className={`${styles.sidebarStack} ${themeStyles.tocTheme}`}>
-                  <BlogTableOfContents items={tableOfContentsItems} />
-                </div>
-              </aside>
-            ) : null}
+          <div className={styles.postGrid}>
+            <aside className={styles.sidebar}>
+              <div className={`${styles.sidebarStack} ${themeStyles.tocTheme}`}>
+                <BlogTableOfContents items={b2bSeoStatisticsHeadingItems} />
+              </div>
+            </aside>
 
             <article className={`${styles.articleCopy} authority-post-copy`}>
               <div className={`${styles.articleProse} ${themeStyles.articleProse}`}>
-                {youtubeUsersArticleData ? (
-                  <YouTubeUsersArticle
-                    data={youtubeUsersArticleData}
-                    insertBeforeHeadingId="the-bottom-line"
-                    insertNode={faqSection}
-                  />
-                ) : isYouTubeChannelStatisticsPost ? (
-                  <>
-                    <YouTubeChannelStatisticsArticle />
-                    {faqSection}
-                  </>
-                ) : currentPost.body ? (
-                  <BlogRichText
-                    data={currentPost.body}
-                    headingIds={tableOfContentsItems.map((item) => item.id)}
-                  />
-                ) : (
-                  <>
-                    {currentPost.intro.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
-
-                    {currentPost.sections.map((section) => (
-                      <section key={section.id} id={section.id} className={styles.articleSection}>
-                        <h2>{section.title}</h2>
-                        {section.blocks.map((block, index) =>
-                          renderBlock(block, `${section.id}-${index}`)
-                        )}
-                      </section>
-                    ))}
-                  </>
-                )}
-
-                {!youtubeUsersArticleData && !isYouTubeChannelStatisticsPost ? faqSection : null}
+                <B2BSeoStatisticsArticle />
+                {faqSection}
               </div>
 
               <aside className={`${styles.shareRail} ${styles.shareRailMobile}`}>
@@ -558,19 +427,34 @@ export default async function YouTubeStatsPage() {
                     <div className={styles.articleAuthorFooter}>
                       <div className={styles.articleAuthorSocials}>
                         {postAuthor.socials?.twitter ? (
-                          <Link href={postAuthor.socials.twitter} className={`${styles.articleAuthorSocialLink} ${themeStyles.articleAuthorSocialLink}`} target="_blank" rel="noreferrer">
+                          <Link
+                            href={postAuthor.socials.twitter}
+                            className={`${styles.articleAuthorSocialLink} ${themeStyles.articleAuthorSocialLink}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
                             <Twitter size={14} strokeWidth={2} />
                             <span>Twitter</span>
                           </Link>
                         ) : null}
                         {postAuthor.socials?.linkedin ? (
-                          <Link href={postAuthor.socials.linkedin} className={`${styles.articleAuthorSocialLink} ${themeStyles.articleAuthorSocialLink}`} target="_blank" rel="noreferrer">
+                          <Link
+                            href={postAuthor.socials.linkedin}
+                            className={`${styles.articleAuthorSocialLink} ${themeStyles.articleAuthorSocialLink}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
                             <Linkedin size={14} strokeWidth={2} />
                             <span>LinkedIn</span>
                           </Link>
                         ) : null}
                         {postAuthor.socials?.instagram ? (
-                          <Link href={postAuthor.socials.instagram} className={`${styles.articleAuthorSocialLink} ${themeStyles.articleAuthorSocialLink}`} target="_blank" rel="noreferrer">
+                          <Link
+                            href={postAuthor.socials.instagram}
+                            className={`${styles.articleAuthorSocialLink} ${themeStyles.articleAuthorSocialLink}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
                             <Instagram size={14} strokeWidth={2} />
                             <span>Instagram</span>
                           </Link>
@@ -611,7 +495,9 @@ export default async function YouTubeStatsPage() {
                     {relatedPost.category?.name ?? "Blog"}
                   </span>
                   <h2>
-                    <Link href={getPostPath(relatedPost.slug)} prefetch>{relatedPost.title}</Link>
+                    <Link href={getPostPath(relatedPost.slug)} prefetch>
+                      {relatedPost.title}
+                    </Link>
                   </h2>
                   <p className={styles.cardBlurb}>{relatedPost.cardBlurb}</p>
                   <div className={styles.cardMeta}>
@@ -631,16 +517,3 @@ export default async function YouTubeStatsPage() {
     </main>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

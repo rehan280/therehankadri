@@ -1,0 +1,544 @@
+.youtubeArticleBlock {
+  width: 100%;
+}
+
+.youtubeArticleBlock + .youtubeArticleBlock {
+  margin-top: 0.25rem;
+}
+
+.youtubeInsightGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+  margin: 1.5rem 0 1.9rem;
+}
+
+.youtubeInsightCard {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.78rem;
+  padding: 0.95rem 0.95rem 1rem;
+  border: 1px solid rgba(89, 139, 250, 0.24);
+  border-radius: 1.2rem;
+  background:
+    radial-gradient(circle at top right, rgba(122, 168, 255, 0.3), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(239, 246, 255, 0.99));
+  box-shadow:
+    0 14px 30px rgba(64, 108, 214, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.86);
+  overflow: hidden;
+}
+
+.youtubeInsightCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 0.22rem;
+  background: linear-gradient(90deg, #8eb7ff 0%, #598bfa 58%, #3c71e5 100%);
+}
+
+.youtubeInsightTop {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.youtubeInsightNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 1.9rem;
+  padding: 0.32rem 0.68rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(112, 160, 255, 0.18), rgba(230, 240, 255, 0.94));
+  color: #2f63d9;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.youtubeInsightCard p {
+  margin-bottom: 0 !important;
+  color: #27395b;
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.youtubeInsightEmphasis {
+  display: inline;
+  color: #173869;
+  font-weight: 700;
+  background: linear-gradient(180deg, rgba(227, 238, 255, 0), rgba(137, 182, 255, 0.46));
+  box-shadow: inset 0 -0.45em 0 rgba(137, 182, 255, 0.3);
+}
+
+.youtubeStatDeck {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 1.35rem 0 1.85rem;
+}
+
+.youtubeStatCard {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 0.5rem;
+  min-height: 0;
+  padding: 0.9rem 0.92rem 0.95rem;
+  border: 1px solid rgba(89, 139, 250, 0.24);
+  border-radius: 1.18rem;
+  background:
+    radial-gradient(circle at top right, rgba(134, 181, 255, 0.24), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(239, 246, 255, 0.99));
+  box-shadow:
+    0 14px 28px rgba(64, 108, 214, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
+  overflow: hidden;
+}
+
+.youtubeStatCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 0.18rem;
+  background: linear-gradient(90deg, #9cc1ff 0%, #598bfa 58%, #3c71e5 100%);
+}
+
+.youtubeStatHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.youtubeStatLabel,
+.youtubeVisualEyebrow {
+  color: #4a72c8;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.youtubeStatContext {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.24rem 0.52rem;
+  border: 1px solid rgba(89, 139, 250, 0.22);
+  border-radius: 999px;
+  background: rgba(245, 248, 255, 0.96);
+  color: #3d63b8;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.youtubeStatValue {
+  color: #173869;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.55rem, 3.5vw, 2rem);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+
+.youtubeStatNote {
+  margin-bottom: 0 !important;
+  color: #5f7090;
+  font-size: 0.78rem;
+  line-height: 1.42;
+}
+
+.youtubeVisualPanel {
+  position: relative;
+  margin: 1.45rem 0 1.8rem;
+  padding: 1rem 0.95rem 1rem;
+  border: 1px solid rgba(89, 139, 250, 0.14);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at top right, rgba(128, 177, 255, 0.26), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.998), rgba(239, 246, 255, 0.99));
+  box-shadow: 0 14px 34px rgba(64, 108, 214, 0.1);
+}
+
+.youtubeVisualPanel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.32), transparent 28%);
+}
+
+.youtubeVisualHeader {
+  position: relative;
+  display: grid;
+  gap: 0.48rem;
+  margin-bottom: 1rem;
+}
+
+.youtubeVisualHeaderTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.95fr);
+  gap: 0.9rem 1.25rem;
+  align-items: end;
+}
+
+.youtubeVisualHeader h3 {
+  margin: 0;
+  color: #173869;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.youtubeVisualSummary {
+  margin: 0;
+  max-width: 30ch;
+  justify-self: end;
+  color: #5f7090;
+  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  text-align: right;
+}
+
+.youtubeHorizontalChart {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.youtubeHorizontalRow {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.youtubeHorizontalMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.youtubeHorizontalLabel {
+  color: #173869;
+  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.youtubeHorizontalValue {
+  color: #4a72c8;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.youtubeHorizontalTrack {
+  position: relative;
+  height: 0.85rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--chart-track);
+}
+
+.youtubeHorizontalFill {
+  display: block;
+  width: var(--bar-size);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--chart-start) 0%, var(--chart-end) 100%);
+}
+
+.statsDonutShell {
+  display: grid;
+  grid-template-columns: minmax(10.5rem, 12rem) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.statsDonutFigure {
+  display: grid;
+  place-items: center;
+}
+
+.statsDonutRing {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(10.5rem, 24vw, 12rem);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: conic-gradient(var(--donut-stops));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5),
+    0 18px 34px rgba(64, 108, 214, 0.12);
+}
+
+.statsDonutRing::after {
+  content: "";
+  position: absolute;
+  inset: 18%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(239, 246, 255, 0.98));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.statsDonutCenter {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.18rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.statsDonutCenter strong {
+  color: #173869;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.55rem, 3.5vw, 2rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.statsDonutCenter span {
+  color: #5f7090;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.statsDonutLegend {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.statsDonutCard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.82rem 0.9rem;
+  border: 1px solid rgba(89, 139, 250, 0.16);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.statsDonutSwatch {
+  width: 0.82rem;
+  height: 0.82rem;
+  border-radius: 999px;
+  background: var(--swatch);
+  box-shadow: 0 0 0 0.2rem rgba(89, 139, 250, 0.08);
+}
+
+.statsDonutLabel {
+  color: #173869;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.statsDonutValue {
+  color: #4a72c8;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.statsVerticalChart {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.statsVerticalGrid {
+  display: grid;
+  grid-template-columns: repeat(var(--bar-count), minmax(0, 1fr));
+  gap: 0.7rem;
+  align-items: end;
+}
+
+.statsVerticalColumn {
+  display: grid;
+  gap: 0.5rem;
+  align-items: end;
+}
+
+.statsVerticalValue {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.55rem;
+  padding: 0.16rem 0.46rem;
+  border-radius: 999px;
+  border: 1px solid rgba(89, 139, 250, 0.16);
+  background: rgba(255, 255, 255, 0.94);
+  color: #2f63d9;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  box-shadow: 0 10px 18px rgba(64, 108, 214, 0.08);
+}
+
+.statsVerticalTrack {
+  position: relative;
+  height: clamp(9rem, 24vw, 11rem);
+  display: flex;
+  align-items: flex-end;
+  padding: 0.26rem;
+  border: 1px solid rgba(89, 139, 250, 0.14);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 247, 255, 0.94));
+  overflow: hidden;
+}
+
+.statsVerticalTrack::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to top, rgba(89, 139, 250, 0.08) 1px, transparent 1px);
+  background-size: 100% 20%;
+  opacity: 0.55;
+}
+
+.statsVerticalFill {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: var(--bar-size);
+  min-height: 0.9rem;
+  border-radius: 0.8rem;
+  background: linear-gradient(180deg, var(--chart-start) 0%, var(--chart-end) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 14px 22px var(--chart-soft);
+}
+
+.statsVerticalLabel {
+  color: #173869;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+}
+
+@media (min-width: 1100px) {
+  .youtubeInsightGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .youtubeStatDeck {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .youtubeInsightGrid {
+    grid-template-columns: 1fr;
+    gap: 0.72rem;
+  }
+
+  .youtubeInsightCard,
+  .youtubeStatCard,
+  .youtubeVisualPanel {
+    border-radius: 1.15rem;
+  }
+
+  .youtubeInsightCard {
+    gap: 0.58rem;
+    padding: 0.82rem 0.8rem 0.88rem;
+  }
+
+  .youtubeInsightTop {
+    gap: 0.5rem;
+  }
+
+  .youtubeInsightNumber {
+    min-height: 1.7rem;
+    padding: 0.22rem 0.56rem;
+    font-size: 0.66rem;
+  }
+
+  .youtubeInsightCard p {
+    font-size: 0.84rem;
+    line-height: 1.48;
+  }
+
+  .youtubeStatDeck {
+    grid-template-columns: 1fr;
+  }
+
+  .youtubeStatCard {
+    padding: 0.82rem 0.8rem 0.88rem;
+  }
+
+  .youtubeVisualPanel {
+    margin: 1.35rem 0 1.7rem;
+    padding: 0.92rem;
+  }
+
+  .youtubeVisualHeaderTop {
+    grid-template-columns: 1fr;
+  }
+
+  .youtubeVisualHeader h3 {
+    font-size: clamp(1.18rem, 6.6vw, 1.55rem);
+  }
+
+  .youtubeVisualSummary {
+    max-width: none;
+    justify-self: start;
+    text-align: left;
+    font-size: 0.84rem;
+    line-height: 1.48;
+  }
+
+  .youtubeHorizontalMeta {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .youtubeHorizontalLabel,
+  .youtubeHorizontalValue {
+    font-size: 0.92rem;
+  }
+
+  .statsDonutShell {
+    grid-template-columns: 1fr;
+  }
+
+  .statsDonutFigure {
+    justify-items: start;
+  }
+
+  .statsVerticalGrid {
+    gap: 0.5rem;
+  }
+
+  .statsVerticalLabel {
+    font-size: 0.76rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .youtubeInsightGrid,
+  .youtubeStatDeck {
+    grid-template-columns: 1fr;
+  }
+}

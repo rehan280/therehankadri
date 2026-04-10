@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import Link from "next/link";
-import styles from "@/app/(frontend)/blog/blog.module.css";
+import baseStyles from "@/app/(frontend)/blog/blog.module.css";
+import styles from "./youtube-stats-visuals.module.css";
 import type { YouTubeUsersArticleData, YouTubeUsersBlock } from "@/lib/youtube-users-article";
 
 type MetricCard = {
@@ -125,22 +126,22 @@ const nicheEconomicsData: ChartDatum[] = [
 
 const chartTones = {
   ember: {
-    start: "#ffbf92",
-    end: "#f15a30",
-    soft: "rgba(241, 90, 48, 0.16)",
-    track: "rgba(241, 90, 48, 0.1)",
+    start: "#ff7f7f",
+    end: "#d91919",
+    soft: "rgba(217, 25, 25, 0.16)",
+    track: "rgba(217, 25, 25, 0.1)",
   },
   sunset: {
-    start: "#ffd6ae",
-    end: "#ff7a45",
-    soft: "rgba(255, 122, 69, 0.14)",
-    track: "rgba(255, 122, 69, 0.1)",
+    start: "#ff9a9a",
+    end: "#ef3b3b",
+    soft: "rgba(239, 59, 59, 0.14)",
+    track: "rgba(239, 59, 59, 0.1)",
   },
   apricot: {
-    start: "#ffe0bc",
-    end: "#ff914d",
-    soft: "rgba(255, 145, 77, 0.14)",
-    track: "rgba(255, 145, 77, 0.1)",
+    start: "#ffb3b3",
+    end: "#ff5454",
+    soft: "rgba(255, 84, 84, 0.14)",
+    track: "rgba(255, 84, 84, 0.1)",
   },
 } satisfies Record<string, ChartTone>;
 
@@ -495,7 +496,7 @@ function renderBlock(block: YouTubeUsersBlock) {
     case "heading": {
       if (block.level === 3) {
         return (
-          <h3 id={block.id} className={styles.richTextSubheading}>
+          <h3 id={block.id} className={baseStyles.richTextSubheading}>
             {block.text}
           </h3>
         );
@@ -507,7 +508,7 @@ function renderBlock(block: YouTubeUsersBlock) {
       return <p>{renderInlineMarkdown(block.text)}</p>;
     case "list": {
       const Tag = block.ordered ? "ol" : "ul";
-      const className = block.ordered ? styles.youtubeOrderedList : styles.articleList;
+      const className = block.ordered ? styles.youtubeOrderedList : baseStyles.articleList;
 
       return (
         <Tag className={className}>

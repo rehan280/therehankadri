@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import Link from "next/link";
-import styles from "@/app/(frontend)/blog/blog.module.css";
+import baseStyles from "@/app/(frontend)/blog/blog.module.css";
+import styles from "./youtube-stats-visuals.module.css";
 
 type MetricCard = {
   label: string;
@@ -13,6 +14,13 @@ type ChartDatum = {
   label: string;
   value: number;
   valueLabel: string;
+};
+
+type DonutSlice = {
+  label: string;
+  value: number;
+  valueLabel: string;
+  color: string;
 };
 
 type ChartTone = {
@@ -31,22 +39,22 @@ type ArticleBlock =
 
 const chartTones = {
   ember: {
-    start: "#ffbf92",
-    end: "#f15a30",
-    soft: "rgba(241, 90, 48, 0.16)",
-    track: "rgba(241, 90, 48, 0.1)",
+    start: "#fe9292",
+    end: "#f03030",
+    soft: "rgba(240, 48, 48, 0.16)",
+    track: "rgba(240, 48, 48, 0.1)",
   },
   sunset: {
-    start: "#ffd6ae",
-    end: "#ff7a45",
-    soft: "rgba(255, 122, 69, 0.14)",
-    track: "rgba(255, 122, 69, 0.1)",
+    start: "#ffaeae",
+    end: "#ff4444",
+    soft: "rgba(255, 68, 68, 0.14)",
+    track: "rgba(255, 68, 68, 0.1)",
   },
   apricot: {
-    start: "#ffe0bc",
-    end: "#ff914d",
-    soft: "rgba(255, 145, 77, 0.14)",
-    track: "rgba(255, 145, 77, 0.1)",
+    start: "#ffbcbc",
+    end: "#fe4d4d",
+    soft: "rgba(254, 77, 77, 0.14)",
+    track: "rgba(254, 77, 77, 0.1)",
   },
 } satisfies Record<string, ChartTone>;
 
@@ -85,6 +93,14 @@ const countryAudienceData: ChartDatum[] = [
   { label: "Mexico", value: 83.6, valueLabel: "83.6M" },
   { label: "Saudi Arabia", value: 27.2, valueLabel: "27.2M" },
   { label: "Australia", value: 20.9, valueLabel: "20.9M" },
+];
+
+const countryShareData: DonutSlice[] = [
+  { label: "India", value: 535, valueLabel: "18.8%", color: "#d91919" },
+  { label: "United States", value: 254, valueLabel: "8.9%", color: "#ff4f4f" },
+  { label: "Brazil", value: 144, valueLabel: "5.1%", color: "#ff7c7c" },
+  { label: "Indonesia", value: 143, valueLabel: "5.0%", color: "#ff9b9b" },
+  { label: "Rest of world", value: 1774, valueLabel: "62.2%", color: "#ffd1d1" },
 ];
 
 const topChannelsData: ChartDatum[] = [
@@ -781,19 +797,95 @@ function HorizontalBarChart({
   );
 }
 
+function DonutShareChart({
+  title,
+  eyebrow,
+  summary,
+  centerLabel,
+  centerValue,
+  items,
+}: {
+  title: string;
+  eyebrow: string;
+  summary: string;
+  centerLabel: string;
+  centerValue: string;
+  items: DonutSlice[];
+}) {
+  const total = items.reduce((sum, item) => sum + item.value, 0);
+  let runningTotal = 0;
+  const donutStops = items
+    .map((item) => {
+      const start = (runningTotal / total) * 100;
+      runningTotal += item.value;
+      const end = (runningTotal / total) * 100;
+      return `${item.color} ${start}% ${end}%`;
+    })
+    .join(", ");
+
+  return (
+    <section className={styles.youtubeVisualPanel} aria-label={title}>
+      <div className={styles.youtubeVisualHeader}>
+        <span className={styles.youtubeVisualEyebrow}>{eyebrow}</span>
+        <div className={styles.youtubeVisualHeaderTop}>
+          <h3>{title}</h3>
+          <p className={styles.youtubeVisualSummary}>{summary}</p>
+        </div>
+      </div>
+      <div className={styles.statsDonutShell}>
+        <div className={styles.statsDonutFigure}>
+          <div
+            className={styles.statsDonutRing}
+            style={{ "--donut-stops": donutStops } as CSSProperties}
+            aria-hidden="true"
+          >
+            <div className={styles.statsDonutCenter}>
+              <strong>{centerValue}</strong>
+              <span>{centerLabel}</span>
+            </div>
+          </div>
+        </div>
+        <div className={styles.statsDonutLegend}>
+          {items.map((item) => (
+            <article key={item.label} className={styles.statsDonutCard}>
+              <span
+                className={styles.statsDonutSwatch}
+                style={{ "--swatch": item.color } as CSSProperties}
+                aria-hidden="true"
+              />
+              <span className={styles.statsDonutLabel}>{item.label}</span>
+              <span className={styles.statsDonutValue}>{item.valueLabel}</span>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function renderSectionVisual(sectionId?: string) {
   switch (sectionId) {
     case "youtube-user-stats":
       return <StatDeck items={openingMetricCards} />;
     case "youtube-users-by-country-2026":
       return (
-        <HorizontalBarChart
-          eyebrow="Audience geography"
-          title="Top YouTube audiences by country"
-          summary="India leads by a wide margin, while the United States remains the largest mature market."
-          items={countryAudienceData}
-          tone={chartTones.sunset}
-        />
+        <>
+          <HorizontalBarChart
+            eyebrow="Audience geography"
+            title="Top YouTube audiences by country"
+            summary="India leads by a wide margin, while the United States remains the largest mature market."
+            items={countryAudienceData}
+            tone={chartTones.sunset}
+          />
+          <DonutShareChart
+            eyebrow="Global share"
+            title="How the biggest YouTube markets split global users"
+            summary="India is the single largest national audience, but most YouTube usage still comes from the rest of the world combined."
+            centerLabel="global users"
+            centerValue="2.85B"
+            items={countryShareData}
+          />
+        </>
       );
     case "the-top-youtube-channels-in-2026":
       return (
@@ -835,7 +927,7 @@ function renderBlock(block: ArticleBlock) {
     case "heading":
       if (block.level === 3) {
         return (
-          <h3 id={block.id} className={styles.richTextSubheading}>
+          <h3 id={block.id} className={baseStyles.richTextSubheading}>
             {block.text}
           </h3>
         );
@@ -846,7 +938,7 @@ function renderBlock(block: ArticleBlock) {
       return <p>{renderInlineMarkdown(block.text)}</p>;
     case "list": {
       const Tag = block.ordered ? "ol" : "ul";
-      const className = block.ordered ? styles.youtubeOrderedList : styles.articleList;
+      const className = block.ordered ? styles.youtubeOrderedList : baseStyles.articleList;
 
       return (
         <Tag className={className}>

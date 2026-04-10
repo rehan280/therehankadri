@@ -1,0 +1,793 @@
+.youtubeArticleBlock {
+  width: 100%;
+}
+
+.youtubeArticleBlock + .youtubeArticleBlock {
+  margin-top: 0.25rem;
+}
+
+.youtubeInsightGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+  margin: 1.5rem 0 1.9rem;
+}
+
+.youtubeInsightCard {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.78rem;
+  padding: 0.95rem 0.95rem 1rem;
+  border: 1px solid rgba(240, 48, 48, 0.14);
+  border-radius: 1.2rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 110, 110, 0.22), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(255, 245, 245, 0.97));
+  box-shadow:
+    0 14px 30px rgba(212, 38, 38, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  overflow: hidden;
+}
+
+.youtubeInsightCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 0.22rem;
+  background: linear-gradient(90deg, #ff6b6b 0%, #d91919 100%);
+}
+
+.youtubeInsightTop {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.youtubeInsightNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 1.9rem;
+  padding: 0.32rem 0.68rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 154, 154, 0.72), rgba(255, 233, 233, 0.92));
+  color: #c91818;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.youtubeInsightCard p {
+  margin-bottom: 0 !important;
+  color: #4f3434;
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.youtubeInsightEmphasis {
+  display: inline;
+  color: #1f1111;
+  font-weight: 700;
+  background: linear-gradient(180deg, rgba(255, 225, 225, 0), rgba(255, 120, 120, 0.4));
+  box-shadow: inset 0 -0.45em 0 rgba(255, 120, 120, 0.24);
+}
+
+.youtubeStatDeck {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 1.35rem 0 1.85rem;
+}
+
+.youtubeStatCard {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 0.5rem;
+  min-height: 0;
+  padding: 0.9rem 0.92rem 0.95rem;
+  border: 1px solid rgba(228, 63, 63, 0.16);
+  border-radius: 1.18rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 114, 114, 0.2), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(255, 245, 245, 0.97));
+  box-shadow:
+    0 14px 28px rgba(212, 38, 38, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  overflow: hidden;
+}
+
+.youtubeStatCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 0.18rem;
+  background: linear-gradient(90deg, #ff6b6b 0%, #d91919 100%);
+}
+
+.youtubeStatHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.youtubeStatLabel,
+.youtubeVisualEyebrow {
+  color: #c01818;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.youtubeStatContext {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.24rem 0.52rem;
+  border: 1px solid rgba(217, 25, 25, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 245, 245, 0.92);
+  color: #9f1616;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.youtubeStatValue {
+  color: #2f1818;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.55rem, 3.5vw, 2rem);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+
+.youtubeStatNote {
+  margin-bottom: 0 !important;
+  color: #6d4c4c;
+  font-size: 0.78rem;
+  line-height: 1.42;
+}
+
+.youtubeVisualPanel {
+  position: relative;
+  margin: 1.45rem 0 1.8rem;
+  padding: 1rem 0.95rem 1rem;
+  border: 1px solid rgba(240, 48, 48, 0.12);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 100, 100, 0.2), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.995), rgba(255, 245, 245, 0.97));
+  box-shadow: 0 14px 34px rgba(212, 38, 38, 0.08);
+}
+
+.youtubeVisualPanel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent 28%);
+}
+
+.youtubeVisualHeader {
+  position: relative;
+  display: grid;
+  gap: 0.48rem;
+  margin-bottom: 1rem;
+}
+
+.youtubeVisualHeaderTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.95fr);
+  gap: 0.9rem 1.25rem;
+  align-items: end;
+}
+
+.youtubeVisualHeader h3 {
+  margin: 0;
+  color: #2f1818;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.youtubeVisualSummary {
+  margin: 0;
+  max-width: 30ch;
+  justify-self: end;
+  color: #6f4c4c;
+  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  text-align: right;
+}
+
+.youtubeBarChartShell {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.7rem;
+  align-items: end;
+}
+
+.youtubeBarAxis {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  align-items: stretch;
+  justify-items: end;
+  width: 3.5rem;
+  height: clamp(8.75rem, 23vw, 11rem);
+  margin-bottom: 1.65rem;
+  color: #9a6868;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.youtubeBarAxis span {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  width: 100%;
+  transform: translateY(-0.1rem);
+}
+
+.youtubeChartViewportCompact {
+  width: 100%;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.youtubeChartViewport {
+  min-width: 0;
+  overflow: visible;
+  padding-bottom: 0;
+}
+
+.youtubeChartViewport::-webkit-scrollbar {
+  height: 0;
+}
+
+.youtubeChartViewport::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.youtubeBarChart {
+  display: grid;
+  gap: clamp(0.35rem, 1vw, 0.62rem);
+  align-items: end;
+  width: 100%;
+  min-width: 0;
+  padding-top: 0.25rem;
+}
+
+.youtubeBarColumn {
+  display: grid;
+  gap: 0.5rem;
+  align-items: end;
+  min-width: 0;
+}
+
+.youtubeBarValue,
+.youtubeBarLabel {
+  min-width: 0;
+  text-align: center;
+}
+
+.youtubeBarValue {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.55rem;
+  padding: 0.16rem 0.42rem;
+  border: 1px solid rgba(240, 48, 48, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 247, 247, 0.96);
+  color: #b81414;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: clamp(0.62rem, 1.35vw, 0.74rem);
+  font-weight: 700;
+  line-height: 1.1;
+  box-shadow: 0 10px 18px rgba(226, 55, 55, 0.08);
+}
+
+.youtubeBarTrack {
+  position: relative;
+  height: clamp(8.75rem, 23vw, 11rem);
+  display: flex;
+  align-items: flex-end;
+  padding: 0.3rem;
+  border: 1px solid rgba(240, 48, 48, 0.1);
+  border-radius: 0.95rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 244, 244, 0.92));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.62),
+    0 8px 20px rgba(212, 38, 38, 0.04);
+  overflow: hidden;
+}
+
+.youtubeBarTrack::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to top, rgba(240, 48, 48, 0.1) 1px, transparent 1px);
+  background-size: 100% 20%;
+  opacity: 0.5;
+}
+
+.youtubeBarFill {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: var(--bar-size);
+  min-height: 0.72rem;
+  border-radius: 0.82rem;
+  background: linear-gradient(180deg, var(--chart-start) 0%, var(--chart-end) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 14px 20px var(--chart-soft);
+}
+
+.youtubeBarLabel {
+  color: #725050;
+  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(0.72rem, 1.35vw, 0.82rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.youtubeHorizontalChart {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.youtubeHorizontalRow {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.youtubeHorizontalMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.youtubeHorizontalLabel {
+  color: #2f1818;
+  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.youtubeHorizontalValue {
+  color: #c22d2d;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.youtubeHorizontalTrack {
+  position: relative;
+  height: 0.85rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--chart-track);
+}
+
+.youtubeHorizontalFill {
+  display: block;
+  width: var(--bar-size);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--chart-start) 0%, var(--chart-end) 100%);
+}
+
+.statsDonutShell {
+  display: grid;
+  grid-template-columns: minmax(10.5rem, 12rem) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.statsDonutFigure {
+  display: grid;
+  place-items: center;
+}
+
+.statsDonutRing {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(10.5rem, 24vw, 12rem);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: conic-gradient(var(--donut-stops));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.52),
+    0 18px 34px rgba(212, 38, 38, 0.12);
+}
+
+.statsDonutRing::after {
+  content: "";
+  position: absolute;
+  inset: 18%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 244, 244, 0.98));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.statsDonutCenter {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.18rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.statsDonutCenter strong {
+  color: #2f1818;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.55rem, 3.5vw, 2rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.statsDonutCenter span {
+  color: #6f4c4c;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.statsDonutLegend {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.statsDonutCard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.82rem 0.9rem;
+  border: 1px solid rgba(217, 25, 25, 0.14);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.statsDonutSwatch {
+  width: 0.82rem;
+  height: 0.82rem;
+  border-radius: 999px;
+  background: var(--swatch);
+  box-shadow: 0 0 0 0.2rem rgba(217, 25, 25, 0.08);
+}
+
+.statsDonutLabel {
+  color: #2f1818;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.statsDonutValue {
+  color: #c01818;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.youtubeAudienceSplit {
+  display: grid;
+  grid-template-columns: minmax(11rem, 12.5rem) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.youtubeAudienceHighlight {
+  display: grid;
+  align-content: center;
+  gap: 0.32rem;
+  padding: 1rem;
+  border: 1px solid rgba(240, 48, 48, 0.12);
+  border-radius: 1.15rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 112, 112, 0.22), transparent 42%),
+    linear-gradient(180deg, rgba(255, 247, 247, 0.98), rgba(255, 241, 241, 0.96));
+}
+
+.youtubeAudienceHighlightLabel {
+  color: #b82f2f;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.youtubeAudienceHighlight strong {
+  color: #2f1818;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  line-height: 0.95;
+}
+
+.youtubeAudienceHighlight > span:last-child {
+  color: #704f4f;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.youtubeAudiencePanel {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.youtubeAudienceTrack {
+  display: flex;
+  height: 1.05rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(240, 48, 48, 0.09);
+  box-shadow: inset 0 0 0 1px rgba(240, 48, 48, 0.08);
+}
+
+.youtubeAudienceFill {
+  height: 100%;
+}
+
+.youtubeAudienceLegend {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.youtubeAudienceCard {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.9rem 0.95rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(240, 48, 48, 0.1);
+}
+
+.youtubeAudienceCardTop {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: #6f4e4e;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.youtubeAudienceCard strong {
+  color: #2f1818;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.youtubeAudienceCard p {
+  margin: 0;
+  color: #7a5a5a;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.youtubeLegendSwatch {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 999px;
+}
+
+.youtubeDataTableWrap {
+  margin: 1.7rem 0 2.05rem;
+  overflow-x: auto;
+  border: 1px solid rgba(240, 48, 48, 0.12);
+  border-radius: 1.35rem;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 20px 46px rgba(212, 38, 38, 0.07);
+}
+
+.youtubeDataTable {
+  width: 100%;
+  min-width: 580px;
+  border-collapse: collapse;
+}
+
+.youtubeDataTable thead th {
+  padding: 0.98rem 1rem;
+  color: #b62d2d;
+  background: rgba(255, 183, 183, 0.28);
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.youtubeDataTable tbody td {
+  padding: 0.95rem 1rem;
+  border-top: 1px solid rgba(240, 48, 48, 0.08);
+  color: #5a3c3c;
+  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  vertical-align: top;
+}
+
+.youtubeDataTable tbody tr:nth-child(even) td {
+  background: rgba(255, 241, 241, 0.72);
+}
+
+.youtubeOrderedList {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0 0 1.7rem;
+  padding-left: 1.35rem;
+}
+
+.youtubeOrderedList li {
+  color: inherit;
+  padding-left: 0.1rem;
+}
+
+@media (min-width: 1100px) {
+  .youtubeInsightGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .youtubeStatDeck {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .youtubeAudienceSplit {
+    grid-template-columns: 1fr;
+  }
+
+  .youtubeAudienceLegend {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .youtubeInsightGrid {
+    grid-template-columns: 1fr;
+    gap: 0.72rem;
+  }
+
+  .youtubeInsightCard,
+  .youtubeStatCard,
+  .youtubeVisualPanel {
+    border-radius: 1.15rem;
+  }
+
+  .youtubeInsightCard {
+    gap: 0.58rem;
+    padding: 0.82rem 0.8rem 0.88rem;
+  }
+
+  .youtubeInsightTop {
+    gap: 0.5rem;
+  }
+
+  .youtubeInsightNumber {
+    min-height: 1.7rem;
+    padding: 0.22rem 0.56rem;
+    font-size: 0.66rem;
+  }
+
+  .youtubeInsightCard p {
+    font-size: 0.84rem;
+    line-height: 1.48;
+  }
+
+  .youtubeStatDeck {
+    grid-template-columns: 1fr;
+  }
+
+  .youtubeStatCard {
+    padding: 0.82rem 0.8rem 0.88rem;
+  }
+
+  .youtubeVisualPanel {
+    margin: 1.35rem 0 1.7rem;
+    padding: 0.92rem;
+  }
+
+  .youtubeVisualHeaderTop {
+    grid-template-columns: 1fr;
+  }
+
+  .youtubeVisualHeader h3 {
+    font-size: clamp(1.18rem, 6.6vw, 1.55rem);
+  }
+
+  .youtubeVisualSummary {
+    max-width: none;
+    justify-self: start;
+    text-align: left;
+    font-size: 0.84rem;
+    line-height: 1.48;
+  }
+
+  .youtubeBarChartShell {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .youtubeBarAxis {
+    display: none;
+  }
+
+  .youtubeChartViewportCompact {
+    max-width: none;
+  }
+
+  .youtubeBarChart {
+    gap: 0.32rem;
+  }
+
+  .youtubeBarTrack {
+    height: 7.75rem;
+    padding: 0.2rem;
+  }
+
+  .youtubeHorizontalMeta {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .youtubeAudienceLegend {
+    grid-template-columns: 1fr;
+  }
+
+  .youtubeHorizontalLabel,
+  .youtubeHorizontalValue,
+  .youtubeDataTable tbody td {
+    font-size: 0.92rem;
+  }
+
+  .statsDonutShell {
+    grid-template-columns: 1fr;
+  }
+
+  .statsDonutFigure {
+    justify-items: start;
+  }
+
+  .youtubeDataTable thead th {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .youtubeInsightGrid,
+  .youtubeStatDeck {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,68 @@
+.pageTheme {}
+
+.heroPill {
+  color: #2152c3 !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.postMetaItem {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+.tocTheme a {
+  color: #2d63db !important;
+}
+
+.tocTheme a:hover,
+.tocTheme a[aria-current="true"] {
+  color: #173f9e !important;
+}
+
+.articleProse a {
+  color: #2d63db !important;
+  text-decoration-color: rgba(89, 139, 250, 0.34) !important;
+}
+
+.articleProse a:hover {
+  color: #173f9e !important;
+  text-decoration-color: rgba(89, 139, 250, 0.72) !important;
+}
+
+.articleAuthorCard {
+  border-color: rgba(89, 139, 250, 0.12) !important;
+}
+
+.articleAuthorSocialLink {
+  border-color: rgba(89, 139, 250, 0.14) !important;
+}
+
+.articleAuthorSocialLink:hover {
+  color: #173f9e !important;
+  background: rgba(89, 139, 250, 0.06) !important;
+}
+
+.relatedLabel,
+.cardEyebrow {
+  color: #2d63db !important;
+}
+
+.faqTheme {
+  --faq-eyebrow-bg-start: rgba(89, 139, 250, 0.12);
+  --faq-eyebrow-bg-end: rgba(89, 139, 250, 0.06);
+  --faq-eyebrow-color: #2d63db;
+  --faq-item-border: rgba(89, 139, 250, 0.16);
+  --faq-item-glow: rgba(89, 139, 250, 0.14);
+  --faq-item-surface-start: rgba(242, 247, 255, 0.98);
+  --faq-item-surface-end: rgba(255, 255, 255, 0.99);
+  --faq-item-shadow: rgba(64, 108, 214, 0.08);
+  --faq-topbar-start: rgba(156, 193, 255, 0.9);
+  --faq-topbar-end: #598bfa;
+  --faq-index-border: rgba(89, 139, 250, 0.18);
+  --faq-index-color: #2d63db;
+  --faq-icon-border: rgba(89, 139, 250, 0.12);
+  --faq-icon-color: #4772c6;
+  --faq-icon-open-bg: rgba(233, 241, 255, 0.96);
+  --faq-icon-open-color: #2d63db;
+  --faq-answer-border: rgba(89, 139, 250, 0.12);
+}
