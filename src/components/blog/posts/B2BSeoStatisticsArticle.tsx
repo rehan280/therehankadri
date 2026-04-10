@@ -70,7 +70,7 @@ These are the stats that matter most. They show exactly where the industry is he
 
 **80% of users now rely on AI-generated summaries to distill complex information** (Bain & Company, 2026)
 
-**95% of B2B marketers now use AI** (Commonplaces, 2026)
+**[95% of B2B marketers now use AI](/stats/b2b)** (Commonplaces, 2026)
 
 **61% of B2B buyers prefer an overall rep-free buying experience** (Gartner, 2026)
 
@@ -352,7 +352,7 @@ The brands winning today got into the buyer's head before the buying process sta
 
 The brands losing? They're still producing generic content and waiting for inbound leads that never come.
 
-The stats don't lie.
+The [stats](/stats) don't lie.
 
 Now it's your turn to act on them.`;
 
@@ -443,7 +443,7 @@ const insightStatPattern =
 
 function renderInlineMarkdown(text: string): ReactNode[] {
   const fragments: ReactNode[] = [];
-  const pattern = /(\*\*(.+?)\*\*)/g;
+  const pattern = /(\*\*(.+?)\*\*)|(\[([^\]]+)\]\(([^)]+)\))/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 
@@ -451,7 +451,17 @@ function renderInlineMarkdown(text: string): ReactNode[] {
     if (match.index > lastIndex) {
       fragments.push(text.slice(lastIndex, match.index));
     }
-    fragments.push(<strong key={`strong-${match.index}`}>{match[2]}</strong>);
+
+    if (match[2]) {
+      fragments.push(<strong key={`strong-${match.index}`}>{match[2]}</strong>);
+    } else if (match[4] && match[5]) {
+      fragments.push(
+        <a key={`link-${match.index}`} href={match[5]}>
+          {match[4]}
+        </a>
+      );
+    }
+
     lastIndex = match.index + match[0].length;
   }
 
