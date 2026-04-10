@@ -53,6 +53,32 @@
   max-width: 32rem;
 }
 
+.heroBreadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.heroBreadcrumbLink {
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #1f6be6;
+  text-decoration: none;
+}
+
+.heroBreadcrumbLink:hover {
+  color: #0d53c8;
+}
+
+.heroBreadcrumbDivider {
+  color: rgba(16, 32, 58, 0.4);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
 .heroEyebrow {
   font-size: 0.92rem;
   font-weight: 800;

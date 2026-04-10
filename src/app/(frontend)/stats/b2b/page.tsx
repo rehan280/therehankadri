@@ -95,7 +95,13 @@ export default async function B2BStatsHubPage() {
       <section className={styles.hero}>
         <div className={styles.heroShell}>
           <div className={styles.heroContent}>
-            <span className={styles.heroEyebrow}>B2B Statistics</span>
+            <div className={styles.heroBreadcrumb}>
+              <Link href="/stats" className={styles.heroBreadcrumbLink}>
+                Stats
+              </Link>
+              <span className={styles.heroBreadcrumbDivider}>/</span>
+              <span className={styles.heroEyebrow}>B2B Statistics</span>
+            </div>
             <h1 className={styles.heroTitle}>B2B Statistics Hub</h1>
             <p className={styles.heroCopy}>{hubIntro}</p>
             <div className={styles.heroActions}>
