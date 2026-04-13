@@ -73,7 +73,7 @@ function getHubPathForSubcategory(name: string) {
   }
 
   if (normalizedName === "b2b") {
-    return "/stats/b2b/seo";
+    return "/stats/b2b";
   }
 
   return "/stats";
@@ -135,6 +135,9 @@ export default async function StatsHubPage() {
             <span className={styles.heroEyebrow}>Statistics Hub</span>
             <h1 className={styles.heroTitle}>Research-Driven Statistics Hub</h1>
             <p className={styles.heroCopy}>{hubIntro}</p>
+            <p className={styles.heroCopy}>
+              Use these pages to compare audience size, platform adoption, creator economics, and category-level shifts without bouncing between disconnected sources.
+            </p>
             <a href="#statistics-directory" className={styles.heroButton}>
               <span>Explore Stats</span>
               <ArrowRight size={18} strokeWidth={2.1} />
@@ -166,16 +169,22 @@ export default async function StatsHubPage() {
                 <div key={group.name} className={styles.topicGrid}>
                   <div className={styles.topicCard}>
                     <span className={styles.topicCardLabel}>Statistics</span>
-                    <strong className={styles.topicCardTitle}>{group.name} Statistics</strong>
+                    <h2 className={styles.topicCardTitle}>{group.name} Statistics</h2>
                     <p className={styles.topicCardCopy}>
                       Curated statistics pages for {group.name.toLowerCase()} trends, growth
                       benchmarks, audience signals, and platform insights.
+                    </p>
+                    <p className={styles.topicCardCopy}>
+                      Start with the hub overview, then jump into the specific pages that match the market or platform question you are trying to answer.
                     </p>
                   </div>
 
                   <div className={styles.topicLearn}>
                     <span className={styles.topicMiniHeading}>What you&apos;ll find</span>
                     <p className={styles.topicLearnCopy}>{getGroupDescription(group.name)}</p>
+                    <p className={styles.topicLearnCopy}>
+                      Each section is meant to make internal research faster, with direct paths into live stats pages instead of another full-site search.
+                    </p>
                   </div>
 
                   <div className={styles.topicResources}>

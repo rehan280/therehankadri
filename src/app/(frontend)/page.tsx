@@ -302,30 +302,6 @@ export default function Home() {
     },
   ];
 
-  const visualProofItems: ProofShowcase[] = [
-    {
-      img: "/ranked-website-proof.webp", alt: "Ranked Website Proof",
-      tag: "SEO Dominance • B2B Rankings",
-      h3: "#1 Ranked Global Websites",
-      p: "Secured the absolute top search spots globally for high-intent keywords connecting product value directly to enterprise search intent.",
-      features: [{ title: "Search Monopoly", desc: "Consistently outranking massive enterprise competitors globally." }],
-    },
-    {
-      img: "/youtube-proof.webp", alt: "YouTube Analytics",
-      tag: "Growth Scaling • Backend",
-      h3: "Massive Impression Scaling",
-      p: "The backend dashboard proving exponential growth patterns. Millions of targeted impressions scaling dramatically week over week through systemic editorial ops.",
-      features: [{ title: "Consistent Predictability", desc: "Undeniable backend data proving the exact scalability of my systems." }],
-    },
-    {
-      img: "/traffic shot 4million.webp", alt: "Traffic proof analytics",
-      tag: "Traffic Proof • Search Console",
-      h3: "Traffic proof that backs up the growth claim",
-      p: "Search Console screenshots showing multi-million click and impression volume, added as direct evidence behind the 1M+ traffic case study.",
-      features: [{ title: "Search Console Evidence", desc: "Direct click and impression screenshots reinforcing the 1M+ traffic performance claim." }],
-    },
-  ];
-
   return (
     <main className="site-shell">
       <script
@@ -343,7 +319,7 @@ export default function Home() {
               <span className="hero-line-static">I help B2B brands rank <span className="text-orange">#1 on Google</span></span>
               <span className="hero-line-static">and scale <span className="text-orange">YouTube</span> into real leads.</span>
             </h1>
-            <h1 className="hero-title hero-title-mobile">
+            <p className="hero-title hero-title-mobile" aria-hidden="true">
               <span className="hero-mobile-line">I help B2B brands</span>
               <span className="hero-mobile-line">
                 rank <span className="text-orange">#1 on Google</span>
@@ -352,7 +328,7 @@ export default function Home() {
                 and scale <span className="text-orange">YouTube</span>
               </span>
               <span className="hero-mobile-line">into real leads.</span>
-            </h1>
+            </p>
             <p className="hero-subtitle hero-subtitle-desktop">
               Growth systems built to turn search visibility and content reach into qualified pipeline, not vanity metrics.
             </p>
@@ -1014,8 +990,8 @@ export default function Home() {
             <div className="marquee-content">
               {["Organic SEO Pipelines", "B2B Lead Generation Systems", "Content & Video Ops", "LinkedIn Outreach Systems", "YouTube Growth Systems",
                 "Organic SEO Pipelines", "B2B Lead Generation Systems", "Content & Video Ops", "LinkedIn Outreach Systems", "YouTube Growth Systems"].map((t, i) => (
-                <div className="marquee-item" key={i}>{t}</div>
-              ))}
+                  <div className="marquee-item" key={i}>{t}</div>
+                ))}
             </div>
           </div>
         </div>

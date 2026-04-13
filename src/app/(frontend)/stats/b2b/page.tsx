@@ -104,6 +104,9 @@ export default async function B2BStatsHubPage() {
             </div>
             <h1 className={styles.heroTitle}>B2B Statistics Hub</h1>
             <p className={styles.heroCopy}>{hubIntro}</p>
+            <p className={styles.heroCopy}>
+              The goal is simple: help you get from a broad B2B research question to the exact benchmark page you need without wasting time digging through mixed-intent content.
+            </p>
             <div className={styles.heroActions}>
               <a href="#b2b-stats-directory" className={styles.heroButton}>
                 <span>Explore B2B Stats</span>
@@ -136,10 +139,13 @@ export default async function B2BStatsHubPage() {
           <div className={styles.topicGrid}>
             <div className={styles.topicCard}>
               <span className={styles.topicCardLabel}>B2B Statistics</span>
-              <strong className={styles.topicCardTitle}>Pipeline Research Shelf</strong>
+              <h2 className={styles.topicCardTitle}>Pipeline Research Shelf</h2>
               <p className={styles.topicCardCopy}>
                 B2B benchmark posts for growth, demand generation, content performance, and
                 revenue-minded marketing decisions.
+              </p>
+              <p className={styles.topicCardCopy}>
+                These pages are organized to support planning, positioning, and stakeholder reporting with faster access to source-backed numbers.
               </p>
             </div>
 

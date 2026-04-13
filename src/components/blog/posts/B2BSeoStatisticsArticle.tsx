@@ -705,15 +705,22 @@ function DonutShareChart({
   items: DonutSlice[];
 }) {
   const total = items.reduce((sum, item) => sum + item.value, 0);
-  let runningTotal = 0;
-  const donutStops = items
-    .map((item) => {
-      const start = (runningTotal / total) * 100;
-      runningTotal += item.value;
-      const end = (runningTotal / total) * 100;
-      return `${item.color} ${start}% ${end}%`;
-    })
-    .join(", ");
+  const { stops: donutStops } = items.reduce<{
+    runningTotal: number;
+    stops: string[];
+  }>(
+    (accumulator, item) => {
+      const start = (accumulator.runningTotal / total) * 100;
+      const nextTotal = accumulator.runningTotal + item.value;
+      const end = (nextTotal / total) * 100;
+
+      accumulator.stops.push(`${item.color} ${start}% ${end}%`);
+      accumulator.runningTotal = nextTotal;
+
+      return accumulator;
+    },
+    { runningTotal: 0, stops: [] }
+  );
 
   return (
     <section className={styles.youtubeVisualPanel} aria-label={title}>

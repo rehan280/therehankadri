@@ -71,7 +71,7 @@ export type BlogPost = {
 export const defaultBlogAuthor: BlogAuthor = {
   name: "Rehan Kadri",
   role: "Growth Marketing Strategist",
-  image: "/rehan.png",
+  image: "/The Rehan Kadri.webp",
   bio: "Rehan Kadri is an SEO specialist, content strategist, and growth marketer with 8+ years of hands-on experience. He started his journey at the age of 14 and has since grown a blog to 1M+ traffic and built an audience of 33K+ subscribers. He helps brands and creators scale through SEO, social media marketing, and data-driven strategies, with deep expertise in YouTube growth.",
   socials: {
     twitter: "https://x.com/rehanous",

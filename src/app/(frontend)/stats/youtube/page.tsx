@@ -88,6 +88,9 @@ export default async function YouTubeStatsHubPage() {
             <span className={styles.heroEyebrow}>YouTube Statistics</span>
             <h1 className={styles.heroTitle}>YouTube Statistics Hub</h1>
             <p className={styles.heroCopy}>{hubIntro}</p>
+            <p className={styles.heroCopy}>
+              This hub is built for marketers, creators, and researchers who need quick access to reliable numbers on audience scale, channel growth, and platform monetization.
+            </p>
             {featuredPost ? (
               <Link href={getPostPath(featuredPost.slug)} className={styles.heroButton}>
                 <span>Explore Hub</span>
@@ -115,10 +118,13 @@ export default async function YouTubeStatsHubPage() {
           <div className={styles.topicGrid}>
             <div className={styles.topicCard}>
               <span className={styles.topicCardLabel}>YouTube Statistics</span>
-              <strong className={styles.topicCardTitle}>YouTube Research Stack</strong>
+              <h2 className={styles.topicCardTitle}>YouTube Research Stack</h2>
               <p className={styles.topicCardCopy}>
                 Updated statistics pages for YouTube channels, users, revenue, and platform
                 growth.
+              </p>
+              <p className={styles.topicCardCopy}>
+                It gives you one stable place to navigate the current library and find the next supporting data point quickly.
               </p>
             </div>
 
@@ -128,6 +134,9 @@ export default async function YouTubeStatsHubPage() {
                 Explore the exact posts covering YouTube users, active channels, Shorts, and
                 platform-level growth trends. New YouTube statistics posts tagged under this
                 subcategory will automatically appear here.
+              </p>
+              <p className={styles.topicLearnCopy}>
+                Use it when you need a clean starting point for deck research, benchmark comparisons, or creator-market sizing.
               </p>
             </div>
 

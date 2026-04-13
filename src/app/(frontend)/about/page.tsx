@@ -49,7 +49,7 @@ function getAboutHeroLineClass(index: number, total: number) {
 export const metadata: Metadata = createPageMetadata({
   title: "About Rehan Kadri | SEO & Growth Strategist",
   description:
-    "Learn more about Rehan Kadri, the growth marketer behind tested SEO, content, and audience growth systems used to scale Rehanous.com to 1M+ monthly organic visitors.",
+    "Learn how Rehan Kadri built tested SEO, content, and audience-growth systems that scaled Rehanous.com to 1M+ monthly organic visitors.",
   path: "/about",
   type: "profile",
   imageAlt: "Growth proof from The Rehan Kadri",
@@ -110,7 +110,7 @@ const aboutPageJsonLd = {
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
-      url: buildAbsoluteImageUrl("/favicon/web-app-manifest-512x512.png"),
+      url: buildAbsoluteImageUrl("/web-app-manifest-512x512.png"),
     },
   },
 };

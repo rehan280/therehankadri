@@ -10,7 +10,7 @@ import { monoFont } from "@/lib/mono-font";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Stats Hub | Rehan Kadri",
+  title: "Marketing Statistics Hub | Rehan Kadri",
   description:
     "Statistics-focused content on YouTube, SEO, and digital growth trends.",
   path: "/stats",

@@ -1,0 +1,440 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  padding: clamp(7.5rem, 12vw, 10rem) 0 clamp(4rem, 8vw, 6.5rem);
+  overflow: clip;
+}
+
+.page::before,
+.page::after {
+  content: "";
+  position: absolute;
+  inset: auto;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(14px);
+}
+
+.page::before {
+  top: 10rem;
+  left: -8rem;
+  width: 18rem;
+  height: 18rem;
+  background: radial-gradient(circle, rgba(255, 90, 54, 0.24), transparent 72%);
+}
+
+.page::after {
+  right: -4rem;
+  bottom: 3rem;
+  width: 20rem;
+  height: 20rem;
+  background: radial-gradient(circle, rgba(255, 188, 160, 0.32), transparent 72%);
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: stretch;
+}
+
+.panel,
+.signalCard {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 249, 244, 0.84)),
+    rgba(255, 255, 255, 0.78);
+  box-shadow:
+    0 28px 80px rgba(34, 22, 12, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+}
+
+.panel {
+  padding: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.signalCard {
+  padding: clamp(1.25rem, 2.6vw, 1.75rem);
+  display: grid;
+  gap: 1.15rem;
+  align-content: start;
+}
+
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(18, 18, 18, 0.7);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 2.8rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--brand-orange), transparent);
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid rgba(255, 90, 54, 0.16);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--brand-orange);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.statusDot {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 0 0.28rem rgba(255, 90, 54, 0.14);
+}
+
+.code {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-copy), Arial, sans-serif;
+  font-size: clamp(4.4rem, 12vw, 7.4rem);
+  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: -0.08em;
+  color: #151515;
+}
+
+.title {
+  max-width: 12ch;
+  margin-bottom: 1rem;
+  font-family: var(--font-hero), var(--font-sans), sans-serif;
+  font-size: clamp(2.4rem, 5vw, 4.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.07em;
+}
+
+.titleAccent {
+  color: var(--brand-orange);
+}
+
+.description {
+  max-width: 58ch;
+  font-family: var(--font-copy), Arial, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.8;
+  color: #5f5f69;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.8rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.4rem;
+  padding: 0.95rem 1.4rem;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    background 0.25s ease;
+}
+
+.primaryAction {
+  color: white;
+  background: linear-gradient(135deg, #ff704d, #ff5a36 55%, #e84d2c);
+  box-shadow:
+    0 16px 36px rgba(255, 90, 54, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.secondaryAction {
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  background: rgba(255, 255, 255, 0.78);
+  color: #181818;
+}
+
+.primaryAction:hover,
+.secondaryAction:hover {
+  transform: translateY(-2px);
+}
+
+.secondaryAction:hover {
+  border-color: rgba(255, 90, 54, 0.34);
+  color: var(--brand-orange);
+}
+
+.quickLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.3rem;
+}
+
+.quickLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.68rem 0.95rem;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  background: rgba(255, 255, 255, 0.56);
+  color: #36363b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.quickLink:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 90, 54, 0.32);
+  color: var(--brand-orange);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+
+.metric {
+  padding: 1rem;
+  border: 1px solid rgba(17, 17, 17, 0.06);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 247, 242, 0.8));
+}
+
+.metricValue {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-family: var(--font-hero), var(--font-sans), sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: #131313;
+}
+
+.metricLabel {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6d6d76;
+}
+
+.signalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.signalKicker {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: #6d6d76;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.signalTitle {
+  font-family: var(--font-hero), var(--font-sans), sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.signalBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.1rem;
+  min-height: 4.1rem;
+  border: 1px solid rgba(255, 90, 54, 0.16);
+  background: radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.96), rgba(255, 229, 220, 0.88));
+  color: var(--brand-orange);
+  font-family: var(--font-hero), var(--font-sans), sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.signalPanel {
+  position: relative;
+  min-height: 12rem;
+  padding: 1rem;
+  border: 1px solid rgba(17, 17, 17, 0.06);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 245, 239, 0.84));
+}
+
+.gridGlow {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(17, 17, 17, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 17, 0.06) 1px, transparent 1px);
+  background-size: 2.8rem 2.8rem;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.78), transparent);
+  opacity: 0.36;
+}
+
+.signalPath {
+  position: absolute;
+  inset: auto 1.1rem 2rem 1.1rem;
+  height: 5rem;
+  border-bottom: 2px solid rgba(255, 90, 54, 0.34);
+  border-left: 2px solid rgba(255, 90, 54, 0.34);
+}
+
+.signalPath::before,
+.signalPath::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff845f, #ff5a36);
+  box-shadow: 0 0 0 0.35rem rgba(255, 90, 54, 0.12);
+}
+
+.signalPath::before {
+  top: -0.2rem;
+  left: 15%;
+  width: 0.7rem;
+  height: 0.7rem;
+}
+
+.signalPath::after {
+  top: -2.35rem;
+  right: 10%;
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.signalCopy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.signalText {
+  font-family: var(--font-copy), Arial, sans-serif;
+  color: #63636b;
+  line-height: 1.75;
+}
+
+.signalList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.signalItem {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.7rem;
+  align-items: start;
+  font-size: 0.96rem;
+  color: #303037;
+}
+
+.signalItemMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border: 1px solid rgba(255, 90, 54, 0.16);
+  background: rgba(255, 90, 54, 0.08);
+  color: var(--brand-orange);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+@media (max-width: 980px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    order: 1;
+  }
+
+  .signalCard {
+    order: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-top: 6.75rem;
+  }
+
+  .eyebrowRow,
+  .signalHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    width: 100%;
+  }
+
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .quickLinks {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .quickLink {
+    justify-content: center;
+  }
+
+  .signalPanel {
+    min-height: 10.5rem;
+  }
+}

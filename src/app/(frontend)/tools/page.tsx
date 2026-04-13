@@ -26,7 +26,7 @@ const tools = [
 ];
 
 export const metadata: Metadata = createPageMetadata({
-  title: "SEO Tools | Rehan Kadri",
+  title: "Free SEO Tools | Rehan Kadri",
   description:
     "Browse free SEO and growth tools from Rehan Kadri, starting with the YouTube Tag Generator for creators and marketers.",
   path: "/tools",
@@ -88,6 +88,9 @@ export default function ToolsPage() {
               <p className={styles.subtitle}>
                 Explore practical SEO tools built to help creators and marketers move faster on keyword research, content execution, and YouTube growth.
               </p>
+              <p className={styles.subtitle}>
+                Each tool is built around one clear job, so you can test an idea, get useful output, and move on without a long setup flow.
+              </p>
 
               <a href="#tools-directory" className={styles.heroButton}>
                 <span>Explore Tools</span>
@@ -119,6 +122,9 @@ export default function ToolsPage() {
             <div className={styles.sectionIntro}>
               <span className={styles.sectionLabel}>Available Now</span>
               <h2 className={styles.sectionTitle}>Start with the tool that already does real work.</h2>
+              <p className={styles.subtitle}>
+                The goal here is practical utility: focused SEO helpers that shorten research and execution time for creators, marketers, and small teams.
+              </p>
             </div>
 
             <div className={styles.toolsGrid}>
