@@ -977,6 +977,7 @@ export default function Home() {
                     alt={name}
                     width={64}
                     height={64}
+                    sizes="(max-width: 640px) 56px, 64px"
                     className="testimonial-avatar"
                   />
                 </div>

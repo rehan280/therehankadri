@@ -445,6 +445,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       alt={postAuthor.name}
                       width={80}
                       height={80}
+                      sizes="45px"
                       className={styles.authorAvatar}
                     />
                   </div>
@@ -563,6 +564,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       alt={postAuthor.name}
                       width={150}
                       height={150}
+                      sizes="(max-width: 640px) 112px, 150px"
                       className={styles.articleAuthorImage}
                     />
                     <div className={styles.articleAuthorIdentityText}>
