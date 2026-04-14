@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { type BlogCategory, type BlogPost, formatBlogDate } from "@/lib/blog";
+import { type BlogCategory, type BlogPost, formatBlogDisplayDate } from "@/lib/blog";
 import { getPostPath } from "@/lib/post-paths";
 import styles from "./BlogTopicSection.module.css";
 
@@ -86,7 +86,7 @@ export default function BlogTopicSectionContent({
 
                   <div className={styles.topicCardMeta}>
                     <span>{post.author.name}</span>
-                    <span>{formatBlogDate(post.publishedAt)}</span>
+                    <span>{formatBlogDisplayDate(post)}</span>
                   </div>
                 </div>
               </article>

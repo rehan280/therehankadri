@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Calendar } from "lucide-react";
 import BlogTopicSection from "@/components/blog/BlogTopicSection";
-import { formatBlogDate } from "@/lib/blog";
+import { formatBlogDisplayDate } from "@/lib/blog";
 import { getAllBlogPosts, getBlogCategories } from "@/lib/blog-content";
 import { getPostPath, isStatsPostSlug } from "@/lib/post-paths";
 import {
@@ -114,7 +114,7 @@ export default async function BlogIndexPage() {
                   <span className={styles.latestMetaDivider}>•</span>
                   <span className={styles.latestCardDate}>
                     <Calendar size={14} />
-                    {formatBlogDate(post.publishedAt)}
+                    {formatBlogDisplayDate(post)}
                   </span>
                 </div>
               </article>

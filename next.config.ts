@@ -5,6 +5,30 @@ const nextConfig: NextConfig = {
   experimental: {
     inlineCss: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/blog/youtube-users",
+        destination: "/stats/youtube/users",
+        permanent: true,
+      },
+      {
+        source: "/blog/youtube-channel-statistics",
+        destination: "/stats/youtube/channel",
+        permanent: true,
+      },
+      {
+        source: "/blog/youtube-channel-statistics-2026",
+        destination: "/stats/youtube/channel",
+        permanent: true,
+      },
+      {
+        source: "/blog/b2b-seo-statistics",
+        destination: "/stats/b2b/seo",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

@@ -26,7 +26,8 @@ import {
   type BlogBlock,
   type BlogPost,
   defaultBlogAuthor,
-  formatBlogDate,
+  formatBlogDisplayDate,
+  getBlogDisplayDateLabel,
   getBlogReadTime,
 } from "@/lib/blog";
 import {
@@ -73,6 +74,7 @@ export async function generateMetadata(): Promise<Metadata> {
     imagePath: socialImage,
     imageAlt: currentPost.title,
     publishedTime: `${currentPost.publishedAt}T00:00:00Z`,
+    modifiedTime: `${currentPost.modifiedAt ?? currentPost.publishedAt}T00:00:00Z`,
     authors: [postAuthor.name],
   });
 }
@@ -441,7 +443,7 @@ export default async function YouTubeStatsPage() {
               <div className={styles.postMetaRow}>
                 <span className={`${styles.postMetaItem} ${themeStyles.postMetaItem}`}>
                   <CalendarDays size={16} strokeWidth={2.1} />
-                  <span>{formatBlogDate(currentPost.publishedAt)}</span>
+                  <span>{getBlogDisplayDateLabel(currentPost)}: {formatBlogDisplayDate(currentPost)}</span>
                 </span>
                 <span className={`${styles.postMetaItem} ${themeStyles.postMetaItem}`}>
                   <Clock3 size={16} strokeWidth={2.1} />
@@ -617,7 +619,7 @@ export default async function YouTubeStatsPage() {
                   </h2>
                   <p className={styles.cardBlurb}>{relatedPost.cardBlurb}</p>
                   <div className={styles.cardMeta}>
-                    <span>{formatBlogDate(relatedPost.publishedAt)}</span>
+                    <span>{formatBlogDisplayDate(relatedPost)}</span>
                     <span>{getBlogReadTime(relatedPost)}</span>
                   </div>
                   <Link href={getPostPath(relatedPost.slug)} prefetch className={styles.cardLink}>

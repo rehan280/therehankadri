@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import {
   ArrowUpRight,
   CalendarDays,
@@ -26,7 +26,8 @@ import {
   type BlogBlock,
   type BlogPost,
   defaultBlogAuthor,
-  formatBlogDate,
+  formatBlogDisplayDate,
+  getBlogDisplayDateLabel,
   getBlogReadTime,
 } from "@/lib/blog";
 import {
@@ -80,6 +81,7 @@ export async function generateMetadata({
     imagePath: socialImage,
     imageAlt: currentPost.title,
     publishedTime: `${currentPost.publishedAt}T00:00:00Z`,
+    modifiedTime: `${currentPost.modifiedAt ?? currentPost.publishedAt}T00:00:00Z`,
     authors: [postAuthor.name],
   });
 }
@@ -262,7 +264,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
 
   if (isStatsPostSlug(slug)) {
-    redirect(getPostPath(slug));
+    permanentRedirect(getPostPath(slug));
   }
 
   const [post, allPosts] = await Promise.all([getBlogPostBySlug(slug), getAllBlogPosts()]);
@@ -459,7 +461,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <div className={styles.postMetaRow}>
                 <span className={styles.postMetaItem}>
                   <CalendarDays size={16} strokeWidth={2.1} />
-                  <span>{formatBlogDate(currentPost.publishedAt)}</span>
+                  <span>{getBlogDisplayDateLabel(currentPost)}: {formatBlogDisplayDate(currentPost)}</span>
                 </span>
                 <span className={styles.postMetaItem}>
                   <Clock3 size={16} strokeWidth={2.1} />
@@ -635,7 +637,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </h2>
                   <p className={styles.cardBlurb}>{relatedPost.cardBlurb}</p>
                   <div className={styles.cardMeta}>
-                    <span>{formatBlogDate(relatedPost.publishedAt)}</span>
+                    <span>{formatBlogDisplayDate(relatedPost)}</span>
                     <span>{getBlogReadTime(relatedPost)}</span>
                   </div>
                   <Link href={getPostPath(relatedPost.slug)} prefetch className={styles.cardLink}>

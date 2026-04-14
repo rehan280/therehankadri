@@ -28,6 +28,7 @@ type CreateArticleMetadataOptions = {
   imagePath?: string;
   imageAlt?: string;
   publishedTime?: string;
+  modifiedTime?: string;
   authors?: string[];
 };
 
@@ -102,6 +103,7 @@ export function createArticleMetadata({
   imagePath = DEFAULT_SOCIAL_IMAGE_PATH,
   imageAlt = title,
   publishedTime,
+  modifiedTime,
   authors,
 }: CreateArticleMetadataOptions): Metadata {
   const canonicalUrl = buildCanonicalUrl(path);
@@ -122,6 +124,7 @@ export function createArticleMetadata({
       siteName: SITE_NAME,
       type: "article",
       publishedTime,
+      modifiedTime,
       authors,
       images: [
         {
