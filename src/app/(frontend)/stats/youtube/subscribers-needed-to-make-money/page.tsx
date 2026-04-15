@@ -121,101 +121,6 @@ function getStandaloneStrongText(text: string) {
   return match ? match[1] : null;
 }
 
-function buildHeroTitleLines(title: string) {
-  const words = title.trim().split(/\s+/).filter(Boolean);
-  const joinedLength = (items: string[]) => items.join(" ").length;
-  const longestWordLength = Math.max(...words.map((word) => word.length));
-  const buildLineGroups = (lineCount: number, maxLength: number) => {
-    const groups: string[][][] = [];
-
-    const visit = (startIndex: number, remainingLines: number, current: string[][]) => {
-      if (remainingLines === 1) {
-        const lastLine = words.slice(startIndex);
-        if (lastLine.length === 0 || joinedLength(lastLine) > maxLength) return;
-        groups.push([...current, lastLine]);
-        return;
-      }
-
-      const maxEnd = words.length - remainingLines + 1;
-      for (let endIndex = startIndex + 1; endIndex <= maxEnd; endIndex += 1) {
-        const nextLine = words.slice(startIndex, endIndex);
-        if (joinedLength(nextLine) > maxLength) break;
-        visit(endIndex, remainingLines - 1, [...current, nextLine]);
-      }
-    };
-
-    visit(0, lineCount, []);
-    return groups;
-  };
-
-  if (words.length <= 3) return [title];
-  if (longestWordLength > 18) return [title];
-
-  const scoreLines = (lineGroups: string[][]) => {
-    const lengths = lineGroups.map((line) => joinedLength(line));
-    const wordsPerLine = lineGroups.map((line) => line.length);
-    const maxLength = Math.max(...lengths);
-    const minLength = Math.min(...lengths);
-    const balancePenalty = maxLength - minLength;
-    const orphanPenalty = lengths[lengths.length - 1] < 7 ? 18 : 0;
-    const singleWordLastPenalty = wordsPerLine[wordsPerLine.length - 1] === 1 ? 8 : 0;
-    const increasingPenalty = lengths.slice(1).reduce((total, length, index) => {
-      const previous = lengths[index];
-      return total + (length > previous ? (length - previous) * 2.5 : 0);
-    }, 0);
-    const squarePenalty =
-      lineGroups.length >= 4 && maxLength - minLength < 8 ? 18 : 0;
-    const bottomTooLongPenalty =
-      lineGroups.length >= 3 && lengths[lengths.length - 1] > lengths[0] * 0.92 ? 12 : 0;
-    const taperPenalty =
-      lineGroups.length >= 3 && lengths[0] - lengths[lengths.length - 1] < 6 ? 10 : 0;
-    const longLinePenalty = lengths.reduce((total, length) => {
-      if (length > 30) return total + (length - 30) * 12;
-      if (length > 28) return total + (length - 28) * 7;
-      if (length > 26) return total + (length - 26) * 4;
-      return total;
-    }, 0);
-    const twoLinePreference = lineGroups.length === 2 && maxLength <= 30 ? -18 : 0;
-    const threeLinePreference = lineGroups.length === 3 && maxLength <= 24 ? -8 : 0;
-    const lineCountPenalty =
-      lineGroups.length === 2 ? 0 : lineGroups.length === 3 ? 10 : 36;
-
-    return (
-      balancePenalty +
-      orphanPenalty +
-      singleWordLastPenalty +
-      increasingPenalty +
-      squarePenalty +
-      bottomTooLongPenalty +
-      taperPenalty +
-      longLinePenalty +
-      twoLinePreference +
-      threeLinePreference +
-      lineCountPenalty
-    );
-  };
-
-  const candidateGroups = [...buildLineGroups(2, 28), ...buildLineGroups(3, 24)];
-  if (candidateGroups.length === 0) return [title];
-
-  const best = candidateGroups.reduce<string[][] | null>((currentBest, candidate) => {
-    if (!currentBest) return candidate;
-    return scoreLines(candidate) < scoreLines(currentBest) ? candidate : currentBest;
-  }, null);
-
-  return best ? best.map((line) => line.join(" ")) : [title];
-}
-
-function getHeroLineClass(index: number, totalLines: number) {
-  if (totalLines <= 1) return blogStyles.postHeroLineSingle;
-  if (totalLines === 2) {
-    return index === 0 ? blogStyles.postHeroLineTop : blogStyles.postHeroLineMiddle;
-  }
-  if (index === 0) return blogStyles.postHeroLineTop;
-  if (index === 1) return blogStyles.postHeroLineMiddle;
-  return blogStyles.postHeroLineBottom;
-}
-
 function getSectionDisplayTitle(sectionId: string, fallbackTitle: string) {
   return SECTION_TITLE_OVERRIDES[sectionId] ?? fallbackTitle;
 }
@@ -328,7 +233,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const article = await getSubscribersNeededToMakeMoneyArticle();
 
   return createArticleMetadata({
-    title: article.title || PAGE_TITLE,
+    title: PAGE_TITLE,
     description: article.description,
     path: PAGE_PATH,
     imagePath: PAGE_IMAGE_PATH,
@@ -357,7 +262,6 @@ export default async function SubscribersNeededToMakeMoneyPage() {
   const authorArticleCount = (allPosts ?? []).filter(
     (entry) => (entry.author ?? defaultBlogAuthor).name === postAuthor.name
   ).length;
-  const heroTitleLines = buildHeroTitleLines(article.title || PAGE_TITLE);
   const canonicalUrl = buildCanonicalUrl(PAGE_PATH);
   const socialImage = buildAbsoluteImageUrl(PAGE_IMAGE_PATH);
   const readTime = getReadTime(article.wordCount);
@@ -389,7 +293,7 @@ export default async function SubscribersNeededToMakeMoneyPage() {
       {
         "@type": "ListItem",
         position: 4,
-        name: article.title || PAGE_TITLE,
+        name: PAGE_TITLE,
         item: canonicalUrl,
       },
     ],
@@ -397,7 +301,7 @@ export default async function SubscribersNeededToMakeMoneyPage() {
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: article.title || PAGE_TITLE,
+    headline: PAGE_TITLE,
     description: article.description,
     mainEntityOfPage: canonicalUrl,
     url: canonicalUrl,
@@ -488,19 +392,8 @@ export default async function SubscribersNeededToMakeMoneyPage() {
       >
         <div className={`${blogStyles.heroInner} ${blogStyles.postHeroInner} ${blogStyles.postHeroGrid}`}>
           <div className={blogStyles.postHeroContent}>
-            <span className={`${blogStyles.heroPill} ${themeStyles.heroPill}`}>
-              YouTube Statistics
-            </span>
-
             <h1 className={`${blogStyles.postHeroTitle} ${blogStyles.postHeroTitleSplit}`}>
-              {heroTitleLines.map((line, index) => (
-                <span
-                  key={`${line}-${index}`}
-                  className={`${blogStyles.postHeroLine} ${getHeroLineClass(index, heroTitleLines.length)}`}
-                >
-                  {line}
-                </span>
-              ))}
+              {PAGE_TITLE}
             </h1>
 
             <div className={blogStyles.authorRow}>
@@ -578,7 +471,7 @@ export default async function SubscribersNeededToMakeMoneyPage() {
                 <div className={blogStyles.shareRailInner}>
                   <ArticleSocialShare
                     slug={PAGE_SLUG}
-                    title={article.title || PAGE_TITLE}
+                    title={PAGE_TITLE}
                     url={canonicalUrl}
                   />
                 </div>
@@ -661,7 +554,7 @@ export default async function SubscribersNeededToMakeMoneyPage() {
               <div className={`${blogStyles.sidebarStack} ${blogStyles.shareRailInner}`}>
                 <ArticleSocialShare
                   slug={PAGE_SLUG}
-                  title={article.title || PAGE_TITLE}
+                  title={PAGE_TITLE}
                   url={canonicalUrl}
                 />
               </div>
