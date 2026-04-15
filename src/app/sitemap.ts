@@ -30,6 +30,11 @@ const staticRoutes: MetadataRoute.Sitemap = [
     priority: 0.8,
   },
   {
+    url: `${SITE_URL}/stats/youtube/subscribers-needed-to-make-money`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
     url: `${SITE_URL}/stats/b2b`,
     changeFrequency: "weekly",
     priority: 0.8,

@@ -69,6 +69,7 @@ const showcaseImageDimensions: Record<string, { width: number; height: number }>
 function getShowcaseImageDimensions(src: string) {
   return showcaseImageDimensions[src] ?? { width: 1200, height: 900 };
 }
+
 const renderServiceDiagramIcon = (kind: ServiceDiagramIconKind) => {
   switch (kind) {
     case "keyword":
@@ -301,6 +302,18 @@ export default function Home() {
       ],
     },
   ];
+  const featuredStatsArticle = {
+    href: "/stats/youtube/subscribers-needed-to-make-money",
+    tag: "Featured Research",
+    title: "How Many YouTube Subscribers Do You Need to Make Money in 2026?",
+    copy:
+      "A newly published YouTube monetization article built from the full source file, with structured metadata, FAQ schema, and a clean stats URL for search.",
+    bullets: [
+      "Exact article published at /stats/youtube/subscribers-needed-to-make-money",
+      "SVG artwork added to the homepage for stronger internal promotion",
+      "WEBP social image wired into metadata, OG tags, and sitemap coverage",
+    ],
+  };
 
   return (
     <main className="site-shell">
@@ -736,6 +749,43 @@ export default function Home() {
         </div>
       </section>
       */}
+
+      <section className="section-gray section-padding featured-insight-section">
+        <div className="container">
+          <div className="featured-insight-shell">
+            <div className="featured-insight-copy">
+              <span className="section-label">{featuredStatsArticle.tag}</span>
+              <h2 className="section-title">
+                Fresh <span className="text-orange">YouTube Stats</span> Published
+              </h2>
+              <p className="section-desc">{featuredStatsArticle.copy}</p>
+              <ul className="featured-insight-list" aria-label="Article highlights">
+                {featuredStatsArticle.bullets.map((item) => (
+                  <li key={item} className="featured-insight-item">
+                    <span className="featured-insight-check">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link href={featuredStatsArticle.href} className="featured-insight-cta">
+                <span>Read the full article</span>
+                <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+
+            <Link href={featuredStatsArticle.href} className="featured-insight-artwork">
+              <Image
+                src="/stats/youtube/subscribers-needed-to-make-money/youtube-subscribers-needed-to-make-money.svg"
+                alt="YouTube subscribers needed to make money article preview"
+                width={300}
+                height={169}
+                unoptimized
+                className="featured-insight-image"
+              />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* ── 6.5. GROWTH PATHS ── */}
       <section id="growth" className="section-light section-padding growth-paths-section">

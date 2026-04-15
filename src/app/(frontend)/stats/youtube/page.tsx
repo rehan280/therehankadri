@@ -14,6 +14,13 @@ import {
 } from "@/lib/seo";
 import styles from "./youtube-stats.module.css";
 
+const featuredYouTubeStatsResources = [
+  {
+    title: "How Many YouTube Subscribers Do You Need to Make Money in 2026?",
+    url: "/stats/youtube/subscribers-needed-to-make-money",
+  },
+] as const;
+
 export const metadata: Metadata = createPageMetadata({
   title: "YouTube Statistics Hub | Rehan Kadri",
   description:
@@ -61,12 +68,20 @@ export default async function YouTubeStatsHubPage() {
         ...hubJsonLd,
         mainEntity: {
           "@type": "ItemList",
-          itemListElement: youtubePosts.map((post, index) => ({
-            "@type": "ListItem",
-            position: index + 1,
-            name: post.title,
-            url: buildCanonicalUrl(getPostPath(post.slug)),
-          })),
+          itemListElement: [
+            ...featuredYouTubeStatsResources.map((resource, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: resource.title,
+              url: buildCanonicalUrl(resource.url),
+            })),
+            ...youtubePosts.map((post, index) => ({
+              "@type": "ListItem",
+              position: featuredYouTubeStatsResources.length + index + 1,
+              name: post.title,
+              url: buildCanonicalUrl(getPostPath(post.slug)),
+            })),
+          ],
         },
       },
       breadcrumbJsonLd,
@@ -142,9 +157,17 @@ export default async function YouTubeStatsHubPage() {
 
             <div className={styles.topicResources}>
               <span className={styles.topicMiniHeading}>
-                {youtubePosts.length} {youtubePosts.length === 1 ? "resource" : "resources"}
+                {featuredYouTubeStatsResources.length + youtubePosts.length}{" "}
+                {featuredYouTubeStatsResources.length + youtubePosts.length === 1 ? "resource" : "resources"}
               </span>
               <ul className={styles.resourceList}>
+                {featuredYouTubeStatsResources.map((resource) => (
+                  <li key={resource.url} className={styles.resourceItem}>
+                    <Link href={resource.url} className={styles.resourceLink}>
+                      {resource.title}
+                    </Link>
+                  </li>
+                ))}
                 {youtubePosts.map((post) => (
                   <li key={post.slug} className={styles.resourceItem}>
                     <Link href={getPostPath(post.slug)} className={styles.resourceLink}>

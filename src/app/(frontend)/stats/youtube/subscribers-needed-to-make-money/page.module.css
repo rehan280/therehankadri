@@ -1,0 +1,313 @@
+.pageTheme {}
+
+.heroPill {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.14) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.postMetaItem {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+.tocTheme a {
+  color: #d91919 !important;
+}
+
+.tocTheme a:hover,
+.tocTheme a[aria-current="true"] {
+  color: #a30f0f !important;
+}
+
+.articleProse a {
+  color: #cb341b !important;
+  text-decoration-color: rgba(203, 52, 27, 0.35) !important;
+}
+
+.articleProse a:hover {
+  color: #9f2310 !important;
+  text-decoration-color: rgba(159, 35, 16, 0.72) !important;
+}
+
+.articleFlow {
+  display: grid;
+  gap: 1rem;
+}
+
+.highlightStack {
+  display: grid;
+  gap: 1rem;
+  margin: 0.35rem 0 0.85rem;
+}
+
+.highlightCard {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.15rem 1.2rem;
+  border: 1px solid rgba(217, 25, 25, 0.12);
+  border-radius: 1.3rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 145, 117, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(255, 251, 250, 0.98), rgba(255, 245, 242, 0.98));
+  box-shadow: 0 18px 30px rgba(217, 25, 25, 0.07);
+}
+
+.highlightLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 2rem;
+  padding: 0.42rem 0.78rem;
+  border-radius: 999px;
+  background: rgba(217, 25, 25, 0.09);
+  color: #be1c1c;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.highlightTitle {
+  margin: 0;
+  color: #1a1a1a;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.highlightBody :global(p) {
+  margin: 0;
+}
+
+.articleSection {
+  scroll-margin-top: 7rem;
+}
+
+.articleSection h2 {
+  max-width: 18ch;
+  margin-bottom: 0.55rem;
+  color: #171717;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.65rem, 2.6vw, 2.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.articleSection h3 {
+  margin: 0.85rem 0 0.1rem;
+  color: #1a1a1a;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.articleRule {
+  height: 1px;
+  margin: 0.15rem 0 0.25rem;
+  background: linear-gradient(90deg, rgba(217, 25, 25, 0.08), rgba(217, 25, 25, 0.26), rgba(217, 25, 25, 0.08));
+}
+
+.articleOrderedList {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0 0 22.95px;
+  padding-left: 1.35rem;
+  color: rgb(90, 90, 110);
+  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 31.45px;
+}
+
+.articleOrderedList li {
+  padding-left: 0.2rem;
+}
+
+.articleTableWrap {
+  margin: 0.35rem 0 1.1rem;
+  overflow-x: auto;
+  border: 1px solid rgba(217, 25, 25, 0.12);
+  border-radius: 1.35rem;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 20px 46px rgba(217, 25, 25, 0.07);
+}
+
+.articleTable {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+}
+
+.articleTable thead th {
+  padding: 0.98rem 1rem;
+  color: #b64928;
+  background: rgba(255, 215, 205, 0.42);
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.articleTable tbody td,
+.articleTable tbody th {
+  padding: 0.95rem 1rem;
+  border-top: 1px solid rgba(217, 25, 25, 0.08);
+  color: #4d3e38;
+  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  vertical-align: top;
+}
+
+.articleTable tbody th {
+  color: #231814;
+  font-weight: 700;
+  text-align: left;
+}
+
+.articleTable tbody tr:nth-child(even) td,
+.articleTable tbody tr:nth-child(even) th {
+  background: rgba(255, 247, 244, 0.8);
+}
+
+.articleIntroCard {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.3rem;
+  border: 1px solid rgba(217, 25, 25, 0.1);
+  border-radius: 1.4rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 140, 108, 0.16), transparent 35%),
+    linear-gradient(180deg, rgba(255, 252, 251, 0.98), rgba(255, 247, 244, 0.98));
+}
+
+.articleHeroImageCard {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 1.4rem;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 22px 44px rgba(100, 19, 6, 0.16);
+}
+
+.articleHeroImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.heroLayout {
+  width: min(1280px, 100%) !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.9fr);
+  gap: clamp(1.8rem, 4vw, 4rem);
+  align-items: center !important;
+}
+
+.heroContent {
+  width: 100%;
+}
+
+.heroTitle {
+  width: min(100%, 41rem) !important;
+  max-width: 41rem !important;
+  margin: 0.5rem 0 0.9rem !important;
+  font-size: clamp(2.4rem, 4.3vw, 4.1rem) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.04em !important;
+  text-align: left !important;
+}
+
+.heroMetaRow {
+  justify-content: flex-start !important;
+}
+
+.heroArtwork {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.faqTheme {
+  --faq-eyebrow-bg-start: rgba(217, 25, 25, 0.14);
+  --faq-eyebrow-bg-end: rgba(217, 25, 25, 0.08);
+  --faq-eyebrow-color: #c01818;
+  --faq-item-border: rgba(217, 25, 25, 0.16);
+  --faq-item-glow: rgba(217, 25, 25, 0.14);
+  --faq-item-surface-start: rgba(255, 244, 244, 0.98);
+  --faq-item-surface-end: rgba(255, 255, 255, 0.99);
+  --faq-item-shadow: rgba(217, 25, 25, 0.09);
+  --faq-topbar-start: rgba(255, 92, 92, 0.95);
+  --faq-topbar-end: #d91919;
+  --faq-index-border: rgba(217, 25, 25, 0.16);
+  --faq-index-color: #c01818;
+  --faq-icon-border: rgba(217, 25, 25, 0.12);
+  --faq-icon-color: #a11d1d;
+  --faq-icon-open-bg: rgba(255, 228, 228, 0.98);
+  --faq-icon-open-color: #d91919;
+  --faq-answer-border: rgba(217, 25, 25, 0.12);
+}
+
+.faqSection {
+  margin-top: 1.1rem;
+  scroll-margin-top: 7rem;
+}
+
+@media (max-width: 1180px) {
+  .heroLayout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem !important;
+  }
+
+  .heroContent {
+    order: 2;
+  }
+
+  .heroArtwork {
+    order: 1;
+    justify-content: center;
+  }
+
+  .heroTitle {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+
+  .heroMetaRow {
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .articleIntroCard {
+    padding: 1rem;
+    border-radius: 1.1rem;
+  }
+
+  .highlightCard {
+    padding: 1rem;
+    border-radius: 1.1rem;
+  }
+
+  .articleSection h3 {
+    font-size: 1.2rem;
+  }
+
+  .articleOrderedList {
+    font-size: 16px;
+    line-height: 29px;
+  }
+
+  .heroTitle {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: clamp(2rem, 10vw, 3rem) !important;
+  }
+}
