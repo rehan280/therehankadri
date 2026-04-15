@@ -34,14 +34,14 @@ import {
 
 const PAGE_PATH = "/stats/youtube/subscribers-needed-to-make-money";
 const PAGE_SLUG = "youtube-subscribers-needed-to-make-money";
-const PAGE_TITLE = "How Many YouTube Subscribers to Make Money in 2026?";
+const PAGE_TITLE = "How Many YouTube Subscribers Needed to Make Money in 2026?";
 const PAGE_IMAGE_PATH =
   "/stats/youtube/subscribers-needed-to-make-money/youtube-subscribers-needed-to-make-money.webp";
 const HERO_IMAGE_PATH =
   "/stats/youtube/subscribers-needed-to-make-money/youtube-subscribers-needed-to-make-money.svg";
 const PAGE_IMAGE_ALT = "YouTube subscribers needed to make money article graphic";
 const PUBLISHED_AT = "2026-04-14";
-const MODIFIED_AT = "2026-04-14";
+const MODIFIED_AT = "2026-04-15";
 const YOUTUBE_HERO_BACKGROUND =
   "linear-gradient(135deg, #ff4b43 0%, #ff3838 48%, #ff2923 100%)";
 const SECTION_TITLE_OVERRIDES: Record<string, string> = {

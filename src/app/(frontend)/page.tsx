@@ -305,7 +305,7 @@ export default function Home() {
   const featuredStatsArticle = {
     href: "/stats/youtube/subscribers-needed-to-make-money",
     tag: "Featured Research",
-    title: "How Many YouTube Subscribers Do You Need to Make Money in 2026?",
+    title: "How Many YouTube Subscribers Needed to Make Money in 2026?",
     copy:
       "A newly published YouTube monetization article built from the full source file, with structured metadata, FAQ schema, and a clean stats URL for search.",
     bullets: [
