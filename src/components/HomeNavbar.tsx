@@ -11,6 +11,7 @@ const aboutHref = "/about";
 const contactHref = "/contact";
 
 const navLinks = [
+  { href: blogHref, label: "Blog" },
   { href: statsHref, label: "Stats" },
   { href: serviceHref, label: "Service" },
   { href: aboutHref, label: "About Us" },
@@ -44,6 +45,7 @@ export default function HomeNavbar() {
 
   const closeMenu = () => setMenuState({ open: false, path: pathname });
   const toggleMenu = () => setMenuState({ open: !menuOpen, path: pathname });
+  const isBlogActive = pathname.startsWith(blogHref);
   const isStatsActive = pathname.startsWith(statsHref);
   const isServiceActive = pathname === "/";
   const isAboutActive = pathname === aboutHref || pathname === contactHref;
@@ -70,7 +72,9 @@ export default function HomeNavbar() {
           <div className="desktop-links">
             {navLinks.map(({ href, label }) => {
               const isActive =
-                href === statsHref
+                href === blogHref
+                  ? isBlogActive
+                  : href === statsHref
                   ? isStatsActive
                   : href === serviceHref
                     ? isServiceActive
@@ -114,11 +118,13 @@ export default function HomeNavbar() {
       <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="mobile-nav-drawer">
         <div className="mobile-drawer-links">
           <div className="mobile-drawer-top">
-            <p>Browse stats, services, and company pages.</p>
+            <p>Browse blog posts, stats, services, and company pages.</p>
           </div>
           {navLinks.map(({ href, label }) => {
             const isActive =
-              href === statsHref
+              href === blogHref
+                ? isBlogActive
+                : href === statsHref
                 ? isStatsActive
                 : href === serviceHref
                   ? isServiceActive

@@ -5,12 +5,14 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import styles from "./BlogHeader.module.css";
 
+const blogHref = "/blog";
 const statsHref = "/stats";
 const serviceHref = "/#services";
 const aboutHref = "/about";
 const contactHref = "/contact";
 
 const navLinks = [
+  { href: blogHref, label: "Blog" },
   { href: statsHref, label: "Stats" },
   { href: serviceHref, label: "Service" },
   { href: aboutHref, label: "About Us" },
@@ -26,6 +28,7 @@ export default function BlogHeader() {
   const closeMenu = () => setMenuState({ open: false, path: pathname });
   const toggleMenu = () => setMenuState({ open: !menuOpen, path: pathname });
   const blendIntoHero = !menuOpen;
+  const isBlogActive = pathname.startsWith(blogHref);
   const isStatsActive = pathname.startsWith(statsHref);
   const isServiceActive = pathname === "/";
   const isAboutActive = pathname === aboutHref || pathname === contactHref;
@@ -50,7 +53,9 @@ export default function BlogHeader() {
           <div className="desktop-links">
             {navLinks.map(({ href, label }) => {
               const isActive =
-                href === statsHref
+                href === blogHref
+                  ? isBlogActive
+                  : href === statsHref
                   ? isStatsActive
                   : href === serviceHref
                     ? isServiceActive
@@ -95,11 +100,13 @@ export default function BlogHeader() {
       <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="blog-mobile-nav-drawer">
         <div className="mobile-drawer-links">
           <div className="mobile-drawer-top">
-            <p>SEO, stats, and growth resources for qualified revenue growth.</p>
+            <p>Blog posts, stats, and growth resources for qualified revenue growth.</p>
           </div>
           {navLinks.map(({ href, label }) => {
             const isActive =
-              href === statsHref
+              href === blogHref
+                ? isBlogActive
+                : href === statsHref
                 ? isStatsActive
                 : href === serviceHref
                   ? isServiceActive
@@ -109,7 +116,7 @@ export default function BlogHeader() {
               <Link
                 key={href}
                 href={href}
-                prefetch={href === statsHref}
+                prefetch={href === blogHref || href === statsHref}
                 onClick={closeMenu}
                 className={isActive ? "active" : ""}
                 aria-current={isActive ? "page" : undefined}
