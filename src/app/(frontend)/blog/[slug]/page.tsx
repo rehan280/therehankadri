@@ -12,6 +12,11 @@ import {
   Twitter,
 } from "lucide-react";
 import BlogRichText from "@/components/blog/BlogRichText";
+import HowToRecordAudioArticle, {
+  howToRecordAudioHowToSteps,
+  howToRecordAudioHeadingItems,
+  howToRecordAudioWordCount,
+} from "@/components/blog/posts/HowToRecordAudioArticle";
 import YouTubeChannelStatisticsArticle, {
   youtubeChannelStatisticsHeadingItems,
   youtubeChannelStatisticsWordCount,
@@ -57,6 +62,7 @@ const YOUTUBE_HERO_BACKGROUND = "linear-gradient(135deg, #ff4b43 0%, #ff3838 48%
 function isYouTubePost(slug: string) {
   return slug.startsWith("youtube");
 }
+
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
@@ -221,6 +227,10 @@ function renderBlock(block: BlogBlock, key: string) {
 }
 
 function getWordCountForPost(post: BlogPost) {
+  if (post.slug === "how-to-record-audio") {
+    return howToRecordAudioWordCount;
+  }
+
   if (post.slug === "youtube-users") {
     return 4814;
   }
@@ -294,6 +304,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const youtubeUsersArticleData =
     currentPost.slug === "youtube-users" ? await getYouTubeUsersArticleData() : null;
   const isYouTubeChannelStatisticsPost = currentPost.slug === YOUTUBE_CHANNEL_STATISTICS_SLUG;
+  const isHowToRecordAudioPost = currentPost.slug === "how-to-record-audio";
   const heroTitleLines = buildHeroTitleLines(currentPost.title);
   const authorArticleCount = normalizedPosts.filter(
     (entry) => (entry.author ?? defaultBlogAuthor).name === postAuthor.name
@@ -339,6 +350,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         })),
       }
     : null;
+  const howToJsonLd = isHowToRecordAudioPost
+    ? {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: currentPost.metaTitle ?? currentPost.title,
+        description: currentPost.seoDescription,
+        image: [socialImage],
+        totalTime: `PT${Number.parseInt(postReadTime, 10) || 1}M`,
+        step: howToRecordAudioHowToSteps.map((step, index) => ({
+          "@type": "HowToStep",
+          position: index + 1,
+          name: step.name,
+          text: step.text,
+          url: step.url ? `${canonicalUrl}${step.url}` : canonicalUrl,
+        })),
+      }
+    : null;
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -380,6 +408,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     ? youtubeUsersArticleData.headings
     : isYouTubeChannelStatisticsPost
       ? youtubeChannelStatisticsHeadingItems
+      : isHowToRecordAudioPost
+        ? howToRecordAudioHeadingItems
       : currentPost.body
         ? getRichTextHeadingItems(currentPost.body)
         : currentPost.sections.map((section) => ({
@@ -406,6 +436,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
+      ) : null}
+      {howToJsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(howToJsonLd).replace(/</g, "\\u003c"),
           }}
         />
       ) : null}
@@ -514,6 +552,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     <YouTubeChannelStatisticsArticle />
                     {faqSection}
                   </>
+                ) : isHowToRecordAudioPost ? (
+                  <HowToRecordAudioArticle />
                 ) : currentPost.body ? (
                   <BlogRichText
                     data={currentPost.body}
@@ -536,7 +576,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </>
                 )}
 
-                {!youtubeUsersArticleData && !isYouTubeChannelStatisticsPost ? faqSection : null}
+                {!youtubeUsersArticleData && !isYouTubeChannelStatisticsPost && !isHowToRecordAudioPost
+                  ? faqSection
+                  : null}
               </div>
 
               <aside className={`${styles.shareRail} ${styles.shareRailMobile}`}>
