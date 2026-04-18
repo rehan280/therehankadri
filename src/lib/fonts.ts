@@ -21,6 +21,7 @@ export const heroFont = localFont({
     },
   ],
   display: 'swap',
+  preload: false,
   variable: '--font-hero',
 });
 
@@ -33,5 +34,6 @@ export const copyFont = localFont({
     },
   ],
   display: 'swap',
+  preload: false,
   variable: '--font-copy',
 });
