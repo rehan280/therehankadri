@@ -4,7 +4,7 @@ import '../home.css';
 import AppFrame from '@/components/AppFrame';
 import DeferredClientFeatures from '@/components/DeferredClientFeatures';
 import HomeNavbar from '@/components/HomeNavbar';
-import { copyFont, heroFont, sansFont } from '@/lib/fonts';
+import { sansFont } from '@/lib/fonts';
 import {
   GOOGLE_SITE_VERIFICATION,
   SITE_NAME,
@@ -67,7 +67,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${sansFont.variable} ${heroFont.variable} ${copyFont.variable} antialiased`}
+        className={`${sansFont.variable} antialiased`}
         suppressHydrationWarning
       >
         <AppFrame>

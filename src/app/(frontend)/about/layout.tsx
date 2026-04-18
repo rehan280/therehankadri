@@ -3,6 +3,7 @@ import {
   therehankadriDisplayFont,
   therehankadriFont,
 } from "@/lib/blog-fonts";
+import { copyFont, heroFont } from "@/lib/fonts";
 import { monoFont } from "@/lib/mono-font";
 
 export default function AboutLayout({
@@ -12,7 +13,7 @@ export default function AboutLayout({
 }) {
   return (
     <div
-      className={`${therehankadriFont.variable} ${therehankadriDisplayFont.variable} ${blogPlexFont.variable} ${monoFont.variable}`}
+      className={`${therehankadriFont.variable} ${therehankadriDisplayFont.variable} ${blogPlexFont.variable} ${monoFont.variable} ${heroFont.variable} ${copyFont.variable}`}
     >
       {children}
     </div>
