@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   experimental: {
     inlineCss: true,
   },
+  images: {
+    qualities: [60, 75],
+    formats: ["image/avif", "image/webp"],
+  },
   async redirects() {
     return [
       {

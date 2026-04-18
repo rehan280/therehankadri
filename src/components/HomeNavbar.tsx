@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const blogHref = "/blog";
 const statsHref = "/stats";
@@ -20,28 +20,9 @@ const navLinks = [
 export default function HomeNavbar() {
   const pathname = usePathname();
   const [menuState, setMenuState] = useState({ open: false, path: pathname });
-  const [scrolled, setScrolled] = useState(false);
   const shouldHideNavbar = pathname.startsWith(blogHref) || pathname.startsWith(statsHref);
   const menuOpen = menuState.path === pathname ? menuState.open : false;
   const useTransparentHeroNavbar = pathname === aboutHref;
-
-  useEffect(() => {
-    if (shouldHideNavbar) {
-      return;
-    }
-
-    const handleScroll = () => {
-      const nextScrolled = window.scrollY > 30;
-      setScrolled((current) => (current === nextScrolled ? current : nextScrolled));
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [shouldHideNavbar]);
 
   const closeMenu = () => setMenuState({ open: false, path: pathname });
   const toggleMenu = () => setMenuState({ open: !menuOpen, path: pathname });
@@ -56,7 +37,7 @@ export default function HomeNavbar() {
 
   return (
     <>
-      <nav className={`navbar${scrolled ? " scrolled" : ""}${menuOpen ? " menu-open" : ""}${useTransparentHeroNavbar && !menuOpen ? " hero-blend" : ""}`}>
+      <nav className={`navbar${menuOpen ? " menu-open" : ""}${useTransparentHeroNavbar && !menuOpen ? " hero-blend" : ""}`}>
         <Link href="/" prefetch={false} className="nav-brand" aria-label="The Rehan Kadri home">
           <span className="nav-brand-copy">
             <span className="nav-brand-kicker">Revenue-first growth systems</span>

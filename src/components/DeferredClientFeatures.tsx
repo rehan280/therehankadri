@@ -2,9 +2,8 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 
-const IDLE_TIMEOUT_MS = 1500;
+const IDLE_TIMEOUT_MS = 10_000;
 
 type BrowserWindow = Window &
   typeof globalThis & {
@@ -39,12 +38,13 @@ function hasCmsRedirectParams(url: URL) {
 }
 
 export default function DeferredClientFeatures() {
-  const pathname = usePathname();
   const [enableDeferredFeatures, setEnableDeferredFeatures] = useState(false);
   const [enableCmsGuard, setEnableCmsGuard] = useState(false);
 
   useEffect(() => {
-    if (pathname !== "/") {
+    const isHomepage = window.location.pathname === "/";
+
+    if (!isHomepage) {
       setEnableCmsGuard(false);
       return;
     }
@@ -61,12 +61,17 @@ export default function DeferredClientFeatures() {
       window.removeEventListener("hashchange", updateCmsGuard);
       window.removeEventListener("popstate", updateCmsGuard);
     };
-  }, [pathname]);
+  }, []);
 
   useEffect(() => {
     const browserWindow = window as BrowserWindow;
+    let cleanup: (() => void) | undefined;
 
     const enableFeatures = () => {
+      if (enableDeferredFeatures) {
+        return;
+      }
+
       if (browserWindow.requestIdleCallback) {
         const idleHandle = browserWindow.requestIdleCallback(
           () => {
@@ -89,22 +94,46 @@ export default function DeferredClientFeatures() {
       };
     };
 
-    if (document.readyState === "complete") {
-      return enableFeatures();
-    }
-
-    let cleanup: (() => void) | undefined;
-    const handleLoad = () => {
+    const scheduleEnable = () => {
+      cleanup?.();
       cleanup = enableFeatures();
     };
 
-    window.addEventListener("load", handleLoad, { once: true });
+    const handleFirstInteraction = () => {
+      scheduleEnable();
+      window.removeEventListener("pointerdown", handleFirstInteraction);
+      window.removeEventListener("keydown", handleFirstInteraction);
+      window.removeEventListener("touchstart", handleFirstInteraction);
+      window.removeEventListener("scroll", handleFirstInteraction);
+    };
+
+    if (document.readyState === "complete") {
+      scheduleEnable();
+    } else {
+      const handleLoad = () => {
+        scheduleEnable();
+      };
+
+      window.addEventListener("load", handleLoad, { once: true });
+
+      cleanup = () => {
+        window.removeEventListener("load", handleLoad);
+      };
+    }
+
+    window.addEventListener("pointerdown", handleFirstInteraction, { once: true, passive: true });
+    window.addEventListener("keydown", handleFirstInteraction, { once: true });
+    window.addEventListener("touchstart", handleFirstInteraction, { once: true, passive: true });
+    window.addEventListener("scroll", handleFirstInteraction, { once: true, passive: true });
 
     return () => {
-      window.removeEventListener("load", handleLoad);
+      window.removeEventListener("pointerdown", handleFirstInteraction);
+      window.removeEventListener("keydown", handleFirstInteraction);
+      window.removeEventListener("touchstart", handleFirstInteraction);
+      window.removeEventListener("scroll", handleFirstInteraction);
       cleanup?.();
     };
-  }, []);
+  }, [enableDeferredFeatures]);
 
   return (
     <>

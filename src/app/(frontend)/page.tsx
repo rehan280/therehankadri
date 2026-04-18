@@ -356,7 +356,7 @@ export default function Home() {
                 preload
                 fetchPriority="high"
                 sizes="(max-width: 640px) 252px, (max-width: 960px) 285px, 370px"
-                unoptimized
+                quality={75}
                 className="premium-portrait-img"
               />
             </div>
@@ -403,7 +403,7 @@ export default function Home() {
       </section>
 
       {/* ── 2. PROBLEM & SOLUTION ── */}
-      <section className="section-dark section-padding problem-section">
+      <section className="section-dark section-padding problem-section defer-section">
         <div className="container">
           <div className="problem-panel">
             <div className="problem-intro">
@@ -642,6 +642,7 @@ export default function Home() {
                     width={getShowcaseImageDimensions(img).width}
                     height={getShowcaseImageDimensions(img).height}
                     sizes="(max-width: 640px) 100vw, 520px"
+                    quality={60}
                     className="proof-showcase-image"
                   />
                   {proofShots ? (
@@ -654,6 +655,7 @@ export default function Home() {
                             width={getShowcaseImageDimensions(shot.img).width}
                             height={getShowcaseImageDimensions(shot.img).height}
                             sizes="(max-width: 640px) 100vw, 300px"
+                            quality={60}
                             className="proof-shot-image"
                           />
                         </div>
@@ -809,6 +811,7 @@ export default function Home() {
                         width={798}
                         height={724}
                         sizes="(max-width: 760px) 260px, 320px"
+                        quality={60}
                         className="growth-path-image"
                       />
                     </div>
@@ -913,6 +916,7 @@ export default function Home() {
               width={1237}
               height={2199}
               sizes="(max-width: 640px) 80vw, 320px"
+              quality={60}
               className="hire-img"
             />
           </div>
@@ -981,6 +985,7 @@ export default function Home() {
                     width={64}
                     height={64}
                     sizes="(max-width: 640px) 56px, 64px"
+                    quality={60}
                     className="testimonial-avatar"
                   />
                 </div>
