@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const IDLE_TIMEOUT_MS = 1500;
@@ -20,7 +20,6 @@ const DeferredSpeedInsights = dynamic(
   () => import("@vercel/speed-insights/next").then((mod) => mod.SpeedInsights),
   { ssr: false }
 );
-const DeferredRouteWarmup = dynamic(() => import("./RouteWarmup"), { ssr: false });
 const DeferredCmsMagicLinkRedirectGuard = dynamic(
   () => import("./cms/CmsMagicLinkRedirectGuard"),
   { ssr: false }
@@ -39,32 +38,30 @@ function hasCmsRedirectParams(url: URL) {
   );
 }
 
-function subscribeToLocation(callback: () => void) {
-  window.addEventListener("hashchange", callback);
-  window.addEventListener("popstate", callback);
-
-  return () => {
-    window.removeEventListener("hashchange", callback);
-    window.removeEventListener("popstate", callback);
-  };
-}
-
-function getLocationSnapshot() {
-  return typeof window === "undefined" ? "" : window.location.href;
-}
-
 export default function DeferredClientFeatures() {
   const pathname = usePathname();
   const [enableDeferredFeatures, setEnableDeferredFeatures] = useState(false);
-  const locationHref = useSyncExternalStore(
-    subscribeToLocation,
-    getLocationSnapshot,
-    () => ""
-  );
-  const enableCmsGuard =
-    pathname === "/" && locationHref
-      ? hasCmsRedirectParams(new URL(locationHref))
-      : false;
+  const [enableCmsGuard, setEnableCmsGuard] = useState(false);
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setEnableCmsGuard(false);
+      return;
+    }
+
+    const updateCmsGuard = () => {
+      setEnableCmsGuard(hasCmsRedirectParams(new URL(window.location.href)));
+    };
+
+    updateCmsGuard();
+    window.addEventListener("hashchange", updateCmsGuard);
+    window.addEventListener("popstate", updateCmsGuard);
+
+    return () => {
+      window.removeEventListener("hashchange", updateCmsGuard);
+      window.removeEventListener("popstate", updateCmsGuard);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     const browserWindow = window as BrowserWindow;
@@ -114,7 +111,6 @@ export default function DeferredClientFeatures() {
       {enableCmsGuard ? <DeferredCmsMagicLinkRedirectGuard /> : null}
       {enableDeferredFeatures ? (
         <>
-          <DeferredRouteWarmup />
           <DeferredAnalytics />
           <DeferredSpeedInsights />
         </>

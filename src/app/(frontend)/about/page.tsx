@@ -76,7 +76,7 @@ const aboutPageJsonLd = {
     "@type": "Person",
     name: "Rehan Kadri",
     url: SITE_URL,
-    image: buildAbsoluteImageUrl("/rehan.png"),
+    image: buildAbsoluteImageUrl("/rehan.webp"),
     description:
       "Growth Marketer. SEO nerd. And the guy who tests marketing strategies so you don't have to.",
     jobTitle: "Growth Marketer",

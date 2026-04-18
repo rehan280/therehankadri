@@ -30,7 +30,7 @@ export function createOrganizationJsonLd() {
       "@type": "ImageObject",
       url: buildAbsoluteImageUrl("/favicon/web-app-manifest-512x512.png"),
     },
-    image: buildAbsoluteImageUrl("/rehan.png"),
+    image: buildAbsoluteImageUrl("/rehan.webp"),
     sameAs: SOCIAL_PROFILES,
     founder: {
       "@id": PERSON_ID,
@@ -48,7 +48,7 @@ export function createPersonJsonLd() {
     "@id": PERSON_ID,
     name: "Rehan Kadri",
     url: SITE_URL,
-    image: buildAbsoluteImageUrl("/rehan.png"),
+    image: buildAbsoluteImageUrl("/rehan.webp"),
     description:
       "Growth marketer and SEO strategist building content, YouTube, and pipeline systems for compounding growth.",
     jobTitle: "SEO & Growth Strategist",

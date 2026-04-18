@@ -41,8 +41,12 @@ import {
   getRelatedBlogPosts,
 } from "@/lib/blog-content";
 import {
+  ORGANIZATION_ID,
+  PERSON_ID,
+  createOrganizationJsonLd,
+  createPersonJsonLd,
+  createWebsiteJsonLd,
   createArticleMetadata,
-  createPublisherJsonLd,
   buildAbsoluteImageUrl,
   buildCanonicalUrl,
 } from "@/lib/seo";
@@ -316,11 +320,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const datePublished = `${currentPost.publishedAt}T00:00:00Z`;
   const dateModified = `${currentPost.modifiedAt ?? currentPost.publishedAt}T00:00:00Z`;
   const articleJsonLd = {
-    "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: currentPost.metaTitle ?? currentPost.title,
     description: currentPost.seoDescription,
-    mainEntityOfPage: canonicalUrl,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+      url: canonicalUrl,
+    },
     url: canonicalUrl,
     datePublished,
     dateModified,
@@ -330,11 +337,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     wordCount,
     image: [socialImage],
     author: {
-      "@type": "Person",
-      name: postAuthor.name,
-      url: postAuthor.socials?.linkedin,
+      "@id": PERSON_ID,
     },
-    publisher: createPublisherJsonLd(),
+    publisher: {
+      "@id": ORGANIZATION_ID,
+    },
+    isPartOf: {
+      "@id": canonicalUrl,
+    },
+  };
+  const articleStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      createWebsiteJsonLd(),
+      createOrganizationJsonLd(),
+      createPersonJsonLd(),
+      articleJsonLd,
+    ],
   };
   const faqJsonLd = currentPost.faqEntries?.length
     ? {
@@ -422,7 +441,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(articleStructuredData).replace(/</g, "\\u003c"),
         }}
       />
       <script
@@ -604,7 +623,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className={styles.articleAuthorInner}>
                   <div className={styles.articleAuthorIdentity}>
                     <Image
-                      src={postAuthor.image}
+                      src="/the-rehan-kadri.webp"
                       alt={postAuthor.name}
                       width={150}
                       height={150}

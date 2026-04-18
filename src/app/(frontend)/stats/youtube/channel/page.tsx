@@ -544,7 +544,7 @@ export default async function YouTubeStatsPage() {
                 <div className={styles.articleAuthorInner}>
                   <div className={styles.articleAuthorIdentity}>
                     <Image
-                      src={postAuthor.image}
+                      src="/the-rehan-kadri.webp"
                       alt={postAuthor.name}
                       width={150}
                       height={150}

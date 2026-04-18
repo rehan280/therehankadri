@@ -60,12 +60,12 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
   useEffect(() => {
     if (!activeId || !listRef.current) return;
     const activeElement = listRef.current.querySelector<HTMLAnchorElement>(`a[href="#${activeId}"]`);
-    if (activeElement) {
-      const container = listRef.current;
-      const elementTop = activeElement.offsetTop;
-      const containerHalf = container.clientHeight / 2;
-      container.scrollTo({ top: elementTop - containerHalf, behavior: "smooth" });
-    }
+    if (!activeElement) return;
+
+    activeElement.scrollIntoView({
+      block: "nearest",
+      inline: "nearest",
+    });
   }, [activeId]);
 
   if (!items.length) {

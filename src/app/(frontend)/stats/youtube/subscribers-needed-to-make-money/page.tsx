@@ -490,7 +490,7 @@ export default async function SubscribersNeededToMakeMoneyPage() {
                 <div className={blogStyles.articleAuthorInner}>
                   <div className={blogStyles.articleAuthorIdentity}>
                     <Image
-                      src={postAuthor.image}
+                      src="/the-rehan-kadri.webp"
                       alt={postAuthor.name}
                       width={150}
                       height={150}

@@ -302,19 +302,6 @@ export default function Home() {
       ],
     },
   ];
-  const featuredStatsArticle = {
-    href: "/stats/youtube/subscribers-needed-to-make-money",
-    tag: "Featured Research",
-    title: "How Many YouTube Subscribers Needed to Make Money in 2026?",
-    copy:
-      "A newly published YouTube monetization article built from the full source file, with structured metadata, FAQ schema, and a clean stats URL for search.",
-    bullets: [
-      "Exact article published at /stats/youtube/subscribers-needed-to-make-money",
-      "SVG artwork added to the homepage for stronger internal promotion",
-      "WEBP social image wired into metadata, OG tags, and sitemap coverage",
-    ],
-  };
-
   return (
     <main className="site-shell">
       <script
@@ -351,7 +338,7 @@ export default function Home() {
               not vanity metrics.
             </p>
             <div className="hero-cta">
-              <Link href="/contact" className="btn btn-orange">Book a strategy call ↗</Link>
+              <Link href="/contact" prefetch={false} className="btn btn-orange">Book a strategy call ↗</Link>
               <Link href="#proofs" className="btn btn-white">See Real Results</Link>
             </div>
             <p className="hero-cta-note">
@@ -362,7 +349,7 @@ export default function Home() {
           <div className="hero-portrait-col">
             <div className="premium-circle-wrapper">
               <Image
-                src="/rehan.png"
+                src="/rehan.webp"
                 alt="Rehan Kadri"
                 width={500}
                 height={600}
@@ -447,12 +434,12 @@ export default function Home() {
                   </div>
 
                   <div className="problem-image-frame problem-image-frame-loss">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src="/arrow%20funnel.png"
                       alt="Traffic leaking away illustration"
                       width={388}
                       height={636}
+                      sizes="(max-width: 640px) 76px, (max-width: 900px) 84px, 84px"
                       className="problem-image"
                     />
                   </div>
@@ -494,12 +481,12 @@ export default function Home() {
                   </div>
 
                   <div className="problem-image-frame problem-image-frame-build">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src="/what%20i%20build%20funnel).png"
                       alt="Qualified pipeline funnel illustration"
                       width={475}
                       height={815}
+                      sizes="(max-width: 640px) 82px, (max-width: 900px) 90px, 106px"
                       className="problem-image"
                     />
                   </div>
@@ -609,7 +596,7 @@ export default function Home() {
 
                 <div className="service-premium-footer">
                   <span className="service-footer-text">Built for qualified pipeline growth</span>
-                  <Link href="/contact" className="service-cta-button">
+                  <Link href="/contact" prefetch={false} className="service-cta-button">
                     <span>{cta}</span>
                     <span aria-hidden="true">↗</span>
                   </Link>
@@ -623,7 +610,7 @@ export default function Home() {
               <h3>Not sure which system fits your business?</h3>
               <p>I will break down what is holding your growth back and what to fix first.</p>
             </div>
-            <Link href="/contact" className="services-audit-button">
+            <Link href="/contact" prefetch={false} className="services-audit-button">
               <span>Get Free Growth Audit</span>
               <span aria-hidden="true">↗</span>
             </Link>
@@ -750,43 +737,6 @@ export default function Home() {
       </section>
       */}
 
-      <section className="section-gray section-padding featured-insight-section">
-        <div className="container">
-          <div className="featured-insight-shell">
-            <div className="featured-insight-copy">
-              <span className="section-label">{featuredStatsArticle.tag}</span>
-              <h2 className="section-title">
-                Fresh <span className="text-orange">YouTube Stats</span> Published
-              </h2>
-              <p className="section-desc">{featuredStatsArticle.copy}</p>
-              <ul className="featured-insight-list" aria-label="Article highlights">
-                {featuredStatsArticle.bullets.map((item) => (
-                  <li key={item} className="featured-insight-item">
-                    <span className="featured-insight-check">✓</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link href={featuredStatsArticle.href} className="featured-insight-cta">
-                <span>Read the full article</span>
-                <span aria-hidden="true">↗</span>
-              </Link>
-            </div>
-
-            <Link href={featuredStatsArticle.href} className="featured-insight-artwork">
-              <Image
-                src="/stats/youtube/subscribers-needed-to-make-money/youtube-subscribers-needed-to-make-money.svg"
-                alt="YouTube subscribers needed to make money article preview"
-                width={300}
-                height={169}
-                unoptimized
-                className="featured-insight-image"
-              />
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* ── 6.5. GROWTH PATHS ── */}
       <section id="growth" className="section-light section-padding growth-paths-section">
         <div className="container">
@@ -876,7 +826,7 @@ export default function Home() {
                     <p className="growth-path-fit">
                       <strong>Best for:</strong> {fit}
                     </p>
-                    <Link href="/contact" className="btn btn-orange growth-path-cta">
+                    <Link href="/contact" prefetch={false} className="btn btn-orange growth-path-cta">
                       {cta} ↗
                     </Link>
                   </div>
@@ -955,7 +905,7 @@ export default function Home() {
         <div className="container why-hire-grid">
           <div className="hire-image-wrapper">
             <Image
-              src="/rehan.png"
+              src="/rehan.webp"
               alt="Rehan Kadri"
               width={1237}
               height={2199}
@@ -1061,7 +1011,7 @@ export default function Home() {
               <p className="cta-text">
                 I will audit your growth system and map the fastest route to qualified pipeline.
               </p>
-              <Link href="/contact" className="btn btn-orange cta-button">
+              <Link href="/contact" prefetch={false} className="btn btn-orange cta-button">
                 Build My System ↗
               </Link>
             </div>

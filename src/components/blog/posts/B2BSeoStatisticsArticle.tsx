@@ -90,7 +90,7 @@ These are the stats that matter most. They show exactly where the industry is he
 
 ## 1. AI and Answer Engine Optimization (AEO)
 
-This is the BIGGEST shift in **[B2B](/stats/b2b)** SEO right now.
+This is the BIGGEST shift in **B2B** SEO right now.
 
 Buyers aren't searching Google the way they used to. They're asking ChatGPT, Perplexity, and Google's AI Overviews to summarize the market for them. If your brand doesn't show up in those AI answers, you're invisible.
 
@@ -352,7 +352,7 @@ The brands winning today got into the buyer's head before the buying process sta
 
 The brands losing? They're still producing generic content and waiting for inbound leads that never come.
 
-The [stats](/stats) don't lie.
+The stats don't lie.
 
 Now it's your turn to act on them.`;
 
