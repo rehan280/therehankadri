@@ -435,11 +435,12 @@ export default function Home() {
 
                   <div className="problem-image-frame problem-image-frame-loss">
                     <Image
-                      src="/arrow%20funnel.png"
+                      src="/arrow%20funnel.svg"
                       alt="Traffic leaking away illustration"
                       width={388}
                       height={636}
                       sizes="(max-width: 640px) 76px, (max-width: 900px) 84px, 84px"
+                      unoptimized
                       className="problem-image"
                     />
                   </div>
@@ -482,11 +483,12 @@ export default function Home() {
 
                   <div className="problem-image-frame problem-image-frame-build">
                     <Image
-                      src="/what%20i%20build%20funnel).png"
+                      src="/what%20i%20build%20funnel).svg"
                       alt="Qualified pipeline funnel illustration"
                       width={475}
                       height={815}
                       sizes="(max-width: 640px) 82px, (max-width: 900px) 90px, 106px"
+                      unoptimized
                       className="problem-image"
                     />
                   </div>
