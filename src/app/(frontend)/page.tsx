@@ -353,9 +353,10 @@ export default function Home() {
                 alt="Rehan Kadri"
                 width={500}
                 height={600}
-                loading="eager"
+                preload
                 fetchPriority="high"
                 sizes="(max-width: 640px) 252px, (max-width: 960px) 285px, 370px"
+                unoptimized
                 className="premium-portrait-img"
               />
             </div>
@@ -505,7 +506,7 @@ export default function Home() {
       </section>
 
       {/* ── 4. WHAT I DO ── */}
-      <section id="services" className="section-gray section-padding services-section-compact">
+      <section id="services" className="section-gray section-padding services-section-compact defer-section">
         <div className="container">
           <div className="services-premium-header">
             <div className="services-premium-copy">
@@ -621,7 +622,7 @@ export default function Home() {
       </section>
 
       {/* ── 5. CASE STUDIES ── */}
-      <section id="works" className="section-light section-padding">
+      <section id="works" className="section-light section-padding defer-section">
         <div className="container">
           <div className="section-header">
             <span className="section-label">Case Studies</span>
@@ -680,7 +681,7 @@ export default function Home() {
       </section>
 
       {/* ── 6. VISUAL PROOF ──
-      <section id="proofs" className="section-dark section-padding">
+      <section id="proofs" className="section-dark section-padding defer-section">
         <div className="container">
           <div className="section-header">
             <span className="section-label">Undeniable Proof</span>
@@ -740,7 +741,7 @@ export default function Home() {
       */}
 
       {/* ── 6.5. GROWTH PATHS ── */}
-      <section id="growth" className="section-light section-padding growth-paths-section">
+      <section id="growth" className="section-light section-padding growth-paths-section defer-section">
         <div className="container">
           <div className="growth-paths-header">
             <span className="section-label">How Can I Help</span>
@@ -840,7 +841,7 @@ export default function Home() {
       </section>
 
       {/* ── 7. MY SYSTEM ── */}
-      <section id="process" className="section-gray section-padding process-section">
+      <section id="process" className="section-gray section-padding process-section defer-section">
         <div className="container">
           <div className="process-header">
             <div>
@@ -903,7 +904,7 @@ export default function Home() {
       </section>
 
       {/* ── 8. ABOUT ME ── */}
-      <section id="about" className="section-light section-padding">
+      <section id="about" className="section-light section-padding defer-section">
         <div className="container why-hire-grid">
           <div className="hire-image-wrapper">
             <Image
@@ -943,7 +944,7 @@ export default function Home() {
       </section>
 
       {/* ── 9. TESTIMONIALS & PROOF ── */}
-      <section className="section-gray section-padding" style={{ paddingBottom: "2rem" }}>
+      <section className="section-gray section-padding defer-section" style={{ paddingBottom: "2rem" }}>
         <div className="container">
           <div className="section-header" style={{ textAlign: "center", marginBottom: "3rem", margin: "0 auto 3rem auto" }}>
             <span className="section-label">Client Feedback</span>
@@ -1001,7 +1002,7 @@ export default function Home() {
       </section>
 
       {/* ── 10. FINAL CTA SECTION ── */}
-      <section className="section-dark cta-section">
+      <section className="section-dark cta-section defer-section">
         <div className="container">
           <div className="cta-panel">
             <div className="cta-copy">

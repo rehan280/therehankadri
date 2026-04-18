@@ -419,10 +419,10 @@
   position: absolute;
   top: -20%;
   right: -10%;
-  width: 700px;
-  height: 700px;
+  width: 520px;
+  height: 520px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 90, 54, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 90, 54, 0.05) 0%, transparent 72%);
   pointer-events: none;
 }
 
@@ -761,10 +761,7 @@
   align-items: center;
   justify-content: center;
 
-  /* Depth */
-  box-shadow:
-    0 40px 100px rgba(255, 90, 54, 0.35),
-    inset 0 -10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 18px 44px rgba(255, 90, 54, 0.18);
 
   transition: all 0.5s ease;
   overflow: hidden;
@@ -774,11 +771,9 @@
 .premium-circle-wrapper::before {
   content: "";
   position: absolute;
-  width: 120%;
-  height: 120%;
-  background: inherit;
-  filter: blur(60px);
-  opacity: 0.4;
+  inset: 8%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%);
+  opacity: 0.7;
   z-index: 0;
 }
 
@@ -788,12 +783,12 @@
   position: absolute;
   top: 0;
   left: -50%;
-  width: 200%;
+  width: 140%;
   height: 100%;
 
   background: linear-gradient(120deg,
       transparent,
-      rgba(255, 255, 255, 0.25),
+      rgba(255, 255, 255, 0.16),
       transparent);
 
   transform: rotate(25deg);
@@ -833,12 +828,7 @@
   border-radius: 20px;
 
   /* Depth shadows */
-  box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.25),
-    0 10px 25px rgba(0, 0, 0, 0.15);
-
-  /* Subtle color enhancement */
-  filter: contrast(1.05) saturate(1.05);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
 }
 
 /* Hover = premium interaction */
@@ -883,10 +873,8 @@
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow:
-    0 18px 38px rgba(0, 0, 0, 0.16),
-    0 8px 18px rgba(65, 91, 180, 0.12);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+    0 14px 28px rgba(0, 0, 0, 0.12),
+    0 6px 14px rgba(65, 91, 180, 0.08);
   animation: heroAnalyticsFloat 7s ease-in-out infinite;
 }
 
@@ -902,11 +890,14 @@
     linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 244, 0.92));
   border: 1px solid rgba(255, 126, 97, 0.24);
   box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.12),
-    0 10px 24px rgba(255, 90, 54, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+    0 14px 32px rgba(0, 0, 0, 0.1),
+    0 6px 18px rgba(255, 90, 54, 0.08);
   animation: heroSocialFloat 8s ease-in-out infinite;
+}
+
+.defer-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1000px;
 }
 
 .hero-social-top {
