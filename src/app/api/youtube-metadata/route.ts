@@ -45,6 +45,28 @@ type OEmbedResponse = {
   title?: string;
 };
 
+type YouTubeVideoApiResponse = {
+  items?: Array<{
+    id?: string;
+    snippet?: {
+      title?: string;
+      description?: string;
+      channelTitle?: string;
+      channelId?: string;
+      publishedAt?: string;
+      tags?: string[];
+    };
+    contentDetails?: {
+      duration?: string;
+    };
+    statistics?: {
+      viewCount?: string;
+      likeCount?: string;
+      commentCount?: string;
+    };
+  }>;
+};
+
 function getVideoId(rawUrl: string) {
   let parsedUrl: URL;
 
@@ -237,6 +259,68 @@ function parseIsoDurationToSeconds(value: string) {
   return total > 0 ? String(total) : "";
 }
 
+async function fetchYouTubeDataApiMetadata(videoId: string) {
+  const apiKey = process.env.YOUTUBE_DATA_API_KEY?.trim();
+
+  if (!apiKey) {
+    return null;
+  }
+
+  const apiUrl = new URL("https://www.googleapis.com/youtube/v3/videos");
+  apiUrl.searchParams.set("id", videoId);
+  apiUrl.searchParams.set("part", "snippet,contentDetails,statistics");
+  apiUrl.searchParams.set("key", apiKey);
+
+  try {
+    const response = await fetch(apiUrl, {
+      cache: "no-store",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const payload = (await response.json()) as YouTubeVideoApiResponse;
+    const item = payload.items?.[0];
+    const snippet = item?.snippet;
+
+    if (!item || !snippet?.title) {
+      return null;
+    }
+
+    const description = normalizeText(snippet.description);
+    const tags = Array.isArray(snippet.tags)
+      ? uniqueValues(snippet.tags.filter((tag): tag is string => typeof tag === "string"))
+      : [];
+
+    return {
+      videoId,
+      url: `https://www.youtube.com/watch?v=${videoId}`,
+      title: normalizeText(snippet.title),
+      description,
+      channelName: normalizeText(snippet.channelTitle),
+      channelUrl: snippet.channelId
+        ? `https://www.youtube.com/channel/${snippet.channelId}`
+        : "",
+      durationSeconds: parseIsoDurationToSeconds(
+        normalizeText(item.contentDetails?.duration)
+      ),
+      viewCount: normalizeCount(normalizeText(item.statistics?.viewCount)),
+      likeCount: normalizeCount(normalizeText(item.statistics?.likeCount)),
+      commentCount: normalizeCount(normalizeText(item.statistics?.commentCount)),
+      uploadDate: normalizeText(snippet.publishedAt),
+      tags,
+      hashtags: getHashtags(description, tags),
+      timestamps: getTimestamps(description),
+    } satisfies YouTubeMetadata;
+  } catch {
+    return null;
+  }
+}
+
 async function fetchOEmbedMetadata(videoUrl: string) {
   const oEmbedUrl = new URL("https://www.youtube.com/oembed");
   oEmbedUrl.searchParams.set("url", videoUrl);
@@ -397,6 +481,16 @@ export async function GET(request: Request) {
 
   try {
     const canonicalVideoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+    const apiPayload = await fetchYouTubeDataApiMetadata(videoId);
+
+    if (apiPayload) {
+      return NextResponse.json(apiPayload, {
+        headers: {
+          "Cache-Control": "no-store",
+        },
+      });
+    }
+
     const html = await fetchYouTubeHtml(videoId);
     const oEmbed = await fetchOEmbedMetadata(canonicalVideoUrl);
 
