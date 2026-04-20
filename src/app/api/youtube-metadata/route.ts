@@ -1,6 +1,26 @@
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+const YOUTUBE_HEADERS = {
+  Accept:
+    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  "Accept-Language": "en-US,en;q=0.9",
+  "Cache-Control": "no-cache",
+  Pragma: "no-cache",
+  Referer: "https://www.youtube.com/",
+  "Sec-CH-UA": '"Google Chrome";v="135", "Chromium";v="135", "Not.A/Brand";v="24"',
+  "Sec-CH-UA-Mobile": "?0",
+  "Sec-CH-UA-Platform": '"Windows"',
+  "Sec-Fetch-Dest": "document",
+  "Sec-Fetch-Mode": "navigate",
+  "Sec-Fetch-Site": "none",
+  "Sec-Fetch-User": "?1",
+  "Upgrade-Insecure-Requests": "1",
+  "User-Agent":
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+};
 
 type YouTubeMetadata = {
   videoId: string;
@@ -173,6 +193,53 @@ function getMicroformatValue(playerResponse: Record<string, unknown>, key: strin
   return normalizeText(renderer?.[key]);
 }
 
+function extractPlayerResponse(html: string) {
+  return (
+    safeParseJson<Record<string, unknown>>(extractJsonObject(html, "ytInitialPlayerResponse")) ??
+    safeParseJson<Record<string, unknown>>(
+      extractJsonObject(html, "var ytInitialPlayerResponse =")
+    ) ??
+    safeParseJson<Record<string, unknown>>(
+      extractJsonObject(html, "window[\"ytInitialPlayerResponse\"] =")
+    )
+  );
+}
+
+async function fetchYouTubeHtml(videoId: string) {
+  const candidates = [
+    `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&hl=en&gl=US&has_verified=1&bpctr=9999999999`,
+    `https://m.youtube.com/watch?v=${encodeURIComponent(videoId)}&hl=en&gl=US&has_verified=1&bpctr=9999999999`,
+    `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?hl=en&gl=US`,
+  ];
+
+  for (const url of candidates) {
+    try {
+      const response = await fetch(url, {
+        cache: "no-store",
+        headers: YOUTUBE_HEADERS,
+      });
+
+      if (!response.ok) {
+        continue;
+      }
+
+      const html = await response.text();
+
+      if (
+        html.includes("ytInitialPlayerResponse") ||
+        html.includes("var ytInitialPlayerResponse =") ||
+        html.includes('window["ytInitialPlayerResponse"] =')
+      ) {
+        return html;
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  return "";
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const inputUrl = searchParams.get("url")?.trim() ?? "";
@@ -185,25 +252,14 @@ export async function GET(request: Request) {
     );
   }
 
-  const youtubeUrl = `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&hl=en&gl=US`;
-
   try {
-    const response = await fetch(youtubeUrl, {
-      cache: "no-store",
-      headers: {
-        "accept-language": "en-US,en;q=0.9",
-        "user-agent": "",
-      },
-    });
+    const html = await fetchYouTubeHtml(videoId);
 
-    if (!response.ok) {
-      throw new Error("YouTube did not return a public video page.");
+    if (!html) {
+      throw new Error("YouTube did not return a readable public video page.");
     }
 
-    const html = await response.text();
-    const playerResponse = safeParseJson<Record<string, unknown>>(
-      extractJsonObject(html, "ytInitialPlayerResponse")
-    );
+    const playerResponse = extractPlayerResponse(html);
     const readablePlayerResponse = playerResponse ?? {};
 
     const videoDetails = readablePlayerResponse.videoDetails as
