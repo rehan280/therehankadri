@@ -39,6 +39,12 @@ type YouTubeMetadata = {
   timestamps: string[];
 };
 
+type OEmbedResponse = {
+  author_name?: string;
+  author_url?: string;
+  title?: string;
+};
+
 function getVideoId(rawUrl: string) {
   let parsedUrl: URL;
 
@@ -193,6 +199,143 @@ function getMicroformatValue(playerResponse: Record<string, unknown>, key: strin
   return normalizeText(renderer?.[key]);
 }
 
+function decodeHtmlEntities(value: string) {
+  return value
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .trim();
+}
+
+function extractMetaContent(html: string, patterns: RegExp[]) {
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    const content = match?.[1] ? decodeHtmlEntities(match[1]) : "";
+
+    if (content) {
+      return content;
+    }
+  }
+
+  return "";
+}
+
+function parseIsoDurationToSeconds(value: string) {
+  const match = value.match(/^P(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)$/i);
+
+  if (!match) {
+    return "";
+  }
+
+  const hours = Number(match[1] ?? "0");
+  const minutes = Number(match[2] ?? "0");
+  const seconds = Number(match[3] ?? "0");
+  const total = hours * 3600 + minutes * 60 + seconds;
+
+  return total > 0 ? String(total) : "";
+}
+
+async function fetchOEmbedMetadata(videoUrl: string) {
+  const oEmbedUrl = new URL("https://www.youtube.com/oembed");
+  oEmbedUrl.searchParams.set("url", videoUrl);
+  oEmbedUrl.searchParams.set("format", "json");
+
+  try {
+    const response = await fetch(oEmbedUrl, {
+      cache: "no-store",
+      headers: {
+        Accept: "application/json",
+        "Accept-Language": "en-US,en;q=0.9",
+        "User-Agent": YOUTUBE_HEADERS["User-Agent"],
+      },
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return (await response.json()) as OEmbedResponse;
+  } catch {
+    return null;
+  }
+}
+
+function buildMetadataFromFallback(
+  html: string,
+  videoId: string,
+  oEmbed: OEmbedResponse | null
+): YouTubeMetadata | null {
+  const url = `https://www.youtube.com/watch?v=${videoId}`;
+  const title =
+    extractMetaContent(html, [
+      /<meta\s+property="og:title"\s+content="([^"]*)"/i,
+      /<meta\s+name="title"\s+content="([^"]*)"/i,
+      /<meta\s+itemprop="name"\s+content="([^"]*)"/i,
+      /<title>([^<]+)<\/title>/i,
+    ]) ||
+    normalizeText(oEmbed?.title).replace(/\s*-\s*YouTube\s*$/i, "");
+
+  if (!title || /consent|before you continue/i.test(title)) {
+    return null;
+  }
+
+  const description =
+    extractMetaContent(html, [
+      /<meta\s+property="og:description"\s+content="([^"]*)"/i,
+      /<meta\s+name="description"\s+content="([^"]*)"/i,
+      /<meta\s+itemprop="description"\s+content="([^"]*)"/i,
+    ]) || "";
+
+  const channelName =
+    extractMetaContent(html, [
+      /<link\s+itemprop="name"\s+content="([^"]*)"/i,
+      /<meta\s+itemprop="author"\s+content="([^"]*)"/i,
+    ]) || normalizeText(oEmbed?.author_name);
+
+  const channelUrl =
+    extractMetaContent(html, [
+      /<link\s+itemprop="url"\s+href="([^"]*\/channel\/[^"]*)"/i,
+      /<link\s+itemprop="url"\s+href="([^"]*\/@[^"]*)"/i,
+    ]) || normalizeText(oEmbed?.author_url);
+
+  const durationSeconds = parseIsoDurationToSeconds(
+    extractMetaContent(html, [/<meta\s+itemprop="duration"\s+content="([^"]*)"/i])
+  );
+
+  const viewCount =
+    normalizeCount(
+      extractMetaContent(html, [
+        /<meta\s+itemprop="interactionCount"\s+content="([^"]*)"/i,
+        /<meta\s+property="og:video:view_count"\s+content="([^"]*)"/i,
+      ])
+    ) || findFirstCount(html, [/"viewCount"\s*:\s*"([\d,\.]+)"/i]);
+
+  const uploadDate = extractMetaContent(html, [
+    /<meta\s+itemprop="datePublished"\s+content="([^"]*)"/i,
+    /<meta\s+itemprop="uploadDate"\s+content="([^"]*)"/i,
+    /<meta\s+property="og:video:release_date"\s+content="([^"]*)"/i,
+  ]);
+
+  return {
+    videoId,
+    url,
+    title,
+    description,
+    channelName,
+    channelUrl,
+    durationSeconds,
+    viewCount,
+    likeCount: "",
+    commentCount: "",
+    uploadDate,
+    tags: [],
+    hashtags: getHashtags(description, []),
+    timestamps: getTimestamps(description),
+  };
+}
+
 function extractPlayerResponse(html: string) {
   return (
     safeParseJson<Record<string, unknown>>(extractJsonObject(html, "ytInitialPlayerResponse")) ??
@@ -253,9 +396,21 @@ export async function GET(request: Request) {
   }
 
   try {
+    const canonicalVideoUrl = `https://www.youtube.com/watch?v=${videoId}`;
     const html = await fetchYouTubeHtml(videoId);
+    const oEmbed = await fetchOEmbedMetadata(canonicalVideoUrl);
 
     if (!html) {
+      const fallbackPayload = buildMetadataFromFallback("", videoId, oEmbed);
+
+      if (fallbackPayload) {
+        return NextResponse.json(fallbackPayload, {
+          headers: {
+            "Cache-Control": "no-store",
+          },
+        });
+      }
+
       throw new Error("YouTube did not return a readable public video page.");
     }
 
@@ -267,6 +422,16 @@ export async function GET(request: Request) {
       | undefined;
 
     if (!videoDetails) {
+      const fallbackPayload = buildMetadataFromFallback(html, videoId, oEmbed);
+
+      if (fallbackPayload) {
+        return NextResponse.json(fallbackPayload, {
+          headers: {
+            "Cache-Control": "no-store",
+          },
+        });
+      }
+
       return NextResponse.json(
         { error: "Could not read metadata from this YouTube page." },
         { status: 422 }
