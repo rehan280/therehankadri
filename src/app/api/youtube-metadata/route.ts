@@ -168,6 +168,28 @@ function normalizeText(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
 }
 
+function isGenericYouTubeTitle(value: string) {
+  const normalized = value.trim().toLowerCase();
+
+  return (
+    !normalized ||
+    normalized === "youtube" ||
+    normalized === "- youtube" ||
+    normalized === "youtube - youtube" ||
+    normalized === "watch youtube"
+  );
+}
+
+function isGenericYouTubeDescription(value: string) {
+  const normalized = value.trim().toLowerCase();
+
+  return (
+    !normalized ||
+    normalized === "enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on youtube." ||
+    normalized.includes("share it all with friends, family, and the world on youtube")
+  );
+}
+
 function normalizeCount(value: string) {
   const trimmedValue = value.trim().replace(/,/g, "");
 
@@ -352,25 +374,29 @@ function buildMetadataFromFallback(
   oEmbed: OEmbedResponse | null
 ): YouTubeMetadata | null {
   const url = `https://www.youtube.com/watch?v=${videoId}`;
-  const title =
-    extractMetaContent(html, [
+  const metaTitle = extractMetaContent(html, [
       /<meta\s+property="og:title"\s+content="([^"]*)"/i,
       /<meta\s+name="title"\s+content="([^"]*)"/i,
       /<meta\s+itemprop="name"\s+content="([^"]*)"/i,
       /<title>([^<]+)<\/title>/i,
-    ]) ||
-    normalizeText(oEmbed?.title).replace(/\s*-\s*YouTube\s*$/i, "");
+    ]);
+  const oEmbedTitle = normalizeText(oEmbed?.title).replace(/\s*-\s*YouTube\s*$/i, "");
+  const title = !isGenericYouTubeTitle(oEmbedTitle)
+    ? oEmbedTitle
+    : !isGenericYouTubeTitle(metaTitle)
+      ? metaTitle
+      : "";
 
   if (!title || /consent|before you continue/i.test(title)) {
     return null;
   }
 
-  const description =
-    extractMetaContent(html, [
+  const metaDescription = extractMetaContent(html, [
       /<meta\s+property="og:description"\s+content="([^"]*)"/i,
       /<meta\s+name="description"\s+content="([^"]*)"/i,
       /<meta\s+itemprop="description"\s+content="([^"]*)"/i,
-    ]) || "";
+    ]);
+  const description = isGenericYouTubeDescription(metaDescription) ? "" : metaDescription;
 
   const channelName =
     extractMetaContent(html, [
