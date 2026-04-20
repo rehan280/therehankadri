@@ -7,6 +7,7 @@ import styles from "./BlogHeader.module.css";
 
 const blogHref = "/blog";
 const statsHref = "/stats";
+const toolsHref = "/tools";
 const serviceHref = "/#services";
 const aboutHref = "/about";
 const contactHref = "/contact";
@@ -14,6 +15,7 @@ const contactHref = "/contact";
 const navLinks = [
   { href: blogHref, label: "Blog" },
   { href: statsHref, label: "Stats" },
+  { href: toolsHref, label: "Tools" },
   { href: serviceHref, label: "Service" },
   { href: aboutHref, label: "About Us" },
 ] as const;
@@ -30,6 +32,11 @@ export default function BlogHeader() {
   const blendIntoHero = !menuOpen;
   const isBlogActive = pathname.startsWith(blogHref);
   const isStatsActive = pathname.startsWith(statsHref);
+  const isToolsActive =
+    pathname.startsWith(toolsHref) ||
+    pathname === "/youtube-tags-generator" ||
+    pathname === "/youtube-title-extractor" ||
+    pathname === "/youtube-description-extractor";
   const isServiceActive = pathname === "/";
   const isAboutActive = pathname === aboutHref || pathname === contactHref;
 
@@ -57,6 +64,8 @@ export default function BlogHeader() {
                   ? isBlogActive
                   : href === statsHref
                   ? isStatsActive
+                  : href === toolsHref
+                    ? isToolsActive
                   : href === serviceHref
                     ? isServiceActive
                     : isAboutActive;
@@ -81,7 +90,7 @@ export default function BlogHeader() {
             View Results
           </Link>
           <Link href="/contact" prefetch={false} className="btn btn-orange nav-btn">
-            Book a strategy call
+            Book A Strategy Call
           </Link>
           <button
             className={`hamburger${menuOpen ? " open" : ""}`}
@@ -100,7 +109,7 @@ export default function BlogHeader() {
       <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="blog-mobile-nav-drawer">
         <div className="mobile-drawer-links">
           <div className="mobile-drawer-top">
-            <p>Blog posts, stats, and growth resources for qualified revenue growth.</p>
+            <p>Browse blog posts, stats, tools, services, and company pages.</p>
           </div>
           {navLinks.map(({ href, label }) => {
             const isActive =
@@ -108,6 +117,8 @@ export default function BlogHeader() {
                 ? isBlogActive
                 : href === statsHref
                 ? isStatsActive
+                : href === toolsHref
+                  ? isToolsActive
                 : href === serviceHref
                   ? isServiceActive
                   : isAboutActive;
@@ -126,7 +137,7 @@ export default function BlogHeader() {
             );
           })}
           <Link href={contactHref} prefetch={false} className="btn btn-orange drawer-hire" onClick={closeMenu}>
-            Book a strategy call ↗
+            Book A Strategy Call
           </Link>
         </div>
       </div>
