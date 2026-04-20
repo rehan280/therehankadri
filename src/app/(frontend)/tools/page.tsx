@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Tags } from "lucide-react";
+import { ArrowRight, FileText, Heading1, Tags } from "lucide-react";
 import {
   ORGANIZATION_ID,
   SITE_URL,
@@ -23,6 +23,24 @@ const tools = [
     highlights: ["No login required", "Free to use", "Built for YouTube SEO"],
     icon: Tags,
   },
+  {
+    name: "YouTube Title Extractor",
+    href: "/youtube-title-extractor",
+    eyebrow: "YouTube SEO Tool",
+    description:
+      "Extract the exact current title from any public YouTube video or Shorts link for competitor research and title analysis.",
+    highlights: ["Mobile friendly", "No login required", "Built for CTR research"],
+    icon: Heading1,
+  },
+  {
+    name: "YouTube Description Extractor",
+    href: "/youtube-description-extractor",
+    eyebrow: "YouTube Metadata Tool",
+    description:
+      "Pull public YouTube descriptions, titles, tags, hashtags, timestamps, and metadata from a single video URL.",
+    highlights: ["Works with Shorts", "Download .txt", "Useful for SEO audits"],
+    icon: FileText,
+  },
 ];
 
 export const metadata: Metadata = createPageMetadata({
@@ -36,6 +54,8 @@ export const metadata: Metadata = createPageMetadata({
     "free SEO tools",
     "Rehan Kadri tools",
     "YouTube tag generator",
+    "YouTube title extractor",
+    "YouTube description extractor",
     "YouTube SEO tool",
   ],
 });

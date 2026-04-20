@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE_NAME, SITE_URL, buildAbsoluteImageUrl, buildCanonicalUrl, createPageMetadata } from "@/lib/seo";
 import YouTubeTagsArticle from "./YouTubeTagsArticle";
 import YouTubeTagGeneratorClient from "./YouTubeTagGeneratorClient";
@@ -127,6 +128,12 @@ export default async function YouTubeTagGeneratorPage() {
       {
         "@type": "ListItem",
         position: 2,
+        name: "Tools",
+        item: buildCanonicalUrl("/tools"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
         name: "YouTube Tag Generator",
         item: canonicalUrl,
       },
@@ -150,7 +157,10 @@ export default async function YouTubeTagGeneratorPage() {
       <section className={styles.heroSection}>
         <div className={styles.wrap}>
           <div className={styles.heroInner}>
-            <p className={styles.kicker}>Free SEO Tools /</p>
+            <nav className={styles.breadcrumbNav} aria-label="Breadcrumb">
+              <Link href="/tools">Tools</Link>
+              <span>/</span>
+            </nav>
             <h1 className={styles.title}>YouTube Tag Generator</h1>
             <p className={styles.subtitle}>
               Get better YouTube discoverability by generating focused tags from

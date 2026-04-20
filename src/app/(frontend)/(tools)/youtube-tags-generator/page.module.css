@@ -21,6 +21,34 @@
   text-align: center;
 }
 
+.breadcrumbNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 100%;
+  margin-bottom: 18px;
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.breadcrumbNav a,
+.breadcrumbNav span {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumbNav a:hover {
+  color: #ffffff;
+}
+
+.breadcrumbNav span {
+  color: rgba(255, 255, 255, 0.86);
+}
+
 .kicker {
   margin-bottom: 10px;
   color: rgba(255, 255, 255, 0.72);
@@ -38,6 +66,14 @@
   font-weight: 500;
   line-height: 0.96;
   letter-spacing: -0.06em;
+}
+
+.singleLineToolTitle {
+  width: 100%;
+  max-width: 11.8em;
+  font-size: clamp(3.2rem, 6.15vw, 5.25rem);
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .subtitle {
@@ -212,6 +248,116 @@
   padding: 14px 16px;
   resize: vertical;
   line-height: 1.6;
+}
+
+.metadataOutputBoxLarge {
+  min-height: 220px;
+}
+
+.metadataFieldStack {
+  display: grid;
+  gap: 14px;
+}
+
+.metadataFieldCard {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.metadataFieldHeader {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+}
+
+.metadataFieldHeader h2 {
+  margin: 0;
+  color: #ffffff;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.2;
+}
+
+.metadataFieldHeader p {
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.8rem;
+}
+
+.metadataFieldIcon,
+.metadataResultIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(241, 90, 48, 0.14);
+  color: var(--brand-orange);
+  flex: 0 0 auto;
+}
+
+.metadataMiniButton {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.metadataMiniButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.metadataResultGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metadataResultCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 92px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  text-align: left;
+}
+
+.metadataResultCard div > span {
+  display: block;
+  margin-bottom: 7px;
+  color: rgba(255, 255, 255, 0.68);
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.metadataResultCard strong {
+  display: block;
+  color: #ffffff;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .articleSectionShell {
@@ -564,6 +710,58 @@
 
 .articleFaqSection {
   scroll-margin-top: 7rem;
+}
+
+.extractorStepGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.extractorStepCard {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  min-height: 190px;
+  padding: 22px;
+  border: 1px solid rgba(22, 19, 18, 0.08);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at top right, rgba(241, 90, 48, 0.1), transparent 38%),
+    linear-gradient(180deg, rgba(255, 252, 249, 0.98) 0%, rgba(255, 247, 242, 0.98) 100%);
+  box-shadow: 0 16px 34px rgba(31, 15, 8, 0.07);
+}
+
+.extractorStepNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: rgba(241, 90, 48, 0.11);
+  color: #b44d2f;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.extractorStepCard h3 {
+  margin: 0;
+  color: #1e1513;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 1.12rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.extractorStepBody p,
+.extractorStepBody ul {
+  margin-bottom: 0;
+  color: #4f403b;
+  font-size: 0.96rem;
+  line-height: 1.65;
 }
 
 .articleFeatureHeaderInline {
@@ -1026,6 +1224,10 @@
     font-size: clamp(3rem, 13vw, 4.6rem);
   }
 
+  .singleLineToolTitle {
+    font-size: clamp(2rem, 8.6vw, 3.25rem);
+  }
+
   .searchRow {
     grid-template-columns: 1fr;
   }
@@ -1082,6 +1284,8 @@
 
   .articleMetaGrid,
   .articleStatGrid,
+  .metadataResultGrid,
+  .extractorStepGrid,
   .articleStepGrid,
   .articleWarningGrid {
     grid-template-columns: 1fr;
@@ -1140,6 +1344,15 @@
 
   .heroSection {
     padding: 112px 0 84px;
+  }
+
+  .breadcrumbNav {
+    max-width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .singleLineToolTitle {
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
   }
 
   .testimonialsGrid {
