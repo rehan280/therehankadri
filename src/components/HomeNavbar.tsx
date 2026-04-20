@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const blogHref = "/blog";
 const statsHref = "/stats";
+const toolsHref = "/tools";
 const serviceHref = "/#services";
 const aboutHref = "/about";
 const contactHref = "/contact";
@@ -13,6 +14,7 @@ const contactHref = "/contact";
 const navLinks = [
   { href: blogHref, label: "Blog" },
   { href: statsHref, label: "Stats" },
+  { href: toolsHref, label: "Tools" },
   { href: serviceHref, label: "Service" },
   { href: aboutHref, label: "About Us" },
 ] as const;
@@ -28,6 +30,7 @@ export default function HomeNavbar() {
   const toggleMenu = () => setMenuState({ open: !menuOpen, path: pathname });
   const isBlogActive = pathname.startsWith(blogHref);
   const isStatsActive = pathname.startsWith(statsHref);
+  const isToolsActive = pathname.startsWith(toolsHref) || pathname === "/youtube-tags-generator" || pathname === "/youtube-title-extractor" || pathname === "/youtube-description-extractor";
   const isServiceActive = pathname === "/";
   const isAboutActive = pathname === aboutHref || pathname === contactHref;
 
@@ -57,6 +60,8 @@ export default function HomeNavbar() {
                   ? isBlogActive
                   : href === statsHref
                   ? isStatsActive
+                  : href === toolsHref
+                  ? isToolsActive
                   : href === serviceHref
                     ? isServiceActive
                     : isAboutActive;
@@ -100,7 +105,7 @@ export default function HomeNavbar() {
       <div className={`mobile-drawer${menuOpen ? " open" : ""}`} id="mobile-nav-drawer">
         <div className="mobile-drawer-links">
           <div className="mobile-drawer-top">
-            <p>Browse blog posts, stats, services, and company pages.</p>
+            <p>Browse blog posts, stats, tools, services, and company pages.</p>
           </div>
           {navLinks.map(({ href, label }) => {
             const isActive =
@@ -108,6 +113,8 @@ export default function HomeNavbar() {
                 ? isBlogActive
                 : href === statsHref
                 ? isStatsActive
+                : href === toolsHref
+                ? isToolsActive
                 : href === serviceHref
                   ? isServiceActive
                   : isAboutActive;

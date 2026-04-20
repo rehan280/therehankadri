@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import ArticleSocialShare from "@/components/blog/ArticleSocialShare";
 import PremiumFaq from "@/components/content/PremiumFaq";
 import { buildCanonicalUrl } from "@/lib/seo";
@@ -126,7 +127,15 @@ function getStepCards(blocks: ArticleBlock[]) {
   };
 }
 
-function renderHowToSection(section: ParsedExtractorArticle["sections"][number]) {
+function renderHowToSection(
+  section: ParsedExtractorArticle["sections"][number],
+  imagesByStep: Array<
+    Array<{
+      alt: string;
+      src: string;
+    }>
+  >
+) {
   const { cards, introBlocks } = getStepCards(section.blocks);
 
   return (
@@ -145,25 +154,121 @@ function renderHowToSection(section: ParsedExtractorArticle["sections"][number])
           ))}
         </div>
       ) : null}
-      <div className={styles.extractorStepGrid}>
+      <div className={styles.extractorStepStack}>
         {cards.map((card, index) => (
           <article key={card.title} className={styles.extractorStepCard}>
-            <span className={styles.extractorStepNumber}>
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <h3>{renderInlineMarkdown(card.title)}</h3>
-            <div className={styles.extractorStepBody}>
-              {card.body.map((block, bodyIndex) => (
-                <div key={`${card.title}-${block.type}-${bodyIndex}`}>
-                  {renderBlock(block)}
+            <div className={styles.extractorStepContent}>
+              <span className={styles.extractorStepKicker}>
+                Step {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3>{renderInlineMarkdown(card.title)}</h3>
+              <div className={styles.extractorStepBody}>
+                {card.body.map((block, bodyIndex) => (
+                  <div key={`${card.title}-${block.type}-${bodyIndex}`}>
+                    {renderBlock(block)}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className={styles.extractorStepMedia}>
+              {imagesByStep[index]?.length ? (
+                <div
+                  className={`${styles.extractorStepImageGrid} ${
+                    imagesByStep[index].length === 1 ? styles.extractorStepImageGridSingle : ""
+                  }`}
+                >
+                  {imagesByStep[index].map((image) => (
+                    <figure key={image.src} className={styles.extractorStepImageCard}>
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        width={1600}
+                        height={900}
+                        className={styles.extractorImage}
+                        sizes="(max-width: 760px) 100vw, 42vw"
+                      />
+                    </figure>
+                  ))}
                 </div>
-              ))}
+              ) : (
+                <div className={styles.extractorStepMediaPlaceholder} aria-hidden="true" />
+              )}
             </div>
           </article>
         ))}
       </div>
     </section>
   );
+}
+
+function getStepImages(slug: string) {
+  if (slug === "youtube-title-extractor") {
+    return [
+      [
+        {
+          alt: "How to copy a YouTube video URL using the Share button",
+          src: "/tools/yt title extractor/images/youtube meta data extractor.webp",
+        },
+        {
+          alt: "How to copy the YouTube share link from the share modal",
+          src: "/tools/yt title extractor/images/youtube title description extractor.webp",
+        },
+      ],
+      [
+        {
+          alt: "Paste the copied YouTube URL into the YouTube title extractor tool",
+          src: "/tools/yt title extractor/images/youtube title extractor.webp",
+        },
+      ],
+      [
+        {
+          alt: "Click the Extract title button to pull the YouTube title and metadata",
+          src: "/tools/yt title extractor/images/youtube title generator.webp",
+        },
+      ],
+      [
+        {
+          alt: "Copy or download the extracted title, description, and metadata results",
+          src: "/tools/yt title extractor/images/youtube title description metadata extractor.webp",
+        },
+      ],
+    ];
+  }
+
+  if (slug === "youtube-description-extractor") {
+    return [
+      [
+        {
+          alt: "How to copy a YouTube video URL using the Share button",
+          src: "/tools/yt title extractor/images/youtube meta data extractor.webp",
+        },
+        {
+          alt: "How to copy the YouTube share link from the share modal",
+          src: "/tools/yt title extractor/images/youtube title description extractor.webp",
+        },
+      ],
+      [
+        {
+          alt: "Paste the copied YouTube URL into the YouTube description extractor tool",
+          src: "/tools/yt title extractor/images/youtube description extractor.webp",
+        },
+      ],
+      [
+        {
+          alt: "Click the Extract description button to pull the YouTube description and metadata",
+          src: "/tools/yt title extractor/images/youtube description generator.webp",
+        },
+      ],
+      [
+        {
+          alt: "Copy or download the extracted YouTube description, title, and metadata results",
+          src: "/tools/yt title extractor/images/youtube description title extractor.webp",
+        },
+      ],
+    ];
+  }
+
+  return [];
 }
 
 export default function YouTubeExtractorArticle({
@@ -173,6 +278,7 @@ export default function YouTubeExtractorArticle({
   stats,
 }: Props) {
   const canonicalUrl = buildCanonicalUrl(`/${slug}`);
+  const stepImages = getStepImages(slug);
 
   return (
     <div className={blogStyles.postPage}>
@@ -211,7 +317,7 @@ export default function YouTubeExtractorArticle({
                   }
 
                   if (section.id.startsWith("how-to-use-this-youtube")) {
-                    return renderHowToSection(section);
+                    return renderHowToSection(section, stepImages);
                   }
 
                   return (

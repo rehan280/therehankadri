@@ -30,13 +30,13 @@ One-click copy to clipboard. Or download as a .txt file. Either works.
 
 Here's exactly what you get:
 
-- **Full video description** — every word, including links and CTAs buried below the fold
-- **Video title** — the exact title with character count
-- **Tags** — including the hidden ones competitors don't want you to see
-- **Hashtags** — pulled separately so you can reuse them instantly
-- **Timestamps and chapters** — if the video has them
-- **View count and upload date** — useful context for demand and freshness
-- **Upload date** — useful for tracking how fresh the content is
+- **Full video description:** every word, including links and CTAs buried below the fold
+- **Video title:** the exact title with character count
+- **Tags:** including the hidden ones competitors don't want you to see
+- **Hashtags:** pulled separately so you can reuse them instantly
+- **Timestamps and chapters:** if the video has them
+- **View count and upload date:** useful context for demand and freshness
+- **Upload date:** useful for tracking how fresh the content is
 
 That's more than most tools give you. In one shot.
 

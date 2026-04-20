@@ -30,13 +30,13 @@ One-click copy to clipboard. Or download as a .txt file.
 
 You get more than just the title.
 
-- **Video title** — the exact title with character count
-- **Full video description** — every word, including links and timestamps
-- **Tags** — including the hidden ones competitors keep private
-- **Hashtags** — pulled separately for instant reuse
-- **Timestamps and chapters** — if the video has them
-- **View count and upload date** — useful context for freshness and demand
-- **Upload date** — so you know how fresh the content is
+- **Video title:** the exact title with character count
+- **Full video description:** every word, including links and timestamps
+- **Tags:** including the hidden ones competitors keep private
+- **Hashtags:** pulled separately for instant reuse
+- **Timestamps and chapters:** if the video has them
+- **View count and upload date:** useful context for freshness and demand
+- **Upload date:** so you know how fresh the content is
 
 One URL. Everything you need to reverse-engineer a top-performing video.
 
