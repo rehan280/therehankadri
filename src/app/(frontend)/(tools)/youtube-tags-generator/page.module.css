@@ -1438,7 +1438,11 @@
   }
 
   .singleLineToolTitle {
-    font-size: clamp(1.8rem, 8vw, 2.8rem);
+    max-width: 100%;
+    font-size: clamp(1.8rem, 7.2vw, 2.55rem);
+    line-height: 0.98;
+    white-space: normal;
+    text-wrap: balance;
   }
 
   .testimonialsGrid {
