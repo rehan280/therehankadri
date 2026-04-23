@@ -4,6 +4,7 @@ import path from "node:path";
 import { readFileSync } from "node:fs";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import ArticleList from "@/components/blog/ArticleList";
 import styles from "./how-to-record-audio.module.css";
 
 type MarkdownBlock =
@@ -15,6 +16,7 @@ type MarkdownBlock =
 type ParsedMarkdownArticle = {
   blocks: MarkdownBlock[];
   headings: Array<{ id: string; level: 2 | 3; title: string }>;
+  faqEntries: Array<{ question: string; answer: string }>;
   wordCount: number;
 };
 
@@ -23,11 +25,16 @@ const ARTICLE_FILE_PATH = path.join(
   "src",
   "content",
   "blog-jsx",
-  "how-to-record-audio.md"
+  "how-to-edit-audio.md"
 );
 
 const rawArticleMarkdown = readFileSync(ARTICLE_FILE_PATH, "utf8");
-const HOW_TO_EXCLUDED_HEADINGS = new Set(["Frequently asked questions", "The bottom line"]);
+const FAQ_HEADINGS = new Set(["frequently asked questions", "audio editing faq"]);
+const HOW_TO_EXCLUDED_HEADINGS = new Set([
+  "Frequently asked questions",
+  "Audio editing FAQ",
+  "The bottom line",
+]);
 
 function stripArticleFrontMatter(markdown: string) {
   return markdown.replace(/^# [^\n]+\n+[\s\S]*?\n---\n/, "").trim();
@@ -107,7 +114,9 @@ function parseMarkdownArticle(markdown: string): ParsedMarkdownArticle {
   const lines = bodyMarkdown.replace(/\r/g, "").split("\n");
   const blocks: MarkdownBlock[] = [];
   const headings: ParsedMarkdownArticle["headings"] = [];
+  const faqEntries: ParsedMarkdownArticle["faqEntries"] = [];
   const headingCounts = new Map<string, number>();
+  let inFaqSection = false;
 
   for (let index = 0; index < lines.length; ) {
     const line = lines[index].trimEnd();
@@ -119,9 +128,61 @@ function parseMarkdownArticle(markdown: string): ParsedMarkdownArticle {
     }
 
     const headingMatch = trimmed.match(/^(##|###)\s+(.+)$/);
+    if (inFaqSection) {
+      if (headingMatch && headingMatch[1].length === 2) {
+        inFaqSection = false;
+        continue;
+      }
+
+      const questionMatch = trimmed.match(/^\*\*(.+?)\*\*$/);
+      if (questionMatch) {
+        const question = questionMatch[1].trim();
+        index += 1;
+
+        const answerLines: string[] = [];
+        while (index < lines.length) {
+          const answerLine = lines[index].trim();
+
+          if (!answerLine || answerLine === "---") {
+            index += 1;
+            if (answerLines.length > 0) {
+              break;
+            }
+            continue;
+          }
+
+          if (/^(##|###)\s+/.test(answerLine) || /^\*\*(.+?)\*\*$/.test(answerLine)) {
+            break;
+          }
+
+          answerLines.push(answerLine);
+          index += 1;
+        }
+
+        if (question && answerLines.length) {
+          faqEntries.push({
+            question,
+            answer: answerLines.join(" "),
+          });
+        }
+
+        continue;
+      }
+
+      index += 1;
+      continue;
+    }
+
     if (headingMatch) {
       const level = headingMatch[1].length as 2 | 3;
       const text = headingMatch[2].trim();
+
+      if (level === 2 && FAQ_HEADINGS.has(text.toLowerCase())) {
+        inFaqSection = true;
+        index += 1;
+        continue;
+      }
+
       const baseId = slugify(text) || "section";
       const nextCount = (headingCounts.get(baseId) ?? 0) + 1;
       headingCounts.set(baseId, nextCount);
@@ -213,19 +274,22 @@ function parseMarkdownArticle(markdown: string): ParsedMarkdownArticle {
   return {
     blocks,
     headings,
+    faqEntries,
     wordCount: stripMarkdownForWordCount(bodyMarkdown).split(/\s+/).filter(Boolean).length,
   };
 }
 
 const parsedArticle = parseMarkdownArticle(rawArticleMarkdown);
 
-export const howToRecordAudioHeadingItems = parsedArticle.headings
+export const howToEditAudioHeadingItems = parsedArticle.headings
   .filter((heading) => heading.level === 2)
   .map(({ id, title }) => ({ id, title }));
 
-export const howToRecordAudioWordCount = parsedArticle.wordCount;
+export const howToEditAudioFaqEntries = parsedArticle.faqEntries;
 
-export const howToRecordAudioHowToSteps = parsedArticle.blocks.flatMap((block, index, blocks) => {
+export const howToEditAudioWordCount = parsedArticle.wordCount;
+
+export const howToEditAudioHowToSteps = parsedArticle.blocks.flatMap((block, index, blocks) => {
   if (block.type !== "heading" || block.level !== 2 || HOW_TO_EXCLUDED_HEADINGS.has(block.text)) {
     return [];
   }
@@ -259,111 +323,6 @@ export const howToRecordAudioHowToSteps = parsedArticle.blocks.flatMap((block, i
   ];
 });
 
-function AudioStackVisual() {
-  return (
-    <section className={styles.visualPanel} aria-label="3-Layer Audio Stack visual">
-      <div className={styles.visualHeader}>
-        <span className={styles.visualEyebrow}>Named Framework</span>
-        <h3 className={styles.visualTitle}>The 3-Layer Audio Stack at a glance</h3>
-        <p className={styles.visualCopy}>
-          Your recording only sounds as good as the weakest layer. Fix the room first, then the mic, then the cleanup workflow.
-        </p>
-      </div>
-
-      <div className={styles.stackGrid}>
-        <article className={styles.stackCard}>
-          <span className={styles.stackNumber}>01</span>
-          <h3>Environment</h3>
-          <p>Reduce echo, seal noise leaks, and add soft materials before touching your gear budget.</p>
-        </article>
-
-        <article className={styles.stackCard}>
-          <span className={styles.stackNumber}>02</span>
-          <h3>Device</h3>
-          <p>Choose the right mic type and keep placement tight so your voice wins over the room.</p>
-        </article>
-
-        <article className={styles.stackCard}>
-          <span className={styles.stackNumber}>03</span>
-          <h3>Software</h3>
-          <p>Use the right app, clean the take properly, and export with settings that match the platform.</p>
-        </article>
-      </div>
-    </section>
-  );
-}
-
-function StudioSoundVisual() {
-  return (
-    <section className={styles.visualPanel} aria-label="Professional sound checklist">
-      <div className={styles.visualHeader}>
-        <span className={styles.visualEyebrow}>Quick Setup</span>
-        <h3 className={styles.visualTitle}>Three fast wins for better audio at home</h3>
-        <p className={styles.visualCopy}>
-          These are the highest-leverage improvements when you want studio-like sound without buying a full studio.
-        </p>
-      </div>
-
-      <div className={styles.checkGrid}>
-        <article className={styles.checkCard}>
-          <h3>Dead room</h3>
-          <p>Blankets, curtains, rugs, and a tighter space reduce reflections more than most mic upgrades.</p>
-        </article>
-
-        <article className={styles.checkCard}>
-          <h3>Closer mic</h3>
-          <p>Stay roughly 6 to 12 inches away so your voice is louder than fan noise, traffic, and room tone.</p>
-        </article>
-
-        <article className={styles.checkCard}>
-          <h3>Headroom</h3>
-          <p>Keep peaks around -12 dB to -6 dB so you avoid clipping and still have room to process later.</p>
-        </article>
-      </div>
-    </section>
-  );
-}
-
-function CreatorStandardsVisual() {
-  return (
-    <section className={styles.visualPanel} aria-label="Universal creator settings">
-      <div className={styles.visualHeader}>
-        <span className={styles.visualEyebrow}>Universal Standards</span>
-        <h3 className={styles.visualTitle}>Default creator settings worth memorizing</h3>
-        <p className={styles.visualCopy}>
-          These four settings cover most modern creator workflows and match the standards repeated throughout the guide.
-        </p>
-      </div>
-
-      <div className={styles.metricGrid}>
-        <article className={styles.metricCard}>
-          <div className={styles.metricValue}>48 kHz</div>
-          <h3>Video projects</h3>
-          <p>Use 48,000 Hz for YouTube, Reels, Shorts, and any workflow tied to a video timeline.</p>
-        </article>
-
-        <article className={styles.metricCard}>
-          <div className={styles.metricValue}>24-bit</div>
-          <h3>Headroom</h3>
-          <p>Higher bit depth gives you more margin before clipping and more flexibility in post-production.</p>
-        </article>
-
-        <article className={styles.metricCard}>
-          <div className={styles.metricValue}>Mono</div>
-          <h3>Solo voice</h3>
-          <p>Single-speaker voice recordings do not need stereo, and mono keeps the file cleaner and lighter.</p>
-        </article>
-
-        <article className={styles.metricCard}>
-          <div className={styles.metricValue}>WAV</div>
-          <h3>Edit first</h3>
-          <p>Record and edit in WAV, then convert only at the final delivery step if you need smaller files.</p>
-        </article>
-      </div>
-    </section>
-  );
-}
-
 function renderTable(block: Extract<MarkdownBlock, { type: "table" }>, key: string) {
   return (
     <div key={key} className={styles.markdownTableWrap}>
@@ -389,23 +348,7 @@ function renderTable(block: Extract<MarkdownBlock, { type: "table" }>, key: stri
   );
 }
 
-function maybeRenderVisual(heading: string) {
-  if (heading === "The 3-Layer Audio Stack") {
-    return <AudioStackVisual />;
-  }
-
-  if (heading === "How to get professional sound without a studio") {
-    return <StudioSoundVisual />;
-  }
-
-  if (heading === "Creator settings: the universal standards (2026)") {
-    return <CreatorStandardsVisual />;
-  }
-
-  return null;
-}
-
-export default function HowToRecordAudioArticle() {
+export default function HowToEditAudioArticle() {
   return (
     <div className={styles.article}>
       {parsedArticle.blocks.map((block, index) => {
@@ -416,7 +359,6 @@ export default function HowToRecordAudioArticle() {
             return (
               <section key={key} id={block.id} className={styles.sectionAnchor}>
                 <h2>{block.text}</h2>
-                {maybeRenderVisual(block.text)}
               </section>
             );
           }
@@ -433,13 +375,12 @@ export default function HowToRecordAudioArticle() {
         }
 
         if (block.type === "list") {
-          const ListTag = block.ordered ? "ol" : "ul";
           return (
-            <ListTag key={key} className={styles.markdownList}>
-              {block.items.map((item) => (
-                <li key={item}>{renderInlineMarkdown(item)}</li>
-              ))}
-            </ListTag>
+            <ArticleList
+              key={key}
+              ordered={block.ordered}
+              items={block.items.map((item) => renderInlineMarkdown(item))}
+            />
           );
         }
 

@@ -12,11 +12,13 @@ import {
   Twitter,
 } from "lucide-react";
 import BlogRichText from "@/components/blog/BlogRichText";
-import HowToRecordAudioArticle, {
-  howToRecordAudioHowToSteps,
-  howToRecordAudioHeadingItems,
-  howToRecordAudioWordCount,
-} from "@/components/blog/posts/HowToRecordAudioArticle";
+import ArticleList from "@/components/blog/ArticleList";
+import HowToEditAudioArticle, {
+  howToEditAudioFaqEntries,
+  howToEditAudioHowToSteps,
+  howToEditAudioHeadingItems,
+  howToEditAudioWordCount,
+} from "@/components/blog/posts/HowToEditAudioArticle";
 import YouTubeChannelStatisticsArticle, {
   youtubeChannelStatisticsHeadingItems,
   youtubeChannelStatisticsWordCount,
@@ -206,13 +208,7 @@ function renderBlock(block: BlogBlock, key: string) {
     case "paragraph":
       return <p key={key}>{block.text}</p>;
     case "list":
-      return (
-        <ul key={key} className={styles.articleList}>
-          {block.items.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      );
+      return <ArticleList key={key} items={block.items} />;
     case "callout":
       return (
         <aside key={key} className={styles.callout}>
@@ -231,8 +227,8 @@ function renderBlock(block: BlogBlock, key: string) {
 }
 
 function getWordCountForPost(post: BlogPost) {
-  if (post.slug === "how-to-record-audio") {
-    return howToRecordAudioWordCount;
+  if (post.slug === "how-to-edit-audio") {
+    return howToEditAudioWordCount;
   }
 
   if (post.slug === "youtube-users") {
@@ -308,7 +304,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const youtubeUsersArticleData =
     currentPost.slug === "youtube-users" ? await getYouTubeUsersArticleData() : null;
   const isYouTubeChannelStatisticsPost = currentPost.slug === YOUTUBE_CHANNEL_STATISTICS_SLUG;
-  const isHowToRecordAudioPost = currentPost.slug === "how-to-record-audio";
+  const isHowToEditAudioPost = currentPost.slug === "how-to-edit-audio";
+  const effectiveFaqEntries = isHowToEditAudioPost
+    ? howToEditAudioFaqEntries
+    : (currentPost.faqEntries ?? []);
   const heroTitleLines = buildHeroTitleLines(currentPost.title);
   const authorArticleCount = normalizedPosts.filter(
     (entry) => (entry.author ?? defaultBlogAuthor).name === postAuthor.name
@@ -355,11 +354,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       articleJsonLd,
     ],
   };
-  const faqJsonLd = currentPost.faqEntries?.length
+  const faqJsonLd = effectiveFaqEntries.length
     ? {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        mainEntity: currentPost.faqEntries.map((entry) => ({
+        mainEntity: effectiveFaqEntries.map((entry) => ({
           "@type": "Question",
           name: entry.question,
           acceptedAnswer: {
@@ -369,7 +368,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         })),
       }
     : null;
-  const howToJsonLd = isHowToRecordAudioPost
+  const howToJsonLd = isHowToEditAudioPost
     ? {
         "@context": "https://schema.org",
         "@type": "HowTo",
@@ -377,7 +376,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         description: currentPost.seoDescription,
         image: [socialImage],
         totalTime: `PT${Number.parseInt(postReadTime, 10) || 1}M`,
-        step: howToRecordAudioHowToSteps.map((step, index) => ({
+        step: howToEditAudioHowToSteps.map((step, index) => ({
           "@type": "HowToStep",
           position: index + 1,
           name: step.name,
@@ -410,14 +409,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       },
     ],
   };
-  const faqSection = currentPost.faqEntries?.length ? (
+  const faqSection = effectiveFaqEntries.length ? (
     <PremiumFaq
       id="faq"
       title="Frequently Asked Questions"
       eyebrow={null}
       intro="Quick answers to the most common questions from this article."
       className={styles.articleFaqSection}
-      items={currentPost.faqEntries.map((entry) => ({
+      items={effectiveFaqEntries.map((entry) => ({
         question: entry.question,
         answer: entry.answer,
       }))}
@@ -427,8 +426,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     ? youtubeUsersArticleData.headings
     : isYouTubeChannelStatisticsPost
       ? youtubeChannelStatisticsHeadingItems
-      : isHowToRecordAudioPost
-        ? howToRecordAudioHeadingItems
+      : isHowToEditAudioPost
+        ? howToEditAudioHeadingItems
       : currentPost.body
         ? getRichTextHeadingItems(currentPost.body)
         : currentPost.sections.map((section) => ({
@@ -571,8 +570,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     <YouTubeChannelStatisticsArticle />
                     {faqSection}
                   </>
-                ) : isHowToRecordAudioPost ? (
-                  <HowToRecordAudioArticle />
+                ) : isHowToEditAudioPost ? (
+                  <>
+                    <HowToEditAudioArticle />
+                    {faqSection}
+                  </>
                 ) : currentPost.body ? (
                   <BlogRichText
                     data={currentPost.body}
@@ -595,7 +597,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </>
                 )}
 
-                {!youtubeUsersArticleData && !isYouTubeChannelStatisticsPost && !isHowToRecordAudioPost
+                {!youtubeUsersArticleData && !isYouTubeChannelStatisticsPost && !isHowToEditAudioPost
                   ? faqSection
                   : null}
               </div>

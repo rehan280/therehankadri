@@ -5,6 +5,7 @@ import type {
   SerializedRichTextState,
   SerializedRichTextTextNode,
 } from "@/lib/blog-rich-text";
+import ArticleList from "@/components/blog/ArticleList";
 import styles from "@/app/(frontend)/blog/blog.module.css";
 
 type BlogRichTextProps = {
@@ -80,15 +81,19 @@ function renderNode(
       );
     }
     case "list": {
-      const Tag = (node.tag ?? "ul") as "ul" | "ol";
-      return (
-        <Tag key={key} className={styles.articleList}>
-          {children}
-        </Tag>
+      const ordered = (node.tag ?? "ul") === "ol";
+      const items = (node.children ?? []).map((child, index) =>
+        isElementNode(child) && child.type === "listitem" ? (
+          <>{renderChildren(child.children, headingIds)}</>
+        ) : (
+          renderNode(child, `list-item-${index}`, headingIds)
+        )
       );
+
+      return <ArticleList key={key} ordered={ordered} items={items} />;
     }
     case "listitem":
-      return <li key={key}>{children}</li>;
+      return <>{children}</>;
     case "quote":
       return (
         <blockquote key={key} className={styles.quoteBlock}>
@@ -102,8 +107,28 @@ function renderNode(
   }
 }
 
-export default function BlogRichText({ data, headingIds = [] }: BlogRichTextProps) {
+export default function BlogRichText({ data, headingIds = [], customWidgets }: BlogRichTextProps & { customWidgets?: Record<string, ReactNode> }) {
   const headingQueue = [...headingIds];
+  const renderedChildren = renderChildren(data.root.children, headingQueue);
 
-  return <>{renderChildren(data.root.children, headingQueue)}</>;
+  if (!customWidgets) {
+    return <>{renderedChildren}</>;
+  }
+
+  // To inject widgets after headings, we iterate over the root children
+  const result: ReactNode[] = [];
+  data.root.children.forEach((child, index) => {
+    const key = `${child.type}-${index}`;
+    result.push(renderNode(child, key, headingQueue));
+
+    // If it's a heading and we have a widget for its text, inject it
+    if (child.type === "heading" && "children" in child && child.children) {
+      const headingText = child.children.map((c) => ("text" in c ? c.text : "")).join("").trim();
+      if (customWidgets[headingText]) {
+        result.push(<div key={`widget-${key}`} className="rich-text-widget">{customWidgets[headingText]}</div>);
+      }
+    }
+  });
+
+  return <>{result}</>;
 }

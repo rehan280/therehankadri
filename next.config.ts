@@ -31,6 +31,11 @@ const nextConfig: NextConfig = {
         destination: "/stats/b2b/seo",
         permanent: true,
       },
+      {
+        source: "/blog/how-to-record-audio",
+        destination: "/blog/how-to-edit-audio",
+        permanent: true,
+      },
     ];
   },
   async headers() {
