@@ -82,9 +82,9 @@ You trim the dead air. You remove the background noise. You balance the volume. 
 
 But here's something nobody in the top 10 Google results explains well: there are two different types of audio editing.
 
-**Destructive editing** permanently changes your audio file. When you apply an effect in Audacity and save, the original recording is gone forever. There's no undo button after you close the project. This is fast and simple, but risky.
+**Destructive editing** permanently changes your audio file. When you apply an effect in [Audacity](https://www.audacityteam.org/) and save, the original recording is gone forever. There's no undo button after you close the project. This is fast and simple, but risky.
 
-**Non-destructive editing** keeps your original file safe. Programs like Adobe Audition, Logic Pro, and Reaper add effects on top of your audio without actually changing it. You can undo anything, change the order, or remove effects whenever you want. It takes longer to set up, but it's WAY more flexible.
+**Non-destructive editing** keeps your original file safe. Programs like [Adobe Audition](https://www.adobe.com/products/audition.html), Logic Pro, and [Reaper](https://www.reaper.fm/) add effects on top of your audio without actually changing it. You can undo anything, change the order, or remove effects whenever you want. It takes longer to set up, but it's WAY more flexible.
 
 For beginners: start with destructive editing in Audacity. Just save a backup copy of your raw file first. Always.
 
@@ -278,7 +278,7 @@ Mac users actually have it better than most people realize. Apple ships GarageBa
 
 ### How to edit audio in GarageBand
 
-GarageBand comes free on every Mac. For a free app, it's remarkably capable: multitrack editing, a full plugin library, and clean exports.
+[GarageBand](https://www.apple.com/mac/garageband/) comes free on every Mac. For a free app, it's remarkably capable: multitrack editing, a full plugin library, and clean exports.
 
 1. Open GarageBand
 2. Select **Empty Project**
@@ -349,7 +349,7 @@ For anything beyond basic trimming, you need WavePad.
 
 ### How to edit audio on iPhone with WavePad
 
-WavePad by NCH Software is the closest thing to desktop-quality editing on iOS.
+[WavePad](https://www.nch.com.au/wavepad/index.html) by NCH Software is the closest thing to desktop-quality editing on iOS.
 
 Here's why I recommend it over most alternatives:
 
@@ -375,7 +375,7 @@ Here's why I recommend it over most alternatives:
 
 Rinse and repeat this for every recording.
 
-**Other solid options:** Ferrite Recording Studio (built specifically for podcasters on iPad/iPhone), and GarageBand (more music-oriented but works for voice).
+**Other solid options:** [Ferrite](https://www.wooji-juice.com/products/ferrite/) (built specifically for podcasters on iPad/iPhone), and [GarageBand](https://www.apple.com/mac/garageband/) (more music-oriented but works for voice).
 
 ### iPhone audio export settings
 
@@ -496,7 +496,7 @@ Don't use it for final publishing. Use BandLab for that.
 
 ## Adobe Audition audio editing workflow
 
-Audition is what you graduate to when Audacity starts feeling limiting.
+[Adobe Audition](https://www.adobe.com/products/audition.html) is what you graduate to when [Audacity](https://www.audacityteam.org/) starts feeling limiting.
 
 It's not the best tool for everyone. But it is the best tool for detailed voice editing, multitrack podcast production, and surgical cleanup.
 

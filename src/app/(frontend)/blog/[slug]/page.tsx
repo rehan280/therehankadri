@@ -318,10 +318,61 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const wordCount = getWordCountForPost(currentPost);
   const datePublished = `${currentPost.publishedAt}T00:00:00Z`;
   const dateModified = `${currentPost.modifiedAt ?? currentPost.publishedAt}T00:00:00Z`;
+  const breadcrumbId = `${canonicalUrl}#breadcrumb`;
+  const audioEditingAbout = isHowToEditAudioPost
+    ? [
+        { "@type": "Thing", name: "Audio editing" },
+        { "@type": "Thing", name: "Podcast editing" },
+        { "@type": "Thing", name: "YouTube audio editing" },
+        { "@type": "Thing", name: "Audio editing for beginners" },
+        { "@type": "Thing", name: "LUFS loudness standards" },
+      ]
+    : undefined;
+  const audioEditingMentions = isHowToEditAudioPost
+    ? [
+        {
+          "@type": "SoftwareApplication",
+          name: "Audacity",
+          url: "https://www.audacityteam.org/",
+        },
+        {
+          "@type": "SoftwareApplication",
+          name: "GarageBand",
+          url: "https://www.apple.com/mac/garageband/",
+        },
+        {
+          "@type": "SoftwareApplication",
+          name: "Adobe Audition",
+          url: "https://www.adobe.com/products/audition.html",
+        },
+        {
+          "@type": "SoftwareApplication",
+          name: "Adobe Podcast",
+          url: "https://podcast.adobe.com/",
+        },
+        {
+          "@type": "SoftwareApplication",
+          name: "Descript",
+          url: "https://www.descript.com/",
+        },
+        {
+          "@type": "SoftwareApplication",
+          name: "Auphonic",
+          url: "https://auphonic.com/",
+        },
+        {
+          "@type": "SoftwareApplication",
+          name: "BandLab",
+          url: "https://www.bandlab.com/",
+        },
+      ]
+    : undefined;
   const articleJsonLd = {
     "@type": "BlogPosting",
     headline: currentPost.metaTitle ?? currentPost.title,
     description: currentPost.seoDescription,
+    inLanguage: "en-US",
+    isAccessibleForFree: true,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": canonicalUrl,
@@ -344,6 +395,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     isPartOf: {
       "@id": canonicalUrl,
     },
+    breadcrumb: {
+      "@id": breadcrumbId,
+    },
+    about: audioEditingAbout,
+    mentions: audioEditingMentions,
   };
   const articleStructuredData = {
     "@context": "https://schema.org",
@@ -388,6 +444,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": breadcrumbId,
     itemListElement: [
       {
         "@type": "ListItem",
