@@ -63,7 +63,7 @@ function getGitHubPublishConfig(): GitHubPublishConfig | null {
     repo,
     branch: process.env.GITHUB_REPO_BRANCH?.trim() || "main",
     basePath: trimSlashes(process.env.GITHUB_REPO_BASE_PATH?.trim() || ""),
-    apiVersion: process.env.GITHUB_API_VERSION?.trim() || "2026-03-10",
+    apiVersion: process.env.GITHUB_API_VERSION?.trim() || "2022-11-28",
     authorName: process.env.GITHUB_COMMIT_AUTHOR_NAME?.trim() || undefined,
     authorEmail: process.env.GITHUB_COMMIT_AUTHOR_EMAIL?.trim() || undefined,
   };

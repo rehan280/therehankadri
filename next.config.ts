@@ -12,23 +12,48 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/stats/youtube/users",
+        destination: "/stats/youtube-users",
+        permanent: true,
+      },
+      {
+        source: "/stats/youtube/channel",
+        destination: "/stats/youtube-channels",
+        permanent: true,
+      },
+      {
+        source: "/stats/youtube/subscribers-needed-to-make-money",
+        destination: "/stats/youtube-subscribers-needed-to-make-money",
+        permanent: true,
+      },
+      {
+        source: "/stats/youtube-susbcribers-needed-to-make-money",
+        destination: "/stats/youtube-subscribers-needed-to-make-money",
+        permanent: true,
+      },
+      {
+        source: "/stats/b2b/seo",
+        destination: "/stats/b2b-seo",
+        permanent: true,
+      },
+      {
         source: "/blog/youtube-users",
-        destination: "/stats/youtube/users",
+        destination: "/stats/youtube-users",
         permanent: true,
       },
       {
         source: "/blog/youtube-channel-statistics",
-        destination: "/stats/youtube/channel",
+        destination: "/stats/youtube-channels",
         permanent: true,
       },
       {
         source: "/blog/youtube-channel-statistics-2026",
-        destination: "/stats/youtube/channel",
+        destination: "/stats/youtube-channels",
         permanent: true,
       },
       {
         source: "/blog/b2b-seo-statistics",
-        destination: "/stats/b2b/seo",
+        destination: "/stats/b2b-seo",
         permanent: true,
       },
       {

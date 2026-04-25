@@ -40,6 +40,7 @@ export type CreateCmsBlogPostInput = {
   hero?: BlogPost["hero"];
   jsxSource: string;
   originalFileName?: string;
+  isUpdate?: boolean;
 };
 
 const cmsRootDir = path.join(process.cwd(), "src", "content");
@@ -391,7 +392,7 @@ export async function createCmsBlogPost(input: CreateCmsBlogPostInput) {
   const slug = input.slug.trim().toLowerCase();
   const title = input.title.trim();
   const excerpt = input.excerpt.trim();
-  const jsxSource = input.jsxSource.trim();
+  let jsxSource = input.jsxSource.trim();
   const publishedAt = input.publishedAt.trim();
 
   if (!title) {
@@ -405,14 +406,19 @@ export async function createCmsBlogPost(input: CreateCmsBlogPostInput) {
   if (!jsxSource) {
     throw new Error("Paste JSX content or upload a JSX file before publishing.");
   }
+  
+  if (jsxSource && (jsxSource.startsWith("#") || jsxSource.startsWith("|") || (!jsxSource.includes("<p>") && !jsxSource.includes("<div>")))) {
+    const { marked } = await import("marked");
+    jsxSource = await marked.parse(jsxSource);
+  }
 
   assertValidSlug(slug);
   assertValidPublishedAt(publishedAt);
 
   const existingPost = (await getAllManagedBlogPosts()).find((post) => post.slug === slug);
 
-  if (existingPost) {
-    throw new Error(`A post with the slug \"${slug}\" already exists.`);
+  if (existingPost && !input.isUpdate) {
+    throw new Error(`A post with the slug "${slug}" already exists.`);
   }
 
   const body = buildRichTextBodyFromMarkup(jsxSource);
@@ -567,6 +573,18 @@ export async function getCmsUploadCopyFilePaths(slug: string) {
 
     throw error;
   }
+}
+
+export async function getCmsPostJsxSource(slug: string): Promise<string> {
+  const uploadPaths = await getCmsUploadCopyFilePaths(slug);
+  if (uploadPaths.length > 0) {
+    try {
+      return await fs.readFile(uploadPaths[0], "utf8");
+    } catch {
+      return "";
+    }
+  }
+  return "";
 }
 
 

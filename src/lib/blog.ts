@@ -68,6 +68,8 @@ export type BlogPost = {
   sections: BlogSection[];
 };
 
+const BLOG_DISPLAY_TIME_ZONE = "Asia/Kolkata";
+
 const author: BlogAuthor = {
   name: "Rehan Kadri",
   role: "Growth Marketing Strategist",
@@ -596,8 +598,35 @@ export function formatBlogDate(value: string) {
     month: "long",
     day: "numeric",
     year: "numeric",
-    timeZone: "UTC",
-  }).format(new Date(`${value}T00:00:00Z`));
+    timeZone: BLOG_DISPLAY_TIME_ZONE,
+  }).format(new Date(toBlogIsoDateTime(value)));
+}
+
+export function hasBlogTime(value: string) {
+  return /T\d{2}:\d{2}/.test(value);
+}
+
+export function toBlogIsoDateTime(value: string) {
+  const normalizedValue = value.trim();
+
+  if (!hasBlogTime(normalizedValue)) {
+    return `${normalizedValue}T00:00:00Z`;
+  }
+
+  return /(?:Z|[+-]\d{2}:\d{2})$/.test(normalizedValue)
+    ? normalizedValue
+    : `${normalizedValue}Z`;
+}
+
+export function formatBlogDateTime(value: string) {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: BLOG_DISPLAY_TIME_ZONE,
+  }).format(new Date(toBlogIsoDateTime(value)));
 }
 
 export function getBlogDisplayDateValue(post: BlogPost) {
@@ -608,8 +637,12 @@ export function formatBlogDisplayDate(post: BlogPost) {
   return formatBlogDate(getBlogDisplayDateValue(post));
 }
 
+export function getBlogDisplayDateTimeValue(post: BlogPost) {
+  return toBlogIsoDateTime(getBlogDisplayDateValue(post));
+}
+
 export function getBlogDisplayDateLabel(post: BlogPost) {
-  return post.modifiedAt ? "Updated" : "Published";
+  return post.modifiedAt ? "Last updated" : "Published";
 }
 
 function countWords(value: string) {

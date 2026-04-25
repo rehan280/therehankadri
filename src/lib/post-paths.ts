@@ -3,9 +3,9 @@ export const YOUTUBE_USERS_SLUG = "youtube-users";
 export const B2B_SEO_STATISTICS_SLUG = "b2b-seo-statistics";
 
 const statsPostPaths = {
-  [YOUTUBE_CHANNEL_STATISTICS_SLUG]: "/stats/youtube/channel",
-  [YOUTUBE_USERS_SLUG]: "/stats/youtube/users",
-  [B2B_SEO_STATISTICS_SLUG]: "/stats/b2b/seo",
+  [YOUTUBE_CHANNEL_STATISTICS_SLUG]: "/stats/youtube-channels",
+  [YOUTUBE_USERS_SLUG]: "/stats/youtube-users",
+  [B2B_SEO_STATISTICS_SLUG]: "/stats/b2b-seo",
 } as const;
 
 export function isStatsPostSlug(slug: string) {

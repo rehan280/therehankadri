@@ -25,13 +25,13 @@ const getWarmRoutes = (pathname: string) => {
     pathname === "/blog" ||
     pathname.startsWith("/blog/") ||
     pathname === "/stats/youtube" ||
-    pathname === "/stats/youtube/channel" ||
+    pathname === "/stats/youtube-channels" ||
     pathname.startsWith("/stats/")
   ) {
     return ["/", "/contact"];
   }
 
-  return ["/blog", "/stats/youtube/channel", "/contact"];
+  return ["/blog", "/stats/youtube-channels", "/contact"];
 };
 
 export default function RouteWarmup() {

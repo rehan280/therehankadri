@@ -34,8 +34,10 @@ import {
   type BlogPost,
   defaultBlogAuthor,
   formatBlogDisplayDate,
+  getBlogDisplayDateTimeValue,
   getBlogDisplayDateLabel,
   getBlogReadTime,
+  toBlogIsoDateTime,
 } from "@/lib/blog";
 import {
   getAllBlogPosts,
@@ -92,8 +94,8 @@ export async function generateMetadata({
     keywords: currentPost.keywords,
     imagePath: socialImage,
     imageAlt: currentPost.title,
-    publishedTime: `${currentPost.publishedAt}T00:00:00Z`,
-    modifiedTime: `${currentPost.modifiedAt ?? currentPost.publishedAt}T00:00:00Z`,
+    publishedTime: toBlogIsoDateTime(currentPost.publishedAt),
+    modifiedTime: toBlogIsoDateTime(currentPost.modifiedAt ?? currentPost.publishedAt),
     authors: [postAuthor.name],
   });
 }
@@ -316,8 +318,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const canonicalUrl = buildCanonicalUrl(getPostPath(currentPost.slug));
   const socialImage = buildAbsoluteImageUrl(currentPost.coverImage ?? undefined);
   const wordCount = getWordCountForPost(currentPost);
-  const datePublished = `${currentPost.publishedAt}T00:00:00Z`;
-  const dateModified = `${currentPost.modifiedAt ?? currentPost.publishedAt}T00:00:00Z`;
+  const datePublished = toBlogIsoDateTime(currentPost.publishedAt);
+  const dateModified = toBlogIsoDateTime(currentPost.modifiedAt ?? currentPost.publishedAt);
   const breadcrumbId = `${canonicalUrl}#breadcrumb`;
   const audioEditingAbout = isHowToEditAudioPost
     ? [
@@ -574,7 +576,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <div className={styles.postMetaRow}>
                 <span className={styles.postMetaItem}>
                   <CalendarDays size={16} strokeWidth={2.1} />
-                  <span>{getBlogDisplayDateLabel(currentPost)}: {formatBlogDisplayDate(currentPost)}</span>
+                  <time dateTime={getBlogDisplayDateTimeValue(currentPost)}>
+                    {getBlogDisplayDateLabel(currentPost)}: {formatBlogDisplayDate(currentPost)}
+                  </time>
                 </span>
                 <span className={styles.postMetaItem}>
                   <Clock3 size={16} strokeWidth={2.1} />

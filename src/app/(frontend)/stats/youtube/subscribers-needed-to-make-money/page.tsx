@@ -15,6 +15,8 @@ import ArticleSocialShare from "@/components/blog/ArticleSocialShare";
 import PremiumFaq from "@/components/content/PremiumFaq";
 import {
   defaultBlogAuthor,
+  formatBlogDate,
+  toBlogIsoDateTime,
 } from "@/lib/blog";
 import { getAllBlogPosts } from "@/lib/blog-content";
 import {
@@ -32,7 +34,7 @@ import {
   getSubscribersNeededToMakeMoneyArticle,
 } from "./article-content";
 
-const PAGE_PATH = "/stats/youtube/subscribers-needed-to-make-money";
+const PAGE_PATH = "/stats/youtube-subscribers-needed-to-make-money";
 const PAGE_SLUG = "youtube-subscribers-needed-to-make-money";
 const PAGE_TITLE = "How Many YouTube Subscribers Needed to Make Money in 2026?";
 const PAGE_IMAGE_PATH =
@@ -40,8 +42,8 @@ const PAGE_IMAGE_PATH =
 const HERO_IMAGE_PATH =
   "/stats/youtube/subscribers-needed-to-make-money/youtube-subscribers-needed-to-make-money.svg";
 const PAGE_IMAGE_ALT = "YouTube subscribers needed to make money article graphic";
-const PUBLISHED_AT = "2026-04-14";
-const MODIFIED_AT = "2026-04-15";
+const PUBLISHED_AT = "2026-04-25T12:53:41+05:30";
+const MODIFIED_AT = "2026-04-25T12:53:41+05:30";
 const YOUTUBE_HERO_BACKGROUND =
   "linear-gradient(135deg, #ff4b43 0%, #ff3838 48%, #ff2923 100%)";
 const SECTION_TITLE_OVERRIDES: Record<string, string> = {
@@ -70,12 +72,7 @@ const SECTION_TITLE_OVERRIDES: Record<string, string> = {
 };
 
 function formatPublishedDate(date: string) {
-  return new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(new Date(`${date}T00:00:00Z`));
+  return formatBlogDate(date);
 }
 
 function getReadTime(wordCount: number) {
@@ -238,8 +235,8 @@ export async function generateMetadata(): Promise<Metadata> {
     path: PAGE_PATH,
     imagePath: PAGE_IMAGE_PATH,
     imageAlt: PAGE_IMAGE_ALT,
-    publishedTime: `${PUBLISHED_AT}T00:00:00Z`,
-    modifiedTime: `${MODIFIED_AT}T00:00:00Z`,
+    publishedTime: toBlogIsoDateTime(PUBLISHED_AT),
+    modifiedTime: toBlogIsoDateTime(MODIFIED_AT),
     authors: [defaultBlogAuthor.name],
     keywords: [
       "how many youtube subscribers to make money",
@@ -305,8 +302,8 @@ export default async function SubscribersNeededToMakeMoneyPage() {
     description: article.description,
     mainEntityOfPage: canonicalUrl,
     url: canonicalUrl,
-    datePublished: `${PUBLISHED_AT}T00:00:00Z`,
-    dateModified: `${MODIFIED_AT}T00:00:00Z`,
+    datePublished: toBlogIsoDateTime(PUBLISHED_AT),
+    dateModified: toBlogIsoDateTime(MODIFIED_AT),
     articleSection: "YouTube Statistics",
     wordCount: article.wordCount,
     timeRequired: `PT${readTime.minutes}M`,
@@ -406,7 +403,9 @@ export default async function SubscribersNeededToMakeMoneyPage() {
               <div className={blogStyles.postMetaRow}>
                 <span className={`${blogStyles.postMetaItem} ${themeStyles.postMetaItem}`}>
                   <CalendarDays size={16} strokeWidth={2.1} />
-                  <span>Published: {formatPublishedDate(PUBLISHED_AT)}</span>
+                  <time dateTime={toBlogIsoDateTime(MODIFIED_AT)}>
+                    Last updated: {formatPublishedDate(MODIFIED_AT)}
+                  </time>
                 </span>
                 <span className={`${blogStyles.postMetaItem} ${themeStyles.postMetaItem}`}>
                   <Clock3 size={16} strokeWidth={2.1} />
@@ -575,14 +574,14 @@ export default async function SubscribersNeededToMakeMoneyPage() {
           <div className={blogStyles.articleGrid}>
             {[
               {
-                href: "/stats/youtube/channel",
+                href: "/stats/youtube-channels",
                 eyebrow: "YouTube Statistics",
                 title: "YouTube Channel Statistics 2026",
                 blurb:
                   "Platform-wide channel growth, Shorts momentum, revenue, and creator economy benchmarks.",
               },
               {
-                href: "/stats/youtube/users",
+                href: "/stats/youtube-users",
                 eyebrow: "YouTube Statistics",
                 title: "How Many People Use YouTube in 2026?",
                 blurb:

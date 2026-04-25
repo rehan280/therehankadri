@@ -38,11 +38,11 @@ Here's a quick cheat sheet so you can jump straight to your setup:
 
 | Device | Built-in Tool | Best Free Editing Software | Cost | Best For |
 |---|---|---|---|---|
-| Windows PC | (none useful) | [Audacity](https://www.audacityteam.org/) | Free | YouTube, podcasts, voiceovers |
-| Mac | [GarageBand](https://www.apple.com/mac/garageband/) | [Audacity](https://www.audacityteam.org/) / [GarageBand](https://www.apple.com/mac/garageband/) | Free | Music, podcasts, voice editing |
-| iPhone | Voice Memos (basic trim) | [WavePad](https://www.nch.com.au/wavepad/index.html) | Free | Quick edits, mobile podcasting |
+| Windows PC | (none useful) | Audacity | Free | YouTube, podcasts, voiceovers |
+| Mac | GarageBand | Audacity / GarageBand | Free | Music, podcasts, voice editing |
+| iPhone | Voice Memos (basic trim) | WavePad | Free | Quick edits, mobile podcasting |
 | Android | (none useful) | Lexis Audio Editor | Free | Voiceovers, Reels narration |
-| Chromebook | (none) | [BandLab](https://www.bandlab.com/) | Free | Browser-based editing |
+| Chromebook | (none) | BandLab | Free | Browser-based editing |
 
 If you already know your device, skip ahead. But if you want to understand why some edited audio sounds professional and others sound like a phone call from 2004, keep reading.
 
@@ -82,9 +82,9 @@ You trim the dead air. You remove the background noise. You balance the volume. 
 
 But here's something nobody in the top 10 Google results explains well: there are two different types of audio editing.
 
-**Destructive editing** permanently changes your audio file. When you apply an effect in [Audacity](https://www.audacityteam.org/) and save, the original recording is gone forever. There's no undo button after you close the project. This is fast and simple, but risky.
+**Destructive editing** permanently changes your audio file. When you apply an effect in Audacity and save, the original recording is gone forever. There's no undo button after you close the project. This is fast and simple, but risky.
 
-**Non-destructive editing** keeps your original file safe. Programs like [Adobe Audition](https://www.adobe.com/products/audition.html), Logic Pro, and [Reaper](https://www.reaper.fm/) add effects on top of your audio without actually changing it. You can undo anything, change the order, or remove effects whenever you want. It takes longer to set up, but it's WAY more flexible.
+**Non-destructive editing** keeps your original file safe. Programs like Adobe Audition, Logic Pro, and Reaper add effects on top of your audio without actually changing it. You can undo anything, change the order, or remove effects whenever you want. It takes longer to set up, but it's WAY more flexible.
 
 For beginners: start with destructive editing in Audacity. Just save a backup copy of your raw file first. Always.
 
@@ -154,16 +154,16 @@ Here's my shortlist. These are the tools I've actually tested.
 
 | Software | Platform | Best For | Cost | My Take |
 |---|---|---|---|---|
-| [Audacity](https://www.audacityteam.org/) | Win / Mac / Linux | Everything | Free | Ugly interface, incredible power. The most widely used free audio editor on Earth |
-| [GarageBand](https://www.apple.com/mac/garageband/) | Mac / iPhone | Music, podcasts | Free | Multitrack, full plugin library, clean exports. Remarkable for a free app |
-| [Adobe Audition](https://www.adobe.com/products/audition.html) | Win / Mac | Pro podcasts, broadcast | $22/mo | Non-destructive multitrack editing. Spectral display is unmatched |
-| [Reaper](https://www.reaper.fm/) | Win / Mac / Linux | Power users | $60 (one-time) | Enterprise features at an indie price. Steep learning curve |
-| [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve) | Win / Mac / Linux | Video creators | Free | Built-in Fairlight audio editor. Edit audio and video in one app |
-| [Descript](https://www.descript.com/) | Win / Mac | AI editing, podcasts | Freemium | Edit audio like a Word doc. Remove filler words with one click |
-| [BandLab](https://www.bandlab.com/) | Browser (any device) | Chromebook | Free | The best browser-based DAW |
+| Audacity | Win / Mac / Linux | Everything | Free | Ugly interface, incredible power. The most widely used free audio editor on Earth |
+| GarageBand | Mac / iPhone | Music, podcasts | Free | Multitrack, full plugin library, clean exports. Remarkable for a free app |
+| Adobe Audition | Win / Mac | Pro podcasts, broadcast | $22/mo | Non-destructive multitrack editing. Spectral display is unmatched |
+| Reaper | Win / Mac / Linux | Power users | $60 (one-time) | Enterprise features at an indie price. Steep learning curve |
+| DaVinci Resolve | Win / Mac / Linux | Video creators | Free | Built-in Fairlight audio editor. Edit audio and video in one app |
+| Descript | Win / Mac | AI editing, podcasts | Freemium | Edit audio like a Word doc. Remove filler words with one click |
+| BandLab | Browser (any device) | Chromebook | Free | The best browser-based DAW |
 | Lexis Audio Editor | Android / iOS | Mobile editing | Free | Desktop-like interface on your phone |
-| [WavePad](https://www.nch.com.au/wavepad/index.html) | iOS / Android | Mobile editing | Free tier | Best iOS audio editor. Targeted noise removal presets |
-| [Adobe Podcast](https://podcast.adobe.com/) | Browser | AI cleanup | Free | Upload noisy audio, get clean audio back in seconds |
+| WavePad | iOS / Android | Mobile editing | Free tier | Best iOS audio editor. Targeted noise removal presets |
+| Adobe Podcast | Browser | AI cleanup | Free | Upload noisy audio, get clean audio back in seconds |
 
 None of these are sponsored. I pay for Descript and use the free versions of everything else.
 
@@ -375,7 +375,7 @@ Here's why I recommend it over most alternatives:
 
 Rinse and repeat this for every recording.
 
-**Other solid options:** [Ferrite](https://www.wooji-juice.com/products/ferrite/) (built specifically for podcasters on iPad/iPhone), and [GarageBand](https://www.apple.com/mac/garageband/) (more music-oriented but works for voice).
+**Other solid options:** [Ferrite](https://www.wooji-juice.com/products/ferrite/) (built specifically for podcasters on iPad/iPhone), and GarageBand (more music-oriented but works for voice).
 
 ### iPhone audio export settings
 
@@ -496,7 +496,7 @@ Don't use it for final publishing. Use BandLab for that.
 
 ## Adobe Audition audio editing workflow
 
-[Adobe Audition](https://www.adobe.com/products/audition.html) is what you graduate to when [Audacity](https://www.audacityteam.org/) starts feeling limiting.
+[Adobe Audition](https://www.adobe.com/products/audition.html) is what you graduate to when Audacity starts feeling limiting.
 
 It's not the best tool for everyone. But it is the best tool for detailed voice editing, multitrack podcast production, and surgical cleanup.
 
@@ -881,7 +881,3 @@ You now have every workflow, every setting, and every fix. For any device. For a
 Now stop reading and go edit something.
 
 ---
-
-*Written by Rehan Kadri. Last updated: April 2026.*
-
-*Now open Audacity, drag in a recording, and run the Compressor Sandwich. You'll hear the difference in 5 minutes.*

@@ -80,7 +80,7 @@ Widen that to include embedded views, smart TV watching, and mobile browsers. Th
 
 Those 340 million people collectively watch over 1 billion hours of video every single day.
 
-And creators feed that machine with [500 hours](/stats/youtube/channel) of new video every minute. That's 720,000 hours of new content indexed daily.
+And creators feed that machine with [500 hours](/stats/youtube-channels) of new video every minute. That's 720,000 hours of new content indexed daily.
 
 Nobody has watched all of YouTube. Not even YouTube's algorithm.
 

@@ -27,7 +27,23 @@ import { SITE_URL } from "@/lib/seo";
 
 const DEFAULT_CMS_SITE_URL = SITE_URL;
 
-function buildAdminLocation(params?: Record<string, string | undefined>) {
+function humanizeSupabaseError(error: unknown): string {
+  if (!(error instanceof Error)) {
+    return "We could not start the login flow.";
+  }
+  // Supabase returns plain-text "Project paused" when the free-tier project is
+  // inactive. supabase-js tries to JSON.parse it, which throws this message.
+  if (
+    error.message.includes("is not valid JSON") ||
+    error.message.toLowerCase().includes("project paused") ||
+    error.message.toLowerCase().includes("fetch failed")
+  ) {
+    return "Your Supabase project appears to be paused. Resume it at supabase.com/dashboard and try again.";
+  }
+  return error.message;
+}
+
+function buildAdminLocation(path: string, params?: Record<string, string | undefined>) {
   const searchParams = new URLSearchParams();
 
   Object.entries(params ?? {}).forEach(([key, value]) => {
@@ -37,7 +53,7 @@ function buildAdminLocation(params?: Record<string, string | undefined>) {
   });
 
   const query = searchParams.toString();
-  return query ? `/admin/jsx-upload?${query}` : "/admin/jsx-upload";
+  return query ? `${path}?${query}` : path;
 }
 
 function parseCommaSeparatedValue(value: FormDataEntryValue | null) {
@@ -135,14 +151,14 @@ function getOriginFromForwardedHeader(value: string) {
 }
 
 export async function requestCmsMagicLink(formData: FormData) {
-  let destination = buildAdminLocation({
+  let destination = buildAdminLocation("/admin/login", {
     type: "error",
     message: "Supabase is not configured for CMS login yet.",
   });
 
   try {
     if (!isSupabaseConfigured()) {
-      destination = buildAdminLocation({
+      destination = buildAdminLocation("/admin/login", {
         type: "error",
         message: "Supabase is not configured for CMS login yet.",
       });
@@ -151,18 +167,18 @@ export async function requestCmsMagicLink(formData: FormData) {
       const email = String(formData.get("email") ?? fallbackEmail).trim().toLowerCase();
 
       if (!email) {
-        destination = buildAdminLocation({
+        destination = buildAdminLocation("/admin/login", {
           type: "error",
           message: "Enter your admin email first.",
         });
       } else if (!(await isAuthorizedCmsEmail(email))) {
-        destination = buildAdminLocation({
+        destination = buildAdminLocation("/admin/login", {
           type: "error",
           message: "That email is not allowed to access this CMS.",
         });
       } else {
         const supabase = await createSupabaseServerClient();
-        const callbackUrl = `${await getRequestOrigin()}/admin/jsx-upload/auth/callback?next=/admin/jsx-upload`;
+        const callbackUrl = `${await getRequestOrigin()}/admin/auth/callback?next=/admin/manage-posts`;
         const { error } = await supabase.auth.signInWithOtp({
           email,
           options: {
@@ -172,20 +188,20 @@ export async function requestCmsMagicLink(formData: FormData) {
         });
 
         destination = error
-          ? buildAdminLocation({
+          ? buildAdminLocation("/admin/login", {
               type: "error",
               message: error.message,
             })
-          : buildAdminLocation({
+          : buildAdminLocation("/admin/login", {
               type: "success",
               message: "Magic link sent. Open it on this device to enter the CMS.",
             });
       }
     }
   } catch (error) {
-    destination = buildAdminLocation({
+    destination = buildAdminLocation("/admin/login", {
       type: "error",
-      message: error instanceof Error ? error.message : "We could not start the login flow.",
+      message: humanizeSupabaseError(error),
     });
   }
 
@@ -196,7 +212,7 @@ export async function signOutCms() {
   const supabase = await createSupabaseServerClient();
   await supabase.auth.signOut();
   redirect(
-    buildAdminLocation({
+    buildAdminLocation("/admin/login", {
       type: "success",
       message: "You have been signed out of the CMS.",
     })
@@ -204,7 +220,7 @@ export async function signOutCms() {
 }
 
 export async function publishCmsPostAction(formData: FormData) {
-  let destination = buildAdminLocation({
+  let destination = buildAdminLocation("/admin/manage-posts", {
     type: "error",
     message: "We could not publish that post.",
   });
@@ -222,6 +238,7 @@ export async function publishCmsPostAction(formData: FormData) {
       originalFileName = uploadedFile.name;
     }
 
+    const isUpdate = formData.get("isUpdate") === "true";
     const post = await createCmsBlogPost({
       title: String(formData.get("title") ?? ""),
       metaTitle: String(formData.get("metaTitle") ?? ""),
@@ -244,6 +261,7 @@ export async function publishCmsPostAction(formData: FormData) {
       },
       jsxSource,
       originalFileName,
+      isUpdate,
     });
 
     const localFilePaths = [
@@ -257,7 +275,7 @@ export async function publishCmsPostAction(formData: FormData) {
         upsertLocalFilePaths: localFilePaths,
       });
     } catch (error) {
-      destination = buildAdminLocation({
+      destination = buildAdminLocation("/admin/manage-posts", {
         type: "error",
         message:
           error instanceof Error
@@ -269,16 +287,16 @@ export async function publishCmsPostAction(formData: FormData) {
 
     revalidatePath("/blog");
     revalidatePath("/blog/[slug]", "page");
-    revalidatePath("/admin/jsx-upload");
+    revalidatePath("/admin/manage-posts");
 
-    destination = buildAdminLocation({
+    destination = buildAdminLocation("/admin/manage-posts", {
       type: "success",
-      message: `Published ${post.title}. ${getPublishOutcomeMessage()}`,
+      message: `${isUpdate ? "Updated" : "Published"} ${post.title}. ${getPublishOutcomeMessage()}`,
     });
   } catch (error) {
-    destination = buildAdminLocation({
+    destination = buildAdminLocation("/admin/manage-posts", {
       type: "error",
-      message: error instanceof Error ? error.message : "We could not publish that post.",
+      message: humanizeSupabaseError(error),
     });
   }
 
@@ -286,7 +304,7 @@ export async function publishCmsPostAction(formData: FormData) {
 }
 
 export async function deleteCmsPostAction(slug: string) {
-  let destination = buildAdminLocation({
+  let destination = buildAdminLocation("/admin/manage-posts", {
     type: "error",
     message: "We could not delete that post.",
   });
@@ -315,7 +333,7 @@ export async function deleteCmsPostAction(slug: string) {
             }
       );
     } catch (error) {
-      destination = buildAdminLocation({
+      destination = buildAdminLocation("/admin/manage-posts", {
         type: "error",
         message:
           error instanceof Error
@@ -327,9 +345,9 @@ export async function deleteCmsPostAction(slug: string) {
 
     revalidatePath("/blog");
     revalidatePath("/blog/[slug]", "page");
-    revalidatePath("/admin/jsx-upload");
+    revalidatePath("/admin/manage-posts");
 
-    destination = buildAdminLocation({
+    destination = buildAdminLocation("/admin/manage-posts", {
       type: "success",
       message:
         deletedSource === "legacy"
@@ -337,9 +355,9 @@ export async function deleteCmsPostAction(slug: string) {
           : `The CMS post was deleted. ${getPublishOutcomeMessage()}`,
     });
   } catch (error) {
-    destination = buildAdminLocation({
+    destination = buildAdminLocation("/admin/manage-posts", {
       type: "error",
-      message: error instanceof Error ? error.message : "We could not delete that post.",
+      message: humanizeSupabaseError(error),
     });
   }
 

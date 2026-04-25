@@ -17,7 +17,7 @@ import styles from "./youtube-stats.module.css";
 const featuredYouTubeStatsResources = [
   {
     title: "How Many YouTube Subscribers Needed to Make Money in 2026?",
-    url: "/stats/youtube/subscribers-needed-to-make-money",
+    url: "/stats/youtube-subscribers-needed-to-make-money",
   },
 ] as const;
 

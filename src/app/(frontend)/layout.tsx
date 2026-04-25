@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import '@rohanyeole/ray-editor/css';
 import '../globals.css';
 import '../home.css';
 import AppFrame from '@/components/AppFrame';

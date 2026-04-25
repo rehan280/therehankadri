@@ -448,7 +448,7 @@ const articleBlocks: ArticleBlock[] = [
   { type: "heading", id: "youtube-user-stats", text: "YouTube User Stats" },
   {
     type: "paragraph",
-    text: "YouTube has [2.85 billion](/stats/youtube/users) Monthly Active Users in 2026.",
+    text: "YouTube has [2.85 billion](/stats/youtube-users) Monthly Active Users in 2026.",
     sectionId: "youtube-user-stats",
   },
   {
