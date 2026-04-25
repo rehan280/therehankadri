@@ -16,7 +16,6 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
   const [activeId, setActiveId] = useState(items[0]?.id ?? "");
 
   const listRef = useRef<HTMLOListElement>(null);
-
   const sectionIds = useMemo(() => items.map((item) => item.id), [items]);
 
   useEffect(() => {
@@ -62,9 +61,28 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
     const activeElement = listRef.current.querySelector<HTMLAnchorElement>(`a[href="#${activeId}"]`);
     if (!activeElement) return;
 
-    activeElement.scrollIntoView({
-      block: "nearest",
-      inline: "nearest",
+    const listElement = listRef.current;
+    const listRect = listElement.getBoundingClientRect();
+    const activeRect = activeElement.getBoundingClientRect();
+    const viewportPadding = Math.min(48, listRect.height * 0.22);
+
+    const isAboveViewport = activeRect.top < listRect.top + viewportPadding;
+    const isBelowViewport = activeRect.bottom > listRect.bottom - viewportPadding;
+
+    if (!isAboveViewport && !isBelowViewport) {
+      return;
+    }
+
+    const centeredOffset =
+      activeElement.offsetTop - listElement.clientHeight / 2 + activeElement.clientHeight / 2;
+    const nextScrollTop = Math.max(
+      0,
+      Math.min(centeredOffset, listElement.scrollHeight - listElement.clientHeight)
+    );
+
+    listElement.scrollTo({
+      top: nextScrollTop,
+      behavior: "smooth",
     });
   }, [activeId]);
 
@@ -83,7 +101,7 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
         <span className={styles.windowFile}>table_of_contents.md</span>
       </div>
 
-      <nav aria-label="Table of contents">
+      <nav aria-label="Table of contents" data-lenis-prevent>
         <ol className={styles.tocList} ref={listRef}>
           {items.map((item, index) => {
             const active = item.id === activeId;

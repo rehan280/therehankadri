@@ -41,6 +41,23 @@ html {
   scroll-padding-top: 6.5rem;
 }
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+html.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+html.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
 body {
   min-height: 100vh;
   width: 100%;
