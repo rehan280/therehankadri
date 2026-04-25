@@ -41,7 +41,7 @@ export default function HomeNavbar() {
   return (
     <>
       <nav className={`navbar${menuOpen ? " menu-open" : ""}${useTransparentHeroNavbar && !menuOpen ? " hero-blend" : ""}`}>
-        <Link href="/" prefetch={false} className="nav-brand" aria-label="The Rehan Kadri home">
+        <Link href="/" className="nav-brand" aria-label="The Rehan Kadri home">
           <span className="nav-brand-copy">
             <span className="nav-brand-kicker">Revenue-first growth systems</span>
             <span className="nav-brand-title">
@@ -70,7 +70,6 @@ export default function HomeNavbar() {
                 <Link
                   key={href}
                   href={href}
-                  prefetch={false}
                   className={isActive ? "active" : ""}
                   aria-current={isActive ? "page" : undefined}
                 >
@@ -82,10 +81,10 @@ export default function HomeNavbar() {
         </div>
 
         <div className="nav-right">
-          <Link href="/#works" prefetch={false} className="nav-secondary">
+          <Link href="/#works" className="nav-secondary">
             View Results
           </Link>
-          <Link href="/contact" prefetch={false} className="btn btn-orange nav-btn">
+          <Link href="/contact" className="btn btn-orange nav-btn">
             Book A Strategy Call
           </Link>
           <button
@@ -123,7 +122,6 @@ export default function HomeNavbar() {
               <Link
                 key={href}
                 href={href}
-                prefetch={false}
                 onClick={closeMenu}
                 className={isActive ? "active" : ""}
                 aria-current={isActive ? "page" : undefined}
@@ -134,7 +132,6 @@ export default function HomeNavbar() {
           })}
           <Link
             href={contactHref}
-            prefetch={false}
             onClick={closeMenu}
             className={`mobile-sub-link${pathname === contactHref ? " active" : ""}`}
             aria-current={pathname === contactHref ? "page" : undefined}

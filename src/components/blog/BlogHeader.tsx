@@ -45,7 +45,7 @@ export default function BlogHeader() {
       <nav
         className={`navbar blog-navbar${menuOpen ? " menu-open" : ""}${blendIntoHero ? " hero-blend" : ""}${useLightHeroBlend ? " hero-blend-light" : ""}${useWarmHeroBlend ? " hero-blend-warm" : ""}`}
       >
-        <Link href="/" prefetch={false} className="nav-brand" aria-label="The Rehan Kadri home">
+        <Link href="/" className="nav-brand" aria-label="The Rehan Kadri home">
           <span className="nav-brand-copy">
             <span className="nav-brand-kicker">Revenue-first growth systems</span>
             <span className="nav-brand-title">
@@ -74,7 +74,6 @@ export default function BlogHeader() {
                 <Link
                   key={href}
                   href={href}
-                  prefetch={false}
                   className={isActive ? "active" : ""}
                   aria-current={isActive ? "page" : undefined}
                 >
@@ -86,10 +85,10 @@ export default function BlogHeader() {
         </div>
 
         <div className="nav-right">
-          <Link href="/#works" prefetch={false} className="nav-secondary">
+          <Link href="/#works" className="nav-secondary">
             View Results
           </Link>
-          <Link href="/contact" prefetch={false} className="btn btn-orange nav-btn">
+          <Link href="/contact" className="btn btn-orange nav-btn">
             Book A Strategy Call
           </Link>
           <button
@@ -127,7 +126,6 @@ export default function BlogHeader() {
               <Link
                 key={href}
                 href={href}
-                prefetch={false}
                 onClick={closeMenu}
                 className={isActive ? "active" : ""}
                 aria-current={isActive ? "page" : undefined}
@@ -136,7 +134,7 @@ export default function BlogHeader() {
               </Link>
             );
           })}
-          <Link href={contactHref} prefetch={false} className="btn btn-orange drawer-hire" onClick={closeMenu}>
+          <Link href={contactHref} className="btn btn-orange drawer-hire" onClick={closeMenu}>
             Book A Strategy Call
           </Link>
         </div>

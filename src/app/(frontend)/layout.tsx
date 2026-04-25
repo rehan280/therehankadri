@@ -6,6 +6,7 @@ import AppFrame from '@/components/AppFrame';
 import DeferredClientFeatures from '@/components/DeferredClientFeatures';
 import HomeNavbar from '@/components/HomeNavbar';
 import LenisScrollController from '@/components/LenisScrollController';
+import RouteWarmup from '@/components/RouteWarmup';
 import { sansFont } from '@/lib/fonts';
 import {
   GOOGLE_SITE_VERIFICATION,
@@ -74,6 +75,7 @@ export default function RootLayout({
       >
         <AppFrame>
           <LenisScrollController />
+          <RouteWarmup />
           <HomeNavbar />
           {children}
         </AppFrame>
