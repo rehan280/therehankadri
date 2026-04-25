@@ -5,7 +5,7 @@
 **URL:** therehankadri.com/how-to-edit-audio/
 **Schema:** HowTo + FAQPage
 **Author:** Rehan Kadri
-**Last Updated:** April 2026
+**Last Updated:** April 25, 2026 at 1:27 PM IST
 
 ---
 I was 12 years old.

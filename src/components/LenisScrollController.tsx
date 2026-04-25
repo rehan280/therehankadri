@@ -6,12 +6,14 @@ import Lenis from "lenis";
 export default function LenisScrollController() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const prefersPrecisePointer = window.matchMedia("(pointer: fine)");
+    const hasCoarsePointer = window.matchMedia("(pointer: coarse)");
     const prefersDesktopViewport = window.matchMedia("(min-width: 1024px)");
+    const hasTouchInput = navigator.maxTouchPoints > 0;
 
     if (
       prefersReducedMotion.matches ||
-      !prefersPrecisePointer.matches ||
+      hasCoarsePointer.matches ||
+      hasTouchInput ||
       !prefersDesktopViewport.matches
     ) {
       return;
