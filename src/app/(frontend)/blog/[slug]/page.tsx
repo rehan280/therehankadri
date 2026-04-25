@@ -12,25 +12,12 @@ import {
   Twitter,
 } from "lucide-react";
 import BlogRichText from "@/components/blog/BlogRichText";
-import ArticleList from "@/components/blog/ArticleList";
-import HowToEditAudioArticle, {
-  howToEditAudioFaqEntries,
-  howToEditAudioHowToSteps,
-  howToEditAudioHeadingItems,
-  howToEditAudioWordCount,
-} from "@/components/blog/posts/HowToEditAudioArticle";
-import YouTubeChannelStatisticsArticle, {
-  youtubeChannelStatisticsHeadingItems,
-  youtubeChannelStatisticsWordCount,
-} from "@/components/blog/posts/YouTubeChannelStatisticsArticle";
-import YouTubeUsersArticle from "@/components/blog/posts/YouTubeUsersArticle";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
 import ArticleSocialShare from "@/components/blog/ArticleSocialShare";
+import DefaultBlogPostArticle from "@/components/blog/DefaultBlogPostArticle";
+import { getBlogPostModule } from "@/components/blog/post-pages";
 import PremiumFaq from "@/components/content/PremiumFaq";
-import { countRichTextWords, getRichTextHeadingItems } from "@/lib/blog-rich-text";
-import { getYouTubeUsersArticleData } from "@/lib/youtube-users-article";
 import {
-  type BlogBlock,
   type BlogPost,
   defaultBlogAuthor,
   formatBlogDisplayDate,
@@ -57,8 +44,13 @@ import {
 import {
   getPostPath,
   isStatsPostSlug,
-  YOUTUBE_CHANNEL_STATISTICS_SLUG,
 } from "@/lib/post-paths";
+import {
+  buildHeroTitleLines,
+  getBlogPostWordCount,
+  getDefaultBlogPostHeadingItems,
+  getHeroLineClass,
+} from "@/lib/blog-post-page";
 import styles from "../blog.module.css";
 
 type BlogPostPageProps = {
@@ -110,168 +102,6 @@ export async function generateStaticParams() {
     }));
 }
 
-function buildHeroTitleLines(title: string) {
-  const words = title.trim().split(/\s+/).filter(Boolean);
-  const joinedLength = (items: string[]) => items.join(" ").length;
-  const longestWordLength = Math.max(...words.map((word) => word.length));
-  const buildLineGroups = (lineCount: number, maxLength: number) => {
-    const groups: string[][][] = [];
-
-    const visit = (startIndex: number, remainingLines: number, current: string[][]) => {
-      if (remainingLines === 1) {
-        const lastLine = words.slice(startIndex);
-        if (lastLine.length === 0 || joinedLength(lastLine) > maxLength) return;
-        groups.push([...current, lastLine]);
-        return;
-      }
-
-      const maxEnd = words.length - remainingLines + 1;
-      for (let endIndex = startIndex + 1; endIndex <= maxEnd; endIndex += 1) {
-        const nextLine = words.slice(startIndex, endIndex);
-        if (joinedLength(nextLine) > maxLength) break;
-        visit(endIndex, remainingLines - 1, [...current, nextLine]);
-      }
-    };
-
-    visit(0, lineCount, []);
-    return groups;
-  };
-
-  if (words.length <= 3) return [title];
-  if (longestWordLength > 18) return [title];
-
-  const scoreLines = (lineGroups: string[][]) => {
-    const lengths = lineGroups.map((line) => joinedLength(line));
-    const wordsPerLine = lineGroups.map((line) => line.length);
-    const maxLength = Math.max(...lengths);
-    const minLength = Math.min(...lengths);
-    const balancePenalty = maxLength - minLength;
-    const orphanPenalty = lengths[lengths.length - 1] < 7 ? 18 : 0;
-    const singleWordLastPenalty = wordsPerLine[wordsPerLine.length - 1] === 1 ? 8 : 0;
-    const increasingPenalty = lengths.slice(1).reduce((total, length, index) => {
-      const previous = lengths[index];
-      return total + (length > previous ? (length - previous) * 2.5 : 0);
-    }, 0);
-    const squarePenalty =
-      lineGroups.length >= 4 && maxLength - minLength < 8 ? 18 : 0;
-    const bottomTooLongPenalty =
-      lineGroups.length >= 3 && lengths[lengths.length - 1] > lengths[0] * 0.92 ? 12 : 0;
-    const taperPenalty =
-      lineGroups.length >= 3 && lengths[0] - lengths[lengths.length - 1] < 6 ? 10 : 0;
-    const longLinePenalty = lengths.reduce((total, length) => {
-      if (length > 30) return total + (length - 30) * 12;
-      if (length > 28) return total + (length - 28) * 7;
-      if (length > 26) return total + (length - 26) * 4;
-      return total;
-    }, 0);
-    const twoLinePreference = lineGroups.length === 2 && maxLength <= 30 ? -18 : 0;
-    const threeLinePreference = lineGroups.length === 3 && maxLength <= 24 ? -8 : 0;
-    const lineCountPenalty =
-      lineGroups.length === 2 ? 0 : lineGroups.length === 3 ? 10 : 36;
-
-    return (
-      balancePenalty +
-      orphanPenalty +
-      singleWordLastPenalty +
-      increasingPenalty +
-      squarePenalty +
-      bottomTooLongPenalty +
-      taperPenalty +
-      longLinePenalty +
-      twoLinePreference +
-      threeLinePreference +
-      lineCountPenalty
-    );
-  };
-
-  const candidateGroups = [...buildLineGroups(2, 28), ...buildLineGroups(3, 24)];
-  if (candidateGroups.length === 0) return [title];
-
-  const best = candidateGroups.reduce<string[][] | null>((currentBest, candidate) => {
-    if (!currentBest) return candidate;
-    return scoreLines(candidate) < scoreLines(currentBest) ? candidate : currentBest;
-  }, null);
-
-  return best ? best.map((line) => line.join(" ")) : [title];
-}
-
-function getHeroLineClass(index: number, totalLines: number) {
-  if (totalLines <= 1) return styles.postHeroLineSingle;
-  if (totalLines === 2) {
-    return index === 0 ? styles.postHeroLineTop : styles.postHeroLineMiddle;
-  }
-  if (index === 0) return styles.postHeroLineTop;
-  if (index === 1) return styles.postHeroLineMiddle;
-  return styles.postHeroLineBottom;
-}
-
-function renderBlock(block: BlogBlock, key: string) {
-  switch (block.type) {
-    case "paragraph":
-      return <p key={key}>{block.text}</p>;
-    case "list":
-      return <ArticleList key={key} items={block.items} />;
-    case "callout":
-      return (
-        <aside key={key} className={styles.callout}>
-          <strong>{block.title}</strong>
-          <p>{block.body}</p>
-        </aside>
-      );
-    case "quote":
-      return (
-        <blockquote key={key} className={styles.quoteBlock}>
-          <p>{block.text}</p>
-          <cite>{block.author}</cite>
-        </blockquote>
-      );
-  }
-}
-
-function getWordCountForPost(post: BlogPost) {
-  if (post.slug === "how-to-edit-audio") {
-    return howToEditAudioWordCount;
-  }
-
-  if (post.slug === "youtube-users") {
-    return 4814;
-  }
-
-  if (post.slug === YOUTUBE_CHANNEL_STATISTICS_SLUG) {
-    return youtubeChannelStatisticsWordCount;
-  }
-
-  if (post.body) {
-    return countRichTextWords(post.body);
-  }
-
-  const introWords = post.intro
-    .join(" ")
-    .split(/\s+/)
-    .filter(Boolean).length;
-  const sectionWords = post.sections
-    .flatMap((section) => [
-      section.title,
-      ...section.blocks.flatMap((block) => {
-        switch (block.type) {
-          case "paragraph":
-            return [block.text];
-          case "list":
-            return block.items;
-          case "callout":
-            return [block.title, block.body];
-          case "quote":
-            return [block.text, block.author];
-        }
-      }),
-    ])
-    .join(" ")
-    .split(/\s+/)
-    .filter(Boolean).length;
-
-  return introWords + sectionWords;
-}
-
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
 
@@ -303,13 +133,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const normalizedPosts = allPosts as BlogPost[];
   const postAuthor = currentPost.author ?? defaultBlogAuthor;
   const relatedPosts = (await getRelatedBlogPosts(currentPost.slug)) as BlogPost[];
-  const youtubeUsersArticleData =
-    currentPost.slug === "youtube-users" ? await getYouTubeUsersArticleData() : null;
-  const isYouTubeChannelStatisticsPost = currentPost.slug === YOUTUBE_CHANNEL_STATISTICS_SLUG;
-  const isHowToEditAudioPost = currentPost.slug === "how-to-edit-audio";
-  const effectiveFaqEntries = isHowToEditAudioPost
-    ? howToEditAudioFaqEntries
-    : (currentPost.faqEntries ?? []);
+  const postModule = await getBlogPostModule(currentPost.slug);
+  const effectiveFaqEntries = postModule?.getFaqEntries?.(currentPost) ?? (currentPost.faqEntries ?? []);
   const heroTitleLines = buildHeroTitleLines(currentPost.title);
   const authorArticleCount = normalizedPosts.filter(
     (entry) => (entry.author ?? defaultBlogAuthor).name === postAuthor.name
@@ -317,58 +142,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const postReadTime = getBlogReadTime(currentPost);
   const canonicalUrl = buildCanonicalUrl(getPostPath(currentPost.slug));
   const socialImage = buildAbsoluteImageUrl(currentPost.coverImage ?? undefined);
-  const wordCount = getWordCountForPost(currentPost);
+  const wordCount = postModule?.getWordCount?.(currentPost) ?? getBlogPostWordCount(currentPost);
   const datePublished = toBlogIsoDateTime(currentPost.publishedAt);
   const dateModified = toBlogIsoDateTime(currentPost.modifiedAt ?? currentPost.publishedAt);
   const breadcrumbId = `${canonicalUrl}#breadcrumb`;
-  const audioEditingAbout = isHowToEditAudioPost
-    ? [
-        { "@type": "Thing", name: "Audio editing" },
-        { "@type": "Thing", name: "Podcast editing" },
-        { "@type": "Thing", name: "YouTube audio editing" },
-        { "@type": "Thing", name: "Audio editing for beginners" },
-        { "@type": "Thing", name: "LUFS loudness standards" },
-      ]
-    : undefined;
-  const audioEditingMentions = isHowToEditAudioPost
-    ? [
-        {
-          "@type": "SoftwareApplication",
-          name: "Audacity",
-          url: "https://www.audacityteam.org/",
-        },
-        {
-          "@type": "SoftwareApplication",
-          name: "GarageBand",
-          url: "https://www.apple.com/mac/garageband/",
-        },
-        {
-          "@type": "SoftwareApplication",
-          name: "Adobe Audition",
-          url: "https://www.adobe.com/products/audition.html",
-        },
-        {
-          "@type": "SoftwareApplication",
-          name: "Adobe Podcast",
-          url: "https://podcast.adobe.com/",
-        },
-        {
-          "@type": "SoftwareApplication",
-          name: "Descript",
-          url: "https://www.descript.com/",
-        },
-        {
-          "@type": "SoftwareApplication",
-          name: "Auphonic",
-          url: "https://auphonic.com/",
-        },
-        {
-          "@type": "SoftwareApplication",
-          name: "BandLab",
-          url: "https://www.bandlab.com/",
-        },
-      ]
-    : undefined;
+  const articleEntities = postModule?.getArticleEntities?.(currentPost);
   const articleJsonLd = {
     "@type": "BlogPosting",
     headline: currentPost.metaTitle ?? currentPost.title,
@@ -400,8 +178,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     breadcrumb: {
       "@id": breadcrumbId,
     },
-    about: audioEditingAbout,
-    mentions: audioEditingMentions,
+    about: articleEntities?.about,
+    mentions: articleEntities?.mentions,
   };
   const articleStructuredData = {
     "@context": "https://schema.org",
@@ -423,23 +201,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             "@type": "Answer",
             text: entry.answer,
           },
-        })),
-      }
-    : null;
-  const howToJsonLd = isHowToEditAudioPost
-    ? {
-        "@context": "https://schema.org",
-        "@type": "HowTo",
-        name: currentPost.metaTitle ?? currentPost.title,
-        description: currentPost.seoDescription,
-        image: [socialImage],
-        totalTime: `PT${Number.parseInt(postReadTime, 10) || 1}M`,
-        step: howToEditAudioHowToSteps.map((step, index) => ({
-          "@type": "HowToStep",
-          position: index + 1,
-          name: step.name,
-          text: step.text,
-          url: step.url ? `${canonicalUrl}${step.url}` : canonicalUrl,
         })),
       }
     : null;
@@ -481,18 +242,30 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       }))}
     />
   ) : null;
-  const tableOfContentsItems = youtubeUsersArticleData
-    ? youtubeUsersArticleData.headings
-    : isYouTubeChannelStatisticsPost
-      ? youtubeChannelStatisticsHeadingItems
-      : isHowToEditAudioPost
-        ? howToEditAudioHeadingItems
-      : currentPost.body
-        ? getRichTextHeadingItems(currentPost.body)
-        : currentPost.sections.map((section) => ({
-            id: section.id,
-            title: section.title,
-          }));
+  const tableOfContentsItems = postModule?.getHeadingItems
+    ? await postModule.getHeadingItems(currentPost)
+    : getDefaultBlogPostHeadingItems(currentPost);
+  const resolvedHowToJsonLd = postModule?.getHowToJsonLd?.({
+    post: currentPost,
+    canonicalUrl,
+    socialImage,
+    readTime: postReadTime,
+  }) ?? null;
+  const articleContent = postModule
+    ? await postModule.renderArticle({
+        post: currentPost,
+        faqSection,
+      })
+    : currentPost.body
+      ? (
+          <BlogRichText
+            data={currentPost.body}
+            headingIds={tableOfContentsItems.map((item) => item.id)}
+          />
+        )
+      : (
+          <DefaultBlogPostArticle post={currentPost} />
+        );
 
   return (
     <main className={`${styles.page} ${styles.postPage}`}>
@@ -516,11 +289,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           }}
         />
       ) : null}
-      {howToJsonLd ? (
+      {resolvedHowToJsonLd ? (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(howToJsonLd).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(resolvedHowToJsonLd).replace(/</g, "\\u003c"),
           }}
         />
       ) : null}
@@ -545,7 +318,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 heroTitleLines.map((line, index) => (
                   <span
                     key={`${line}-${index}`}
-                    className={`${styles.postHeroLine} ${getHeroLineClass(index, heroTitleLines.length)}`}
+                    className={`${styles.postHeroLine} ${getHeroLineClass(index, heroTitleLines.length, styles)}`}
                   >
                     {line}
                   </span>
@@ -620,47 +393,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             <article className={`${styles.articleCopy} authority-post-copy`}>
               <div className={styles.articleProse}>
-                {youtubeUsersArticleData ? (
-                  <YouTubeUsersArticle
-                    data={youtubeUsersArticleData}
-                    insertBeforeHeadingId="the-bottom-line"
-                    insertNode={faqSection}
-                  />
-                ) : isYouTubeChannelStatisticsPost ? (
-                  <>
-                    <YouTubeChannelStatisticsArticle />
-                    {faqSection}
-                  </>
-                ) : isHowToEditAudioPost ? (
-                  <>
-                    <HowToEditAudioArticle />
-                    {faqSection}
-                  </>
-                ) : currentPost.body ? (
-                  <BlogRichText
-                    data={currentPost.body}
-                    headingIds={tableOfContentsItems.map((item) => item.id)}
-                  />
-                ) : (
-                  <>
-                    {currentPost.intro.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
-
-                    {currentPost.sections.map((section) => (
-                      <section key={section.id} id={section.id} className={styles.articleSection}>
-                        <h2>{section.title}</h2>
-                        {section.blocks.map((block, index) =>
-                          renderBlock(block, `${section.id}-${index}`)
-                        )}
-                      </section>
-                    ))}
-                  </>
-                )}
-
-                {!youtubeUsersArticleData && !isYouTubeChannelStatisticsPost && !isHowToEditAudioPost
-                  ? faqSection
-                  : null}
+                {articleContent}
+                {!postModule?.rendersFaqInternally ? faqSection : null}
               </div>
 
               <aside className={`${styles.shareRail} ${styles.shareRailMobile}`}>

@@ -9,6 +9,7 @@ import styles from "./how-to-record-audio.module.css";
 
 type MarkdownBlock =
   | { type: "heading"; level: 2 | 3; text: string; id?: string }
+  | { type: "callout"; text: string }
   | { type: "paragraph"; text: string }
   | { type: "list"; ordered: boolean; items: string[] }
   | { type: "table"; header: string[]; rows: string[][] };
@@ -30,11 +31,6 @@ const ARTICLE_FILE_PATH = path.join(
 
 const rawArticleMarkdown = readFileSync(ARTICLE_FILE_PATH, "utf8");
 const FAQ_HEADINGS = new Set(["frequently asked questions", "audio editing faq"]);
-const HOW_TO_EXCLUDED_HEADINGS = new Set([
-  "Frequently asked questions",
-  "Audio editing FAQ",
-  "The bottom line",
-]);
 
 function stripArticleFrontMatter(markdown: string) {
   return markdown.replace(/^# [^\n]+\n+[\s\S]*?\n---\n/, "").trim();
@@ -51,6 +47,7 @@ function slugify(value: string) {
 function stripMarkdownForWordCount(markdown: string) {
   return markdown
     .replace(/^#{1,6}\s+/gm, "")
+    .replace(/^\s*>\s?/gm, "")
     .replace(/\*\*(.*?)\*\*/g, "$1")
     .replace(/\*(.*?)\*/g, "$1")
     .replace(/`([^`]+)`/g, "$1")
@@ -218,6 +215,26 @@ function parseMarkdownArticle(markdown: string): ParsedMarkdownArticle {
       continue;
     }
 
+    if (trimmed.startsWith(">")) {
+      const calloutLines: string[] = [];
+
+      while (index < lines.length) {
+        const current = lines[index].trim();
+        if (!current.startsWith(">")) {
+          break;
+        }
+
+        calloutLines.push(current.replace(/^>\s?/, ""));
+        index += 1;
+      }
+
+      blocks.push({
+        type: "callout",
+        text: calloutLines.join(" ").trim(),
+      });
+      continue;
+    }
+
     const unorderedMatch = trimmed.match(/^[-*+]\s+(.+)$/);
     const orderedMatch = trimmed.match(/^\d+\.\s+(.+)$/);
     if (unorderedMatch || orderedMatch) {
@@ -289,39 +306,49 @@ export const howToEditAudioFaqEntries = parsedArticle.faqEntries;
 
 export const howToEditAudioWordCount = parsedArticle.wordCount;
 
-export const howToEditAudioHowToSteps = parsedArticle.blocks.flatMap((block, index, blocks) => {
-  if (block.type !== "heading" || block.level !== 2 || HOW_TO_EXCLUDED_HEADINGS.has(block.text)) {
-    return [];
-  }
+export const howToEditAudioHowToSteps = [
+  {
+    name: "Import your audio file",
+    text: "Open your editor, import the raw recording, and work from the original file before applying any effects.",
+    url: "#how-to-edit-audio-step-by-step",
+  },
+  {
+    name: "Trim mistakes and dead air",
+    text: "Cut long pauses, filler, heavy breaths, and unwanted sections so the final audio feels tight and intentional.",
+    url: "#audio-editing-workflow-in-audacity-step-by-step",
+  },
+  {
+    name: "Remove background noise",
+    text: "Use noise reduction carefully to reduce hiss, hum, and room noise without making the voice sound metallic.",
+    url: "#audio-editing-effects-chain-step-by-step",
+  },
+  {
+    name: "Adjust EQ for clarity",
+    text: "Cut low-end rumble, reduce muddy frequencies, and add a small presence boost so the voice sounds clearer.",
+    url: "#best-eq-settings-for-voice-audio",
+  },
+  {
+    name: "Compress and normalize levels",
+    text: "Apply moderate compression to even out the volume, then normalize so the track plays back at a consistent level.",
+    url: "#best-compression-settings-for-voice-audio",
+  },
+  {
+    name: "Export in the right format",
+    text: "Export WAV for editing and high-quality delivery, or MP3 when a platform needs smaller files for publishing.",
+    url: "#audacity-export-settings-for-creators",
+  },
+] as const;
 
-  const stepContent: string[] = [];
+export const howToEditAudioHowToTools = [
+  "Audacity",
+  "Adobe Audition",
+  "GarageBand",
+  "WavePad",
+  "Lexis Audio Editor",
+  "BandLab",
+] as const;
 
-  for (let cursor = index + 1; cursor < blocks.length; cursor += 1) {
-    const nextBlock = blocks[cursor];
-
-    if (nextBlock.type === "heading" && nextBlock.level === 2) {
-      break;
-    }
-
-    if (nextBlock.type === "paragraph") {
-      stepContent.push(nextBlock.text);
-    } else if (nextBlock.type === "list") {
-      stepContent.push(nextBlock.items.join(" "));
-    }
-
-    if (stepContent.join(" ").length >= 280) {
-      break;
-    }
-  }
-
-  return [
-    {
-      name: block.text,
-      text: stepContent.join(" ").trim() || block.text,
-      url: block.id ? `#${block.id}` : undefined,
-    },
-  ];
-});
+export const howToEditAudioHowToSupplies = ["Raw audio file", "Headphones"] as const;
 
 function renderTable(block: Extract<MarkdownBlock, { type: "table" }>, key: string) {
   return (
@@ -372,6 +399,14 @@ export default function HowToEditAudioArticle() {
 
         if (block.type === "paragraph") {
           return <p key={key}>{renderInlineMarkdown(block.text)}</p>;
+        }
+
+        if (block.type === "callout") {
+          return (
+            <aside key={key} className={styles.snippetBox}>
+              <p>{renderInlineMarkdown(block.text)}</p>
+            </aside>
+          );
         }
 
         if (block.type === "list") {
