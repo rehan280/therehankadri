@@ -131,7 +131,7 @@ Same exact words. Different perception. Just because of audio quality.
 
 Bad audio is also the #1 reason people stop listening to podcasts. Not bad content. Bad sound.
 
-And on YouTube (which gets over 500 hours of new video every single minute), the algorithm cares about one thing above all else: how long people watch. If your audio makes people click away in the first 15 seconds, YouTube thinks your video is bad and stops showing it to people.
+And on YouTube (which gets [over 720 hours of new video every single minute](/stats/youtube-channels#how-much-content-gets-uploaded-every-minute)), the algorithm cares about one thing above all else: how long people watch. If your audio makes people click away in the first 15 seconds, YouTube thinks your video is bad and stops showing it to people.
 
 It gets worse.
 
