@@ -5,6 +5,7 @@ import { readFileSync } from "node:fs";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import ArticleList from "@/components/blog/ArticleList";
+import YouTubeTutorialEmbed from "@/components/common/YouTubeTutorialEmbed";
 import styles from "./how-to-record-audio.module.css";
 
 type MarkdownBlock =
@@ -505,6 +506,118 @@ export default function HowToEditAudioArticle() {
             {block.text}
           </h3>
         );
+
+        if (block.text === "How to edit audio in Audacity") {
+          elements.push(
+            <YouTubeTutorialEmbed
+              key={`audacity-video-${key}`}
+              copy="Prefer watching the workflow first? This Audacity tutorial pairs with the step-by-step process below."
+              videoId="yzJ2VyYkmaA"
+              title="Audacity audio editing tutorial"
+            />
+          );
+        }
+
+        if (block.text === "How to edit audio in GarageBand") {
+          elements.push(
+            <YouTubeTutorialEmbed
+              key={`garageband-video-${key}`}
+              copy="Want the Mac workflow in video form? This GarageBand walkthrough fits the editing steps covered in this section."
+              videoId="AVC3lEQ0ymo"
+              title="GarageBand audio editing tutorial"
+            />
+          );
+        }
+
+        if (block.text === "How to edit audio in Audacity on Mac") {
+          elements.push(
+            <YouTubeTutorialEmbed
+              key={`audacity-mac-video-${key}`}
+              copy="If you want the Audacity-on-Mac version demonstrated visually, this tutorial pairs with the Mac-specific setup and editing workflow in this section."
+              videoId="Z2Q-C5kad54"
+              title="Audacity on Mac tutorial"
+            />
+          );
+        }
+
+        if (block.text === "How to edit audio on Android with Lexis Audio Editor") {
+          elements.push(
+            <YouTubeTutorialEmbed
+              key={`lexis-video-${key}`}
+              copy="Need the Android version in action? This Lexis Audio Editor tutorial shows the mobile workflow alongside the written steps below."
+              videoId="bq-OEoEB4Zc"
+              title="Lexis Audio Editor tutorial"
+            />
+          );
+        }
+
+        if (block.text === "How to capture system audio on Windows") {
+          elements.push(
+            <YouTubeTutorialEmbed
+              key={`windows-capture-video-${key}`}
+              copy="Need to see the loopback setup in action? This tutorial walks through capturing system audio on Windows before you edit it in Audacity."
+              videoId="xhuwo-q0fEY"
+              title="How to capture system audio on Windows"
+            />
+          );
+        }
+
+        if (block.text === "How to edit audio online with Vocaroo") {
+          elements.push(
+            <YouTubeTutorialEmbed
+              key={`vocaroo-video-${key}`}
+              copy="If you want the browser-based version demonstrated, this Vocaroo tutorial pairs with the lightweight online workflow in this section."
+              videoId="IqXDqmfv46M"
+              title="Vocaroo audio editing tutorial"
+            />
+          );
+        }
+
+        if (block.text === "Adobe Audition audio editing workflow") {
+          elements.push(
+            <YouTubeTutorialEmbed
+              key={`audition-video-${key}`}
+              copy="This Adobe Audition walkthrough covers the voice editing workflow for creators who want more surgical control than Audacity offers."
+              videoId="gn0q7BuPML8"
+              title="Adobe Audition voice editing tutorial"
+              footerHref="https://www.youtube.com/watch?v=RudduIk77zk&list=PL6wGbZVVzENnt2F3EgdHeM0X5RTcN3yIA"
+              footerLabel="Watch the full Adobe Audition masterclass playlist"
+            />
+          );
+        }
+
+        if (block.text === "Adobe Podcast Enhance for audio cleanup") {
+          elements.push(
+            <YouTubeTutorialEmbed
+              key={`adobe-podcast-video-${key}`}
+              copy="If you want to see Adobe Podcast cleanup in action first, this tutorial shows the core enhancement workflow covered in this section."
+              videoId="y9pBvKh14G8"
+              title="Adobe Podcast editing tutorial"
+            />
+          );
+        }
+
+        if (block.text === "Descript Studio Sound for audio editing") {
+          elements.push(
+            <YouTubeTutorialEmbed
+              key={`descript-video-${key}`}
+              copy="This Descript tutorial shows how the transcript-based editing flow works before you apply Studio Sound and cleanup tools."
+              videoId="6_TynUbev7I"
+              title="Descript voice tutorial"
+            />
+          );
+        }
+
+        if (block.text === "Auphonic for podcast audio editing") {
+          elements.push(
+            <YouTubeTutorialEmbed
+              key={`auphonic-video-${key}`}
+              copy="If you want to automate podcast leveling and cleanup, this Auphonic walkthrough matches the workflow described in this section."
+              videoId="TcXcFhJQRZU"
+              title="Auphonic podcast audio editing tutorial"
+            />
+          );
+        }
       }
 
       continue;

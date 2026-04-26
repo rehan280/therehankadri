@@ -251,6 +251,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     socialImage,
     readTime: postReadTime,
   }) ?? null;
+  const additionalJsonLd = postModule?.getAdditionalJsonLd?.({
+    post: currentPost,
+    canonicalUrl,
+    socialImage,
+    readTime: postReadTime,
+  }) ?? [];
   const articleContent = postModule
     ? await postModule.renderArticle({
         post: currentPost,
@@ -297,6 +303,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           }}
         />
       ) : null}
+      {additionalJsonLd.map((entry, index) => (
+        <script
+          key={`post-jsonld-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(entry).replace(/</g, "\\u003c"),
+          }}
+        />
+      ))}
 
       <section
         className={`${styles.hero} ${styles.postHero}${hasFeatureHeroLayout ? ` ${styles.postHeroFeature}` : ""}${customHero?.background ? ` ${styles.postHeroCustomBackground}` : ""}`}

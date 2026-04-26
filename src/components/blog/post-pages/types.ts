@@ -27,6 +27,9 @@ export type BlogPostModule = {
   getHowToJsonLd?: (
     context: BlogPostStructuredDataContext
   ) => Record<string, unknown> | null;
+  getAdditionalJsonLd?: (
+    context: BlogPostStructuredDataContext
+  ) => Array<Record<string, unknown>> | null;
   renderArticle: (input: {
     post: BlogPost;
     faqSection: ReactNode | null;
