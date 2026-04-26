@@ -1,0 +1,642 @@
+.article {
+  display: grid;
+  gap: 0;
+}
+
+.sectionAnchor {
+  scroll-margin-top: 7rem;
+}
+
+.subheading {
+  margin-top: 0.4rem;
+}
+
+.answerCard {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0 0 1.95rem;
+  padding: 1.1rem 1.15rem 1.15rem;
+  border: 1px solid rgba(255, 72, 58, 0.16);
+  border-radius: 1.1rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 145, 112, 0.2), transparent 30%),
+    linear-gradient(180deg, rgba(255, 247, 242, 0.98), rgba(255, 255, 255, 0.99));
+  box-shadow:
+    0 18px 38px rgba(29, 36, 54, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.answerLabel {
+  color: #c04921;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.answerCard p {
+  margin: 0;
+}
+
+.statStrip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin: 0 0 1.95rem;
+}
+
+.statCard {
+  display: grid;
+  gap: 0.45rem;
+  padding: 1rem;
+  border: 1px solid rgba(16, 24, 38, 0.08);
+  border-radius: 1.1rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 120, 85, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(255, 248, 243, 0.96));
+  box-shadow:
+    0 16px 34px rgba(20, 26, 41, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
+}
+
+.statLabel {
+  color: #7b8494;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.statValue {
+  color: #161c2b;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.65rem, 4vw, 2.1rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.statNote {
+  margin: 0;
+  color: #586273;
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+
+.algorithmPanel {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1.95rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 72, 58, 0.14);
+  border-radius: 1.45rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 115, 85, 0.18), transparent 28%),
+    radial-gradient(circle at bottom left, rgba(66, 108, 255, 0.08), transparent 25%),
+    linear-gradient(180deg, rgba(255, 250, 246, 0.99), rgba(255, 255, 255, 0.98));
+  box-shadow:
+    0 24px 48px rgba(20, 26, 41, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.shortsPanel {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1.95rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 72, 58, 0.14);
+  border-radius: 1.45rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 75, 96, 0.18), transparent 30%),
+    radial-gradient(circle at bottom left, rgba(83, 107, 255, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(255, 248, 247, 0.99), rgba(255, 255, 255, 0.98));
+  box-shadow:
+    0 24px 48px rgba(20, 26, 41, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94);
+}
+
+.shortsPanelHeader {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.shortsSignalGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.shortsSignalCard {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+  border: 1px solid rgba(16, 24, 38, 0.08);
+  border-radius: 1.15rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 112, 130, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 249, 251, 0.95));
+  box-shadow:
+    0 16px 34px rgba(20, 26, 41, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.shortsSignalCardWide {
+  grid-column: 1 / -1;
+  background:
+    radial-gradient(circle at top right, rgba(255, 112, 130, 0.14), transparent 32%),
+    radial-gradient(circle at bottom left, rgba(88, 111, 255, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 247, 255, 0.95));
+}
+
+.shortsSignalTop {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.shortsSignalNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.2rem;
+  min-height: 2.2rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.8rem;
+  background: linear-gradient(135deg, #ff4e62, #586cff);
+  color: #ffffff;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.shortsSignalTop h4 {
+  margin: 0;
+  color: #171f31;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: 1.08rem;
+  line-height: 1.15;
+}
+
+.shortsSignalCard p {
+  margin: 0;
+  color: #4f596c;
+  font-size: 0.96rem;
+  line-height: 1.72;
+}
+
+.panelHeader {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.panelEyebrow {
+  color: #cf4f22;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.panelTitle {
+  margin: 0;
+  color: #161c2b;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  line-height: 1.08;
+}
+
+.panelCopy {
+  margin: 0;
+  color: #5c6678;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.stageGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.stageCard {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid rgba(16, 24, 38, 0.08);
+  border-radius: 1.15rem;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.stageBadge {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.38rem 0.68rem;
+  border-radius: 999px;
+  background: rgba(255, 82, 62, 0.1);
+  color: #c44621;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.stageCard h4 {
+  margin: 0;
+  color: #172033;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.14;
+}
+
+.stageCard p {
+  margin: 0;
+  color: #5c6678;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.stageList {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #2a3240;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.tocPanel {
+  margin: 0 0 1.95rem;
+  padding: 1rem;
+  border: 1px solid rgba(16, 24, 38, 0.08);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 129, 94, 0.14), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(255, 248, 243, 0.96));
+  box-shadow: 0 20px 40px rgba(20, 26, 41, 0.06);
+}
+
+.tocGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.72rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tocItem {
+  min-width: 0;
+}
+
+.tocLink {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.7rem;
+  align-items: start;
+  min-height: 100%;
+  padding: 0.88rem 0.95rem;
+  border: 1px solid rgba(16, 24, 38, 0.06);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.84);
+  color: #1d2738;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.tocLink:hover,
+.tocLink:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(255, 90, 65, 0.24);
+  box-shadow: 0 16px 28px rgba(20, 26, 41, 0.06);
+}
+
+.tocIndex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  min-height: 2rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  background: #171f31;
+  color: #ffffff;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.labelRow {
+  margin: 0 0 1rem;
+}
+
+.labelPill {
+  display: inline-flex;
+  padding: 0.36rem 0.72rem;
+  border: 1px solid rgba(255, 82, 62, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 247, 241, 0.95);
+  color: #c44621;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.factorGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 0 0 2rem;
+}
+
+.factorCard {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.08rem;
+  border: 1px solid rgba(16, 24, 38, 0.08);
+  border-top: 4px solid var(--factor-accent);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at top right, var(--factor-soft), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(250, 251, 255, 0.96));
+  box-shadow:
+    0 20px 40px rgba(20, 26, 41, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.factorTop {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.factorNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.35rem;
+  min-height: 2.35rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  background: var(--factor-accent);
+  color: #ffffff;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.factorTitle {
+  margin: 0;
+  color: #171f31;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.08rem, 2vw, 1.28rem);
+  line-height: 1.16;
+}
+
+.factorBody {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.factorBody p {
+  margin: 0;
+  color: #4f596c;
+  font-size: 0.96rem;
+  line-height: 1.72;
+}
+
+.inlineFigure,
+.factorFigure {
+  display: grid;
+  gap: 0.62rem;
+  margin: 0 0 1.95rem;
+}
+
+.factorFigure {
+  margin: 0.2rem 0 0;
+}
+
+.inlineImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(16, 24, 38, 0.08);
+  border-radius: 1.1rem;
+  background: #ffffff;
+  box-shadow: 0 16px 34px rgba(20, 26, 41, 0.06);
+}
+
+.inlineCaption {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.58;
+}
+
+.checklistGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.82rem;
+  margin: 0 0 1.95rem;
+}
+
+.checklistItem {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.72rem;
+  align-items: start;
+  padding: 0.92rem 0.95rem;
+  border: 1px solid rgba(16, 24, 38, 0.08);
+  border-radius: 1rem;
+  background:
+    linear-gradient(180deg, rgba(255, 250, 246, 0.96), rgba(255, 255, 255, 0.99));
+  box-shadow:
+    0 14px 28px rgba(20, 26, 41, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+}
+
+.checklistInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checklistMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  min-height: 2rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(22, 28, 43, 0.16);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 247, 242, 0.98));
+  box-shadow:
+    0 8px 18px rgba(20, 26, 41, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+  position: relative;
+}
+
+.checklistMark::after {
+  content: "";
+  width: 0.95rem;
+  height: 0.55rem;
+  border-left: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  transform: rotate(-45deg) scale(0.9);
+  transform-origin: center;
+  transition: border-color 180ms ease;
+}
+
+.checklistInput:checked + .checklistMark {
+  border-color: rgba(255, 82, 62, 0.36);
+  background: linear-gradient(135deg, #ff5d47, #ff8f5a);
+  box-shadow:
+    0 12px 22px rgba(255, 93, 71, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.checklistInput:checked + .checklistMark::after {
+  border-left-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+.checklistInput:checked ~ .checklistCopy {
+  color: #667183;
+  text-decoration: line-through;
+  text-decoration-color: rgba(102, 113, 131, 0.5);
+}
+
+.checklistInput:focus-visible + .checklistMark {
+  outline: 2px solid rgba(88, 108, 255, 0.34);
+  outline-offset: 3px;
+}
+
+.checklistCopy {
+  color: #2f3642;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.markdownTableWrap {
+  margin: 0 0 1.95rem;
+  overflow-x: auto;
+  border: 1px solid rgba(16, 24, 38, 0.08);
+  border-radius: 1.25rem;
+  background: #ffffff;
+  box-shadow: 0 16px 34px rgba(20, 26, 41, 0.05);
+}
+
+.markdownTable {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+}
+
+.markdownTable th {
+  padding: 0.95rem 1rem;
+  background: rgba(255, 214, 198, 0.4);
+  color: #be4a25;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.markdownTable td {
+  padding: 0.95rem 1rem;
+  border-top: 1px solid rgba(16, 24, 38, 0.08);
+  color: #313844;
+  font-size: 0.96rem;
+  line-height: 1.68;
+  vertical-align: top;
+}
+
+.markdownTable tbody tr:nth-child(even) td {
+  background: rgba(255, 248, 243, 0.56);
+}
+
+@media (max-width: 960px) {
+  .statStrip,
+  .checklistGrid,
+  .tocGrid,
+  .stageGrid,
+  .shortsSignalGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .shortsSignalCardWide {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .algorithmPanel,
+  .shortsPanel,
+  .tocPanel {
+    padding: 0.9rem;
+    border-radius: 1rem;
+  }
+
+  .statCard,
+  .stageCard,
+  .shortsSignalCard,
+  .factorCard,
+  .checklistItem {
+    padding: 0.88rem;
+    border-radius: 0.95rem;
+  }
+
+  .factorNumber {
+    min-width: 2.9rem;
+    min-height: 2.1rem;
+    font-size: 0.72rem;
+  }
+
+  .inlineImage {
+    border-radius: 0.95rem;
+  }
+
+  .shortsSignalTop {
+    gap: 0.62rem;
+  }
+
+  .shortsSignalNumber {
+    min-width: 2rem;
+    min-height: 2rem;
+    border-radius: 0.72rem;
+    font-size: 0.68rem;
+  }
+
+  .shortsSignalTop h4 {
+    font-size: 1rem;
+  }
+
+  .checklistMark,
+  .tocIndex {
+    min-width: 1.85rem;
+    min-height: 1.85rem;
+    font-size: 0.68rem;
+  }
+}
