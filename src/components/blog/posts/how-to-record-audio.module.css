@@ -322,19 +322,97 @@
   }
 
   .premiumLink {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
     gap: 0.8rem;
     padding: 0.95rem;
   }
 
   .premiumRank {
-    min-width: 2.75rem;
-    min-height: 2.75rem;
+    min-width: 2.9rem;
+    min-height: 2.9rem;
+    border-radius: 0.9rem;
   }
 
   .premiumNameRow {
+    gap: 0.55rem;
     align-items: flex-start;
     justify-content: flex-start;
   }
 
+  .premiumNameRow h3 {
+    font-size: 1.18rem;
+  }
+
+}
+
+@media (max-width: 640px) {
+  .visualPanel {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .visualHeader {
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .visualCopy {
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  .premiumList {
+    gap: 0.75rem;
+  }
+
+  .premiumItem {
+    border-radius: 0.9rem;
+  }
+
+  .premiumLink {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    padding: 0.85rem;
+  }
+
+  .premiumRank {
+    width: fit-content;
+    min-width: 2.6rem;
+    min-height: 2.6rem;
+    border-radius: 0.8rem;
+    justify-self: start;
+  }
+
+  .premiumRank span {
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+  }
+
+  .premiumBody {
+    gap: 0.38rem;
+  }
+
+  .premiumNameRow {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .premiumNameRow h3 {
+    font-size: 1.08rem;
+    line-height: 1.16;
+  }
+
+  .premiumBadge {
+    white-space: normal;
+    padding: 0.28rem 0.58rem;
+    font-size: 0.67rem;
+    letter-spacing: 0.06em;
+  }
+
+  .premiumDescription {
+    font-size: 0.95rem;
+    line-height: 1.58;
+  }
 }
