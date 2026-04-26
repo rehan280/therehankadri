@@ -315,12 +315,12 @@ export const howToEditAudioHowToSteps = [
   {
     name: "Trim mistakes and dead air",
     text: "Cut long pauses, filler, heavy breaths, and unwanted sections so the final audio feels tight and intentional.",
-    url: "#audio-editing-workflow-in-audacity-step-by-step",
+    url: "#audio-editing-workflow-in-audacity",
   },
   {
     name: "Remove background noise",
     text: "Use noise reduction carefully to reduce hiss, hum, and room noise without making the voice sound metallic.",
-    url: "#audio-editing-effects-chain-step-by-step",
+    url: "#audio-editing-effects-chain",
   },
   {
     name: "Adjust EQ for clarity",
