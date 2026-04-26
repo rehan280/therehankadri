@@ -218,30 +218,47 @@
   }
 
   .posterOverlay {
-    padding: 0.8rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0.75rem;
+    background:
+      linear-gradient(180deg, rgba(4, 12, 24, 0.12) 0%, rgba(4, 12, 24, 0.08) 34%, rgba(4, 12, 24, 0.42) 100%);
   }
 
   .posterChip {
-    padding: 0.36rem 0.62rem;
-    font-size: 0.64rem;
+    padding: 0.34rem 0.58rem;
+    font-size: 0.59rem;
+    letter-spacing: 0.11em;
   }
 
   .posterCta {
-    gap: 0.72rem;
-    max-width: 100%;
-    padding: 0.78rem 0.82rem;
-    border-radius: 0.95rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    gap: 0;
+    max-width: none;
+    padding: 0.55rem;
+    border-radius: 999px;
+    background: rgba(8, 14, 28, 0.42);
+    transform: translate(-50%, -50%);
   }
 
   .posterPlay {
-    width: 3.1rem;
-    height: 3.1rem;
-    border-radius: 1rem;
+    width: 3.35rem;
+    height: 3.35rem;
+    border-radius: 50%;
+    box-shadow:
+      0 14px 26px rgba(0, 0, 0, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.82);
   }
 
   .posterPlay svg {
     width: 1.35rem;
     height: 1.35rem;
+  }
+
+  .posterText {
+    display: none;
   }
 
   .posterKicker {

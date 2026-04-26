@@ -2,7 +2,8 @@ import "server-only";
 
 import path from "node:path";
 import { readFileSync } from "node:fs";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import ArticleList from "@/components/blog/ArticleList";
 import YouTubeTutorialEmbed from "@/components/common/YouTubeTutorialEmbed";
@@ -22,6 +23,16 @@ type ParsedMarkdownArticle = {
   wordCount: number;
 };
 
+type ArticleArtwork = {
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+  sizes?: string;
+  maxWidth?: string;
+};
+
 const ARTICLE_FILE_PATH = path.join(
   process.cwd(),
   "src",
@@ -32,6 +43,54 @@ const ARTICLE_FILE_PATH = path.join(
 
 const rawArticleMarkdown = readFileSync(ARTICLE_FILE_PATH, "utf8");
 const FAQ_HEADINGS = new Set(["frequently asked questions", "audio editing faq"]);
+const ARTICLE_ARTWORK = {
+  workflow: {
+    src: "/blog/how%20to%20record%20audio/how-to-edit-audio-workflow.webp",
+    alt: "Infographic showing the seven-step audio editing workflow from import to export",
+    caption:
+      "The full editing flow at a glance: import, trim, denoise, EQ, compress, normalize, and export.",
+    width: 1536,
+    height: 1024,
+    sizes: "(max-width: 900px) 100vw, 720px",
+  },
+  software: {
+    src: "/blog/how%20to%20record%20audio/best-audio-editing-software.webp",
+    alt: "Comparison chart of the best audio editing software for different devices and use cases",
+    caption:
+      "A side-by-side software comparison covering platform support, best use cases, pricing, and takeaways.",
+    width: 1536,
+    height: 1024,
+    sizes: "(max-width: 900px) 100vw, 720px",
+  },
+  subscribers: {
+    src: "/blog/how%20to%20record%20audio/rehan-youtube-subscribers.webp",
+    alt: "Screenshot of Rehanous YouTube channel showing about 33.3 thousand subscribers",
+    caption:
+      "The growth behind this workflow: years of creator work, enough testing, and 33K-plus YouTube subscribers.",
+    width: 1229,
+    height: 414,
+    sizes: "(max-width: 900px) 100vw, 560px",
+    maxWidth: "35rem",
+  },
+  mistakes: {
+    src: "/blog/how%20to%20record%20audio/audio-editing-common-mistakes.webp",
+    alt: "Infographic showing common audio editing mistakes, their causes, and the fixes",
+    caption:
+      "A practical troubleshooting sheet for robotic audio, muddy EQ, unstable volume, sync drift, and export issues.",
+    width: 1536,
+    height: 1024,
+    sizes: "(max-width: 900px) 100vw, 720px",
+  },
+  glossary: {
+    src: "/blog/how%20to%20record%20audio/audio-editing-terms-glossary.webp",
+    alt: "Audio editing glossary infographic explaining key terms like clipping, LUFS, EQ, and compression",
+    caption:
+      "A visual glossary for the terms beginners usually have to piece together from five different tutorials.",
+    width: 1024,
+    height: 1536,
+    sizes: "(max-width: 900px) 100vw, 720px",
+  },
+} satisfies Record<string, ArticleArtwork>;
 
 function stripArticleFrontMatter(markdown: string) {
   const normalizedMarkdown = markdown.replace(/\r/g, "");
@@ -433,6 +492,28 @@ function getQuickPickHref(name: string) {
   }
 }
 
+function renderArticleArtwork(artwork: ArticleArtwork, key: string) {
+  const figureStyle = artwork.maxWidth
+    ? ({ maxWidth: artwork.maxWidth } satisfies CSSProperties)
+    : undefined;
+
+  return (
+    <figure key={key} className={styles.articleArtwork} style={figureStyle}>
+      <div className={styles.articleArtworkFrame}>
+        <Image
+          src={artwork.src}
+          alt={artwork.alt}
+          width={artwork.width}
+          height={artwork.height}
+          className={styles.articleArtworkImage}
+          sizes={artwork.sizes ?? "(max-width: 900px) 100vw, 720px"}
+        />
+      </div>
+      <figcaption className={styles.articleArtworkCaption}>{artwork.caption}</figcaption>
+    </figure>
+  );
+}
+
 export default function HowToEditAudioArticle() {
   const elements: ReactNode[] = [];
 
@@ -455,11 +536,12 @@ export default function HowToEditAudioArticle() {
           <h2>{block.text}</h2>
         </section>
       );
+      elements.push(renderArticleArtwork(ARTICLE_ARTWORK.software, `software-${key}`));
 
       elements.push(
         <section key={`visual-${key}`} className={styles.visualPanel}>
           <div className={styles.visualHeader}>
-            <span className={styles.visualEyebrow}>Editor's Picks</span>
+            <span className={styles.visualEyebrow}>Editor&apos;s Picks</span>
             <p className={styles.visualCopy}>
               Choose the editor that matches your device, budget, and workflow.
             </p>
@@ -500,6 +582,18 @@ export default function HowToEditAudioArticle() {
             <h2>{block.text}</h2>
           </section>
         );
+
+        if (block.text === "How to Edit Audio (Quick Answer)") {
+          elements.push(renderArticleArtwork(ARTICLE_ARTWORK.workflow, `workflow-${key}`));
+        }
+
+        if (block.text === "Common audio editing mistakes") {
+          elements.push(renderArticleArtwork(ARTICLE_ARTWORK.mistakes, `mistakes-${key}`));
+        }
+
+        if (block.text === "Audio editing glossary") {
+          elements.push(renderArticleArtwork(ARTICLE_ARTWORK.glossary, `glossary-${key}`));
+        }
       } else {
         elements.push(
           <h3 key={key} id={block.id}>
@@ -625,6 +719,11 @@ export default function HowToEditAudioArticle() {
 
     if (block.type === "paragraph") {
       elements.push(<p key={key}>{renderInlineMarkdown(block.text)}</p>);
+
+      if (block.text.includes("I've grown to 33,000 subscribers.")) {
+        elements.push(renderArticleArtwork(ARTICLE_ARTWORK.subscribers, `subscribers-${key}`));
+      }
+
       continue;
     }
 

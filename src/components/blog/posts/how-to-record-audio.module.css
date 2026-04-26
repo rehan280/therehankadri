@@ -40,6 +40,37 @@
   line-height: 1.7;
 }
 
+.articleArtwork {
+  display: grid;
+  gap: 0.72rem;
+  width: 100%;
+  margin: 0 auto 1.95rem;
+}
+
+.articleArtworkFrame {
+  width: 100%;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 1.3rem;
+  background:
+    radial-gradient(circle at top right, rgba(83, 111, 255, 0.1), transparent 34%),
+    linear-gradient(180deg, rgba(7, 15, 31, 0.96), rgba(9, 17, 34, 0.98));
+  box-shadow: 0 20px 42px rgba(28, 39, 61, 0.08);
+}
+
+.articleArtworkImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
+
+.articleArtworkCaption {
+  margin: 0;
+  color: #667183;
+  font-size: 0.91rem;
+  line-height: 1.6;
+}
+
 .visualPanel {
   margin: 0 0 1.9rem;
   padding: 1.35rem;
@@ -346,6 +377,20 @@
 }
 
 @media (max-width: 640px) {
+  .articleArtwork {
+    gap: 0.6rem;
+    margin-bottom: 1.7rem;
+  }
+
+  .articleArtworkFrame {
+    border-radius: 1rem;
+  }
+
+  .articleArtworkCaption {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
   .visualPanel {
     padding: 1rem;
     border-radius: 1rem;
