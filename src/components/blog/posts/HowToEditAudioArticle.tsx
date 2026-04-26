@@ -33,6 +33,14 @@ type ArticleArtwork = {
   maxWidth?: string;
 };
 
+type QuickPickDetails = {
+  badge: string;
+  href: string;
+  logoSrc: string;
+  platform: string;
+  action: string;
+};
+
 const ARTICLE_FILE_PATH = path.join(
   process.cwd(),
   "src",
@@ -41,11 +49,13 @@ const ARTICLE_FILE_PATH = path.join(
   "how-to-edit-audio.md"
 );
 
+const BLOG_ASSET_BASE = "/blog/how to record audio";
+
 const rawArticleMarkdown = readFileSync(ARTICLE_FILE_PATH, "utf8");
 const FAQ_HEADINGS = new Set(["frequently asked questions", "audio editing faq"]);
 const ARTICLE_ARTWORK = {
   workflow: {
-    src: "/blog/how%20to%20record%20audio/how-to-edit-audio-workflow.webp",
+    src: `${BLOG_ASSET_BASE}/how-to-edit-audio-workflow.webp`,
     alt: "Infographic showing the seven-step audio editing workflow from import to export",
     caption:
       "The full editing flow at a glance: import, trim, denoise, EQ, compress, normalize, and export.",
@@ -54,7 +64,7 @@ const ARTICLE_ARTWORK = {
     sizes: "(max-width: 900px) 100vw, 720px",
   },
   software: {
-    src: "/blog/how%20to%20record%20audio/best-audio-editing-software.webp",
+    src: `${BLOG_ASSET_BASE}/best-audio-editing-software.webp`,
     alt: "Comparison chart of the best audio editing software for different devices and use cases",
     caption:
       "A side-by-side software comparison covering platform support, best use cases, pricing, and takeaways.",
@@ -63,7 +73,7 @@ const ARTICLE_ARTWORK = {
     sizes: "(max-width: 900px) 100vw, 720px",
   },
   subscribers: {
-    src: "/blog/how%20to%20record%20audio/rehan-youtube-subscribers.webp",
+    src: `${BLOG_ASSET_BASE}/rehan-youtube-subscribers.webp`,
     alt: "Screenshot of Rehanous YouTube channel showing about 33.3 thousand subscribers",
     caption:
       "The growth behind this workflow: years of creator work, enough testing, and 33K-plus YouTube subscribers.",
@@ -73,7 +83,7 @@ const ARTICLE_ARTWORK = {
     maxWidth: "35rem",
   },
   mistakes: {
-    src: "/blog/how%20to%20record%20audio/audio-editing-common-mistakes.webp",
+    src: `${BLOG_ASSET_BASE}/audio-editing-common-mistakes.webp`,
     alt: "Infographic showing common audio editing mistakes, their causes, and the fixes",
     caption:
       "A practical troubleshooting sheet for robotic audio, muddy EQ, unstable volume, sync drift, and export issues.",
@@ -82,7 +92,7 @@ const ARTICLE_ARTWORK = {
     sizes: "(max-width: 900px) 100vw, 720px",
   },
   glossary: {
-    src: "/blog/how%20to%20record%20audio/audio-editing-terms-glossary.webp",
+    src: `${BLOG_ASSET_BASE}/audio-editing-terms-glossary.webp`,
     alt: "Audio editing glossary infographic explaining key terms like clipping, LUFS, EQ, and compression",
     caption:
       "A visual glossary for the terms beginners usually have to piece together from five different tutorials.",
@@ -91,6 +101,51 @@ const ARTICLE_ARTWORK = {
     sizes: "(max-width: 900px) 100vw, 720px",
   },
 } satisfies Record<string, ArticleArtwork>;
+
+const QUICK_PICK_DETAILS: Record<string, QuickPickDetails> = {
+  Audacity: {
+    badge: "Best Overall",
+    href: "#how-to-edit-audio-in-audacity",
+    logoSrc: `${BLOG_ASSET_BASE}/audacity.svg`,
+    platform: "Windows / Mac / Linux",
+    action: "Start here",
+  },
+  "Adobe Audition": {
+    badge: "Pro Workflows",
+    href: "#adobe-audition-audio-editing-workflow",
+    logoSrc: `${BLOG_ASSET_BASE}/icons8-adobe-audition (1).svg`,
+    platform: "Windows / Mac",
+    action: "Advanced setup",
+  },
+  GarageBand: {
+    badge: "Apple Users",
+    href: "#how-to-edit-audio-in-garageband",
+    logoSrc: `${BLOG_ASSET_BASE}/icons8-garage-band (1).svg`,
+    platform: "Mac / iPhone",
+    action: "Apple workflow",
+  },
+  WavePad: {
+    badge: "iPhone",
+    href: "#how-to-edit-audio-on-iphone-with-wavepad",
+    logoSrc: `${BLOG_ASSET_BASE}/wavepad.svg`,
+    platform: "iPhone / iPad",
+    action: "Mobile cleanup",
+  },
+  "Lexis Audio Editor": {
+    badge: "Android",
+    href: "#how-to-edit-audio-on-android-with-lexis-audio-editor",
+    logoSrc: `${BLOG_ASSET_BASE}/lexis audio editor.svg`,
+    platform: "Android",
+    action: "Phone editing",
+  },
+  BandLab: {
+    badge: "Chromebook",
+    href: "#how-to-edit-audio-on-chromebook-with-bandlab",
+    logoSrc: `${BLOG_ASSET_BASE}/icons8-bandlab (1).svg`,
+    platform: "Chromebook / Browser",
+    action: "Browser workflow",
+  },
+};
 
 function stripArticleFrontMatter(markdown: string) {
   const normalizedMarkdown = markdown.replace(/\r/g, "");
@@ -452,44 +507,16 @@ function parseQuickPickItem(item: string) {
   };
 }
 
-function getQuickPickBadge(name: string, index: number) {
-  if (index === 0) {
-    return "Best Overall";
-  }
-
-  switch (name) {
-    case "Adobe Audition":
-      return "Pro Workflows";
-    case "GarageBand":
-      return "Apple Users";
-    case "WavePad":
-      return "iPhone";
-    case "Lexis Audio Editor":
-      return "Android";
-    case "BandLab":
-      return "Chromebook";
-    default:
-      return "Top Pick";
-  }
-}
-
-function getQuickPickHref(name: string) {
-  switch (name) {
-    case "Audacity":
-      return "#how-to-edit-audio-in-audacity";
-    case "Adobe Audition":
-      return "#adobe-audition-audio-editing-workflow";
-    case "GarageBand":
-      return "#how-to-edit-audio-in-garageband";
-    case "WavePad":
-      return "#how-to-edit-audio-on-iphone-with-wavepad";
-    case "Lexis Audio Editor":
-      return "#how-to-edit-audio-on-android-with-lexis-audio-editor";
-    case "BandLab":
-      return "#how-to-edit-audio-on-chromebook-with-bandlab";
-    default:
-      return "#best-audio-editing-software-in-2026";
-  }
+function getQuickPickDetails(name: string, index: number) {
+  return (
+    QUICK_PICK_DETAILS[name] ?? {
+      badge: index === 0 ? "Best Overall" : "Top Pick",
+      href: "#best-audio-editing-software-in-2026",
+      logoSrc: `${BLOG_ASSET_BASE}/audacity.svg`,
+      platform: "Audio editor",
+      action: "See details",
+    }
+  );
 }
 
 function renderArticleArtwork(artwork: ArticleArtwork, key: string) {
@@ -542,31 +569,52 @@ export default function HowToEditAudioArticle() {
         <section key={`visual-${key}`} className={styles.visualPanel}>
           <div className={styles.visualHeader}>
             <span className={styles.visualEyebrow}>Editor&apos;s Picks</span>
+            <h3 className={styles.visualTitle}>Professional audio editing apps, ranked by setup</h3>
             <p className={styles.visualCopy}>
-              Choose the editor that matches your device, budget, and workflow.
+              Choose the one that fits your device, workflow, and how much control you need.
             </p>
           </div>
 
           <ol className={styles.premiumList}>
-            {quickPicks.map((item, cardIndex) => (
-              <li key={`${item.name}-${cardIndex}`} className={styles.premiumItem}>
-                <Link href={getQuickPickHref(item.name)} className={styles.premiumLink}>
-                  <div className={styles.premiumRank}>
-                    <span>{(cardIndex + 1).toString().padStart(2, "0")}</span>
-                  </div>
+            {quickPicks.map((item, cardIndex) => {
+              const quickPickDetails = getQuickPickDetails(item.name, cardIndex);
 
-                  <div className={styles.premiumBody}>
-                    <div className={styles.premiumNameRow}>
-                      <h3>{item.name}</h3>
-                      <span className={styles.premiumBadge}>
-                        {getQuickPickBadge(item.name, cardIndex)}
-                      </span>
+              return (
+                <li key={`${item.name}-${cardIndex}`} className={styles.premiumItem}>
+                  <Link href={quickPickDetails.href} className={styles.premiumLink}>
+                    <div className={styles.premiumLead}>
+                      <span className={styles.premiumRank}>{String(cardIndex + 1).padStart(2, "0")}</span>
+                      <div className={styles.premiumLogoShell}>
+                        <Image
+                          src={quickPickDetails.logoSrc}
+                          alt={`${item.name} logo`}
+                          width={72}
+                          height={72}
+                          className={styles.premiumLogo}
+                          unoptimized
+                        />
+                      </div>
                     </div>
-                    <p className={styles.premiumDescription}>{item.description}</p>
-                  </div>
-                </Link>
-              </li>
-            ))}
+
+                    <div className={styles.premiumBody}>
+                      <div className={styles.premiumNameRow}>
+                        <div className={styles.premiumTitleGroup}>
+                          <span className={styles.premiumMeta}>{quickPickDetails.platform}</span>
+                          <h3>{item.name}</h3>
+                        </div>
+                        <span className={styles.premiumBadge}>{quickPickDetails.badge}</span>
+                      </div>
+                      <p className={styles.premiumDescription}>{item.description}</p>
+                    </div>
+
+                    <div className={styles.premiumAction}>
+                      <span className={styles.premiumActionLabel}>Jump to section</span>
+                      <span className={styles.premiumActionValue}>{quickPickDetails.action}</span>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
           </ol>
         </section>
       );
