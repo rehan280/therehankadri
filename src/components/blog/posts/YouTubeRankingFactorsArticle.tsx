@@ -879,6 +879,20 @@ export default function YouTubeRankingFactorsArticle() {
     const block = parsedArticle.blocks[index];
     const key = `${block.type}-${index}`;
 
+    if (block.type === "heading" && block.level === 2 && block.id === "table-of-contents") {
+      let cursor = index + 1;
+      while (cursor < parsedArticle.blocks.length) {
+        const candidate = parsedArticle.blocks[cursor];
+        if (candidate.type === "heading" && candidate.level === 2) {
+          break;
+        }
+        cursor += 1;
+      }
+
+      index = cursor - 1;
+      continue;
+    }
+
     if (block.type === "factor") {
       const factors: Extract<MarkdownBlock, { type: "factor" }>[] = [];
 
