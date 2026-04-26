@@ -81,6 +81,118 @@
   line-height: 1.7;
 }
 
+.premiumList {
+  display: grid;
+  gap: 0.95rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.premiumItem {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 1.1rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 249, 245, 0.92));
+  box-shadow: 0 16px 34px rgba(28, 39, 61, 0.045);
+}
+
+.premiumLink {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem 1.05rem;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.premiumLink:hover,
+.premiumLink:focus-visible {
+  transform: translateY(-2px);
+}
+
+.premiumLink:focus-visible {
+  outline: 2px solid rgba(23, 56, 105, 0.32);
+  outline-offset: 4px;
+  border-radius: 1rem;
+}
+
+.premiumItem:hover {
+  border-color: rgba(203, 92, 39, 0.18);
+  box-shadow: 0 20px 42px rgba(28, 39, 61, 0.08);
+}
+
+.premiumRank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3rem;
+  min-height: 3rem;
+  border-radius: 1rem;
+  background:
+    linear-gradient(135deg, #173869 0%, #355b96 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.premiumRank span {
+  color: #ffffff;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.premiumBody {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.premiumNameRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.premiumNameRow h3 {
+  margin: 0;
+  color: #161616;
+  font-family: var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.02rem, 2vw, 1.16rem);
+  line-height: 1.12;
+}
+
+.premiumBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.34rem 0.68rem;
+  border: 1px solid rgba(203, 92, 39, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 244, 236, 0.95);
+  color: #b04f24;
+  font-family: var(--font-copy), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.premiumDescription {
+  margin: 0;
+  color: #596274;
+  font-size: 0.98rem;
+  line-height: 1.68;
+}
+
 .stackGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -203,6 +315,26 @@
   .visualPanel {
     padding: 1.15rem;
     border-radius: 1.15rem;
+  }
+
+  .premiumItem {
+    border-radius: 1rem;
+  }
+
+  .premiumLink {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 0.95rem;
+  }
+
+  .premiumRank {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+  }
+
+  .premiumNameRow {
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 
 }

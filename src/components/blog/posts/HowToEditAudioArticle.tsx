@@ -33,7 +33,8 @@ const rawArticleMarkdown = readFileSync(ARTICLE_FILE_PATH, "utf8");
 const FAQ_HEADINGS = new Set(["frequently asked questions", "audio editing faq"]);
 
 function stripArticleFrontMatter(markdown: string) {
-  return markdown.replace(/^# [^\n]+\n+[\s\S]*?\n---\n/, "").trim();
+  const normalizedMarkdown = markdown.replace(/\r/g, "");
+  return normalizedMarkdown.replace(/^# [^\n]+\n+[\s\S]*?\n---\n/, "").trim();
 }
 
 function slugify(value: string) {
@@ -375,52 +376,169 @@ function renderTable(block: Extract<MarkdownBlock, { type: "table" }>, key: stri
   );
 }
 
+function parseQuickPickItem(item: string) {
+  const match = item.match(/^\*\*(.+?)\*\*:\s*(.+)$/);
+
+  if (!match) {
+    return {
+      name: item,
+      description: "",
+    };
+  }
+
+  return {
+    name: match[1].trim(),
+    description: match[2].trim(),
+  };
+}
+
+function getQuickPickBadge(name: string, index: number) {
+  if (index === 0) {
+    return "Best Overall";
+  }
+
+  switch (name) {
+    case "Adobe Audition":
+      return "Pro Workflows";
+    case "GarageBand":
+      return "Apple Users";
+    case "WavePad":
+      return "iPhone";
+    case "Lexis Audio Editor":
+      return "Android";
+    case "BandLab":
+      return "Chromebook";
+    default:
+      return "Top Pick";
+  }
+}
+
+function getQuickPickHref(name: string) {
+  switch (name) {
+    case "Audacity":
+      return "#how-to-edit-audio-in-audacity";
+    case "Adobe Audition":
+      return "#adobe-audition-audio-editing-workflow";
+    case "GarageBand":
+      return "#how-to-edit-audio-in-garageband";
+    case "WavePad":
+      return "#how-to-edit-audio-on-iphone-with-wavepad";
+    case "Lexis Audio Editor":
+      return "#how-to-edit-audio-on-android-with-lexis-audio-editor";
+    case "BandLab":
+      return "#how-to-edit-audio-on-chromebook-with-bandlab";
+    default:
+      return "#best-audio-editing-software-in-2026";
+  }
+}
+
 export default function HowToEditAudioArticle() {
+  const elements: ReactNode[] = [];
+
+  for (let index = 0; index < parsedArticle.blocks.length; index += 1) {
+    const block = parsedArticle.blocks[index];
+    const key = `${block.type}-${index}`;
+    const nextBlock = parsedArticle.blocks[index + 1];
+
+    if (
+      block.type === "heading" &&
+      block.level === 2 &&
+      block.text === "Best Audio Editing Software (Quick Picks)" &&
+      nextBlock?.type === "list" &&
+      !nextBlock.ordered
+    ) {
+      const quickPicks = nextBlock.items.map(parseQuickPickItem);
+
+      elements.push(
+        <section key={key} id={block.id} className={styles.sectionAnchor}>
+          <h2>{block.text}</h2>
+        </section>
+      );
+
+      elements.push(
+        <section key={`visual-${key}`} className={styles.visualPanel}>
+          <div className={styles.visualHeader}>
+            <span className={styles.visualEyebrow}>Editor's Picks</span>
+            <p className={styles.visualCopy}>
+              Choose the editor that matches your device, budget, and workflow.
+            </p>
+          </div>
+
+          <ol className={styles.premiumList}>
+            {quickPicks.map((item, cardIndex) => (
+              <li key={`${item.name}-${cardIndex}`} className={styles.premiumItem}>
+                <Link href={getQuickPickHref(item.name)} className={styles.premiumLink}>
+                  <div className={styles.premiumRank}>
+                    <span>{(cardIndex + 1).toString().padStart(2, "0")}</span>
+                  </div>
+
+                  <div className={styles.premiumBody}>
+                    <div className={styles.premiumNameRow}>
+                      <h3>{item.name}</h3>
+                      <span className={styles.premiumBadge}>
+                        {getQuickPickBadge(item.name, cardIndex)}
+                      </span>
+                    </div>
+                    <p className={styles.premiumDescription}>{item.description}</p>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </section>
+      );
+
+      index += 1;
+      continue;
+    }
+
+    if (block.type === "heading") {
+      if (block.level === 2) {
+        elements.push(
+          <section key={key} id={block.id} className={styles.sectionAnchor}>
+            <h2>{block.text}</h2>
+          </section>
+        );
+      } else {
+        elements.push(
+          <h3 key={key} id={block.id}>
+            {block.text}
+          </h3>
+        );
+      }
+
+      continue;
+    }
+
+    if (block.type === "paragraph") {
+      elements.push(<p key={key}>{renderInlineMarkdown(block.text)}</p>);
+      continue;
+    }
+
+    if (block.type === "callout") {
+      elements.push(
+        <aside key={key} className={styles.snippetBox}>
+          <p>{renderInlineMarkdown(block.text)}</p>
+        </aside>
+      );
+      continue;
+    }
+
+    if (block.type === "list") {
+      elements.push(
+        <ArticleList
+          key={key}
+          ordered={block.ordered}
+          items={block.items.map((item) => renderInlineMarkdown(item))}
+        />
+      );
+      continue;
+    }
+
+    elements.push(renderTable(block, key));
+  }
+
   return (
-    <div className={styles.article}>
-      {parsedArticle.blocks.map((block, index) => {
-        const key = `${block.type}-${index}`;
-
-        if (block.type === "heading") {
-          if (block.level === 2) {
-            return (
-              <section key={key} id={block.id} className={styles.sectionAnchor}>
-                <h2>{block.text}</h2>
-              </section>
-            );
-          }
-
-          return (
-            <h3 key={key} id={block.id}>
-              {block.text}
-            </h3>
-          );
-        }
-
-        if (block.type === "paragraph") {
-          return <p key={key}>{renderInlineMarkdown(block.text)}</p>;
-        }
-
-        if (block.type === "callout") {
-          return (
-            <aside key={key} className={styles.snippetBox}>
-              <p>{renderInlineMarkdown(block.text)}</p>
-            </aside>
-          );
-        }
-
-        if (block.type === "list") {
-          return (
-            <ArticleList
-              key={key}
-              ordered={block.ordered}
-              items={block.items.map((item) => renderInlineMarkdown(item))}
-            />
-          );
-        }
-
-        return renderTable(block, key);
-      })}
-    </div>
+    <div className={styles.article}>{elements}</div>
   );
 }
