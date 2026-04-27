@@ -257,14 +257,14 @@ const titleExtractorArticlePath = path.join(
   process.cwd(),
   "public",
   "tools",
-  "yt title extractor",
+  "yt-title-extractor",
   "youtube-title-extractor-article.md"
 );
 const descriptionExtractorArticlePath = path.join(
   process.cwd(),
   "public",
   "tools",
-  "youtube description generator",
+  "youtube-description-generator",
   "youtube-metadata-extractor-article.md"
 );
 

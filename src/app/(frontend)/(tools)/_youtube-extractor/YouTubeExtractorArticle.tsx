@@ -207,29 +207,29 @@ function getStepImages(slug: string) {
       [
         {
           alt: "How to copy a YouTube video URL using the Share button",
-          src: "/tools/yt title extractor/images/youtube meta data extractor.webp",
+          src: "/tools/yt-title-extractor/images/youtube-meta-data-extractor.webp",
         },
         {
           alt: "How to copy the YouTube share link from the share modal",
-          src: "/tools/yt title extractor/images/youtube title description extractor.webp",
+          src: "/tools/yt-title-extractor/images/youtube-title-description-extractor.webp",
         },
       ],
       [
         {
           alt: "Paste the copied YouTube URL into the YouTube title extractor tool",
-          src: "/tools/yt title extractor/images/youtube title extractor.webp",
+          src: "/tools/yt-title-extractor/images/youtube-title-extractor.webp",
         },
       ],
       [
         {
           alt: "Click the Extract title button to pull the YouTube title and metadata",
-          src: "/tools/yt title extractor/images/youtube title generator.webp",
+          src: "/tools/yt-title-extractor/images/youtube-title-generator.webp",
         },
       ],
       [
         {
           alt: "Copy or download the extracted title, description, and metadata results",
-          src: "/tools/yt title extractor/images/youtube title description metadata extractor.webp",
+          src: "/tools/yt-title-extractor/images/youtube-title-description-metadata-extractor.webp",
         },
       ],
     ];
@@ -240,29 +240,29 @@ function getStepImages(slug: string) {
       [
         {
           alt: "How to copy a YouTube video URL using the Share button",
-          src: "/tools/yt title extractor/images/youtube meta data extractor.webp",
+          src: "/tools/yt-title-extractor/images/youtube-meta-data-extractor.webp",
         },
         {
           alt: "How to copy the YouTube share link from the share modal",
-          src: "/tools/yt title extractor/images/youtube title description extractor.webp",
+          src: "/tools/yt-title-extractor/images/youtube-title-description-extractor.webp",
         },
       ],
       [
         {
           alt: "Paste the copied YouTube URL into the YouTube description extractor tool",
-          src: "/tools/yt title extractor/images/youtube description extractor.webp",
+          src: "/tools/yt-title-extractor/images/youtube-description-extractor.webp",
         },
       ],
       [
         {
           alt: "Click the Extract description button to pull the YouTube description and metadata",
-          src: "/tools/yt title extractor/images/youtube description generator.webp",
+          src: "/tools/yt-title-extractor/images/youtube-description-generator.webp",
         },
       ],
       [
         {
           alt: "Copy or download the extracted YouTube description, title, and metadata results",
-          src: "/tools/yt title extractor/images/youtube description title extractor.webp",
+          src: "/tools/yt-title-extractor/images/youtube-description-title-extractor.webp",
         },
       ],
     ];
