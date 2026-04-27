@@ -8,6 +8,7 @@ Here's the kicker: nobody has published a proper "200 YouTube ranking factors" l
 
 This article covers all 200 signals. Behavioral metrics, metadata, channel authority, AI factors, Shorts-specific signals, and the viral psychology factors most creators never think about.
 
+Let's dive right into it.
 ---
 
 ## The 9 Most Important YouTube Ranking Factors
