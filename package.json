@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:worker": "pwsh -ExecutionPolicy Bypass -File ./cf-build.ps1",
+    "preview": "npm run preview:worker",
+    "preview:worker": "pwsh -ExecutionPolicy Bypass -File ./cf-preview.ps1",
+    "deploy": "npm run deploy:worker",
+    "deploy:worker": "pwsh -ExecutionPolicy Bypass -File ./cf-deploy.ps1",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "browserslist": [
     "chrome 111",
@@ -15,6 +21,7 @@
     "safari 16.4"
   ],
   "dependencies": {
+    "@opennextjs/cloudflare": "^1.18.1",
     "@rohanyeole/ray-editor": "^2.0.10",
     "@supabase/ssr": "^0.10.0",
     "@supabase/supabase-js": "^2.101.0",
@@ -37,6 +44,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.86.0"
   }
 }

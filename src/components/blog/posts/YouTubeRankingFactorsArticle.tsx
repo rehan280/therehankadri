@@ -17,15 +17,15 @@ type MarkdownBlock =
   | { type: "list"; ordered: boolean; checklist: boolean; items: string[]; sectionId?: string }
   | { type: "table"; header: string[]; rows: string[][]; sectionId?: string }
   | {
-      type: "factor";
-      number: number;
-      title: string;
-      body: Array<
-        | { type: "paragraph"; text: string }
-        | { type: "image"; alt: string; src: string; title?: string }
-      >;
-      sectionId?: string;
-    };
+    type: "factor";
+    number: number;
+    title: string;
+    body: Array<
+      | { type: "paragraph"; text: string }
+      | { type: "image"; alt: string; src: string; title?: string }
+    >;
+    sectionId?: string;
+  };
 
 type ParsedMarkdownArticle = {
   blocks: MarkdownBlock[];
@@ -80,25 +80,25 @@ const overviewStats: VisualStat[] = [
 ];
 
 const categoryStats = {
-  "video-performance-metrics": [
+  "category-1-video-performance-metrics-factors-1-35": [
     { label: "Primary dense signals", value: "AVD + CTR", note: "The strongest ranking pair in the article." },
     { label: "Early hook window", value: "15-30s", note: "Where promise-confirmation matters most." },
     { label: "Healthy CTR band", value: "5-10%", note: "The benchmark range cited for strong videos." },
     { label: "Launch velocity window", value: "48h", note: "The period that often determines impression expansion." },
   ],
-  "seo-and-metadata-factors": [
+  "category-2-seo-and-metadata-factors-factors-36-70": [
     { label: "Ideal title span", value: "50-65", note: "Characters before truncation and clarity issues show up." },
     { label: "Strong description range", value: "200-350", note: "Words that preserve semantic depth without bloat." },
     { label: "Top videos with SRT", value: "94%", note: "Custom captions remain one of the best underused levers." },
     { label: "Top videos with timestamps", value: "63%", note: "Chapterable structure creates more searchable entry points." },
   ],
-  "thumbnail-and-visual-signals": [
+  "category-3-thumbnail-and-visual-signals-factors-71-90": [
     { label: "Custom thumbnail usage", value: "89%", note: "Auto-generated options remain a major CTR handicap." },
     { label: "Text cap", value: "5 words", note: "Shorter overlay text survives mobile scaling far better." },
     { label: "Minimum size", value: "1280x720", note: "The baseline format for clean presentation in search." },
     { label: "CTR trigger", value: "Synergy", note: "Title and thumbnail should tell adjacent parts of the story." },
   ],
-  "channel-authority-factors": [
+  "category-5-channel-authority-factors-factors-121-150": [
     { label: "Median channel age", value: "111 mo", note: "Top-ranked channels usually give the system years of history." },
     { label: "Median subs", value: "520K", note: "But channel size is still not a hard gate to ranking." },
     { label: "Small-channel winners", value: "18%", note: "Top-ranked videos from channels below 1,000 subscribers." },
@@ -242,7 +242,7 @@ function parseMarkdownArticle(markdown: string): ParsedMarkdownArticle {
   let currentSectionId: string | undefined;
   let inFaqSection = false;
 
-  for (let index = 0; index < lines.length; ) {
+  for (let index = 0; index < lines.length;) {
     const rawLine = lines[index].trimEnd();
     const trimmed = rawLine.trim();
 

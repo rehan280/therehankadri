@@ -225,7 +225,7 @@ Affiliate marketing now makes up 21.2% of total creator income. That's a big dea
 
 YouTube is the second largest search engine on the planet. Billions of queries go through it every day.
 
-In 2026, ranking on YouTube isn't just about traditional SEO anymore. It's about GEO (Generative Engine Optimization). That means formatting your content so AI systems can find and cite it.
+In 2026, [ranking on YouTube](/blog/youtube-ranking-factors) isn't just about traditional SEO anymore. It's about GEO (Generative Engine Optimization). That means formatting your content so AI systems can find and cite it.
 
 The three things that matter most for GEO on YouTube:
 
