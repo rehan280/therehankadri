@@ -1,5 +1,6 @@
 {
   "name": "therehankadri",
+  "account_id": "69230a79659cd7bfb1abae14e5cdf517",
   "main": ".open-next/worker.js",
   "compatibility_date": "2025-01-01",
   "compatibility_flags": ["nodejs_compat"],
