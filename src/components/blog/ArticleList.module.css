@@ -27,11 +27,6 @@
   line-height: 1.75;
 }
 
-.unorderedItem :global(strong) {
-  color: #0f172a;
-  font-weight: 700;
-}
-
 .stepList {
   counter-reset: article-step;
   display: grid;
