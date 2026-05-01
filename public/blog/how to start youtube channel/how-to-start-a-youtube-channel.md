@@ -48,7 +48,7 @@ But the data tells a completely different story.
 
 YouTube's creative ecosystem contributed over $55 billion to the US GDP in 2024 and supported more than 490,000 full-time equivalent jobs. That number has only gone up since then.
 
-And YouTube isn't slowing down. The platform now has 2.7 billion monthly active users worldwide. Over 1 billion hours of video get watched every single day. YouTube Shorts alone hit [200 billion daily views](https://economictimes.com/tech/technology/youtube-shorts-has-hit-200-billion-daily-views-ceo-neal-mohan/articleshow/121968947.cms) in 2025.
+And YouTube isn't slowing down. The platform now has [2.7 billion monthly active users](/stats/youtube-users) worldwide. Over 1 billion hours of video get watched every single day. YouTube Shorts alone hit [200 billion daily views](https://economictimes.com/tech/technology/youtube-shorts-has-hit-200-billion-daily-views-ceo-neal-mohan/articleshow/121968947.cms) in 2025.
 
 Here's why this matters for NEW creators specifically:
 
@@ -64,7 +64,7 @@ But here's the real question: can a NEW channel still break through?
 
 Yes. And there's data to prove it.
 
-Channels in focused niches with consistent weekly uploads regularly hit 1,000 subscribers within 6 to 12 months. Some do it in 3 to 6 months when they combine strong YouTube SEO with a smart Shorts strategy.
+Channels in focused niches with consistent weekly uploads regularly hit [1,000 subscribers within 6 to 12 months](/stats/youtube-channels). Some do it in 3 to 6 months when they combine strong YouTube SEO with a smart Shorts strategy.
 
 The channels that struggle are the ones competing in oversaturated broad niches with zero strategy. The ones that succeed pick specific topics, create consistently, and optimize their content for how the 2026 algorithm actually works.
 
@@ -589,7 +589,7 @@ Your editing goal is simple: keep people watching.
 - **DaVinci Resolve:** Free professional-grade editor. Steeper learning curve, but incredibly powerful. This is what many full-time creators use.
 - **iMovie:** Free on Apple devices. Simple, clean, and perfect for getting started.
 
-Don't get stuck in editing perfectionism. Your first videos will not be perfect. That's okay. Ship them. You'll improve with every upload.
+Don't get stuck in editing perfectionism. Your first videos will not be perfect. That's okay. Ship them. You'll improve with every upload. If you want a deeper breakdown of the editing workflow, check out our complete guide on [how to edit audio](/blog/how-to-edit-audio).
 
 ### YouTube Shorts: should you make them as a new channel?
 
@@ -637,7 +637,7 @@ They upload a video, throw on a generic title, write two sentences in the descri
 
 YouTube SEO in 2026 is about giving the algorithm every possible signal to understand your video, categorize it correctly, and recommend it to the right audience.
 
-And the game has changed. YouTube's algorithm now uses AI-powered large language models (based on Google's Gemini framework) to understand video content at a level that was impossible even two years ago. The system generates "Semantic IDs" for every video by analyzing your title, description, spoken words, and on-screen text.
+And the game has changed. YouTube's algorithm now uses AI-powered large language models (based on Google's Gemini framework) to understand video content at a level that was impossible even two years ago. The system generates "Semantic IDs" for every video by analyzing your title, description, spoken words, and on-screen text. We break down all [200 ranking factors](/blog/youtube-ranking-factors) in a separate guide.
 
 In plain English: the algorithm literally watches and listens to your video. If your metadata doesn't match your actual content, it creates confusion. And confused algorithms don't recommend your video to anyone.
 
