@@ -15,6 +15,15 @@ const canonicalUrl = buildCanonicalUrl("/tools");
 
 const tools = [
   {
+    name: "YouTube Start Time Link Generator",
+    href: "/youtube-start-time-link-generator",
+    eyebrow: "YouTube Sharing Tool",
+    description:
+      "Create clean YouTube timestamp links that start at the exact second you want, with embed output and mobile-friendly sharing.",
+    highlights: ["Mobile friendly", "Embed ready", "No login required"],
+    icon: FileText,
+  },
+  {
     name: "YouTube Tag Generator",
     href: "/youtube-tags-generator",
     eyebrow: "YouTube SEO Tool",
@@ -46,13 +55,14 @@ const tools = [
 export const metadata: Metadata = createPageMetadata({
   title: "Free SEO Tools | Rehan Kadri",
   description:
-    "Browse free SEO and growth tools from Rehan Kadri, starting with the YouTube Tag Generator for creators and marketers.",
+    "Browse free SEO and growth tools from Rehan Kadri, including YouTube timestamp, title, description, and tag tools for creators and marketers.",
   path: "/tools",
   imageAlt: "SEO tools by Rehan Kadri",
   keywords: [
     "SEO tools",
     "free SEO tools",
     "Rehan Kadri tools",
+    "YouTube start time link generator",
     "YouTube tag generator",
     "YouTube title extractor",
     "YouTube description extractor",

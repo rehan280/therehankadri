@@ -57,6 +57,11 @@ const staticRoutes: MetadataRoute.Sitemap = [
     priority: 0.8,
   },
   {
+    url: `${SITE_URL}/youtube-start-time-link-generator`,
+    changeFrequency: "weekly",
+    priority: 0.8,
+  },
+  {
     url: `${SITE_URL}/youtube-title-extractor`,
     changeFrequency: "weekly",
     priority: 0.8,

@@ -1,0 +1,562 @@
+.intentHero {
+  padding: 82px 0 54px;
+}
+
+.intentTitle {
+  display: grid;
+  gap: 0.04em;
+  max-width: 18ch;
+  font-size: clamp(3.25rem, 5.45vw, 5.05rem);
+  line-height: 0.94;
+  text-wrap: nowrap;
+}
+
+.intentTitle span {
+  display: block;
+}
+
+.intentSubtitle {
+  max-width: 43rem;
+  margin: 16px auto 22px;
+  line-height: 1.45;
+}
+
+.intentTabRow {
+  margin-bottom: 14px;
+}
+
+.toolStack {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+}
+
+.microcopy {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-family: var(--font-copy), Arial, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.32;
+  text-align: left;
+}
+
+.quickBenefits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.quickBenefit {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.infoStrip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 173, 146, 0.18);
+  border-radius: 14px;
+  background: rgba(255, 173, 146, 0.08);
+  color: #fff4ef;
+  font-family: var(--font-copy), Arial, sans-serif;
+  font-size: 0.86rem;
+}
+
+.inlineButton {
+  padding: 8px 11px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.timeSettingsCard {
+  margin-top: 2px;
+  gap: 8px;
+  padding: 12px;
+}
+
+.fieldHeading {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+}
+
+.fieldHeading h2 {
+  margin: 0;
+  color: #ffffff;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.fieldHeading p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--font-copy), Arial, sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.32;
+}
+
+.slimRows {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.slimRow {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+  padding: 9px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.slimRowOptional {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.03) 100%);
+}
+
+.slimRowMerged {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 10px;
+}
+
+.timeGroupInline {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+
+.timeGroupOptional {
+  min-width: 0;
+}
+
+.slimLabelBlock {
+  display: grid;
+  gap: 4px;
+}
+
+.groupKicker {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 18px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 214, 196, 0.96);
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.groupLabel {
+  color: #ffffff;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-align: left;
+}
+
+.inlineTimeRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.timeField {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  flex: 0 0 auto;
+}
+
+.timeField span {
+  color: rgba(255, 222, 210, 0.88);
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.timeField input {
+  min-height: 38px;
+  width: 56px;
+  min-width: 56px;
+  padding: 0 7px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.085) 0%, rgba(255, 255, 255, 0.045) 100%);
+  color: #ffffff;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.timeField input:focus {
+  outline: none;
+  border-color: rgba(255, 158, 124, 0.94);
+  box-shadow:
+    0 0 0 1px rgba(255, 158, 124, 0.45),
+    0 10px 22px rgba(255, 120, 77, 0.12);
+}
+
+.panelHint,
+.resultNote {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-copy), Arial, sans-serif;
+  font-size: 0.74rem;
+  line-height: 1.28;
+}
+
+.timeSettingsCard .panelHint {
+  display: none;
+}
+
+.codeOutput {
+  min-height: 144px;
+}
+
+.articleMarkdown {
+  margin-top: 18px;
+  color: #433635;
+  font-family: var(--font-copy), Arial, sans-serif;
+  font-size: 1.03rem;
+  line-height: 1.8;
+}
+
+.startTimeStatGrid {
+  align-items: stretch;
+}
+
+.startTimeStatCard {
+  min-height: 0;
+  padding: 24px 26px;
+}
+
+.startTimeStatCard strong {
+  max-width: none;
+  margin-bottom: 16px;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: clamp(2.15rem, 2.9vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.startTimeStatCard p {
+  max-width: 21ch;
+}
+
+.articleMarkdown :global(h1) {
+  display: none;
+}
+
+.articleMarkdown :global(h2),
+.articleMarkdown :global(h3) {
+  color: #1e1513;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.articleMarkdown :global(h2) {
+  margin: 40px 0 14px;
+  font-size: clamp(1.85rem, 3vw, 2.45rem);
+  line-height: 1.05;
+}
+
+.articleMarkdown :global(h3) {
+  margin: 28px 0 10px;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.articleMarkdown :global(p),
+.articleMarkdown :global(ul),
+.articleMarkdown :global(ol),
+.articleMarkdown :global(blockquote),
+.articleMarkdown :global(table),
+.articleMarkdown :global(pre) {
+  margin: 0 0 18px;
+}
+
+.articleMarkdown :global(ul),
+.articleMarkdown :global(ol) {
+  padding-left: 22px;
+}
+
+.articleMarkdown :global(li + li) {
+  margin-top: 8px;
+}
+
+.articleMarkdown :global(a) {
+  color: #b44d2f;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.articleMarkdown :global(hr) {
+  margin: 28px 0;
+  border: 0;
+  border-top: 1px solid rgba(22, 19, 18, 0.08);
+}
+
+.articleMarkdown :global(code) {
+  padding: 0.18rem 0.42rem;
+  border-radius: 8px;
+  background: rgba(241, 90, 48, 0.08);
+  color: #8f3d20;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.92em;
+}
+
+.articleMarkdown :global(pre) {
+  overflow-x: auto;
+  padding: 18px;
+  border-radius: 22px;
+  background: #201816;
+}
+
+.articleMarkdown :global(pre code) {
+  padding: 0;
+  background: transparent;
+  color: #fff7f1;
+}
+
+.articleMarkdown :global(table) {
+  width: 100%;
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid rgba(22, 19, 18, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.articleMarkdown :global(th),
+.articleMarkdown :global(td) {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(22, 19, 18, 0.08);
+  text-align: left;
+  vertical-align: top;
+}
+
+.articleMarkdown :global(thead th) {
+  color: #9e664f;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(255, 239, 230, 0.86);
+}
+
+.articleMarkdown :global(tr:last-child td),
+.articleMarkdown :global(tr:last-child th) {
+  border-bottom: 0;
+}
+
+.relatedToolGrid {
+  display: grid;
+  gap: 12px;
+}
+
+.relatedToolCard {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid rgba(22, 19, 18, 0.08);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+}
+
+.relatedToolCard strong {
+  color: #1d1614;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: 0.98rem;
+}
+
+.relatedToolCard span {
+  color: #5d4a45;
+  font-family: var(--font-copy), Arial, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+  .intentHero {
+    padding: 96px 0 54px;
+  }
+
+  .intentTitle {
+    gap: 0.08em;
+    max-width: 100%;
+    font-size: clamp(2.1rem, 8.2vw, 2.9rem);
+    line-height: 0.95;
+  }
+
+  .intentSubtitle {
+    max-width: 24rem;
+    margin: 16px auto 20px;
+    font-size: 0.96rem;
+    line-height: 1.48;
+  }
+
+  .intentTabRow {
+    margin-bottom: 12px;
+  }
+
+  .infoStrip {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .slimRow {
+    grid-template-columns: 92px minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .slimRowMerged {
+    grid-template-columns: 1fr;
+  }
+
+  .slimRows {
+    grid-template-columns: 1fr;
+  }
+
+  .timeGroupInline {
+    grid-template-columns: 92px minmax(0, 1fr);
+  }
+
+  .inlineTimeRow {
+    gap: 5px;
+  }
+
+  .timeField input {
+    width: 48px;
+    min-width: 48px;
+    min-height: 36px;
+  }
+
+  .startTimeStatCard strong {
+    font-size: clamp(2rem, 9vw, 2.65rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .intentHero {
+    padding: 90px 0 48px;
+  }
+
+  .intentTitle {
+    max-width: 100%;
+    font-size: clamp(1.95rem, 7.6vw, 2.35rem);
+    line-height: 0.96;
+  }
+
+  .intentSubtitle {
+    max-width: 21rem;
+    margin: 16px auto 20px;
+    font-size: 0.92rem;
+    line-height: 1.46;
+  }
+
+  .articleMarkdown {
+    font-size: 0.99rem;
+  }
+
+  .articleMarkdown :global(table) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .toolStack {
+    gap: 10px;
+  }
+
+  .slimRow {
+    grid-template-columns: 86px minmax(0, 1fr);
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .slimRowMerged {
+    grid-template-columns: 1fr;
+  }
+
+  .timeGroupInline {
+    grid-template-columns: 86px minmax(0, 1fr);
+  }
+
+  .inlineTimeRow {
+    gap: 4px;
+    justify-content: flex-start;
+  }
+
+  .timeField input {
+    width: 45px;
+    min-width: 45px;
+    min-height: 34px;
+    font-size: 0.82rem;
+  }
+
+  .groupLabel {
+    font-size: 0.78rem;
+  }
+
+  .panelHint {
+    font-size: 0.7rem;
+  }
+
+  .startTimeStatCard {
+    padding: 22px 20px;
+  }
+
+  .startTimeStatCard strong {
+    font-size: clamp(1.95rem, 10vw, 2.45rem);
+    line-height: 1.04;
+  }
+}
