@@ -42,25 +42,8 @@ html {
   min-height: 100%;
   overflow-y: auto;
   scrollbar-gutter: stable;
-  scroll-behavior: smooth;
-  scroll-padding-top: 6.5rem;
-}
-
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-html.lenis.lenis-smooth {
   scroll-behavior: auto;
-}
-
-html.lenis.lenis-stopped {
-  overflow: clip;
-}
-
-html.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
+  scroll-padding-top: 6.5rem;
 }
 
 body {

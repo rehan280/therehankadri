@@ -82,7 +82,7 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
 
     listElement.scrollTo({
       top: nextScrollTop,
-      behavior: "smooth",
+      behavior: "auto",
     });
   }, [activeId]);
 
@@ -101,7 +101,7 @@ export default function BlogTableOfContents({ items }: BlogTableOfContentsProps)
         <span className={styles.windowFile}>table_of_contents.md</span>
       </div>
 
-      <nav aria-label="Table of contents" data-lenis-prevent>
+      <nav aria-label="Table of contents">
         <ol className={styles.tocList} ref={listRef}>
           {items.map((item, index) => {
             const active = item.id === activeId;
