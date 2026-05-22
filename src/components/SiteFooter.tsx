@@ -24,6 +24,12 @@ const socialLinks = [
   },
 ];
 
+const youtubeTools = [
+  { name: "YouTube tag generator", href: "/youtube-tags-generator" },
+  { name: "YouTube title extractor", href: "/youtube-title-extractor" },
+  { name: "YouTube description extractor", href: "/youtube-description-extractor" },
+];
+
 function renderSocialIcon(type: "linkedin" | "instagram" | "youtube" | "x") {
   switch (type) {
     case "linkedin":
@@ -94,6 +100,19 @@ export default function SiteFooter() {
             </div>
           </div>
         </div>
+
+        <nav className={styles.toolsBlock} aria-labelledby="footer-youtube-tools">
+          <h2 id="footer-youtube-tools" className={styles.toolsTitle}>
+            YouTube Tools
+          </h2>
+          <div className={styles.toolsLinks}>
+            {youtubeTools.map((tool) => (
+              <Link key={tool.name} href={tool.href} prefetch>
+                {tool.name}
+              </Link>
+            ))}
+          </div>
+        </nav>
 
         <div className={styles.bottom}>
           <p>© 2026 The Rehan Kadri. All rights reserved.</p>

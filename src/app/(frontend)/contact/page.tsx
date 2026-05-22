@@ -5,7 +5,6 @@ import {
   buildCanonicalUrl,
   createBreadcrumbJsonLd,
 } from "@/lib/seo";
-import ContactForm from "./ContactForm";
 import styles from "./contact.module.css";
 
 const socialLinks = [
@@ -121,9 +120,6 @@ export default function ContactPage() {
               Looking to build your brand, fix your pipeline, or create a stronger growth system?
             </p>
           </div>
-
-          <ContactForm />
-
           <section className={styles.connectSection} aria-labelledby="connect-title">
             <div className={styles.connectSurface}>
               <div className={styles.connectIntro}>

@@ -461,6 +461,13 @@ function renderSectionVisual(sectionId: string) {
   return null;
 }
 
+function isDirectAnswerForSection(
+  block: MarkdownBlock | undefined,
+  sectionId: string
+) {
+  return block?.type === "direct-answer" && block.sectionId === sectionId;
+}
+
 function renderTable(block: Extract<MarkdownBlock, { type: "table" }>, key: string) {
   return (
     <div key={key} className={styles.markdownTableWrap}>
@@ -504,7 +511,9 @@ export default function HowToStartYouTubeChannelArticle() {
             <h2>{block.text}</h2>
           </section>
         );
-        const visual = renderSectionVisual(block.id);
+        const visual = isDirectAnswerForSection(parsedArticle.blocks[index + 1], block.id)
+          ? null
+          : renderSectionVisual(block.id);
         if (visual) {
           elements.push(<div key={`visual-${key}`}>{visual}</div>);
         }
@@ -534,6 +543,17 @@ export default function HowToStartYouTubeChannelArticle() {
           <p>{renderInlineMarkdown(block.text)}</p>
         </aside>
       );
+      if (block.sectionId) {
+        const previousBlock = parsedArticle.blocks[index - 1];
+        const shouldRenderDeferredVisual =
+          previousBlock?.type === "heading" &&
+          previousBlock.level === 2 &&
+          previousBlock.id === block.sectionId;
+        const visual = shouldRenderDeferredVisual ? renderSectionVisual(block.sectionId) : null;
+        if (visual) {
+          elements.push(<div key={`visual-${key}`}>{visual}</div>);
+        }
+      }
       continue;
     }
 
