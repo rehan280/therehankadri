@@ -1,1 +1,1 @@
-export { default, generateMetadata } from "../youtube/channel/page";
+export { default, generateMetadata } from "../youtube/channel/page-content";

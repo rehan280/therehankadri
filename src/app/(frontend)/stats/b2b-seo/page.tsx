@@ -1,1 +1,1 @@
-export { default, generateMetadata } from "../b2b/seo/page";
+export { default, generateMetadata } from "../b2b/seo/page-content";
