@@ -182,14 +182,38 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 920px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.categoryStack {
+  display: grid;
+  gap: 1.6rem;
+}
+
+.categorySection {
+  display: grid;
+  gap: 1rem;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.categoryHeader h3 {
+  margin: 0;
+  color: #1a1a2e;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: clamp(1.18rem, 2vw, 1.55rem);
+  line-height: 1.1;
 }
 
 .toolCard {
   position: relative;
   border: 1px solid rgba(224, 75, 34, 0.08);
-  border-radius: 24px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.94);
   box-shadow:
     0 22px 42px rgba(32, 19, 10, 0.07),
@@ -220,14 +244,14 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  border-radius: 14px;
+  border-radius: 8px;
   background: rgba(241, 90, 48, 0.12);
   color: #f15a30;
 }
 
 .toolTitle {
   margin: 14px 0 0;
-  font-size: 1.62rem;
+  font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: -0.04em;
   color: #1a1a2e;

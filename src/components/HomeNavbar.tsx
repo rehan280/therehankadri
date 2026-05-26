@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { toolCatalog } from "@/lib/tool-catalog";
 
 const blogHref = "/blog";
 const statsHref = "/stats";
@@ -30,7 +31,7 @@ export default function HomeNavbar() {
   const toggleMenu = () => setMenuState({ open: !menuOpen, path: pathname });
   const isBlogActive = pathname.startsWith(blogHref);
   const isStatsActive = pathname.startsWith(statsHref);
-  const isToolsActive = pathname.startsWith(toolsHref) || pathname === "/youtube-tags-generator" || pathname === "/youtube-title-extractor" || pathname === "/youtube-description-extractor";
+  const isToolsActive = pathname.startsWith(toolsHref) || toolCatalog.some((tool) => pathname === `/${tool.slug}`);
   const isServiceActive = pathname === "/";
   const isAboutActive = pathname === aboutHref || pathname === contactHref;
 

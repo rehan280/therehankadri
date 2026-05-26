@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { toolCatalog } from "@/lib/tool-catalog";
 import styles from "./BlogHeader.module.css";
 
 const blogHref = "/blog";
@@ -34,9 +35,7 @@ export default function BlogHeader() {
   const isStatsActive = pathname.startsWith(statsHref);
   const isToolsActive =
     pathname.startsWith(toolsHref) ||
-    pathname === "/youtube-tags-generator" ||
-    pathname === "/youtube-title-extractor" ||
-    pathname === "/youtube-description-extractor";
+    toolCatalog.some((tool) => pathname === `/${tool.slug}`);
   const isServiceActive = pathname === "/";
   const isAboutActive = pathname === aboutHref || pathname === contactHref;
 

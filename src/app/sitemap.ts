@@ -3,6 +3,7 @@ import { toBlogIsoDateTime } from "@/lib/blog";
 import { getAllBlogPosts } from "@/lib/blog-content";
 import { getPostPath } from "@/lib/post-paths";
 import { SITE_URL } from "@/lib/seo";
+import { toolCatalog } from "@/lib/tool-catalog";
 
 const staticRoutes: MetadataRoute.Sitemap = [
   {
@@ -51,27 +52,14 @@ const staticRoutes: MetadataRoute.Sitemap = [
     changeFrequency: "monthly",
     priority: 0.7,
   },
-  {
-    url: `${SITE_URL}/youtube-tags-generator`,
-    changeFrequency: "weekly",
-    priority: 0.8,
-  },
-  {
-    url: `${SITE_URL}/youtube-start-time-link-generator`,
-    changeFrequency: "weekly",
-    priority: 0.8,
-  },
-  {
-    url: `${SITE_URL}/youtube-title-extractor`,
-    changeFrequency: "weekly",
-    priority: 0.8,
-  },
-  {
-    url: `${SITE_URL}/youtube-description-extractor`,
-    changeFrequency: "weekly",
-    priority: 0.8,
-  },
 ];
+
+const toolRoutes: MetadataRoute.Sitemap = toolCatalog.map((tool) => ({
+  url: `${SITE_URL}/${tool.slug}`,
+  lastModified: new Date("2026-05-26T00:00:00+05:30"),
+  changeFrequency: "weekly",
+  priority: 0.8,
+}));
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogPosts = await getAllBlogPosts();
@@ -83,6 +71,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...blogRoutes];
+  return [...staticRoutes, ...toolRoutes, ...blogRoutes];
 }
 

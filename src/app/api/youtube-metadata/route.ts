@@ -281,67 +281,79 @@ function parseIsoDurationToSeconds(value: string) {
   return total > 0 ? String(total) : "";
 }
 
-async function fetchYouTubeDataApiMetadata(videoId: string) {
-  const apiKey = process.env.YOUTUBE_DATA_API_KEY?.trim();
+import { getNextApiKey, reportQuotaExceeded } from "@/lib/youtube-keys";
 
-  if (!apiKey) {
-    return null;
-  }
+async function fetchWithFailover(urlTemplate: (key: string) => string): Promise<any> {
+  let key = getNextApiKey();
+  if (!key) throw new Error("No YouTube API keys available or all quotas exceeded.");
 
-  const apiUrl = new URL("https://www.googleapis.com/youtube/v3/videos");
-  apiUrl.searchParams.set("id", videoId);
-  apiUrl.searchParams.set("part", "snippet,contentDetails,statistics");
-  apiUrl.searchParams.set("key", apiKey);
-
-  try {
-    const response = await fetch(apiUrl, {
+  while (key) {
+    const res = await fetch(urlTemplate(key), {
       cache: "no-store",
-      headers: {
-        Accept: "application/json",
-      },
+      headers: { Accept: "application/json" },
+    });
+    
+    if (res.ok) {
+      return await res.json();
+    }
+
+    if (res.status === 403 || res.status === 400) {
+      await res.json().catch(() => ({})); // consume body
+      reportQuotaExceeded(key);
+      key = getNextApiKey();
+      if (key) continue;
+    }
+    
+    throw new Error(`YouTube API request failed: ${res.status}`);
+  }
+  throw new Error("YouTube API quota exceeded across all available keys.");
+}
+
+async function fetchYouTubeDataApiMetadata(videoId: string) {
+  try {
+    const payload = await fetchWithFailover((key) => {
+      const url = new URL("https://www.googleapis.com/youtube/v3/videos");
+      url.searchParams.set("id", videoId);
+      url.searchParams.set("part", "snippet,contentDetails,statistics");
+      url.searchParams.set("key", key);
+      return url.toString();
     });
 
-    if (!response.ok) {
-      return null;
-    }
-
-    const payload = (await response.json()) as YouTubeVideoApiResponse;
-    const item = payload.items?.[0];
+    const item = payload?.items?.[0];
     const snippet = item?.snippet;
 
-    if (!item || !snippet?.title) {
-      return null;
+    if (!item || !snippet?.title) return null;
+
+      const description = normalizeText(snippet.description);
+      const tags = Array.isArray(snippet.tags)
+        ? uniqueValues(snippet.tags.filter((tag: any): tag is string => typeof tag === "string"))
+        : [];
+
+      return {
+        videoId,
+        url: `https://www.youtube.com/watch?v=${videoId}`,
+        title: normalizeText(snippet.title),
+        description,
+        channelName: normalizeText(snippet.channelTitle),
+        channelUrl: snippet.channelId
+          ? `https://www.youtube.com/channel/${snippet.channelId}`
+          : "",
+        durationSeconds: parseIsoDurationToSeconds(
+          normalizeText(item.contentDetails?.duration)
+        ),
+        viewCount: normalizeCount(normalizeText(item.statistics?.viewCount)),
+        likeCount: normalizeCount(normalizeText(item.statistics?.likeCount)),
+        commentCount: normalizeCount(normalizeText(item.statistics?.commentCount)),
+        uploadDate: normalizeText(snippet.publishedAt),
+        tags,
+        hashtags: getHashtags(description, tags),
+        timestamps: getTimestamps(description),
+      } satisfies YouTubeMetadata;
+    } catch {
+      return null; // API failed or all keys exhausted
     }
-
-    const description = normalizeText(snippet.description);
-    const tags = Array.isArray(snippet.tags)
-      ? uniqueValues(snippet.tags.filter((tag): tag is string => typeof tag === "string"))
-      : [];
-
-    return {
-      videoId,
-      url: `https://www.youtube.com/watch?v=${videoId}`,
-      title: normalizeText(snippet.title),
-      description,
-      channelName: normalizeText(snippet.channelTitle),
-      channelUrl: snippet.channelId
-        ? `https://www.youtube.com/channel/${snippet.channelId}`
-        : "",
-      durationSeconds: parseIsoDurationToSeconds(
-        normalizeText(item.contentDetails?.duration)
-      ),
-      viewCount: normalizeCount(normalizeText(item.statistics?.viewCount)),
-      likeCount: normalizeCount(normalizeText(item.statistics?.likeCount)),
-      commentCount: normalizeCount(normalizeText(item.statistics?.commentCount)),
-      uploadDate: normalizeText(snippet.publishedAt),
-      tags,
-      hashtags: getHashtags(description, tags),
-      timestamps: getTimestamps(description),
-    } satisfies YouTubeMetadata;
-  } catch {
-    return null;
-  }
 }
+
 
 async function fetchOEmbedMetadata(videoUrl: string) {
   const oEmbedUrl = new URL("https://www.youtube.com/oembed");

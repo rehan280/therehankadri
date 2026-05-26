@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, FileText, Heading1, Tags } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  Download,
+  FileText,
+  MessageCircle,
+  Tags,
+  Tv,
+} from "lucide-react";
 import {
   ORGANIZATION_ID,
   SITE_URL,
@@ -9,53 +17,25 @@ import {
   createBreadcrumbJsonLd,
   createPageMetadata,
 } from "@/lib/seo";
+import { toolCatalog, toolCategories, type ToolCategory } from "@/lib/tool-catalog";
 import styles from "./page.module.css";
 
 const canonicalUrl = buildCanonicalUrl("/tools");
+const tools = toolCatalog;
 
-const tools = [
-  {
-    name: "YouTube Start Time Link Generator",
-    href: "/youtube-start-time-link-generator",
-    eyebrow: "YouTube Sharing Tool",
-    description:
-      "Create clean YouTube timestamp links that start at the exact second you want, with embed output and mobile-friendly sharing.",
-    highlights: ["Mobile friendly", "Embed ready", "No login required"],
-    icon: FileText,
-  },
-  {
-    name: "YouTube Tag Generator",
-    href: "/youtube-tags-generator",
-    eyebrow: "YouTube SEO Tool",
-    description:
-      "Generate focused YouTube tags from a title or keyword with a fast workflow built for creators and marketers.",
-    highlights: ["No login required", "Free to use", "Built for YouTube SEO"],
-    icon: Tags,
-  },
-  {
-    name: "YouTube Title Extractor",
-    href: "/youtube-title-extractor",
-    eyebrow: "YouTube SEO Tool",
-    description:
-      "Extract the exact current title from any public YouTube video or Shorts link for competitor research and title analysis.",
-    highlights: ["Mobile friendly", "No login required", "Built for CTR research"],
-    icon: Heading1,
-  },
-  {
-    name: "YouTube Description Extractor",
-    href: "/youtube-description-extractor",
-    eyebrow: "YouTube Metadata Tool",
-    description:
-      "Pull public YouTube descriptions, titles, tags, hashtags, timestamps, and metadata from a single video URL.",
-    highlights: ["Works with Shorts", "Download .txt", "Useful for SEO audits"],
-    icon: FileText,
-  },
-];
+const categoryIcons: Record<ToolCategory, typeof Tags> = {
+  "YouTube SEO & Optimization": Tags,
+  "YouTube Analytics & Monetization": BarChart3,
+  "YouTube Media Downloaders": Download,
+  "Engagement & Interaction": MessageCircle,
+  "YouTube Video & Channel Utilities": Tv,
+  "Podcast Tools": FileText,
+};
 
 export const metadata: Metadata = createPageMetadata({
   title: "Free SEO Tools | Rehan Kadri",
   description:
-    "Browse free SEO and growth tools from Rehan Kadri, including YouTube timestamp, title, description, and tag tools for creators and marketers.",
+    "Browse free creator tools from Rehan Kadri, including YouTube SEO, metadata, downloader, and podcast tools.",
   path: "/tools",
   imageAlt: "SEO tools by Rehan Kadri",
   keywords: [
@@ -64,6 +44,9 @@ export const metadata: Metadata = createPageMetadata({
     "Rehan Kadri tools",
     "YouTube start time link generator",
     "YouTube tag generator",
+    "YouTube tools",
+    "creator tools",
+    "podcast tools",
     "YouTube title extractor",
     "YouTube description extractor",
     "YouTube SEO tool",
@@ -86,8 +69,8 @@ export default function ToolsPage() {
       itemListElement: tools.map((tool, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        name: tool.name,
-        url: buildCanonicalUrl(tool.href),
+        name: tool.title,
+        url: buildCanonicalUrl(`/${tool.slug}`),
       })),
     },
   };
@@ -153,39 +136,53 @@ export default function ToolsPage() {
               <span className={styles.sectionLabel}>Available Now</span>
               <h2 className={styles.sectionTitle}>Start with the tool that already does real work.</h2>
               <p className={styles.subtitle}>
-                The goal here is practical utility: focused SEO helpers that shorten research and execution time for creators, marketers, and small teams.
+                The goal here is practical utility: focused helpers that shorten YouTube research, creator planning, and podcast publishing work.
               </p>
             </div>
 
-            <div className={styles.toolsGrid}>
-              {tools.map((tool) => {
-                const Icon = tool.icon;
+            <div className={styles.categoryStack}>
+              {toolCategories.map((category) => {
+                const categoryTools = toolCatalog.filter((tool) => tool.category === category);
+                const Icon = categoryIcons[category];
 
                 return (
-                  <article key={tool.href} className={styles.toolCard}>
-                    <div className={styles.toolTop}>
-                      <span className={styles.toolEyebrow}>{tool.eyebrow}</span>
+                  <section key={category} className={styles.categorySection}>
+                    <div className={styles.categoryHeader}>
                       <span className={styles.toolIconWrap}>
                         <Icon size={20} strokeWidth={2.2} />
                       </span>
+                      <h3>{category}</h3>
                     </div>
 
-                    <h3 className={styles.toolTitle}>{tool.name}</h3>
-                    <p className={styles.toolDescription}>{tool.description}</p>
+                    <div className={styles.toolsGrid}>
+                      {categoryTools.map((tool) => (
+                        <article key={tool.slug} className={styles.toolCard}>
+                          <div className={styles.toolTop}>
+                            <span className={styles.toolEyebrow}>{tool.keyword}</span>
+                            <span className={styles.toolIconWrap}>
+                              <Icon size={20} strokeWidth={2.2} />
+                            </span>
+                          </div>
 
-                    <div className={styles.toolHighlights}>
-                      {tool.highlights.map((highlight) => (
-                        <span key={highlight} className={styles.toolChip}>
-                          {highlight}
-                        </span>
+                          <h4 className={styles.toolTitle}>{tool.title}</h4>
+                          <p className={styles.toolDescription}>{tool.shortDescription}</p>
+
+                          <div className={styles.toolHighlights}>
+                            {tool.highlights.map((highlight) => (
+                              <span key={highlight} className={styles.toolChip}>
+                                {highlight}
+                              </span>
+                            ))}
+                          </div>
+
+                          <Link href={`/${tool.slug}`} className={styles.toolLink}>
+                            <span>Open Tool</span>
+                            <ArrowRight size={17} strokeWidth={2.2} />
+                          </Link>
+                        </article>
                       ))}
                     </div>
-
-                    <Link href={tool.href} className={styles.toolLink}>
-                      <span>Open Tool</span>
-                      <ArrowRight size={17} strokeWidth={2.2} />
-                    </Link>
-                  </article>
+                  </section>
                 );
               })}
             </div>
