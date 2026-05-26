@@ -56,28 +56,37 @@ const PREFILLED_CACHE: Record<string, string> = {
 };
 Object.assign(globalCache, PREFILLED_CACHE);
 
-// ─────────────────────────────────────────────────────────────────────────────
-// ROBUST FETCHER WITH AUTO-FAILOVER
-// If a key has exceeded its quota (data.error), it seamlessly retries with the next key.
-// ─────────────────────────────────────────────────────────────────────────────
+let currentKeyIndex = 0;
+
 async function fetchWithFailover(urlFactory: (key: string) => string, keys: string[]): Promise<any> {
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
+  for (let attempts = 0; attempts < keys.length; attempts++) {
+    const key = keys[currentKeyIndex];
     const url = urlFactory(key);
-    const res = await fetch(url, { cache: "no-store" });
-    const data = await res.json();
     
-    // If no error, success! Return data.
-    if (!data.error) {
-      return data;
-    }
-    
-    // If error is quota exceeded, try the next key
-    console.error(`Key ${i + 1}/${keys.length} failed:`, data.error.message);
-    if (i === keys.length - 1) {
-      return data; // All keys exhausted
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      const text = await res.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        throw new Error("Invalid JSON: " + text.slice(0, 100));
+      }
+      
+      if (!data.error) {
+        return data; // Success
+      }
+      
+      // Quota exceeded or other API error
+      console.error(`Key ${currentKeyIndex + 1}/${keys.length} API error:`, data.error.message);
+      currentKeyIndex = (currentKeyIndex + 1) % keys.length;
+    } catch (err) {
+      console.error(`Key ${currentKeyIndex + 1}/${keys.length} network error:`, String(err));
+      currentKeyIndex = (currentKeyIndex + 1) % keys.length;
     }
   }
+  
+  return { items: [], error: "All keys exhausted" };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -161,18 +170,14 @@ async function resolveLinksToIds(channels: { name: string; link: string }[], key
   let newlyResolvedCount = 0;
 
   for (const chunk of chunks) {
-    const results = await Promise.allSettled(
-      chunk.map(async (item) => {
-        const urlFactory = (key: string) => `https://www.googleapis.com/youtube/v3/channels?part=id&${item.queryType}=${encodeURIComponent(item.queryValue)}&key=${key}`;
-        const data = await fetchWithFailover(urlFactory, keys);
-        return { value: item.queryValue, id: data?.items?.[0]?.id };
-      })
-    );
-
-    for (const r of results) {
-      if (r.status === "fulfilled" && r.value.id) {
-        globalCache[r.value.value] = r.value.id;
-        resolvedIds.push(r.value.id);
+    for (const item of chunk) {
+      const urlFactory = (key: string) => `https://www.googleapis.com/youtube/v3/channels?part=id&${item.queryType}=${encodeURIComponent(item.queryValue)}&key=${key}`;
+      const data = await fetchWithFailover(urlFactory, keys);
+      const id = data?.items?.[0]?.id;
+      
+      if (id) {
+        globalCache[item.queryValue] = id;
+        resolvedIds.push(id);
         newlyResolvedCount++;
       }
     }
@@ -191,18 +196,17 @@ async function fetchStats(ids: string[], keys: string[]): Promise<any[]> {
     batches.push(uniqueIds.slice(i, i + 50));
   }
 
-  const results = await Promise.allSettled(
-    batches.map(async (batch) => {
-      const urlFactory = (key: string) => `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${batch.join(",")}&maxResults=50&key=${key}`;
-      const data = await fetchWithFailover(urlFactory, keys);
-      return data?.items || [];
-    })
-  );
-
   const items: any[] = [];
-  results.forEach((r) => {
-    if (r.status === "fulfilled") items.push(...r.value);
-  });
+  
+  // Fetch sequentially to prevent concurrent queries from tripping the same failing key
+  for (const batch of batches) {
+    const urlFactory = (key: string) => `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${batch.join(",")}&maxResults=50&key=${key}`;
+    const data = await fetchWithFailover(urlFactory, keys);
+    if (data?.items) {
+      items.push(...data.items);
+    }
+  }
+  
   return items;
 }
 
@@ -216,6 +220,7 @@ export async function GET() {
       process.env.YOUTUBE_DATA_API_KEY_2,
       process.env.YOUTUBE_DATA_API_KEY_3,
       process.env.YOUTUBE_DATA_API_KEY_4,
+      process.env.YOUTUBE_DATA_API_KEY_5,
     ].filter(Boolean) as string[];
 
     if (!keys.length) {
