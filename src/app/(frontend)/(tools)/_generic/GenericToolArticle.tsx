@@ -51,7 +51,7 @@ export default function GenericToolArticle({ tool }: Props) {
                     <section className={`${blogStyles.articleSection} ${styles.articleSection}`}>
                       <h2>How to Use the {tool.title}</h2>
                       <div className={styles.articleFlow}>
-                        <div className={styles.articleStepGrid}>
+                        <div className={styles.articleStrategyGrid}>
                           {content.howToUse.map((step, index) => (
                             <article key={index} className={blogStyles.youtubeInsightCard}>
                               <div className={styles.articleFeatureHeaderInline}>
