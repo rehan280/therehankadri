@@ -120,7 +120,6 @@ export default function GenericToolArticle({ tool }: Props) {
                 <section className={`${blogStyles.articleSection} ${styles.articleSection}`}>
                   <PremiumFaq
                     defaultOpenFirst={false}
-                    eyebrow="FAQ"
                     items={faqEntries}
                     title="Frequently Asked Questions"
                     className={styles.articleFaqSection}
