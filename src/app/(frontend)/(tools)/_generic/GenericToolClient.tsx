@@ -1204,7 +1204,7 @@ function Top100Leaderboard() {
   };
 
   return (
-    <div style={{ marginTop: "1.5rem" }}>
+    <div style={{ marginTop: "1.5rem", width: "100%", minWidth: 0 }}>
       {/* Header bar */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem", marginBottom: "1.2rem" }}>
         <div>

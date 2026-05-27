@@ -1796,7 +1796,7 @@
 
 .articleStrategyGrid,
 .articleFaqGrid {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .articleFaqSection {
@@ -1908,13 +1908,13 @@
 
 .extractorStepImageGrid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
   align-items: start;
 }
 
 .extractorStepImageGridSingle {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .extractorStepImageGrid:not(.extractorStepImageGridSingle) .extractorStepImageCard {
@@ -2393,7 +2393,7 @@
   }
 
   .searchRow {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .resultsTop {
@@ -2424,7 +2424,7 @@
   }
 
   .articleLayout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .articleSidebar {
@@ -2451,12 +2451,12 @@
   .metadataResultGrid,
   .articleStepGrid,
   .articleWarningGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .extractorStepCard,
   .extractorStepCard:nth-child(even) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .extractorStepCard:nth-child(even) .extractorStepContent,
@@ -2465,7 +2465,7 @@
   }
 
   .extractorStepImageGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .testimonialsGrid {
@@ -2537,7 +2537,7 @@
   }
 
   .testimonialsGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .articleSidebarCard {
@@ -2613,7 +2613,7 @@
   gap: 32px;
 }
 @media (max-width: 600px) {
-  .calcTop { grid-template-columns: 1fr; }
+  .calcTop { grid-template-columns: minmax(0, 1fr); }
 }
 .calcControl {
   display: flex;
@@ -2692,7 +2692,7 @@
   gap: 16px;
 }
 @media (max-width: 600px) {
-  .calcBottom { grid-template-columns: 1fr; }
+  .calcBottom { grid-template-columns: minmax(0, 1fr); }
 }
 .calcCard {
   border: 1px solid rgba(255, 90, 54, 0.15);
