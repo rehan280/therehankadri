@@ -345,6 +345,26 @@ export const toolCatalog: ToolDefinition[] = [
     intro: "Paste a YouTube URL and get the complete description, all tags, and all hashtags in one pull. Download as a text file.",
     highlights: ["Descriptions", "Tags", "Download .txt"],
   },
+  {
+    slug: "youtube-monetization-checker",
+    title: "YouTube Monetization Checker",
+    keyword: "youtube monetization checker",
+    category: "YouTube Analytics & Monetization",
+    kind: "existing",
+    shortDescription: "Instantly check if any YouTube video or channel is monetized.",
+    intro: "Paste a YouTube video or channel link to verify if it is accepted into the YouTube Partner Program and earning ad revenue.",
+    highlights: ["Channel & Video support", "Source code verification", "Instant results"],
+  },
+  {
+    slug: "youtube-shadowban-detector",
+    title: "YouTube Shadowban Detector",
+    keyword: "youtube shadowban detector",
+    category: "YouTube Analytics & Monetization",
+    kind: "existing",
+    shortDescription: "Check if your YouTube channel or video is shadowbanned.",
+    intro: "Paste a YouTube video or channel link to check its health score and diagnose algorithmic restrictions.",
+    highlights: ["Health score", "Search index check", "Family-safe verification"],
+  },
 ];
 
 export function getToolBySlug(slug: string) {

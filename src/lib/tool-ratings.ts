@@ -6,6 +6,15 @@ export type ToolRating = {
   rating_count: number;
 };
 
+export function getFallbackRating(slug: string) {
+  const baseCount = 30 + (slug.length % 20);
+  const baseAvg = 4.7 + ((slug.length % 3) / 10);
+  return {
+    average: baseAvg,
+    count: baseCount,
+  };
+}
+
 export async function getToolRating(slug: string): Promise<{
   average: number;
   count: number;
@@ -34,11 +43,5 @@ export async function getToolRating(slug: string): Promise<{
   // Fallback to high SEO base if database fails or no ratings exist yet
   // We use deterministic pseudo-random numbers based on slug length
   // to ensure fallback ratings don't look completely identical everywhere
-  const baseCount = 30 + (slug.length % 20);
-  const baseAvg = 4.7 + ((slug.length % 3) / 10);
-  
-  return {
-    average: baseAvg,
-    count: baseCount,
-  };
+  return getFallbackRating(slug);
 }

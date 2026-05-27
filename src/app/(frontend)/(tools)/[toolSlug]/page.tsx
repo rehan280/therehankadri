@@ -14,6 +14,7 @@ import GenericToolClient from "../_generic/GenericToolClient";
 import styles from "../youtube-tags-generator/page.module.css";
 import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
+import RelatedTools from "@/components/tools/RelatedTools";
 
 type Props = {
   params: Promise<{
@@ -65,7 +66,7 @@ export default async function GenericToolPage({ params }: Props) {
   }
 
   const canonicalUrl = buildCanonicalUrl(`/${tool.slug}`);
-  const faqEntries = getGenericToolFaq(tool);
+  const faqEntries = await getGenericToolFaq(tool);
   const testimonials = getToolTestimonials(tool.slug, tool.title);
   const ratingData = await getToolRating(tool.slug);
   
@@ -202,6 +203,7 @@ export default async function GenericToolPage({ params }: Props) {
       </section>
 
       <GenericToolArticle tool={tool} />
+      <RelatedTools currentToolSlug={tool.slug} category={tool.category} />
     </main>
   );
 }

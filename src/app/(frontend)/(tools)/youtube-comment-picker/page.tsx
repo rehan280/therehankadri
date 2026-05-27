@@ -13,6 +13,7 @@ import YouTubeCommentPickerClient from "./YouTubeCommentPickerClient";
 import styles from "./page.module.css";
 import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
+import RelatedTools from "@/components/tools/RelatedTools";
 
 const canonicalUrl = buildCanonicalUrl("/youtube-comment-picker");
 
@@ -43,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function YouTubeCommentPickerPage() {
   const tool = getToolBySlug("youtube-comment-picker")!;
-  const faqEntries = getGenericToolFaq(tool);
+  const faqEntries = await getGenericToolFaq(tool);
   const testimonials = getToolTestimonials(tool.slug, tool.title);
   const ratingData = await getToolRating(tool.slug);
 
@@ -165,6 +166,10 @@ export default async function YouTubeCommentPickerPage() {
           <GenericToolArticle tool={tool} />
         </div>
       </section>
+      <RelatedTools 
+        currentToolSlug={tool.slug} 
+        category={tool.category} 
+      />
     </main>
   );
 }

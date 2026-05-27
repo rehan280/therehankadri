@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import PremiumFaq from "@/components/content/PremiumFaq";
 import type { ToolDefinition } from "@/lib/tool-catalog";
 import styles from "../youtube-tags-generator/page.module.css";
@@ -8,15 +9,16 @@ import { buildCanonicalUrl } from "@/lib/seo";
 import { getToolTestimonials } from "@/lib/tool-testimonials";
 import RateMyTool from "@/components/tools/RateMyTool";
 import { getToolRating } from "@/lib/tool-ratings";
+import type { ArticleBlock } from "@/lib/tool-article-parser";
 
 type Props = {
   tool: ToolDefinition;
 };
 
-function getFaq(tool: ToolDefinition) {
-  const content = getToolArticleContent(tool.slug);
-  if (content && content.faq.length > 0) {
-    return content.faq;
+export async function getGenericToolFaq(tool: ToolDefinition) {
+  const content = await getToolArticleContent(tool.slug);
+  if (content && content.faqEntries && content.faqEntries.length > 0) {
+    return content.faqEntries;
   }
   
   return [
@@ -39,9 +41,117 @@ function getFaq(tool: ToolDefinition) {
   ];
 }
 
+function renderInlineMarkdown(text: string): ReactNode[] {
+  const fragments: ReactNode[] = [];
+  const pattern = /(\*\*.+?\*\*|\*.+?\*)/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(text))) {
+    if (match.index > lastIndex) {
+      fragments.push(text.slice(lastIndex, match.index));
+    }
+
+    const token = match[0];
+    const content = token.startsWith("**")
+      ? token.slice(2, -2)
+      : token.slice(1, -1);
+
+    if (token.startsWith("**")) {
+      fragments.push(<strong key={`${content}-${match.index}`}>{content}</strong>);
+    } else {
+      fragments.push(<em key={`${content}-${match.index}`}>{content}</em>);
+    }
+
+    lastIndex = match.index + token.length;
+  }
+
+  if (lastIndex < text.length) {
+    fragments.push(text.slice(lastIndex));
+  }
+
+  return fragments.length ? fragments : [text];
+}
+
+function getRenderableBlocks(blocks: ArticleBlock[]) {
+  return blocks.filter(
+    (block, index) => !(block.type === "rule" && index === blocks.length - 1)
+  );
+}
+
+function renderBlock(block: ArticleBlock) {
+  switch (block.type) {
+    case "paragraph":
+      return <p>{renderInlineMarkdown(block.text)}</p>;
+    case "quote":
+      return (
+        <blockquote className={blogStyles.quoteBlock}>
+          <p>{renderInlineMarkdown(block.text)}</p>
+        </blockquote>
+      );
+    case "rule":
+      return <div className={styles.articleDivider} aria-hidden="true" />;
+    case "list":
+      return (
+        <ul className={blogStyles.articleList}>
+          {block.items.map((item) => (
+            <li key={item}>{renderInlineMarkdown(item)}</li>
+          ))}
+        </ul>
+      );
+  }
+}
+
+function getStandaloneStrongText(text: string) {
+  const match = text.trim().match(/^\*\*(.+?)\*\*$/);
+  return match ? match[1] : null;
+}
+
+function getStepCards(blocks: ArticleBlock[]) {
+  const introBlocks: ArticleBlock[] = [];
+  const cards: Array<{
+    body: ArticleBlock[];
+    title: string;
+  }> = [];
+  let currentCard: Array<{
+    body: ArticleBlock[];
+    title: string;
+  }>[number] | null = null;
+
+  getRenderableBlocks(blocks).forEach((block) => {
+    if (block.type === "paragraph") {
+      const strongText = getStandaloneStrongText(block.text);
+      const stepMatch = strongText?.match(/^Step\s*#?\d+:\s*(.+)$/i) || strongText?.match(/^(.+)$/i);
+
+      if (stepMatch && currentCard === null && strongText && !strongText.includes(' ')) {
+         // Not a clear step
+      }
+
+      // To handle loose format, we treat any standalone bold paragraph in "How to Use" as a step if it feels like one
+      if (strongText && strongText.length > 5) {
+        currentCard = {
+          title: strongText,
+          body: [],
+        };
+        cards.push(currentCard);
+        return;
+      }
+    }
+
+    if (currentCard) {
+      currentCard.body.push(block);
+      return;
+    }
+
+    introBlocks.push(block);
+  });
+
+  return { cards, introBlocks };
+}
+
 export default async function GenericToolArticle({ tool }: Props) {
-  const faqEntries = getFaq(tool);
-  const content = getToolArticleContent(tool.slug);
+  const faqEntries = await getGenericToolFaq(tool);
+  const content = await getToolArticleContent(tool.slug);
   const canonicalUrl = buildCanonicalUrl(`/${tool.slug}`);
   const testimonials = getToolTestimonials(tool.slug, tool.title);
   const shareTitle = `Free ${tool.title} - AI-Powered, No Login Required`;
@@ -57,50 +167,61 @@ export default async function GenericToolArticle({ tool }: Props) {
                 
                 {content ? (
                   <>
-                    <section className={`${blogStyles.articleSection} ${styles.articleSection}`}>
-                      <h2>How to Use the {tool.title}</h2>
-                      <div className={styles.articleFlow}>
-                        <div className={styles.articleStrategyGrid}>
-                          {content.howToUse.map((step, index) => (
-                            <article key={index} className={blogStyles.youtubeInsightCard}>
-                              <div className={styles.articleFeatureHeaderInline}>
-                                <span className={blogStyles.youtubeInsightNumber}>
-                                  {String(index + 1).padStart(2, "0")}
-                                </span>
-                                <h3 className={styles.articleFeatureTitleInline}>
-                                  {step.step}
-                                </h3>
-                              </div>
-                              <div className={styles.articleFeatureBody}>
-                                <p>{step.detail}</p>
-                              </div>
-                            </article>
-                          ))}
-                        </div>
-                      </div>
-                    </section>
+                    {content.sections.map((section) => {
+                      if (section.id === "frequently-asked-questions") {
+                        return null; // Rendered below
+                      }
 
-                    <section className={`${blogStyles.articleSection} ${styles.articleSection}`}>
-                      <h2>Who Should Use This Tool</h2>
-                      <div className={styles.articleFlow}>
-                        <ul className={blogStyles.articleList}>
-                          {content.whoShouldUse.map((item, index) => (
-                            <li key={index}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </section>
+                      if (section.id.includes("how-to-use")) {
+                        const { cards, introBlocks } = getStepCards(section.blocks);
+                        return (
+                          <section key={section.id} className={`${blogStyles.articleSection} ${styles.articleSection}`}>
+                            <h2>{section.title}</h2>
+                            <div className={styles.articleFlow}>
+                              {introBlocks.length > 0 && (
+                                <div className={styles.articleFlow}>
+                                  {introBlocks.map((block, index) => (
+                                    <div key={`intro-${index}`}>{renderBlock(block)}</div>
+                                  ))}
+                                </div>
+                              )}
+                              <div className={styles.articleStrategyGrid}>
+                                {cards.map((card, index) => (
+                                  <article key={index} className={blogStyles.youtubeInsightCard}>
+                                    <div className={styles.articleFeatureHeaderInline}>
+                                      <span className={blogStyles.youtubeInsightNumber}>
+                                        {String(index + 1).padStart(2, "0")}
+                                      </span>
+                                      <h3 className={styles.articleFeatureTitleInline}>
+                                        {renderInlineMarkdown(card.title)}
+                                      </h3>
+                                    </div>
+                                    <div className={styles.articleFeatureBody}>
+                                      {card.body.map((block, bodyIndex) => (
+                                        <div key={`body-${bodyIndex}`}>{renderBlock(block)}</div>
+                                      ))}
+                                    </div>
+                                  </article>
+                                ))}
+                              </div>
+                            </div>
+                          </section>
+                        );
+                      }
 
-                    <section className={`${blogStyles.articleSection} ${styles.articleSection}`}>
-                      <h2>What This Tool Is Best For</h2>
-                      <div className={styles.articleFlow}>
-                        <ul className={blogStyles.articleList}>
-                          {content.bestFor.map((item, index) => (
-                            <li key={index}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </section>
+                      return (
+                        <section key={section.id} className={`${blogStyles.articleSection} ${styles.articleSection}`}>
+                          <h2>{section.title}</h2>
+                          <div className={styles.articleFlow}>
+                            {getRenderableBlocks(section.blocks).map((block, index) => (
+                              <div key={`${section.id}-${index}`}>
+                                {renderBlock(block)}
+                              </div>
+                            ))}
+                          </div>
+                        </section>
+                      );
+                    })}
                   </>
                 ) : (
                   <>
@@ -129,6 +250,7 @@ export default async function GenericToolArticle({ tool }: Props) {
                 <section className={`${blogStyles.articleSection} ${styles.articleSection}`}>
                   <PremiumFaq
                     defaultOpenFirst={false}
+                    eyebrow={null}
                     items={faqEntries}
                     title="Frequently Asked Questions"
                     className={styles.articleFaqSection}
@@ -141,36 +263,6 @@ export default async function GenericToolArticle({ tool }: Props) {
                   initialCount={ratingData.count} 
                 />
                 
-                <section className={`${styles.testimonialsSection} ${styles.testimonialsSectionBottom}`} aria-label="Creator reviews">
-                  <div className={styles.testimonialsHeader}>
-                    <span className={styles.testimonialsEyebrow}>What Creators Are Saying</span>
-                    <div className={styles.testimonialsRating}>
-                      <span className={styles.testimonialsStars} aria-label={`${ratingData.average} out of 5 stars`}>★★★★★</span>
-                      <span className={styles.testimonialsRatingValue}>{ratingData.average}</span>
-                      <span className={styles.testimonialsRatingCount}>({ratingData.count} reviews)</span>
-                    </div>
-                  </div>
-                  <div className={styles.testimonialsGrid}>
-                    {testimonials.map((t) => (
-                      <article key={`bottom-${t.name}`} className={styles.testimonialCard}>
-                        <div className={styles.testimonialStars} aria-hidden="true">★★★★★</div>
-                        <blockquote className={styles.testimonialQuote}>
-                          &ldquo;{t.quote}&rdquo;
-                        </blockquote>
-                        <footer className={styles.testimonialFooter}>
-                          <div className={styles.testimonialInitial} aria-hidden="true">
-                            {t.name.charAt(0)}
-                          </div>
-                          <div className={styles.testimonialMeta}>
-                            <strong className={styles.testimonialName}>{t.name}</strong>
-                            <span className={styles.testimonialChannel}>{t.channel} &middot; {t.subscribers}</span>
-                          </div>
-                        </footer>
-                      </article>
-                    ))}
-                  </div>
-                </section>
-
                 <aside className={`${blogStyles.shareRail} ${blogStyles.shareRailMobile}`}>
                   <div className={blogStyles.shareRailInner}>
                     <ArticleSocialShare
@@ -198,8 +290,4 @@ export default async function GenericToolArticle({ tool }: Props) {
       </section>
     </div>
   );
-}
-
-export function getGenericToolFaq(tool: ToolDefinition) {
-  return getFaq(tool);
 }

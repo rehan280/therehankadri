@@ -2,6 +2,7 @@
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
+import { getFallbackRating } from "@/lib/tool-ratings";
 
 export async function submitToolRating(slug: string, stars: number) {
   if (stars < 1 || stars > 5) {
@@ -33,12 +34,13 @@ export async function submitToolRating(slug: string, stars: number) {
 
       if (error) throw error;
     } else {
+      const fallback = getFallbackRating(slug);
       const { error } = await supabase
         .from("tool_ratings")
         .insert({
           tool_slug: slug,
-          total_stars: stars,
-          rating_count: 1,
+          total_stars: (fallback.average * fallback.count) + stars,
+          rating_count: fallback.count + 1,
         });
 
       if (error) throw error;

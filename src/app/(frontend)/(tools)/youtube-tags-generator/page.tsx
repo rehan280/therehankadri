@@ -7,6 +7,8 @@ import { getYouTubeTagGeneratorArticle } from "./article-content";
 import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
 import styles from "./page.module.css";
+import RelatedTools from "@/components/tools/RelatedTools";
+import { toolCatalog } from "@/lib/tool-catalog";
 
 const canonicalUrl = buildCanonicalUrl("/youtube-tags-generator");
 const pageTitle = "Free YouTube Tag Generator | No Login Required";
@@ -200,6 +202,10 @@ export default async function YouTubeTagGeneratorPage() {
       </section>
 
       <YouTubeTagsArticle article={article} />
+      <RelatedTools 
+        currentToolSlug="youtube-tags-generator" 
+        category={toolCatalog.find(t => t.slug === "youtube-tags-generator")?.category} 
+      />
     </main>
   );
 }

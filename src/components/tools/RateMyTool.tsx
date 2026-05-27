@@ -28,6 +28,12 @@ export default function RateMyTool({ slug, initialAverage, initialCount }: Props
     }
   }, [slug]);
 
+  useEffect(() => {
+    // Sync with server if other users rate or if router.refresh() fetches new data
+    setCurrentCount(initialCount);
+    setCurrentAverage(initialAverage);
+  }, [initialCount, initialAverage]);
+
   const handleRate = async (stars: number) => {
     if (hasRated || isSubmitting) return;
     

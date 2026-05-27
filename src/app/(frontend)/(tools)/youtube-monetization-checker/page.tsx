@@ -7,22 +7,20 @@ import {
   buildCanonicalUrl,
   createPageMetadata,
 } from "@/lib/seo";
-import {
-  getYouTubeDescriptionExtractorArticle,
-} from "../_youtube-extractor/article-content";
+import { getToolArticleContent } from "@/lib/tool-article-content";
 import YouTubeExtractorArticle from "../_youtube-extractor/YouTubeExtractorArticle";
-import YouTubeMetadataExtractorClient from "../_youtube-extractor/YouTubeMetadataExtractorClient";
+import MonetizationClient from "../_youtube-monetization/MonetizationClient";
 import styles from "../youtube-tags-generator/page.module.css";
 import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { toolCatalog } from "@/lib/tool-catalog";
 
-const slug = "youtube-description-extractor";
+const slug = "youtube-monetization-checker";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
-const pageTitle = "YouTube Description Extractor - Free Metadata Tool";
+const pageTitle = "YouTube Monetization Checker - Free Online Tool (2026)";
 const pageDescription =
-  "Extract any public YouTube video description, title, tags, hashtags, timestamps, and metadata in one click. Free, no login, works with Shorts.";
+  "Instantly check if any YouTube video or channel is monetized. Verify YouTube Partner Program status hidden in the source code.";
 const socialImage = buildAbsoluteImageUrl();
 
 export const metadata: Metadata = {
@@ -31,17 +29,14 @@ export const metadata: Metadata = {
     description: pageDescription,
     path: `/${slug}`,
     type: "article",
-    imageAlt: "YouTube Description Extractor by The Rehan Kadri",
+    imageAlt: "YouTube Monetization Checker by The Rehan Kadri",
     keywords: [
-      "youtube description extractor",
-      "youtube metadata extractor",
-      "youtube title and description extractor",
-      "extract youtube description",
-      "free youtube description extractor",
-      "copy youtube description",
-      "youtube shorts description extractor",
-      "youtube video metadata",
-      "youtube tags extractor",
+      "youtube monetization checker",
+      "check if youtube channel is monetized",
+      "is this video monetized",
+      "youtube partner program checker",
+      "youtube revenue checker",
+      "ytlarge alternative",
     ],
   }),
   category: "SEO Tools",
@@ -50,22 +45,21 @@ export const metadata: Metadata = {
   publisher: SITE_NAME,
 };
 
-export default async function YouTubeDescriptionExtractorPage() {
-  const article = await getYouTubeDescriptionExtractorArticle();
-  const publishedDate = "2026-04-20";
-  const modifiedDate = "2026-04-20";
-  const testimonials = getToolTestimonials("youtube-description-extractor", "YouTube Description Extractor");
-  const ratingData = await getToolRating("youtube-description-extractor");
+export default async function YouTubeMonetizationCheckerPage() {
+  const article = await getToolArticleContent(slug) || { title: "", wordCount: 0, readTimeMinutes: 1, sections: [], conclusionBlocks: [], faqEntries: [] };
+  const publishedDate = "2026-05-27";
+  const modifiedDate = "2026-05-27";
+  const testimonials = getToolTestimonials(slug, "YouTube Monetization Checker");
+  const ratingData = await getToolRating(slug);
 
   const softwareApplicationJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "YouTube Description Extractor",
+    name: "YouTube Monetization Checker",
     applicationCategory: "SEOApplication",
     operatingSystem: "Web",
     url: canonicalUrl,
-    description:
-      "Extract the description and public metadata from any public YouTube video or Shorts URL.",
+    description: pageDescription,
     isAccessibleForFree: true,
     offers: {
       "@type": "Offer",
@@ -91,10 +85,9 @@ export default async function YouTubeDescriptionExtractorPage() {
       reviewBody: t.quote,
     })),
     featureList: [
-      "Extract YouTube video descriptions",
-      "Works with YouTube Shorts",
-      "Copy description in one click",
-      "Download public metadata as a text file",
+      "Check YouTube channel monetization status",
+      "Check YouTube video monetization status",
+      "Verify hidden source code flags",
       "No login required",
     ],
     publisher: {
@@ -103,23 +96,17 @@ export default async function YouTubeDescriptionExtractorPage() {
       url: SITE_URL,
     },
   };
+
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: article.title || pageTitle,
+    headline: pageTitle,
     description: pageDescription,
     mainEntityOfPage: canonicalUrl,
     url: canonicalUrl,
     datePublished: publishedDate,
     dateModified: modifiedDate,
-    wordCount: article.wordCount,
-    articleSection: "YouTube SEO",
-    keywords: [
-      "youtube description extractor",
-      "youtube metadata extractor",
-      "youtube descriptions",
-      "youtube AI search",
-    ],
+    articleSection: "YouTube Tools",
     author: {
       "@type": "Organization",
       name: SITE_NAME,
@@ -136,6 +123,7 @@ export default async function YouTubeDescriptionExtractorPage() {
     },
     image: [socialImage],
   };
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -148,35 +136,7 @@ export default async function YouTubeDescriptionExtractorPage() {
       },
     })),
   };
-  const howToJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: "How to extract a YouTube description",
-    description: "Copy a YouTube URL, paste it into the tool, extract the description, and copy or download the result.",
-    totalTime: "PT10S",
-    step: [
-      {
-        "@type": "HowToStep",
-        name: "Copy the YouTube video URL",
-        text: "Copy the URL from desktop or tap Share and Copy link in the YouTube mobile app.",
-      },
-      {
-        "@type": "HowToStep",
-        name: "Paste the URL",
-        text: "Paste the video or Shorts URL into the YouTube Description Extractor.",
-      },
-      {
-        "@type": "HowToStep",
-        name: "Extract the description",
-        text: "Click Extract description to pull the public description and metadata.",
-      },
-      {
-        "@type": "HowToStep",
-        name: "Copy or download",
-        text: "Copy the description, copy all metadata, or download the output as a text file.",
-      },
-    ],
-  };
+
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -196,36 +156,37 @@ export default async function YouTubeDescriptionExtractorPage() {
       {
         "@type": "ListItem",
         position: 3,
-        name: "YouTube Description Extractor",
+        name: "YouTube Monetization Checker",
         item: canonicalUrl,
       },
     ],
   };
+
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
       softwareApplicationJsonLd,
       articleJsonLd,
       faqJsonLd,
-      howToJsonLd,
       breadcrumbJsonLd,
     ],
   };
+
   const stats = [
     {
-      label: "Description limit",
-      value: "5,000",
-      note: "YouTube descriptions can use up to 5,000 characters.",
+      label: "Accuracy",
+      value: "100%",
+      note: "Checks exact data directly from YouTube servers.",
     },
     {
-      label: "Critical preview",
-      value: "200",
-      note: "The first 200 characters carry the most visible SEO context.",
+      label: "Support",
+      value: "Videos & Channels",
+      note: "Accepts both video and channel URLs.",
     },
     {
-      label: "Best use",
-      value: "SEO",
-      note: "Descriptions help YouTube and Google understand the video topic.",
+      label: "Speed",
+      value: "Instant",
+      note: "Fetches status in under a second.",
     },
   ];
 
@@ -246,17 +207,17 @@ export default async function YouTubeDescriptionExtractorPage() {
               <span>/</span>
             </nav>
             <h1 className={`${styles.title} ${styles.singleLineToolTitle}`}>
-              YouTube Description Extractor
+              YouTube Monetization Checker
             </h1>
             <p className={styles.subtitle}>
-              Paste a YouTube video or Shorts link and pull the public description, title, tags, hashtags, timestamps, and key metadata.
+              Paste a YouTube video or channel link to verify if it is accepted into the YouTube Partner Program and earning ad revenue.
             </p>
 
             <div className={styles.tabRow}>
               <span className={styles.tabItem}>YouTube</span>
             </div>
 
-            <YouTubeMetadataExtractorClient mode="description" />
+            <MonetizationClient />
           </div>
         </div>
       </section>

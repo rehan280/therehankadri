@@ -47,7 +47,7 @@ async function fetchPlaylistUnofficial(playlistId: string): Promise<PlaylistVide
     while (hasContinuation && currentItems.length < 500) {
       try {
         const next = await playlist.getContinuation();
-        currentItems = currentItems.concat(next.items);
+        currentItems.push(...Array.from(next.items));
         hasContinuation = next.has_continuation;
       } catch {
         break; // Stop if continuation fails

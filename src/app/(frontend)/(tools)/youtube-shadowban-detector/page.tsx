@@ -7,22 +7,20 @@ import {
   buildCanonicalUrl,
   createPageMetadata,
 } from "@/lib/seo";
-import {
-  getYouTubeDescriptionExtractorArticle,
-} from "../_youtube-extractor/article-content";
+import { getToolArticleContent } from "@/lib/tool-article-content";
 import YouTubeExtractorArticle from "../_youtube-extractor/YouTubeExtractorArticle";
-import YouTubeMetadataExtractorClient from "../_youtube-extractor/YouTubeMetadataExtractorClient";
+import ShadowbanClient from "../_youtube-shadowban/ShadowbanClient";
 import styles from "../youtube-tags-generator/page.module.css";
 import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { toolCatalog } from "@/lib/tool-catalog";
 
-const slug = "youtube-description-extractor";
+const slug = "youtube-shadowban-detector";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
-const pageTitle = "YouTube Description Extractor - Free Metadata Tool";
+const pageTitle = "YouTube Shadowban Detector - Free Online Tool (2026)";
 const pageDescription =
-  "Extract any public YouTube video description, title, tags, hashtags, timestamps, and metadata in one click. Free, no login, works with Shorts.";
+  "Check if your YouTube channel or video is shadowbanned. Run a diagnostic health check to find hidden algorithmic restrictions.";
 const socialImage = buildAbsoluteImageUrl();
 
 export const metadata: Metadata = {
@@ -31,17 +29,14 @@ export const metadata: Metadata = {
     description: pageDescription,
     path: `/${slug}`,
     type: "article",
-    imageAlt: "YouTube Description Extractor by The Rehan Kadri",
+    imageAlt: "YouTube Shadowban Detector by The Rehan Kadri",
     keywords: [
-      "youtube description extractor",
-      "youtube metadata extractor",
-      "youtube title and description extractor",
-      "extract youtube description",
-      "free youtube description extractor",
-      "copy youtube description",
-      "youtube shorts description extractor",
-      "youtube video metadata",
-      "youtube tags extractor",
+      "youtube shadowban detector",
+      "is my channel shadowbanned",
+      "youtube search restriction check",
+      "youtube algorithm check",
+      "why are my youtube views dropping",
+      "youtube family safe checker",
     ],
   }),
   category: "SEO Tools",
@@ -50,22 +45,21 @@ export const metadata: Metadata = {
   publisher: SITE_NAME,
 };
 
-export default async function YouTubeDescriptionExtractorPage() {
-  const article = await getYouTubeDescriptionExtractorArticle();
-  const publishedDate = "2026-04-20";
-  const modifiedDate = "2026-04-20";
-  const testimonials = getToolTestimonials("youtube-description-extractor", "YouTube Description Extractor");
-  const ratingData = await getToolRating("youtube-description-extractor");
+export default async function YouTubeShadowbanDetectorPage() {
+  const article = await getToolArticleContent(slug) || { title: "", wordCount: 0, readTimeMinutes: 1, sections: [], conclusionBlocks: [], faqEntries: [] };
+  const publishedDate = "2026-05-27";
+  const modifiedDate = "2026-05-27";
+  const testimonials = getToolTestimonials(slug, "YouTube Shadowban Detector");
+  const ratingData = await getToolRating(slug);
 
   const softwareApplicationJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "YouTube Description Extractor",
+    name: "YouTube Shadowban Detector",
     applicationCategory: "SEOApplication",
     operatingSystem: "Web",
     url: canonicalUrl,
-    description:
-      "Extract the description and public metadata from any public YouTube video or Shorts URL.",
+    description: pageDescription,
     isAccessibleForFree: true,
     offers: {
       "@type": "Offer",
@@ -91,10 +85,9 @@ export default async function YouTubeDescriptionExtractorPage() {
       reviewBody: t.quote,
     })),
     featureList: [
-      "Extract YouTube video descriptions",
-      "Works with YouTube Shorts",
-      "Copy description in one click",
-      "Download public metadata as a text file",
+      "Check YouTube channel search indexing",
+      "Detect 'Family Safe' restriction flags",
+      "Analyze shadowban risk score",
       "No login required",
     ],
     publisher: {
@@ -103,23 +96,17 @@ export default async function YouTubeDescriptionExtractorPage() {
       url: SITE_URL,
     },
   };
+
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: article.title || pageTitle,
+    headline: pageTitle,
     description: pageDescription,
     mainEntityOfPage: canonicalUrl,
     url: canonicalUrl,
     datePublished: publishedDate,
     dateModified: modifiedDate,
-    wordCount: article.wordCount,
-    articleSection: "YouTube SEO",
-    keywords: [
-      "youtube description extractor",
-      "youtube metadata extractor",
-      "youtube descriptions",
-      "youtube AI search",
-    ],
+    articleSection: "YouTube Tools",
     author: {
       "@type": "Organization",
       name: SITE_NAME,
@@ -136,6 +123,7 @@ export default async function YouTubeDescriptionExtractorPage() {
     },
     image: [socialImage],
   };
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -148,35 +136,7 @@ export default async function YouTubeDescriptionExtractorPage() {
       },
     })),
   };
-  const howToJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: "How to extract a YouTube description",
-    description: "Copy a YouTube URL, paste it into the tool, extract the description, and copy or download the result.",
-    totalTime: "PT10S",
-    step: [
-      {
-        "@type": "HowToStep",
-        name: "Copy the YouTube video URL",
-        text: "Copy the URL from desktop or tap Share and Copy link in the YouTube mobile app.",
-      },
-      {
-        "@type": "HowToStep",
-        name: "Paste the URL",
-        text: "Paste the video or Shorts URL into the YouTube Description Extractor.",
-      },
-      {
-        "@type": "HowToStep",
-        name: "Extract the description",
-        text: "Click Extract description to pull the public description and metadata.",
-      },
-      {
-        "@type": "HowToStep",
-        name: "Copy or download",
-        text: "Copy the description, copy all metadata, or download the output as a text file.",
-      },
-    ],
-  };
+
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -196,36 +156,37 @@ export default async function YouTubeDescriptionExtractorPage() {
       {
         "@type": "ListItem",
         position: 3,
-        name: "YouTube Description Extractor",
+        name: "YouTube Shadowban Detector",
         item: canonicalUrl,
       },
     ],
   };
+
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
       softwareApplicationJsonLd,
       articleJsonLd,
       faqJsonLd,
-      howToJsonLd,
       breadcrumbJsonLd,
     ],
   };
+
   const stats = [
     {
-      label: "Description limit",
-      value: "5,000",
-      note: "YouTube descriptions can use up to 5,000 characters.",
+      label: "Heuristics",
+      value: "Search & Metadata",
+      note: "Checks if you are indexed in YouTube search results.",
     },
     {
-      label: "Critical preview",
-      value: "200",
-      note: "The first 200 characters carry the most visible SEO context.",
+      label: "Safety Flags",
+      value: "Checked",
+      note: "Identifies if YouTube marked you as not family-safe.",
     },
     {
-      label: "Best use",
-      value: "SEO",
-      note: "Descriptions help YouTube and Google understand the video topic.",
+      label: "Cost",
+      value: "Free",
+      note: "Check as many channels or videos as you want.",
     },
   ];
 
@@ -246,17 +207,17 @@ export default async function YouTubeDescriptionExtractorPage() {
               <span>/</span>
             </nav>
             <h1 className={`${styles.title} ${styles.singleLineToolTitle}`}>
-              YouTube Description Extractor
+              YouTube Shadowban Detector
             </h1>
             <p className={styles.subtitle}>
-              Paste a YouTube video or Shorts link and pull the public description, title, tags, hashtags, timestamps, and key metadata.
+              Paste a YouTube video or channel link to check its health score and diagnose algorithmic restrictions.
             </p>
 
             <div className={styles.tabRow}>
               <span className={styles.tabItem}>YouTube</span>
             </div>
 
-            <YouTubeMetadataExtractorClient mode="description" />
+            <ShadowbanClient />
           </div>
         </div>
       </section>

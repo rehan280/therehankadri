@@ -11,6 +11,8 @@ import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
 import baseStyles from "../youtube-tags-generator/page.module.css";
 import styles from "./page.module.css";
+import RelatedTools from "@/components/tools/RelatedTools";
+import { toolCatalog } from "@/lib/tool-catalog";
 import { getYouTubeStartTimeArticle, youtubeStartTimeFaqEntries } from "./article";
 import YouTubeStartTimeArticle from "./YouTubeStartTimeArticle";
 import YouTubeStartTimeLinkGeneratorClient from "./YouTubeStartTimeLinkGeneratorClient";
@@ -248,6 +250,10 @@ export default async function YouTubeStartTimeLinkGeneratorPage() {
       </section>
 
       <YouTubeStartTimeArticle article={article} />
+      <RelatedTools 
+        currentToolSlug={slug} 
+        category={toolCatalog.find(t => t.slug === slug)?.category} 
+      />
     </main>
   );
 }

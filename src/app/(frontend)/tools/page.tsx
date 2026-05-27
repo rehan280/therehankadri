@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight,
-  BarChart3,
-  Download,
-  FileText,
-  MessageCircle,
-  Tags,
-  Tv,
-} from "lucide-react";
+  PremiumArrowRight,
+  PremiumBarChart3,
+  PremiumDownload,
+  PremiumFileText,
+  PremiumMessageCircle,
+  PremiumTags,
+  PremiumTv,
+} from "@/components/icons/PremiumIcons";
 import {
   ORGANIZATION_ID,
   SITE_URL,
@@ -23,13 +23,13 @@ import styles from "./page.module.css";
 const canonicalUrl = buildCanonicalUrl("/tools");
 const tools = toolCatalog;
 
-const categoryIcons: Record<ToolCategory, typeof Tags> = {
-  "YouTube SEO & Optimization": Tags,
-  "YouTube Analytics & Monetization": BarChart3,
-  "YouTube Media Downloaders": Download,
-  "Engagement & Interaction": MessageCircle,
-  "YouTube Video & Channel Utilities": Tv,
-  "Podcast Tools": FileText,
+const categoryIcons: Record<ToolCategory, typeof PremiumTags> = {
+  "YouTube SEO & Optimization": PremiumTags,
+  "YouTube Analytics & Monetization": PremiumBarChart3,
+  "YouTube Media Downloaders": PremiumDownload,
+  "Engagement & Interaction": PremiumMessageCircle,
+  "YouTube Video & Channel Utilities": PremiumTv,
+  "Podcast Tools": PremiumFileText,
 };
 
 export const metadata: Metadata = createPageMetadata({
@@ -107,7 +107,7 @@ export default function ToolsPage() {
 
               <a href="#tools-directory" className={styles.heroButton}>
                 <span>Explore Tools</span>
-                <ArrowRight size={18} strokeWidth={2.1} />
+                <PremiumArrowRight size={18} strokeWidth={2.1} />
               </a>
             </div>
 
@@ -177,7 +177,7 @@ export default function ToolsPage() {
 
                           <Link href={`/${tool.slug}`} className={styles.toolLink}>
                             <span>Open Tool</span>
-                            <ArrowRight size={17} strokeWidth={2.2} />
+                            <PremiumArrowRight size={17} strokeWidth={2.2} />
                           </Link>
                         </article>
                       ))}

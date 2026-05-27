@@ -15,6 +15,8 @@ import YouTubeMetadataExtractorClient from "../_youtube-extractor/YouTubeMetadat
 import styles from "../youtube-tags-generator/page.module.css";
 import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
+import RelatedTools from "@/components/tools/RelatedTools";
+import { toolCatalog } from "@/lib/tool-catalog";
 
 const slug = "youtube-title-extractor";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
@@ -264,6 +266,10 @@ export default async function YouTubeTitleExtractorPage() {
         slug={slug}
         shareTitle={pageTitle}
         stats={stats}
+      />
+      <RelatedTools 
+        currentToolSlug={slug} 
+        category={toolCatalog.find(t => t.slug === slug)?.category} 
       />
     </main>
   );
