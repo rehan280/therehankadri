@@ -13,6 +13,8 @@ import {
 import YouTubeExtractorArticle from "../_youtube-extractor/YouTubeExtractorArticle";
 import YouTubeMetadataExtractorClient from "../_youtube-extractor/YouTubeMetadataExtractorClient";
 import styles from "../youtube-tags-generator/page.module.css";
+import { getToolTestimonials } from "@/lib/tool-testimonials";
+import { getToolRating } from "@/lib/tool-ratings";
 
 const slug = "youtube-title-extractor";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
@@ -50,6 +52,9 @@ export default async function YouTubeTitleExtractorPage() {
   const article = await getYouTubeTitleExtractorArticle();
   const publishedDate = "2026-04-20";
   const modifiedDate = "2026-04-20";
+  const testimonials = getToolTestimonials("youtube-title-extractor", "YouTube Title Extractor");
+  const ratingData = await getToolRating("youtube-title-extractor");
+
   const softwareApplicationJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -65,6 +70,24 @@ export default async function YouTubeTitleExtractorPage() {
       price: "0",
       priceCurrency: "USD",
     },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: ratingData.average.toString(),
+      ratingCount: ratingData.count.toString(),
+    },
+    review: testimonials.map((t) => ({
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: t.name,
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      reviewBody: t.quote,
+    })),
     featureList: [
       "Extract YouTube video titles",
       "Works with YouTube Shorts",

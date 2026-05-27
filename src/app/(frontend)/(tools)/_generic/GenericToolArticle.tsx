@@ -3,6 +3,11 @@ import type { ToolDefinition } from "@/lib/tool-catalog";
 import styles from "../youtube-tags-generator/page.module.css";
 import blogStyles from "../../blog/blog.module.css";
 import { getToolArticleContent } from "@/lib/tool-article-content";
+import ArticleSocialShare from "@/components/blog/ArticleSocialShare";
+import { buildCanonicalUrl } from "@/lib/seo";
+import { getToolTestimonials } from "@/lib/tool-testimonials";
+import RateMyTool from "@/components/tools/RateMyTool";
+import { getToolRating } from "@/lib/tool-ratings";
 
 type Props = {
   tool: ToolDefinition;
@@ -34,9 +39,13 @@ function getFaq(tool: ToolDefinition) {
   ];
 }
 
-export default function GenericToolArticle({ tool }: Props) {
+export default async function GenericToolArticle({ tool }: Props) {
   const faqEntries = getFaq(tool);
   const content = getToolArticleContent(tool.slug);
+  const canonicalUrl = buildCanonicalUrl(`/${tool.slug}`);
+  const testimonials = getToolTestimonials(tool.slug, tool.title);
+  const shareTitle = `Free ${tool.title} - AI-Powered, No Login Required`;
+  const ratingData = await getToolRating(tool.slug);
 
   return (
     <div className={blogStyles.postPage}>
@@ -126,8 +135,64 @@ export default function GenericToolArticle({ tool }: Props) {
                   />
                 </section>
                 
+                <RateMyTool 
+                  slug={tool.slug} 
+                  initialAverage={ratingData.average} 
+                  initialCount={ratingData.count} 
+                />
+                
+                <section className={`${styles.testimonialsSection} ${styles.testimonialsSectionBottom}`} aria-label="Creator reviews">
+                  <div className={styles.testimonialsHeader}>
+                    <span className={styles.testimonialsEyebrow}>What Creators Are Saying</span>
+                    <div className={styles.testimonialsRating}>
+                      <span className={styles.testimonialsStars} aria-label={`${ratingData.average} out of 5 stars`}>★★★★★</span>
+                      <span className={styles.testimonialsRatingValue}>{ratingData.average}</span>
+                      <span className={styles.testimonialsRatingCount}>({ratingData.count} reviews)</span>
+                    </div>
+                  </div>
+                  <div className={styles.testimonialsGrid}>
+                    {testimonials.map((t) => (
+                      <article key={`bottom-${t.name}`} className={styles.testimonialCard}>
+                        <div className={styles.testimonialStars} aria-hidden="true">★★★★★</div>
+                        <blockquote className={styles.testimonialQuote}>
+                          &ldquo;{t.quote}&rdquo;
+                        </blockquote>
+                        <footer className={styles.testimonialFooter}>
+                          <div className={styles.testimonialInitial} aria-hidden="true">
+                            {t.name.charAt(0)}
+                          </div>
+                          <div className={styles.testimonialMeta}>
+                            <strong className={styles.testimonialName}>{t.name}</strong>
+                            <span className={styles.testimonialChannel}>{t.channel} &middot; {t.subscribers}</span>
+                          </div>
+                        </footer>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+
+                <aside className={`${blogStyles.shareRail} ${blogStyles.shareRailMobile}`}>
+                  <div className={blogStyles.shareRailInner}>
+                    <ArticleSocialShare
+                      slug={tool.slug}
+                      title={shareTitle}
+                      url={canonicalUrl}
+                    />
+                  </div>
+                </aside>
+
               </div>
             </article>
+
+            <aside className={`${blogStyles.sidebar} ${blogStyles.shareRail} ${blogStyles.shareRailDesktop}`}>
+              <div className={`${blogStyles.sidebarStack} ${blogStyles.shareRailInner}`}>
+                <ArticleSocialShare
+                  slug={tool.slug}
+                  title={shareTitle}
+                  url={canonicalUrl}
+                />
+              </div>
+            </aside>
           </div>
         </div>
       </section>

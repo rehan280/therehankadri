@@ -5,6 +5,8 @@ import PremiumFaq from "@/components/content/PremiumFaq";
 import { buildCanonicalUrl } from "@/lib/seo";
 import blogStyles from "../../blog/blog.module.css";
 import styles from "../youtube-tags-generator/page.module.css";
+import RateMyTool from "@/components/tools/RateMyTool";
+import { getToolRating } from "@/lib/tool-ratings";
 import type {
   ArticleBlock,
   ParsedExtractorArticle,
@@ -271,7 +273,7 @@ function getStepImages(slug: string) {
   return [];
 }
 
-export default function YouTubeExtractorArticle({
+export default async function YouTubeExtractorArticle({
   article,
   slug,
   shareTitle,
@@ -279,6 +281,7 @@ export default function YouTubeExtractorArticle({
 }: Props) {
   const canonicalUrl = buildCanonicalUrl(`/${slug}`);
   const stepImages = getStepImages(slug);
+  const ratingData = await getToolRating(slug);
 
   return (
     <div className={blogStyles.postPage}>
@@ -289,6 +292,7 @@ export default function YouTubeExtractorArticle({
               className={`${blogStyles.articleCopy} ${styles.centeredArticleCopy} authority-post-copy`}
             >
               <div className={`${blogStyles.articleProse} ${styles.articleProseShell}`}>
+
                 <div className={styles.articleStatGrid}>
                   {stats.map((stat) => (
                     <article key={stat.label} className={styles.articleStatCard}>
@@ -337,6 +341,12 @@ export default function YouTubeExtractorArticle({
                     </section>
                   );
                 })}
+
+                <RateMyTool
+                  slug={slug}
+                  initialAverage={ratingData.average}
+                  initialCount={ratingData.count}
+                />
 
                 {article.conclusionBlocks.length ? (
                   <section

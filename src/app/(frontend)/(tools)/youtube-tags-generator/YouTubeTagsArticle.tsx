@@ -10,6 +10,8 @@ import {
   youtubeTagGeneratorArticleStats,
 } from "./article-content";
 import styles from "./page.module.css";
+import RateMyTool from "@/components/tools/RateMyTool";
+import { getToolRating } from "@/lib/tool-ratings";
 
 type HighlightCard = {
   title: string;
@@ -502,9 +504,10 @@ function renderSection(section: ArticleSection, article: ParsedArticle) {
   }
 }
 
-export default function YouTubeTagsArticle({ article }: { article: ParsedArticle }) {
+export default async function YouTubeTagsArticle({ article }: { article: ParsedArticle }) {
   const canonicalUrl = buildCanonicalUrl("/youtube-tags-generator");
   const shareTitle = "Free YouTube Tag Generator - AI-Powered, No Login Required";
+  const ratingData = await getToolRating("youtube-tags-generator");
   const testimonials = [
     {
       name: "Marcus T.",
@@ -564,13 +567,19 @@ export default function YouTubeTagsArticle({ article }: { article: ParsedArticle
                 </section>
               ) : null}
 
+              <RateMyTool
+                slug="youtube-tags-generator"
+                initialAverage={ratingData.average}
+                initialCount={ratingData.count}
+              />
+
               <section className={`${styles.testimonialsSection} ${styles.testimonialsSectionBottom}`} aria-label="Creator reviews">
                 <div className={styles.testimonialsHeader}>
                   <span className={styles.testimonialsEyebrow}>What Creators Are Saying</span>
                   <div className={styles.testimonialsRating}>
-                    <span className={styles.testimonialsStars} aria-label="4.9 out of 5 stars">★★★★★</span>
-                    <span className={styles.testimonialsRatingValue}>4.9</span>
-                    <span className={styles.testimonialsRatingCount}>(47 reviews)</span>
+                    <span className={styles.testimonialsStars} aria-label={`${ratingData.average} out of 5 stars`}>★★★★★</span>
+                    <span className={styles.testimonialsRatingValue}>{ratingData.average}</span>
+                    <span className={styles.testimonialsRatingCount}>({ratingData.count} reviews)</span>
                   </div>
                 </div>
                 <div className={styles.testimonialsGrid}>

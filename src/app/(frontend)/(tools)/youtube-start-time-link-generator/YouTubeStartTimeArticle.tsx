@@ -5,6 +5,8 @@ import blogStyles from "../../blog/blog.module.css";
 import baseStyles from "../youtube-tags-generator/page.module.css";
 import styles from "./page.module.css";
 import type { YouTubeStartTimeArticle } from "./article";
+import RateMyTool from "@/components/tools/RateMyTool";
+import { getToolRating } from "@/lib/tool-ratings";
 
 const statCards = [
   {
@@ -42,13 +44,14 @@ const relatedTools = [
   },
 ];
 
-export default function YouTubeStartTimeArticle({
+export default async function YouTubeStartTimeArticle({
   article,
 }: {
   article: YouTubeStartTimeArticle;
 }) {
   const canonicalUrl = buildCanonicalUrl("/youtube-start-time-link-generator");
   const shareTitle = "YouTube Start Time Link Generator - Free [2026]";
+  const ratingData = await getToolRating("youtube-start-time-link-generator");
 
   return (
     <div className={blogStyles.postPage}>
@@ -81,6 +84,12 @@ export default function YouTubeStartTimeArticle({
                     dangerouslySetInnerHTML={{ __html: article.html }}
                   />
                 </section>
+
+                <RateMyTool
+                  slug="youtube-start-time-link-generator"
+                  initialAverage={ratingData.average}
+                  initialCount={ratingData.count}
+                />
 
                 <section
                   className={`${blogStyles.articleSection} ${baseStyles.articleSection}`}

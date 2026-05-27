@@ -4,6 +4,8 @@ import { SITE_NAME, SITE_URL, buildAbsoluteImageUrl, buildCanonicalUrl, createPa
 import YouTubeTagsArticle from "./YouTubeTagsArticle";
 import YouTubeTagGeneratorClient from "./YouTubeTagGeneratorClient";
 import { getYouTubeTagGeneratorArticle } from "./article-content";
+import { getToolTestimonials } from "@/lib/tool-testimonials";
+import { getToolRating } from "@/lib/tool-ratings";
 import styles from "./page.module.css";
 
 const canonicalUrl = buildCanonicalUrl("/youtube-tags-generator");
@@ -42,6 +44,9 @@ export default async function YouTubeTagGeneratorPage() {
   const article = await getYouTubeTagGeneratorArticle();
   const publishedDate = "2026-04-04";
   const modifiedDate = "2026-04-06";
+  const testimonials = getToolTestimonials("youtube-tags-generator", "YouTube Tag Generator");
+  const ratingData = await getToolRating("youtube-tags-generator");
+
   const softwareApplicationJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -57,6 +62,24 @@ export default async function YouTubeTagGeneratorPage() {
       price: "0",
       priceCurrency: "USD",
     },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: ratingData.average.toString(),
+      ratingCount: ratingData.count.toString(),
+    },
+    review: testimonials.map((t) => ({
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: t.name,
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      reviewBody: t.quote,
+    })),
     featureList: [
       "Generate tags from a title or keyword",
       "Copy-ready tag output",

@@ -7,6 +7,8 @@ import {
   buildCanonicalUrl,
   createPageMetadata,
 } from "@/lib/seo";
+import { getToolTestimonials } from "@/lib/tool-testimonials";
+import { getToolRating } from "@/lib/tool-ratings";
 import baseStyles from "../youtube-tags-generator/page.module.css";
 import styles from "./page.module.css";
 import { getYouTubeStartTimeArticle, youtubeStartTimeFaqEntries } from "./article";
@@ -50,6 +52,9 @@ export default async function YouTubeStartTimeLinkGeneratorPage() {
   const article = await getYouTubeStartTimeArticle();
   const publishedDate = "2026-05-22";
   const modifiedDate = "2026-05-22";
+  const testimonials = getToolTestimonials("youtube-start-time-link-generator", "YouTube Start Time Link Generator");
+  const ratingData = await getToolRating("youtube-start-time-link-generator");
+  
   const softwareApplicationJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -59,13 +64,31 @@ export default async function YouTubeStartTimeLinkGeneratorPage() {
     operatingSystem: "Web",
     url: canonicalUrl,
     description:
-      "Generate clean YouTube timestamp links, watch URLs, and embed links from a video URL and a start time.",
+      "Generate YouTube links that start at a specific timestamp. Works for standard videos and YouTube Shorts.",
     isAccessibleForFree: true,
     offers: {
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
     },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: ratingData.average.toString(),
+      ratingCount: ratingData.count.toString(),
+    },
+    review: testimonials.map((t) => ({
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: t.name,
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      reviewBody: t.quote,
+    })),
     featureList: [
       "Generate timestamped youtu.be links",
       "Generate standard watch URLs with timestamps",

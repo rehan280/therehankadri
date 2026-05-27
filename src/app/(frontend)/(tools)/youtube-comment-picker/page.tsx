@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import {
   SITE_NAME,
   SITE_URL,
@@ -8,45 +7,31 @@ import {
   buildCanonicalUrl,
   createPageMetadata,
 } from "@/lib/seo";
-import { getToolBySlug, toolCatalog } from "@/lib/tool-catalog";
+import { getToolBySlug } from "@/lib/tool-catalog";
 import GenericToolArticle, { getGenericToolFaq } from "../_generic/GenericToolArticle";
-import GenericToolClient from "../_generic/GenericToolClient";
-import styles from "../youtube-tags-generator/page.module.css";
+import YouTubeCommentPickerClient from "./YouTubeCommentPickerClient";
+import styles from "./page.module.css";
 import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
 
-type Props = {
-  params: Promise<{
-    toolSlug: string;
-  }>;
-};
+const canonicalUrl = buildCanonicalUrl("/youtube-comment-picker");
 
-export function generateStaticParams() {
-  return toolCatalog
-    .filter((tool) => tool.kind !== "existing")
-    .map((tool) => ({ toolSlug: tool.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { toolSlug } = await params;
-  const tool = getToolBySlug(toolSlug);
-
-  if (!tool || tool.kind === "existing") {
-    return {};
-  }
+export async function generateMetadata(): Promise<Metadata> {
+  const tool = getToolBySlug("youtube-comment-picker")!;
 
   return {
     ...createPageMetadata({
-      title: `${tool.title} - Free Tool`,
-      description: `${tool.shortDescription} Free ${tool.keyword} from The Rehan Kadri tools hub.`,
+      title: `${tool.title} - Free API Tool`,
+      description: tool.shortDescription,
       path: `/${tool.slug}`,
       type: "article",
       imageAlt: `${tool.title} by The Rehan Kadri`,
       keywords: [
         tool.keyword,
         `free ${tool.keyword}`,
+        "youtube giveaway picker",
+        "youtube random comment picker",
         tool.title.toLowerCase(),
-        tool.category.toLowerCase(),
       ],
     }),
     category: "Tools",
@@ -56,19 +41,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function GenericToolPage({ params }: Props) {
-  const { toolSlug } = await params;
-  const tool = getToolBySlug(toolSlug);
-
-  if (!tool || tool.kind === "existing") {
-    notFound();
-  }
-
-  const canonicalUrl = buildCanonicalUrl(`/${tool.slug}`);
+export default async function YouTubeCommentPickerPage() {
+  const tool = getToolBySlug("youtube-comment-picker")!;
   const faqEntries = getGenericToolFaq(tool);
   const testimonials = getToolTestimonials(tool.slug, tool.title);
   const ratingData = await getToolRating(tool.slug);
-  
+
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -107,8 +85,8 @@ export default async function GenericToolPage({ params }: Props) {
         featureList: [
           `Free ${tool.title}`,
           "No login required",
-          "Copy-ready results",
-          "Fast browser-based processing",
+          "Automated API fetching",
+          "Random fairness",
         ],
         publisher: {
           "@type": "Organization",
@@ -150,26 +128,6 @@ export default async function GenericToolPage({ params }: Props) {
           },
         ],
       },
-      {
-        "@type": "Article",
-        headline: tool.title,
-        description: tool.shortDescription,
-        mainEntityOfPage: canonicalUrl,
-        url: canonicalUrl,
-        datePublished: "2026-05-26",
-        dateModified: "2026-05-26",
-        author: {
-          "@type": "Organization",
-          name: SITE_NAME,
-          url: SITE_URL,
-        },
-        publisher: {
-          "@type": "Organization",
-          name: SITE_NAME,
-          url: SITE_URL,
-        },
-        image: [buildAbsoluteImageUrl()],
-      },
     ],
   };
 
@@ -196,12 +154,17 @@ export default async function GenericToolPage({ params }: Props) {
               <span className={styles.tabItem}>{tool.category.replace("YouTube ", "")}</span>
             </div>
 
-            <GenericToolClient tool={tool} />
+            {/* The Custom Client Component */}
+            <YouTubeCommentPickerClient />
           </div>
         </div>
       </section>
 
-      <GenericToolArticle tool={tool} />
+      <section className={styles.contentArea}>
+        <div className={styles.articleProseShell}>
+          <GenericToolArticle tool={tool} />
+        </div>
+      </section>
     </main>
   );
 }

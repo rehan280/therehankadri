@@ -13,6 +13,8 @@ import {
 import YouTubeExtractorArticle from "../_youtube-extractor/YouTubeExtractorArticle";
 import YouTubeMetadataExtractorClient from "../_youtube-extractor/YouTubeMetadataExtractorClient";
 import styles from "../youtube-tags-generator/page.module.css";
+import { getToolTestimonials } from "@/lib/tool-testimonials";
+import { getToolRating } from "@/lib/tool-ratings";
 
 const slug = "youtube-description-extractor";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
@@ -50,6 +52,9 @@ export default async function YouTubeDescriptionExtractorPage() {
   const article = await getYouTubeDescriptionExtractorArticle();
   const publishedDate = "2026-04-20";
   const modifiedDate = "2026-04-20";
+  const testimonials = getToolTestimonials("youtube-description-extractor", "YouTube Description Extractor");
+  const ratingData = await getToolRating("youtube-description-extractor");
+
   const softwareApplicationJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -58,19 +63,37 @@ export default async function YouTubeDescriptionExtractorPage() {
     operatingSystem: "Web",
     url: canonicalUrl,
     description:
-      "Extract public YouTube descriptions, titles, tags, hashtags, timestamps, and metadata from video and Shorts URLs.",
+      "Extract the description and public metadata from any public YouTube video or Shorts URL.",
     isAccessibleForFree: true,
     offers: {
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
     },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: ratingData.average.toString(),
+      ratingCount: ratingData.count.toString(),
+    },
+    review: testimonials.map((t) => ({
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: t.name,
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      reviewBody: t.quote,
+    })),
     featureList: [
-      "Extract full YouTube descriptions",
-      "Copy title and metadata",
-      "Pull public tags and hashtags",
-      "Find timestamps and chapters from descriptions",
-      "Download results as a text file",
+      "Extract YouTube video descriptions",
+      "Works with YouTube Shorts",
+      "Copy description in one click",
+      "Download public metadata as a text file",
+      "No login required",
     ],
     publisher: {
       "@type": "Organization",

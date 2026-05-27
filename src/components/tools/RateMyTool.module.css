@@ -1,0 +1,119 @@
+.ratingWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0;
+  padding: 1.25rem 1.75rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  width: 100%;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.ratingHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ratingTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.ratingStats {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.ratingInteraction {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.starsContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin: 0;
+}
+
+.starButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.starButton:not(:disabled):hover {
+  transform: scale(1.2) translateY(-2px);
+}
+
+.starButton:disabled {
+  cursor: default;
+}
+
+.hasRated .starButton:not(:disabled):hover {
+  transform: none;
+}
+
+.starIcon {
+  width: 26px;
+  height: 26px;
+  color: rgba(0, 0, 0, 0.12);
+  fill: rgba(0, 0, 0, 0.04);
+  stroke-width: 1.5;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.starFilled {
+  color: #f59e0b;
+  fill: #f59e0b;
+  filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.3));
+}
+
+.thankYouMessage {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #059669;
+  background: #d1fae5;
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .ratingWrapper {
+    flex-direction: column;
+    gap: 1.25rem;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  
+  .ratingInteraction {
+    align-items: center;
+  }
+}
