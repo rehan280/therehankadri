@@ -1757,7 +1757,7 @@ export default function GenericToolClient({ tool }: Props) {
         </p>
       )}
 
-      <form className={styles.generatorForm} onSubmit={e => { e.preventDefault(); void runTool(); }}>
+      <form className={styles.generatorForm} action={runTool}>
         <div className={styles.searchRow}>
           {usesTextarea ? (
             <textarea className={styles.outputBox} value={input} onChange={e => setInput(e.target.value)}

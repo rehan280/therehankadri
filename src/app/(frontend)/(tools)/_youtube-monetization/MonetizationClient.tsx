@@ -59,10 +59,7 @@ export default function MonetizationClient() {
     <div className={styles.toolArea}>
       <form
         className={styles.generatorForm}
-        onSubmit={(event) => {
-          event.preventDefault();
-          void checkMonetization();
-        }}
+        action={}
       >
         <div className={styles.searchRow}>
           <input

@@ -204,10 +204,7 @@ export default function YouTubeMetadataExtractorClient({ mode }: Props) {
     <div className={styles.toolArea}>
       <form
         className={styles.generatorForm}
-        onSubmit={(event) => {
-          event.preventDefault();
-          void extractMetadata();
-        }}
+        action={}
       >
         <div className={styles.searchRow}>
           <input

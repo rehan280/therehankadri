@@ -64,10 +64,7 @@ export default function ShadowbanClient() {
     <div className={styles.toolArea}>
       <form
         className={styles.generatorForm}
-        onSubmit={(event) => {
-          event.preventDefault();
-          void checkShadowban();
-        }}
+        action={checkShadowban}
       >
         <div className={styles.searchRow}>
           <input
