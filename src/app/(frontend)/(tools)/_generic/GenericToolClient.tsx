@@ -1247,9 +1247,10 @@ function Top100Leaderboard() {
 
       {/* Loading skeleton */}
       {loading && !error && (
-        <div style={{ background: "var(--bg-alt)", border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden" }}>
-          {[...Array(15)].map((_, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: "1rem", padding: "1rem 1.5rem", borderBottom: "1px solid var(--border)", opacity: 1 - i * 0.05 }}>
+        <div style={{ background: "var(--bg-alt)", border: "1px solid var(--border)", borderRadius: 12, overflowX: "auto", overflowY: "hidden" }}>
+          <div style={{ minWidth: 600 }}>
+            {[...Array(15)].map((_, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: "1rem", padding: "1rem 1.5rem", borderBottom: "1px solid var(--border)", opacity: 1 - i * 0.05 }}>
               <div style={{ width: 32, height: 18, borderRadius: 4, background: "var(--border)" }} />
               <div style={{ width: 48, height: 48, borderRadius: 8, background: "var(--border)", flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
@@ -1261,13 +1262,14 @@ function Top100Leaderboard() {
               <div style={{ width: 50, height: 14, borderRadius: 4, background: "var(--border)" }} />
             </div>
           ))}
+          </div>
         </div>
       )}
 
       {/* Leaderboard table */}
       {!loading && !error && channels.length > 0 && (
-        <div style={{ background: "var(--bg-alt)", border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.1)" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+        <div style={{ background: "var(--bg-alt)", border: "1px solid var(--border)", borderRadius: 12, overflowX: "auto", overflowY: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.1)", WebkitOverflowScrolling: "touch" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 600 }}>
             <thead>
               <tr style={{ background: "rgba(0,0,0,0.04)", borderBottom: "2px solid var(--border)" }}>
                 <th style={{ padding: "0.9rem 1rem", textAlign: "center", fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.08em", color: "var(--text-secondary)", textTransform: "uppercase", width: 60 }}>#</th>
