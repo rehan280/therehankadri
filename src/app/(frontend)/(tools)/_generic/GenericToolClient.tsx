@@ -1248,7 +1248,7 @@ function Top100Leaderboard() {
       {/* Loading skeleton */}
       {loading && !error && (
         <div style={{ background: "var(--bg-alt)", border: "1px solid var(--border)", borderRadius: 12, overflowX: "auto", overflowY: "hidden" }}>
-          <div style={{ minWidth: 600 }}>
+          <div style={{ width: "100%" }}>
             {[...Array(15)].map((_, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: "1rem", padding: "1rem 1.5rem", borderBottom: "1px solid var(--border)", opacity: 1 - i * 0.05 }}>
               <div style={{ width: 32, height: 18, borderRadius: 4, background: "var(--border)" }} />
@@ -1269,15 +1269,15 @@ function Top100Leaderboard() {
       {/* Leaderboard table */}
       {!loading && !error && channels.length > 0 && (
         <div style={{ background: "var(--bg-alt)", border: "1px solid var(--border)", borderRadius: 12, overflowX: "auto", overflowY: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.1)", WebkitOverflowScrolling: "touch" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 600 }}>
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr style={{ background: "rgba(0,0,0,0.04)", borderBottom: "2px solid var(--border)" }}>
                 <th style={{ padding: "0.9rem 1rem", textAlign: "center", fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.08em", color: "var(--text-secondary)", textTransform: "uppercase", width: 60 }}>#</th>
                 <th style={{ padding: "0.9rem 1.2rem", textAlign: "left", fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.08em", color: "var(--text-secondary)", textTransform: "uppercase" }}>Channel</th>
                 <th style={{ padding: "0.9rem 1.2rem", textAlign: "right", fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.08em", color: "var(--text-secondary)", textTransform: "uppercase", whiteSpace: "nowrap" }}>Subscribers</th>
-                <th style={{ padding: "0.9rem 1.2rem", textAlign: "right", fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.08em", color: "var(--text-secondary)", textTransform: "uppercase", whiteSpace: "nowrap" }}>Total Views</th>
-                <th style={{ padding: "0.9rem 1.2rem", textAlign: "right", fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.08em", color: "var(--text-secondary)", textTransform: "uppercase" }}>Videos</th>
-                <th style={{ padding: "0.9rem 1rem", textAlign: "center", fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.08em", color: "var(--text-secondary)", textTransform: "uppercase" }}>Country</th>
+                <th className={styles.hideOnMobile} style={{ padding: "0.9rem 1.2rem", textAlign: "right", fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.08em", color: "var(--text-secondary)", textTransform: "uppercase", whiteSpace: "nowrap" }}>Total Views</th>
+                <th className={styles.hideOnMobile} style={{ padding: "0.9rem 1.2rem", textAlign: "right", fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.08em", color: "var(--text-secondary)", textTransform: "uppercase" }}>Videos</th>
+                <th className={styles.hideOnMobile} style={{ padding: "0.9rem 1rem", textAlign: "center", fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.08em", color: "var(--text-secondary)", textTransform: "uppercase" }}>Country</th>
               </tr>
             </thead>
             <tbody>
@@ -1316,14 +1316,14 @@ function Top100Leaderboard() {
                     <span style={{ fontWeight: 700, fontSize: "0.93rem", color: "var(--foreground)" }}>{c.subs}</span>
                     <span style={{ color: "#10b981", fontSize: "0.75rem", marginLeft: "0.25rem" }}>▲</span>
                   </td>
-                  <td style={{ padding: "0.85rem 1.2rem", textAlign: "right", whiteSpace: "nowrap" }}>
+                  <td className={styles.hideOnMobile} style={{ padding: "0.85rem 1.2rem", textAlign: "right", whiteSpace: "nowrap" }}>
                     <span style={{ fontSize: "0.9rem", color: "var(--foreground)" }}>{c.views}</span>
                     <span style={{ color: "#10b981", fontSize: "0.75rem", marginLeft: "0.25rem" }}>▲</span>
                   </td>
-                  <td style={{ padding: "0.85rem 1.2rem", textAlign: "right", whiteSpace: "nowrap" }}>
+                  <td className={styles.hideOnMobile} style={{ padding: "0.85rem 1.2rem", textAlign: "right", whiteSpace: "nowrap" }}>
                     <span style={{ fontSize: "0.9rem", color: "var(--foreground)" }}>{c.videos}</span>
                   </td>
-                  <td style={{ padding: "0.85rem 1rem", textAlign: "center" }}>
+                  <td className={styles.hideOnMobile} style={{ padding: "0.85rem 1rem", textAlign: "center" }}>
                     <span style={{ fontSize: "0.73rem", padding: "0.2rem 0.55rem", background: "rgba(0,0,0,0.07)", borderRadius: 20, color: "var(--text-secondary)", fontWeight: 600, letterSpacing: "0.05em" }}>{c.country}</span>
                   </td>
                 </tr>
