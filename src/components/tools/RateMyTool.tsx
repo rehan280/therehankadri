@@ -79,7 +79,11 @@ export default function RateMyTool({ slug, initialAverage, initialCount }: Props
               key={star}
               type="button"
               className={styles.starButton}
-              onMouseEnter={() => !hasRated && setHoveredStar(star)}
+              onPointerEnter={(e) => {
+                if (e.pointerType === 'mouse' && !hasRated) {
+                  setHoveredStar(star);
+                }
+              }}
               onClick={() => handleRate(star)}
               disabled={hasRated || isSubmitting}
               aria-label={`Rate ${star} stars`}

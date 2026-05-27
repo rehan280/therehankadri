@@ -55,18 +55,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
+}@media (hover: hover) {
 
-.starButton:not(:disabled):hover {
-  transform: scale(1.2) translateY(-2px);
 }
 
 .starButton:disabled {
   cursor: default;
-}
+}@media (hover: hover) {
 
-.hasRated .starButton:not(:disabled):hover {
-  transform: none;
 }
 
 .starIcon {
