@@ -5,6 +5,7 @@ import type { ToolDefinition } from "@/lib/tool-catalog";
 import styles from "../youtube-tags-generator/page.module.css";
 import { PlaylistExporter } from "@/components/PlaylistExporter";
 import { PlaylistLengthCalculator } from "@/components/PlaylistLengthCalculator";
+import { X, Copy, Check } from "lucide-react";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -735,9 +736,11 @@ function TagsInspectorResult({ meta, onCopy, copyTarget }: { meta: YouTubeMetada
 
   if (meta.tags.length === 0) {
     return (
-      <div className={styles.metaField}>
-        <span className={styles.metaFieldLabel}>Tags</span>
-        <p className={styles.metaFieldMuted}>No public tags found for this video.</p>
+      <div className={styles.metaFieldStack}>
+        <div className={styles.metaField}>
+          <span className={styles.metaFieldLabel}>Tags</span>
+          <p className={styles.metaFieldMuted}>No public tags found for this video.</p>
+        </div>
       </div>
     );
   }
@@ -746,33 +749,80 @@ function TagsInspectorResult({ meta, onCopy, copyTarget }: { meta: YouTubeMetada
     <div className={styles.metaFieldStack}>
       <div className={styles.metaField}>
         <div className={styles.metaFieldTop}>
-          <span className={styles.metaFieldLabel}>
-            Extracted Tags ({activeTags.length})
+          <span className={styles.metaFieldLabel} style={{textTransform: 'none'}}>
+            Extracted "{meta.title}" tags :
           </span>
-          <button type="button" className={`${styles.smButton} ${styles.smButtonPrimary}`} onClick={handleCopyAll}>
+          <button type="button" className={`${styles.smButton} ${styles.smButtonGhost}`} onClick={handleCopyAll}>
             {copyTarget === "all-tags" ? "Copied ✓" : "Copy to Clipboard"}
           </button>
         </div>
         
         <div className={styles.metaChips} style={{ gap: '0.8rem', marginTop: '0.5rem' }}>
-          {activeTags.map(({ tag, score }) => (
-            <div key={tag} style={{ display: 'inline-flex', alignItems: 'stretch', background: 'var(--bg-alt)', borderRadius: '6px', border: '1px solid var(--border)', overflow: 'hidden' }}>
-              <div style={{ display: 'flex', alignItems: 'center', padding: '0.4rem 0.6rem', gap: '0.4rem' }}>
-                <span style={{ fontSize: '0.85rem', color: 'var(--foreground)' }}>{tag}</span>
-                <button 
-                  type="button" 
-                  onClick={() => setRemovedTags(prev => new Set(prev).add(tag))}
-                  style={{ background: 'rgba(255,255,255,0.1)', border: 'none', borderRadius: '50%', width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-secondary)', fontSize: '0.7rem', padding: 0 }}
-                  title="Remove tag"
-                >
-                  ✕
-                </button>
+          {activeTags.map(({ tag, score }) => {
+            const isHigh = score >= 80;
+            const isMed = score >= 50 && score < 80;
+            
+            const theme = isHigh 
+              ? { bg: 'rgba(16, 185, 129, 0.08)', border: 'rgba(16, 185, 129, 0.2)', text: '#10b981', badgeBg: 'rgba(16, 185, 129, 0.15)' }
+              : isMed
+                ? { bg: 'rgba(245, 158, 11, 0.08)', border: 'rgba(245, 158, 11, 0.2)', text: '#f59e0b', badgeBg: 'rgba(245, 158, 11, 0.15)' }
+                : { bg: 'rgba(148, 163, 184, 0.08)', border: 'rgba(148, 163, 184, 0.2)', text: '#94a3b8', badgeBg: 'rgba(148, 163, 184, 0.15)' };
+
+            return (
+              <div 
+                key={tag} 
+                style={{ 
+                  display: 'inline-flex', alignItems: 'stretch', 
+                  background: theme.bg, 
+                  borderRadius: '6px', 
+                  border: `1px solid ${theme.border}`, 
+                  overflow: 'hidden',
+                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = `0 4px 12px ${theme.badgeBg}`;
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', padding: '0.3rem 0.5rem', gap: '0.5rem' }}>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--foreground)' }}>{tag}</span>
+                  <button 
+                    type="button" 
+                    onClick={() => setRemovedTags(prev => new Set(prev).add(tag))}
+                    style={{ 
+                      background: 'transparent', border: 'none', borderRadius: '4px',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                      cursor: 'pointer', color: 'var(--text-secondary)', padding: '2px',
+                      transition: 'all 0.15s ease'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.background = 'rgba(239, 68, 68, 0.15)';
+                      e.currentTarget.style.color = '#ef4444';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.background = 'transparent';
+                      e.currentTarget.style.color = 'var(--text-secondary)';
+                    }}
+                    title="Remove tag"
+                  >
+                    <X size={14} strokeWidth={2.5} />
+                  </button>
+                </div>
+                <div style={{ 
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                  background: theme.badgeBg, color: theme.text, 
+                  fontWeight: 600, fontSize: '0.75rem', padding: '0 0.6rem', 
+                  borderLeft: `1px solid ${theme.border}` 
+                }}>
+                  {score}%
+                </div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa', fontWeight: 600, fontSize: '0.75rem', padding: '0 0.6rem', borderLeft: '1px solid var(--border)' }}>
-                {score}%
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
