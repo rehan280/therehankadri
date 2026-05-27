@@ -139,7 +139,7 @@ That's exactly what this tool filters out for you. Clean, relevant, ready to pas
 
 Let's be honest.
 
-There are plenty of tag tools out there. RapidTags, vidIQ, TunePocket, TimeSkip AI, Keyword Tool. They all do *something*. But none of them tick every box the way this tool does.
+There are plenty of tag tools out there. RapidTags, vidIQ, TimeSkip AI, Keyword Tool. They all do *something*. But none of them tick every box the way this tool does.
 
 Here's the real breakdown.
 
@@ -159,12 +159,6 @@ If you just want a fast, free tag tool, vidIQ buries it inside a platform that p
 
 This tool doesn't ask you to subscribe to an analytics platform just to get a list of tags. It does one thing and does it well. For free.
 
-**vs. TunePocket**
-
-TunePocket has a simple YouTube tags generator free option. It works. But users have flagged a common complaint: it generates too few tags per search to fill YouTube's 500-character tag limit. That means more manual work on your end to pad out the list.
-
-This tool is built to maximize your 500-character allowance with relevant, data-backed suggestions. You get a full tag set, not a short list that leaves you guessing.
-
 **vs. TimeSkip AI**
 
 TimeSkip markets itself as an AI tag tool. It's clean and generates tags quickly. But it's built inside a larger multi-tool suite that requires navigating through extra features just to reach the tag generator. Not ideal when you're mid-upload and need tags in 30 seconds.
@@ -179,18 +173,18 @@ This tool skips the research step and delivers a final, paste-ready tag list bui
 
 Here's the full side-by-side breakdown:
 
-| Feature | The Rehan Kadri Tool | RapidTags | vidIQ | TunePocket | TimeSkip AI | Keyword Tool |
-|---|---|---|---|---|---|---|
-| 100% Free | ✅ Yes | ⚠️ Limited | ⚠️ Limited | ✅ Yes | ⚠️ Limited | ⚠️ Limited |
-| No Login Required | ✅ Yes | ❌ No | ❌ No | ✅ Yes | ❌ No | ❌ No |
-| No Daily Limits | ✅ Unlimited | ❌ 10–20/day free | ❌ Credit limits | ✅ Yes | ❌ Limited | ❌ Limited |
-| AI-Powered Tags | ✅ Yes | ✅ Yes | ✅ Yes | ❌ No | ✅ Yes | ❌ No |
-| Fills 500-char limit | ✅ Yes | ✅ Yes | ✅ Yes | ❌ Often short | ✅ Yes | ❌ Not designed for it |
-| Paste-Ready Output | ✅ Yes | ✅ Yes | ⚠️ Needs extension | ✅ Yes | ✅ Yes | ❌ Raw keyword data |
-| No Extra Navigation | ✅ Yes | ✅ Yes | ❌ Multi-step | ✅ Yes | ❌ Multi-tool suite | ❌ Multi-step |
-| Works for Shorts | ✅ Yes | ✅ Yes | ✅ Yes | ⚠️ Limited | ✅ Yes | ⚠️ Limited |
-| Long-tail Suggestions | ✅ Yes | ✅ Yes | ✅ Yes | ❌ Basic only | ✅ Yes | ✅ Yes |
-| No Paid Upsells | ✅ Yes | ❌ Plus plan | ❌ Pro/Boost plans | ✅ Yes | ❌ Paid tiers | ❌ Paid tiers |
+| Feature | The Rehan Kadri Tool | RapidTags | vidIQ | TimeSkip AI | Keyword Tool |
+|---|---|---|---|---|---|
+| 100% Free | ✅ Yes | ⚠️ Limited | ⚠️ Limited | ⚠️ Limited | ⚠️ Limited |
+| No Login Required | ✅ Yes | ❌ No | ❌ No | ❌ No | ❌ No |
+| No Daily Limits | ✅ Unlimited | ❌ 10–20/day free | ❌ Credit limits | ❌ Limited | ❌ Limited |
+| AI-Powered Tags | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ❌ No |
+| Fills 500-char limit | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ❌ Not designed for it |
+| Paste-Ready Output | ✅ Yes | ✅ Yes | ⚠️ Needs extension | ✅ Yes | ❌ Raw keyword data |
+| No Extra Navigation | ✅ Yes | ✅ Yes | ❌ Multi-step | ❌ Multi-tool suite | ❌ Multi-step |
+| Works for Shorts | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ⚠️ Limited |
+| Long-tail Suggestions | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| No Paid Upsells | ✅ Yes | ❌ Plus plan | ❌ Pro/Boost plans | ❌ Paid tiers | ❌ Paid tiers |
 
 The table tells the story pretty clearly.
 
