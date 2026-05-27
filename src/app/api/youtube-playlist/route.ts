@@ -1,52 +1,11 @@
 import { NextResponse } from "next/server";
+import { getCachedData, setCachedData, logApiMetric } from "@/lib/youtube-cache";
+import { Innertube, UniversalCache } from "youtubei.js";
 import { getNextApiKey, reportQuotaExceeded } from "@/lib/youtube-keys";
+import crypto from "crypto";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Types
-// ─────────────────────────────────────────────────────────────────────────────
-
-type PlaylistItem = {
-  contentDetails?: {
-    videoId: string;
-  };
-};
-
-type PlaylistItemResponse = {
-  nextPageToken?: string;
-  items?: PlaylistItem[];
-  error?: any;
-};
-
-type VideoItem = {
-  id: string;
-  snippet?: {
-    title: string;
-    description: string;
-    channelTitle: string;
-    publishedAt: string;
-    thumbnails: {
-      high?: { url: string };
-      default?: { url: string };
-    };
-    tags?: string[];
-  };
-  contentDetails?: {
-    duration: string;
-  };
-  statistics?: {
-    viewCount?: string;
-    likeCount?: string;
-    commentCount?: string;
-  };
-};
-
-type VideoResponse = {
-  items?: VideoItem[];
-  error?: any;
-};
 
 export type PlaylistVideo = {
   videoId: string;
@@ -64,14 +23,6 @@ export type PlaylistVideo = {
   durationSeconds: number;
 };
 
-export type PlaylistDataResponse = {
-  items: PlaylistVideo[];
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Helpers
-// ─────────────────────────────────────────────────────────────────────────────
-
 function parseDurationToSeconds(duration: string): number {
   const match = duration.match(/^P(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)$/i);
   if (!match) return 0;
@@ -81,140 +32,176 @@ function parseDurationToSeconds(duration: string): number {
   return hours * 3600 + minutes * 60 + seconds;
 }
 
-// Fallback logic for YouTube API keys
-async function fetchWithFailover(urlTemplate: (key: string) => string): Promise<any> {
-  let key = getNextApiKey();
-  if (!key) throw new Error("No YouTube API keys available or all quotas exceeded.");
-
-  while (key) {
-    const res = await fetch(urlTemplate(key), {
-      cache: "no-store",
-      headers: { Accept: "application/json" },
-    });
-    
-    if (res.ok) {
-      return await res.json();
-    }
-
-    if (res.status === 403 || res.status === 400) {
-      await res.json().catch(() => ({})); // consume body
-      reportQuotaExceeded(key);
-      key = getNextApiKey();
-      if (key) continue;
-    }
-    
-    throw new Error(`YouTube API request failed: ${res.status}`);
-  }
-  throw new Error("YouTube API quota exceeded across all available keys.");
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Main route
-// ─────────────────────────────────────────────────────────────────────────────
-
-export async function GET(request: Request) {
+// 1. Unofficial Fallback
+async function fetchPlaylistUnofficial(playlistId: string): Promise<PlaylistVideo[] | null> {
   try {
-    const { searchParams } = new URL(request.url);
-    const target = searchParams.get("url") || searchParams.get("list");
+    const yt = await Innertube.create({ cache: new UniversalCache(false) });
+    const playlist = await yt.getPlaylist(playlistId);
+    
+    if (!playlist || !playlist.items) return null;
 
-    if (!target) {
-      return NextResponse.json({ error: "Missing playlist url or list ID" }, { status: 400 });
-    }
-
-    // Extract playlist ID
-    let playlistId = target;
-    const listMatch = target.match(/[?&]list=([a-zA-Z0-9_-]+)/);
-    if (listMatch) {
-      playlistId = listMatch[1];
-    } else {
-      // Sometimes people just paste the raw ID
-      if (target.includes("/")) {
-        return NextResponse.json({ error: "Invalid YouTube playlist URL." }, { status: 400 });
+    // Load all items (up to 500)
+    let currentItems = playlist.items;
+    let hasContinuation = playlist.has_continuation;
+    
+    while (hasContinuation && currentItems.length < 500) {
+      try {
+        const next = await playlist.getContinuation();
+        currentItems = currentItems.concat(next.items);
+        hasContinuation = next.has_continuation;
+      } catch {
+        break; // Stop if continuation fails
       }
     }
 
-    // Phase 1: Fetch all video IDs in the playlist (up to 500)
-    let videoIds: string[] = [];
-    let nextPageToken: string | undefined = undefined;
-    const maxPages = 10; // 500 videos max
-    let pageCount = 0;
+    const videos: PlaylistVideo[] = currentItems.map((item: any) => ({
+      videoId: item.id || "",
+      url: `https://www.youtube.com/watch?v=${item.id}`,
+      title: item.title?.text || "Unknown Title",
+      description: "", // Playlist items usually don't have full descriptions
+      channelName: item.author?.name || "",
+      thumbnailUrl: item.thumbnails?.[0]?.url || "",
+      tags: [],
+      views: 0,
+      likes: 0,
+      comments: 0,
+      uploadedAt: "",
+      duration: item.duration?.text || "0:00",
+      durationSeconds: item.duration?.seconds || 0,
+    })).filter(v => v.videoId);
 
-    do {
-      const payload: PlaylistItemResponse = await fetchWithFailover((key) => {
-        const url = new URL("https://www.googleapis.com/youtube/v3/playlistItems");
-        url.searchParams.set("part", "contentDetails");
-        url.searchParams.set("playlistId", playlistId);
-        url.searchParams.set("maxResults", "50");
-        url.searchParams.set("key", key);
-        if (nextPageToken) url.searchParams.set("pageToken", nextPageToken);
-        return url.toString();
-      });
+    return videos.length > 0 ? videos : null;
+  } catch (err) {
+    console.error("youtubei.js playlist error", err);
+    return null;
+  }
+}
 
-      if (!payload.items) break;
+// 2. Official Fallback
+async function fetchPlaylistOfficial(playlistId: string): Promise<PlaylistVideo[] | null> {
+  let key = getNextApiKey();
+  if (!key) return null;
 
-      for (const item of payload.items) {
-        if (item.contentDetails?.videoId) {
-          videoIds.push(item.contentDetails.videoId);
+  while (key) {
+    try {
+      let videoIds: string[] = [];
+      let nextPageToken: string | undefined = undefined;
+      const maxPages = 10;
+      let pageCount = 0;
+
+      do {
+        let url = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=${playlistId}&maxResults=50&key=${key}`;
+        if (nextPageToken) url += `&pageToken=${nextPageToken}`;
+        
+        const res = await fetch(url, { cache: "no-store" });
+        const payload = await res.json();
+
+        if (res.status === 403 && payload.error?.errors?.[0]?.reason === "quotaExceeded") {
+          reportQuotaExceeded(key);
+          key = getNextApiKey();
+          break; // outer while loop will catch the new key
+        }
+
+        if (!payload.items) break;
+
+        for (const item of payload.items) {
+          if (item.contentDetails?.videoId) videoIds.push(item.contentDetails.videoId);
+        }
+
+        nextPageToken = payload.nextPageToken;
+        pageCount++;
+      } while (nextPageToken && pageCount < maxPages);
+
+      if (videoIds.length === 0) return null;
+
+      const playlistVideos: PlaylistVideo[] = [];
+      const chunks = [];
+      for (let i = 0; i < videoIds.length; i += 50) chunks.push(videoIds.slice(i, i + 50));
+
+      for (const chunk of chunks) {
+        const idsParam = chunk.join(",");
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${idsParam}&key=${key}`;
+        const res = await fetch(url, { cache: "no-store" });
+        const payload = await res.json();
+
+        if (payload.items) {
+          for (const item of payload.items) {
+            const duration = item.contentDetails?.duration || "PT0S";
+            playlistVideos.push({
+              videoId: item.id,
+              url: `https://www.youtube.com/watch?v=${item.id}`,
+              title: item.snippet?.title || "Unknown Title",
+              description: item.snippet?.description || "",
+              channelName: item.snippet?.channelTitle || "",
+              thumbnailUrl: item.snippet?.thumbnails?.high?.url || item.snippet?.thumbnails?.default?.url || "",
+              tags: item.snippet?.tags || [],
+              views: Number(item.statistics?.viewCount || 0),
+              likes: Number(item.statistics?.likeCount || 0),
+              comments: Number(item.statistics?.commentCount || 0),
+              uploadedAt: item.snippet?.publishedAt || "",
+              duration,
+              durationSeconds: parseDurationToSeconds(duration),
+            });
+          }
         }
       }
 
-      nextPageToken = payload.nextPageToken;
-      pageCount++;
-    } while (nextPageToken && pageCount < maxPages);
+      return playlistVideos.length > 0 ? playlistVideos : null;
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
 
-    if (videoIds.length === 0) {
+export async function GET(request: Request) {
+  const startTime = Date.now();
+  const { searchParams } = new URL(request.url);
+  const target = searchParams.get("url") || searchParams.get("list");
+
+  if (!target) {
+    return NextResponse.json({ error: "Missing playlist url or list ID" }, { status: 400 });
+  }
+
+  let playlistId = target;
+  const listMatch = target.match(/[?&]list=([a-zA-Z0-9_-]+)/);
+  if (listMatch) playlistId = listMatch[1];
+  else if (target.includes("/")) return NextResponse.json({ error: "Invalid YouTube playlist URL." }, { status: 400 });
+
+  const cacheKey = `playlist_${playlistId}`;
+  let isCached = false;
+  let statusCode = 200;
+
+  try {
+    const cached = await getCachedData<{ items: PlaylistVideo[] }>(cacheKey);
+    if (cached) {
+      isCached = true;
+      logApiMetric({ toolSlug: "youtube-playlist", endpoint: "/api/youtube-playlist", statusCode, isCached, latencyMs: Date.now() - startTime });
+      return NextResponse.json(cached);
+    }
+
+    let items = await fetchPlaylistUnofficial(playlistId);
+    
+    if (!items) {
+      items = await fetchPlaylistOfficial(playlistId);
+    }
+
+    if (!items || items.length === 0) {
+      statusCode = 404;
+      logApiMetric({ toolSlug: "youtube-playlist", endpoint: "/api/youtube-playlist", statusCode, isCached, latencyMs: Date.now() - startTime });
       return NextResponse.json({ error: "Playlist is empty or does not exist." }, { status: 404 });
     }
 
-    // Phase 2: Fetch video details (durations and titles) in chunks of 50
-    const playlistVideos: PlaylistVideo[] = [];
+    const payload = { items };
+    // Cache for 12 hours (43200s)
+    await setCachedData(cacheKey, payload, 43200);
 
-    // Chunk array helper
-    const chunkArray = (arr: string[], size: number) => {
-      const chunks = [];
-      for (let i = 0; i < arr.length; i += size) {
-        chunks.push(arr.slice(i, i + size));
-      }
-      return chunks;
-    };
+    logApiMetric({ toolSlug: "youtube-playlist", endpoint: "/api/youtube-playlist", statusCode, isCached, latencyMs: Date.now() - startTime });
+    return NextResponse.json(payload);
 
-    const chunks = chunkArray(videoIds, 50);
-
-    for (const chunk of chunks) {
-      const idsParam = chunk.join(",");
-      const payload: VideoResponse = await fetchWithFailover((key) => {
-        const url = new URL("https://www.googleapis.com/youtube/v3/videos");
-        url.searchParams.set("part", "snippet,contentDetails,statistics");
-        url.searchParams.set("id", idsParam);
-        url.searchParams.set("key", key);
-        return url.toString();
-      });
-
-      if (payload.items) {
-        for (const item of payload.items) {
-          const duration = item.contentDetails?.duration || "PT0S";
-          playlistVideos.push({
-            videoId: item.id,
-            url: `https://www.youtube.com/watch?v=${item.id}`,
-            title: item.snippet?.title || "Unknown Title",
-            description: item.snippet?.description || "",
-            channelName: item.snippet?.channelTitle || "",
-            thumbnailUrl: item.snippet?.thumbnails?.high?.url || item.snippet?.thumbnails?.default?.url || "",
-            tags: item.snippet?.tags || [],
-            views: Number(item.statistics?.viewCount || 0),
-            likes: Number(item.statistics?.likeCount || 0),
-            comments: Number(item.statistics?.commentCount || 0),
-            uploadedAt: item.snippet?.publishedAt || "",
-            duration,
-            durationSeconds: parseDurationToSeconds(duration),
-          });
-        }
-      }
-    }
-
-    return NextResponse.json({ items: playlistVideos });
   } catch (error: any) {
-    console.error("Playlist fetch error:", error.message);
-    return NextResponse.json({ error: error.message || "Failed to fetch playlist data." }, { status: 500 });
+    statusCode = 500;
+    logApiMetric({ toolSlug: "youtube-playlist", endpoint: "/api/youtube-playlist", statusCode, isCached, latencyMs: Date.now() - startTime });
+    return NextResponse.json({ error: "Failed to fetch playlist data." }, { status: 500 });
   }
 }

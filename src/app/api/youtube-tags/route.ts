@@ -1,16 +1,12 @@
-import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { getCachedData, setCachedData, logApiMetric } from "@/lib/youtube-cache";
 import { generateYouTubeTags, type YouTubeSerpVideo } from "@/lib/youtube-tags";
+import { Innertube, UniversalCache } from "youtubei.js";
+import { getNextApiKey, reportQuotaExceeded } from "@/lib/youtube-keys";
+import crypto from "crypto";
 
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-type SuggestResponse = [string, string[]] | [string, string[], ...unknown[]];
-
-const YOUTUBE_HEADERS = {
-  Accept: "text/html,application/json",
-  "Accept-Language": "en-US,en;q=0.9",
-  "User-Agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
-};
 
 function buildAutocompleteQueries(keyword: string) {
   const cleanedKeyword = keyword.trim();
@@ -25,173 +21,148 @@ function buildAutocompleteQueries(keyword: string) {
     normalized.startsWith("why ") ? cleanedKeyword : `why ${cleanedKeyword}`,
     `${cleanedKeyword} ${currentYear}`,
   ];
-
   return [...new Set(queries.map((query) => query.trim()).filter(Boolean))];
 }
 
 async function fetchSuggestionSet(query: string) {
-  const suggestUrl = new URL("https://suggestqueries.google.com/complete/search");
-  suggestUrl.searchParams.set("client", "firefox");
-  suggestUrl.searchParams.set("ds", "yt");
-  suggestUrl.searchParams.set("q", query);
-
+  const suggestUrl = `https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${encodeURIComponent(query)}`;
   try {
-    const response = await fetch(suggestUrl, {
-      cache: "no-store",
-      headers: {
-        Accept: "application/json",
-        "Accept-Language": "en-US,en;q=0.9",
-      },
-    });
-
-    if (!response.ok) {
-      return [] as string[];
-    }
-
-    const payload = (await response.json()) as SuggestResponse | unknown;
-
-    return Array.isArray(payload) && Array.isArray(payload[1])
-      ? payload[1].filter((item): item is string => typeof item === "string")
-      : [];
+    const response = await fetch(suggestUrl, { cache: "no-store", headers: { Accept: "application/json" } });
+    if (!response.ok) return [];
+    const payload = await response.json();
+    return Array.isArray(payload) && Array.isArray(payload[1]) ? payload[1] : [];
   } catch {
-    return [] as string[];
+    return [];
   }
 }
 
-function extractSearchVideoIds(html: string, limit: number) {
-  const pattern = /videoId\\x22:\\x22([A-Za-z0-9_-]{11})\\x22/g;
-  const ids: string[] = [];
-  const seen = new Set<string>();
-
-  for (const match of html.matchAll(pattern)) {
-    const videoId = match[1];
-
-    if (!videoId || seen.has(videoId)) {
-      continue;
-    }
-
-    seen.add(videoId);
-    ids.push(videoId);
-
-    if (ids.length >= limit) {
-      break;
-    }
-  }
-
-  return ids;
-}
-
-function decodeJsonString(raw: string) {
+// Unofficial Scraper for Tags
+async function fetchSerpVideosUnofficial(keyword: string): Promise<YouTubeSerpVideo[] | null> {
   try {
-    return JSON.parse(`"${raw}"`) as string;
-  } catch {
-    return raw;
-  }
-}
+    const yt = await Innertube.create({ cache: new UniversalCache(false) });
+    const search = await yt.search(keyword, { type: "video" });
+    if (!search.videos || search.videos.length === 0) return null;
 
-function extractWatchSignals(html: string, videoId: string, rank: number): YouTubeSerpVideo | null {
-  const titleMatch = html.match(
-    /"videoId":"[A-Za-z0-9_-]{11}","title":"((?:[^"\\]|\\.)+)","lengthSeconds":"/
-  );
-  const keywordsMatch = html.match(/"keywords":(\[[^\]]*\])/);
-
-  if (!keywordsMatch) {
-    return null;
-  }
-
-  try {
-    const keywords = JSON.parse(keywordsMatch[1]) as unknown;
-
-    if (!Array.isArray(keywords)) {
-      return null;
-    }
-
-    return {
-      videoId,
-      title: titleMatch ? decodeJsonString(titleMatch[1]) : "",
-      keywords: keywords.filter((item): item is string => typeof item === "string"),
-      rank,
-    };
-  } catch {
-    return null;
-  }
-}
-
-async function fetchSearchResultVideos(keyword: string) {
-  const searchUrl = new URL("https://www.youtube.com/results");
-  searchUrl.searchParams.set("search_query", keyword);
-  searchUrl.searchParams.set("hl", "en");
-
-  try {
-    const searchResponse = await fetch(searchUrl, {
-      cache: "no-store",
-      headers: YOUTUBE_HEADERS,
-    });
-
-    if (!searchResponse.ok) {
-      return [] as YouTubeSerpVideo[];
-    }
-
-    const searchHtml = await searchResponse.text();
-    const videoIds = extractSearchVideoIds(searchHtml, 6);
-
+    const topVideos = search.videos.slice(0, 6);
     const watchResults = await Promise.all(
-      videoIds.map(async (videoId, index) => {
+      topVideos.map(async (v: any, index: number) => {
         try {
-          const watchUrl = new URL("https://www.youtube.com/watch");
-          watchUrl.searchParams.set("v", videoId);
-          watchUrl.searchParams.set("hl", "en");
-
-          const watchResponse = await fetch(watchUrl, {
-            cache: "no-store",
-            headers: YOUTUBE_HEADERS,
-          });
-
-          if (!watchResponse.ok) {
-            return null;
-          }
-
-          const watchHtml = await watchResponse.text();
-          return extractWatchSignals(watchHtml, videoId, index);
+          const info = await yt.getBasicInfo(v.id);
+          return {
+            videoId: v.id,
+            title: info.basic_info.title || "",
+            keywords: info.basic_info.keywords || [],
+            rank: index,
+          };
         } catch {
           return null;
         }
       })
     );
 
-    return watchResults.filter((item): item is YouTubeSerpVideo => item !== null);
+    const valid = watchResults.filter((v): v is YouTubeSerpVideo => v !== null);
+    return valid.length > 0 ? valid : null;
   } catch {
-    return [] as YouTubeSerpVideo[];
+    return null;
   }
 }
 
-export async function GET(request: NextRequest) {
-  const keyword = request.nextUrl.searchParams.get("keyword")?.trim() ?? "";
-  const seed = Number.parseInt(request.nextUrl.searchParams.get("seed") ?? "0", 10) || 0;
+// Official API Fallback for Tags
+async function fetchSerpVideosOfficial(keyword: string): Promise<YouTubeSerpVideo[] | null> {
+  let key = getNextApiKey();
+  if (!key) return null;
+
+  while (key) {
+    try {
+      const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=id&q=${encodeURIComponent(keyword)}&type=video&maxResults=6&key=${key}`;
+      const searchRes = await fetch(searchUrl, { cache: "no-store" });
+      const searchData = await searchRes.json();
+
+      if (searchRes.status === 403 && searchData.error?.errors?.[0]?.reason === "quotaExceeded") {
+        reportQuotaExceeded(key);
+        key = getNextApiKey();
+        continue;
+      }
+
+      if (!searchRes.ok || !searchData.items?.length) return null;
+
+      const videoIds = searchData.items.map((i: any) => i.id.videoId).join(",");
+      const videosUrl = `https://www.googleapis.com/youtube/v3/videos?id=${videoIds}&part=snippet&key=${key}`;
+      const videosRes = await fetch(videosUrl, { cache: "no-store" });
+      const videosData = await videosRes.json();
+
+      if (!videosRes.ok) return null;
+
+      const results = (videosData.items || []).map((item: any, index: number) => ({
+        videoId: item.id,
+        title: item.snippet?.title || "",
+        keywords: item.snippet?.tags || [],
+        rank: index,
+      }));
+
+      return results.length ? results : null;
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+export async function GET(request: Request) {
+  const startTime = Date.now();
+  const { searchParams } = new URL(request.url);
+  const keyword = searchParams.get("keyword")?.trim() ?? "";
+  const seed = Number.parseInt(searchParams.get("seed") ?? "0", 10) || 0;
 
   if (!keyword) {
-    return Response.json(
-      { error: "Enter a main keyword to generate tags." },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Enter a main keyword to generate tags." }, { status: 400 });
   }
 
-  const queries = buildAutocompleteQueries(keyword);
-  const [suggestionGroups, serpVideos] = await Promise.all([
-    Promise.all(queries.map((query) => fetchSuggestionSet(query))),
-    fetchSearchResultVideos(keyword),
-  ]);
-  const autocompleteSuggestions = suggestionGroups.reduce<string[]>(
-    (allSuggestions, group) => allSuggestions.concat(group),
-    []
-  );
+  const cacheKey = `tags_${crypto.createHash('md5').update(keyword + seed).digest('hex')}`;
+  let isCached = false;
+  let statusCode = 200;
 
-  return Response.json(
-    generateYouTubeTags(keyword, {
+  try {
+    const cached = await getCachedData<any>(cacheKey);
+    if (cached) {
+      isCached = true;
+      logApiMetric({ toolSlug: "youtube-tags", endpoint: "/api/youtube-tags", statusCode, isCached, latencyMs: Date.now() - startTime });
+      return NextResponse.json(cached);
+    }
+
+    const queries = buildAutocompleteQueries(keyword);
+    
+    // Concurrently fetch suggestions and SERP
+    const [suggestionGroups, serpVideosUnofficial] = await Promise.all([
+      Promise.all(queries.map((query) => fetchSuggestionSet(query))),
+      fetchSerpVideosUnofficial(keyword),
+    ]);
+
+    let serpVideos = serpVideosUnofficial;
+    if (!serpVideos) {
+      serpVideos = await fetchSerpVideosOfficial(keyword);
+    }
+
+    const autocompleteSuggestions = suggestionGroups.reduce<string[]>(
+      (allSuggestions, group) => allSuggestions.concat(group),
+      []
+    );
+
+    const payload = generateYouTubeTags(keyword, {
       seed,
       autocompleteSuggestions,
-      serpVideos,
-    })
-  );
-}
+      serpVideos: serpVideos || [],
+    });
 
+    // Cache tags for 7 days (604800s)
+    await setCachedData(cacheKey, payload, 604800);
+
+    logApiMetric({ toolSlug: "youtube-tags", endpoint: "/api/youtube-tags", statusCode, isCached, latencyMs: Date.now() - startTime });
+    return NextResponse.json(payload);
+
+  } catch (error) {
+    statusCode = 500;
+    logApiMetric({ toolSlug: "youtube-tags", endpoint: "/api/youtube-tags", statusCode, isCached, latencyMs: Date.now() - startTime });
+    return NextResponse.json({ error: "Unable to generate tags right now. Try again later." }, { status: 500 });
+  }
+}

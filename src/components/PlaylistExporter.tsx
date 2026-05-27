@@ -285,7 +285,7 @@ render();
       </div>
 
       {/* Settings Grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem", marginBottom: "2rem" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "2rem", marginBottom: "2rem" }}>
         
         {/* Columns */}
         <div>
@@ -295,9 +295,9 @@ render();
               {selectedCols.length === allColumns.length ? "CLEAR ALL" : "SELECT ALL"}
             </button>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem", background: "rgba(0,0,0,0.2)", padding: "1rem", borderRadius: "8px", border: "1px solid rgba(255,90,54,0.1)" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", background: "rgba(0,0,0,0.2)", padding: "1rem", borderRadius: "8px", border: "1px solid rgba(255,90,54,0.1)" }}>
             {allColumns.map(col => (
-              <label key={col.id} style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer", fontSize: "0.9rem", color: "#ccc" }}>
+              <label key={col.id} style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer", fontSize: "0.9rem", color: "#ccc", width: "calc(50% - 0.5rem)", minWidth: "140px" }}>
                 <input 
                   type="checkbox" 
                   checked={selectedCols.includes(col.id)} 
