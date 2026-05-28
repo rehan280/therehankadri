@@ -1757,7 +1757,7 @@ export default function GenericToolClient({ tool }: Props) {
         </p>
       )}
 
-      <form className={styles.generatorForm} action={runTool}>
+      <div className={styles.generatorForm}>
         <div className={styles.searchRow}>
           {usesTextarea ? (
             <textarea className={styles.outputBox} value={input} onChange={e => setInput(e.target.value)}
@@ -1765,9 +1765,10 @@ export default function GenericToolClient({ tool }: Props) {
           ) : (
             <input className={styles.searchInput} type="text" value={input}
               onChange={e => setInput(e.target.value)} placeholder={placeholder}
+              onKeyDown={e => { if (e.key === 'Enter') void runTool(); }}
               autoComplete="off" aria-label={placeholder} />
           )}
-          <button className={styles.generateButton} type="submit" disabled={isLoading}>
+          <button className={styles.generateButton} type="button" disabled={isLoading} onClick={() => void runTool()}>
             {isLoading ? loadingMsg : "Run tool"}
           </button>
         </div>
@@ -1775,12 +1776,13 @@ export default function GenericToolClient({ tool }: Props) {
           <div className={styles.searchRow}>
             <input className={styles.searchInput} type="text" value={secondaryInput}
               onChange={e => setSecondaryInput(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') void runTool(); }}
               placeholder={(tool.kind as string) === "money-calculator" ? "RPM (default: $3.00)" : "Start time in seconds (optional)"}
               aria-label="Optional second input" />
             <button className={styles.ghostButton} type="button" onClick={() => setSecondaryInput("")}>Clear</button>
           </div>
         ) : null}
-      </form>
+      </div>
 
       {error ? <p className={styles.errorText}>{error}</p> : null}
 

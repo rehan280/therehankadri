@@ -62,16 +62,14 @@ export default function ShadowbanClient() {
 
   return (
     <div className={styles.toolArea}>
-      <form
-        className={styles.generatorForm}
-        action={checkShadowban}
-      >
+      <div className={styles.generatorForm}>
         <div className={styles.searchRow}>
           <input
             className={styles.searchInput}
             type="url"
             value={url}
             onChange={(event) => setUrl(event.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter') void checkShadowban(); }}
             placeholder="Paste YouTube Video or Channel URL"
             autoComplete="off"
             inputMode="url"
@@ -79,13 +77,14 @@ export default function ShadowbanClient() {
           />
           <button
             className={styles.generateButton}
-            type="submit"
+            type="button"
             disabled={isLoading}
+            onClick={() => void checkShadowban()}
           >
             {isLoading ? "Scanning..." : "Detect Shadowban"}
           </button>
         </div>
-      </form>
+      </div>
 
       {error ? <p className={styles.errorText}>{error}</p> : null}
 
