@@ -1,3 +1,5 @@
+## About the YouTube Shadowban Detector
+
 Your views dropped. Your search impressions disappeared. New subscribers stopped coming in.
 
 But YouTube hasn't sent you a single strike, warning, or notification.

@@ -1,3 +1,5 @@
+## About the YouTube Monetization Checker
+
 Is that channel making money from ads?
 Paste the URL and find out in under a second.
 
