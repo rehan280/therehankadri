@@ -1,4 +1,4 @@
-import { createSupabaseServerClient } from "./supabase/server";
+import { createSupabaseAdminClient } from "./supabase/admin";
 
 export type ToolRating = {
   tool_slug: string;
@@ -21,7 +21,7 @@ export async function getToolRating(slug: string): Promise<{
 }> {
   // Try to fetch real ratings from Supabase
   try {
-    const supabase = await createSupabaseServerClient();
+    const supabase = createSupabaseAdminClient();
     const { data, error } = await supabase
       .from("tool_ratings")
       .select("total_stars, rating_count")

@@ -1,6 +1,6 @@
 "use server";
 
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { revalidatePath } from "next/cache";
 import { getFallbackRating } from "@/lib/tool-ratings";
 
@@ -10,7 +10,7 @@ export async function submitToolRating(slug: string, stars: number) {
   }
 
   try {
-    const supabase = await createSupabaseServerClient();
+    const supabase = createSupabaseAdminClient();
     
     // In Supabase, we can use an RPC (Remote Procedure Call) to increment securely,
     // or we can just fetch and update. Since this isn't a massive high-traffic financial app,
