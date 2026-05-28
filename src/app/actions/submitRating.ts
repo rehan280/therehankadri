@@ -39,7 +39,7 @@ export async function submitToolRating(slug: string, stars: number) {
         .from("tool_ratings")
         .insert({
           tool_slug: slug,
-          total_stars: (fallback.average * fallback.count) + stars,
+          total_stars: Math.round(fallback.average * fallback.count) + stars,
           rating_count: fallback.count + 1,
         });
 
