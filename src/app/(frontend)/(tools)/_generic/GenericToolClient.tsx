@@ -2655,7 +2655,7 @@ function AdvancedKeywordsResult({ result, onCopy, copyTarget }: { result: Extrac
               </div>
               <div style={{ display: "flex", gap: "1.5rem", marginTop: "1rem" }}>
                 <div>
-                  <span style={{ display: "block", fontSize: "0.7rem", color: "var(--text-secondary)", textTransform: "uppercase", fontWeight: 700, letterSpacing: "0.5px" }}>{volumeLabel(kw)}</span>
+                  <span style={{ display: "block", fontSize: "0.7rem", color: "var(--text-secondary)", textTransform: "uppercase", fontWeight: 700, letterSpacing: "0.5px" }}>{volumeLabel()}</span>
                   <span style={{ fontSize: "1.1rem", fontWeight: 800 }}>{formatVolume(kw)}</span>
                 </div>
                 <div>

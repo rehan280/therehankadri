@@ -84,15 +84,15 @@ async function scoreKeyword(keyword: string): Promise<FreeVolumeResult> {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const keywords = Array.isArray(body.keywords)
-      ? [...new Set(body.keywords.map((keyword: unknown) => normalizeKeyword(String(keyword))).filter(Boolean))].slice(0, 25)
+    const keywords: string[] = Array.isArray(body.keywords)
+      ? [...new Set(body.keywords.map((keyword: unknown) => normalizeKeyword(String(keyword))).filter(Boolean) as string[])].slice(0, 25)
       : [];
 
     if (!keywords.length) {
       return NextResponse.json({ source: "youtube_autocomplete", results: [] });
     }
 
-    const results = await Promise.all(keywords.map(scoreKeyword));
+    const results = await Promise.all(keywords.map((kw: string) => scoreKeyword(kw)));
     return NextResponse.json({ source: "youtube_autocomplete", results });
   } catch (error) {
     return NextResponse.json({
