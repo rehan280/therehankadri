@@ -1,80 +1,75 @@
-YouTube has 15 content categories. Where your video lands affects who sees it.
+YouTube channel categories are different from video categories - and most creators have no idea what category YouTube has assigned to their channel.
 
-This tool takes a video topic or keyword and estimates the most likely YouTube category for it, along with notes on how to frame your content for that category's audience.
+Channel categories are set at the account level in YouTube Studio under Advanced Settings. They tell YouTube what type of channel you're running and influence how the platform categorizes your content at a channel level, separate from individual video categories.
 
-## Why YouTube category matters
+This tool shows you the channel category for any YouTube channel. Use it to check your own channel's classification and to see what category top creators in your niche are using.
 
-When you upload a video, you select a category in YouTube Studio. Most creators pick whatever feels right without thinking deeply about it.
+## Channel category vs. video category: what's different
 
-Here's why it matters:
+**Video category** applies to individual videos. You set it per upload. It affects how that specific video is clustered in recommendations.
 
-YouTube groups content by category for recommendation purposes. A video in "Education" gets shown alongside other educational content. A video in "Entertainment" gets a completely different recommendation pool.
+**Channel category** applies to the entire channel. It's a single setting that describes the broad type of content the channel produces. YouTube uses it to understand your channel's identity at a macro level.
 
-If your cooking tutorial is categorized as "Entertainment" instead of "Howto & Style," you might be missing the audience that's actively looking for how-to content.
+Think of it like this: video categories are the individual product labels. Channel category is the aisle of the store your channel sits in.
 
-Getting the category right is a small optimization that costs nothing.
+Most creators set their channel category once during setup and forget about it. The issue is that many channels evolve significantly from their original format, but the channel category never gets updated to reflect the shift.
 
-## How to use the category checker
+## How to use the channel category checker
 
-**Step 1:** Enter your video topic or a brief description of your video.
+**Step 1:** Copy any YouTube channel URL or @handle.
 
-**Step 2:** The tool analyzes the topic and returns the most likely YouTube category match, plus notes on how other creators in that space typically categorize their content.
+**Step 2:** Paste it into this tool.
 
-**Step 3:** Use this as a reference when choosing your category in YouTube Studio before publishing.
+**Step 3:** Hit Check. See the channel category that channel is classified under.
 
-The tool also notes when a topic could reasonably fit two categories — useful for deciding which audience you want to optimize for.
+**Step 4:** Compare across 5-10 channels in your niche to see if there's a pattern in how successful channels categorize themselves.
 
-## What the main YouTube categories are and what they attract
+## How to update your own channel category
 
-A quick overview:
+If your channel category needs updating:
 
-**Film & Animation:** Films, shorts, animation, movie content. CPM tends to be lower.
+1. Open YouTube Studio
+2. Click Settings in the left sidebar
+3. Under Channel, open the Advanced Settings tab
+4. Find the Category dropdown
+5. Select the category that best describes your channel's primary content type
+6. Save
 
-**Autos & Vehicles:** Car reviews, mods, road trips. Decent CPM due to automotive advertising.
+The categories available for channels are similar to those for individual videos. "Education," "Howto & Style," and "Science & Technology" cover the widest range of creator content.
 
-**Music:** Music videos, covers, tutorials. High volume, lower CPM.
+## Does channel category actually affect your reach?
 
-**Pets & Animals:** Pet care, wildlife. Broad family audience.
+This is a fair question. The honest answer is: it's a signal, not a determining factor.
 
-**Sports:** Game highlights, training, commentary. High volume, seasonal CPM spikes.
+Channel category helps YouTube understand what your channel is about, especially when you're a newer channel without much viewing history to learn from. As your channel grows, YouTube's view of your content becomes more precise - it looks at what people who watch your videos also watch, what topics your videos cover, and what audience segments engage with your content.
 
-**Travel & Events:** Travel vlogs, destination reviews. Moderate CPM, strong affiliate potential.
-
-**Gaming:** Gameplay, reviews, eSports. Very high volume, lower CPM, strong merch opportunity.
-
-**People & Blogs:** Vlogs, day-in-the-life, personal content. Wide range.
-
-**Comedy:** Stand-up clips, sketch, reaction. Lower CPM but high share rate.
-
-**Entertainment:** Variety content, reactions, celebrity. Broad audience.
-
-**News & Politics:** Current events, commentary. High CPM but platform sensitivity.
-
-**Howto & Style:** Tutorials, beauty, DIY. High CPM, strong affiliate potential.
-
-**Education:** Explainers, courses, documentaries. High CPM, strong lead gen potential.
-
-**Science & Technology:** Tech reviews, science explainers. Very high CPM.
-
-**Nonprofits & Activism:** Cause-driven content. Specialized audience.
+For new channels specifically, setting an accurate channel category helps YouTube start with the right audience hypothesis. For established channels, updating a mismatched category can reinforce topical consistency.
 
 ## Frequently asked questions
 
-**Does the YouTube category affect SEO?**
-Indirectly. Categories influence which recommendation feeds your video appears in, which affects CTR, watch time, and eventually rankings.
+**Does the channel category affect my videos' search rankings?**
+Not directly. But channel category influences how YouTube interprets your channel's identity, which can affect which audiences your new videos get tested with initially.
 
-**Can I change a video's category after publishing?**
-Yes. Go to YouTube Studio, edit the video details, and change the category. It takes effect immediately.
+**What if my channel covers multiple topics?**
+Choose the category that best describes your primary content. If you make 70% tech tutorials and 30% lifestyle vlogs, "Science & Technology" is more accurate than "People & Blogs" as your channel category.
 
-**What category gets the highest RPM?**
-Science & Technology and Finance/Business (usually filed under Education) consistently have the highest RPM due to advertiser competition.
+**How often should I update my channel category?**
+Only when your content direction changes significantly. Changing it frequently could send confusing signals. Update it once after a major content pivot and leave it stable.
 
-**Is "Howto & Style" good for tutorial content?**
-Yes. This is the natural home for cooking tutorials, beauty how-tos, DIY projects, and similar instructional content.
-
-**Does category affect who YouTube recommends the video to?**
-It's one of many signals. Category helps YouTube understand context, but watch time, CTR, and audience retention are more powerful recommendation signals.
+**Can viewers see my channel category?**
+Not directly. Channel categories aren't prominently displayed to viewers. They're an internal classification signal for YouTube's recommendation system.
 
 ---
 
----
+## The three-minute channel settings audit
+
+While you're checking your channel category, it's worth doing a quick audit of all your channel-level settings at the same time.
+
+In YouTube Studio under Settings > Channel:
+- **Channel category:** Does it match your current content?
+- **Channel keywords:** Do you have 5-10 relevant keywords set? (Check the basic info tab)
+- **Default upload settings:** Do your defaults match your current video structure?
+
+These settings are rarely visited. Most creators set them once and forget. But spending 3 minutes reviewing them once a quarter ensures your channel's metadata is aligned with where your content actually is now - not where it was when you first set everything up.
+
+Small misalignments in channel-level settings don't cause dramatic problems. But correcting them removes unnecessary confusion from YouTube's system and strengthens your channel's topical identity signal.

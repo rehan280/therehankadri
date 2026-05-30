@@ -66,7 +66,9 @@ export function createPageMetadata({
   const socialImage = buildAbsoluteImageUrl(imagePath);
 
   return {
-    title,
+    title: {
+      absolute: title,
+    },
     description,
     keywords,
     alternates: {
@@ -110,7 +112,9 @@ export function createArticleMetadata({
   const socialImage = buildAbsoluteImageUrl(imagePath);
 
   return {
-    title,
+    title: {
+      absolute: title,
+    },
     description,
     keywords,
     alternates: {

@@ -18,9 +18,9 @@ import { toolCatalog } from "@/lib/tool-catalog";
 
 const slug = "youtube-shadowban-detector";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
-const pageTitle = "YouTube Shadowban Detector — Check If Your Channel Is Shadowbanned";
+const pageTitle = "YouTube Shadowban Detector - Check Channel Visibility";
 const pageDescription =
-  "Check your YouTube channel's health score and detect algorithmic restrictions. See if YouTube marked your content as not family-safe or restricted it from search. Free tool.";
+  "Check your YouTube channel health score and detect search, family-safe, or algorithmic restriction signals. Free tool, no login required.";
 const socialImage = buildAbsoluteImageUrl();
 
 export const metadata: Metadata = {

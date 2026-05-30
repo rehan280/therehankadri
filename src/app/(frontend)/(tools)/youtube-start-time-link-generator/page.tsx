@@ -19,7 +19,7 @@ import YouTubeStartTimeLinkGeneratorClient from "./YouTubeStartTimeLinkGenerator
 
 const slug = "youtube-start-time-link-generator";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
-const pageTitle = "YouTube Start Time Link Generator - Free [2026]";
+const pageTitle = "YouTube Timestamp Link Generator - Start at Any Time";
 const pageDescription =
   "Free YouTube start time link generator. Create a URL that jumps to any second in a YouTube video. Works on desktop, mobile, Shorts, and embeds.";
 const socialImage = buildAbsoluteImageUrl();

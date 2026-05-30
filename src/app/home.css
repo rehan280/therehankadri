@@ -390,7 +390,7 @@
 }
 
 /* ============================================================
-   HERO — Two-column layout
+   HERO - Two-column layout
    ============================================================ */
 .hero {
   background: var(--light-surface);
@@ -3759,7 +3759,7 @@
 }
 
 /* ============================================================
-   FINAL CTA — COMPACT PREMIUM VERSION
+   FINAL CTA - COMPACT PREMIUM VERSION
    ============================================================ */
 
 .cta-section {
@@ -3978,7 +3978,7 @@
 }
 
 /* ============================================================
-   RESPONSIVE — LARGE SCREENS (≥ 1400px)
+   RESPONSIVE - LARGE SCREENS (≥ 1400px)
    ============================================================ */
 @media (min-width: 1400px) {
   .hero-container {
@@ -4406,7 +4406,7 @@
 }
 
 /* ============================================================
-   RESPONSIVE — TABLET (≤ 1024px)
+   RESPONSIVE - TABLET (≤ 1024px)
    ============================================================ */
 @media (max-width: 1024px) {
   .why-hire-grid {
@@ -4440,7 +4440,7 @@
 }
 
 /* ============================================================
-   RESPONSIVE — MOBILE (≤ 980px)
+   RESPONSIVE - MOBILE (≤ 980px)
    ============================================================ */
 @media (max-width: 980px) {
 
@@ -4507,7 +4507,7 @@
     border-radius: 0;
   }
 
-  /* Hero — stack */
+  /* Hero - stack */
   .hero {
     padding-top: 7.7rem;
     padding-bottom: 1.8rem;
@@ -5163,7 +5163,7 @@
 }
 
 /* ============================================================
-   RESPONSIVE — SMALL MOBILE (≤ 480px)
+   RESPONSIVE - SMALL MOBILE (≤ 480px)
    ============================================================ */
 @media (max-width: 480px) {
   .hero {

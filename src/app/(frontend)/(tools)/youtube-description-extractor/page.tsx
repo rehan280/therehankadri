@@ -20,7 +20,7 @@ import { toolCatalog } from "@/lib/tool-catalog";
 
 const slug = "youtube-description-extractor";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
-const pageTitle = "YouTube Description Extractor - Free Metadata Tool";
+const pageTitle = "YouTube Description Extractor - Copy Video Metadata";
 const pageDescription =
   "Extract any public YouTube video description, title, tags, hashtags, timestamps, and metadata in one click. Free, no login, works with Shorts.";
 const socialImage = buildAbsoluteImageUrl();

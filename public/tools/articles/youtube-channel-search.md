@@ -1,54 +1,78 @@
-Finding the right YouTube channels for research, collaboration, or competitor analysis takes longer than it should.
+YouTube channel searches are hard to do well.
 
-This tool builds fast search links for YouTube channel discovery. Type a creator name or topic, get direct search and site-specific links that cut through YouTube's default search noise.
+The platform's native search doesn't filter by channel type. You can't easily find all channels in a specific niche at a specific size. You can't search for channels by keyword and get a sortable list of results with subscriber counts and upload frequency alongside them.
 
-It's a research tool. The kind that saves you 15-20 minutes every time you need to find and compare channels in a niche.
+This tool does exactly that.
 
-## What you can do with faster channel search
+## What channel search actually solves
 
-**Niche research.** Before you start a channel or enter a new content area, you want to know who's already there. How many channels cover this topic? How big are they? What angles are they taking? Faster search means faster answers.
+If you're doing competitor research, niche analysis, or trying to find collaboration partners, you need to find channels - not just videos.
 
-**Collaboration prospecting.** Finding creators at a similar subscriber level for potential collab conversations means sifting through a lot of irrelevant results. Targeted search links narrow the field.
+Most people approach this by searching YouTube for topic keywords and then clicking through to the channels behind the top videos. That works, but it's slow, and it only shows you channels that happen to have a video currently ranking for that search term - not necessarily the best channels in the niche overall.
 
-**Competitor monitoring.** If you regularly check 10-15 channels in your niche, having quick-access search links is faster than bookmarking individual channels.
+This tool lets you search directly for channels matching a keyword or niche description and see the results with key channel stats in one view.
 
-**Brand research.** Companies and agencies use YouTube channel search to find creators for sponsorship conversations. Built search links speed up that prospecting process.
+## How to use the YouTube channel search
 
-## How to use the YouTube channel search tool
+**Step 1:** Enter a niche keyword, topic description, or channel type you're looking for. "Personal finance," "home woodworking," "beginner yoga," or "book reviews" all work.
 
-**Step 1:** Enter a creator name, channel topic, or keyword you're searching for.
+**Step 2:** Hit Search. The tool returns a list of channels matching your keyword with their subscriber count, video count, and total view count displayed.
 
-**Step 2:** The tool builds targeted search links for YouTube and optionally for site-specific searches that find mentions, collaborations, or related content.
+**Step 3:** Sort by the metric most relevant to your purpose: subscribers for size benchmarking, total views for engagement depth, or video count for upload frequency.
 
-**Step 3:** Click the links to open the search results directly in YouTube.
+**Step 4:** Click into channels that look relevant and study their content strategy in more detail.
 
-**Step 4:** Use the results for your research, prospecting, or competitive analysis.
+## Finding collaboration partners
 
-## What makes this different from just searching YouTube
+Channel search is one of the most useful tools for finding collaboration partners at the right size for your channel.
 
-YouTube's search algorithm is built to surface videos, not channels. When you search on YouTube, you mostly see individual videos.
+Here's the collaboration targeting framework most growth-focused creators use:
 
-Finding the actual channel behind a video you like, or discovering channels by topic rather than single videos, requires extra steps.
+**Find channels 2-5x larger than yours:** These channels have enough reach to give you meaningful exposure, but are close enough in size that the collaboration makes sense for both parties. A 10K-subscriber channel won't generate useful value for a 2M-subscriber channel. But it works well with a 50K-100K channel.
 
-This tool builds links that streamline that process. You spend less time clicking around and more time actually analyzing what you find.
+**Find channels in adjacent niches, not identical ones:** Two channels covering the exact same topic compete for the same audience. Two channels in adjacent niches (finance + productivity, cooking + gardening, fitness + nutrition) share an audience without directly competing. Adjacent collabs introduce each creator to an engaged, relevant audience that hasn't seen their content before.
+
+**Look for similar engagement rates:** Compare your views-to-subscriber ratio to theirs. If you both have similar engagement rates, the collaboration is likely to be mutually beneficial.
+
+Use the channel search to build a list of 20-30 channels in adjacent niches within a reasonable size range. That becomes your outreach list.
+
+## Finding content gaps in your niche
+
+Here's another use case: searching for channels in your niche and noticing what's NOT there.
+
+If you search for "sustainable fashion on a budget" and only find 3 channels - two of which are inactive - that's a niche gap. The audience interest exists but the supply of creators serving it is thin. That's a positioning opportunity.
+
+Alternatively, if your search returns 200 active, well-subscribed channels, that's a competitive niche where differentiation becomes critical. You need a specific angle, audience, or format that separates you from the existing channels.
+
+Channel search gives you that competitive landscape view quickly.
 
 ## Frequently asked questions
 
-**Does this tool show subscriber counts for channels?**
-The tool builds search links. Subscriber counts appear in YouTube's own search results when you click through.
+**Can I filter channels by subscriber count range?**
+The tool returns channels matching your keyword. You can sort by subscriber count to see the largest or smallest channels for that topic, making it easy to identify channels in a specific size range.
+
+**Does this return all YouTube channels or just the most popular?**
+The tool searches YouTube's indexed channel data. Very new channels with minimal content may not appear in results. Established channels with content matching your keyword will appear.
 
 **Can I search for channels in a specific language or country?**
-YouTube's channel search has language and region filters. The search links this tool generates take you to YouTube where those filters can be applied.
+The tool primarily searches by content keyword and channel metadata. Filtering by country or language is not currently available in the search interface.
 
-**Is this useful for podcast or brand research, not just creator research?**
-Yes. Many brands, companies, and podcasters have YouTube channels. This tool works for finding any type of channel.
-
-**How is this different from just searching YouTube directly?**
-The tool builds targeted search link structures that reduce steps. For power users doing regular channel research, it's meaningfully faster than repeated manual searches.
-
-**Can I save the search links?**
-You can copy the generated links and save them anywhere — a bookmark folder, a Notion database, a spreadsheet. They're plain URLs.
+**Are the results sorted by relevance or by size?**
+Default results show by relevance to your keyword. You can re-sort by any of the displayed metrics.
 
 ---
 
----
+## The niche mapping exercise worth doing once
+
+Here's a practical research exercise for any creator doing niche analysis:
+
+1. Search for your primary niche keyword.
+2. Sort results by subscriber count, highest to lowest.
+3. Note the subscriber count of position #1, #5, #10, and #50.
+4. Calculate the range: what's the gap between the top channel and the 50th?
+
+A tight range (top channel has 500K, #50 has 100K) suggests a relatively even niche where multiple channels are growing at similar rates. A wide range (#1 has 10M, #50 has 20K) suggests a niche where one or two channels have achieved dominant reach that's difficult to approach.
+
+Knowing which type of niche you're entering changes your strategy. In a tight niche, you can realistically compete with the top channels through better content and more frequent uploads. In a dominant-player niche, your best path is a specific sub-niche angle that the dominant player doesn't serve.
+
+This tool gives you that landscape view in 2 minutes. That's faster than any manual YouTube search research could produce.

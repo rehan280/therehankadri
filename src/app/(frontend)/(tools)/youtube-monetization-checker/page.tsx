@@ -18,7 +18,7 @@ import { toolCatalog } from "@/lib/tool-catalog";
 
 const slug = "youtube-monetization-checker";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
-const pageTitle = "YouTube Monetization Checker — Check If a Channel or Video Is Monetized";
+const pageTitle = "YouTube Monetization Checker - Check Channel Revenue";
 const pageDescription =
   "Check if any YouTube channel or video is accepted into the YouTube Partner Program and earning ad revenue. Instant results, 100% accuracy, no login needed.";
 const socialImage = buildAbsoluteImageUrl();

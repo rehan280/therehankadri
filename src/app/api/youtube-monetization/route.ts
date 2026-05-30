@@ -49,7 +49,7 @@ function determineUrlType(rawUrl: string): { type: "video" | "channel" | "invali
  * the channel has a Join (membership) button.
  *
  * For channels: checks for a Join button (memberships), merch shelf, and
- * SuperThanks/SuperChat features — all of which require YPP membership.
+ * SuperThanks/SuperChat features - all of which require YPP membership.
  *
  * Note: YouTube removed `is_monetization_enabled` and `yt_ad` from page
  * source in 2024/2025 so we now use structural InnerTube signals instead.
@@ -113,7 +113,7 @@ async function checkMonetization(id: string, type: "video" | "channel") {
       }
     }
   } else {
-    // Channel — resolve handle/URL to a browse ID first
+    // Channel - resolve handle/URL to a browse ID first
     const resolved = await yt.resolveURL(`https://www.youtube.com${id}`);
     const browseId = resolved.payload?.browseId;
     if (!browseId) return null;

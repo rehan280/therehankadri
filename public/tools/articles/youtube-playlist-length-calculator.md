@@ -1,58 +1,66 @@
-How long will it actually take to watch this playlist?
+Playlist length calculators solve a specific problem that anyone who teaches, studies, or curates YouTube content runs into constantly: you've found a great playlist, but you have no idea if watching it will take 2 hours or 8 hours.
 
-That's the question this calculator answers. Add video durations, get a total watch time. Plan a study session, prep a course outline, or just figure out if you can finish the series before your flight lands.
+This tool gives you that answer in under 10 seconds. Paste the playlist URL, pick your playback speed, and see the exact total watch time.
 
-## Who actually uses a playlist length calculator
+## When playlist length actually matters
 
-More people than you'd expect.
+For most casual viewers, playlist length is an afterthought. But for anyone using YouTube intentionally, knowing the total runtime changes how you plan your time.
 
-**Students and learners.** Before committing to a YouTube course or tutorial series, you want to know the total time investment. A playlist titled "Complete Web Development Bootcamp" could be 20 hours or 200 hours. This tells you upfront.
+**Online course students:** Many creators publish structured courses as YouTube playlists. A 47-video playlist could be 3 hours of content or 15 hours. That difference matters if you're planning when to start a learning sprint.
 
-**Content creators.** If you're building a YouTube course or series, calculating total playlist length helps you match your content depth to your audience's expectations.
+**Content creators studying competitors:** If you're doing a competitive channel audit and want to watch everything a creator has made in a specific category, knowing the total runtime helps you decide whether to block off a full day or spread it across a week.
 
-**Study planners.** Students who schedule their YouTube learning (watching lectures, tutorials, or revision content) use playlist length to block time accurately.
+**Fitness and workout playlists:** Scheduling a workout session from a YouTube playlist requires knowing how long the playlist runs. 10 minutes too short means you didn't finish the workout. 20 minutes too long means you run out of time.
 
-**Marathon planners.** Sometimes you just want to know if you can finish a documentary series on a long weekend. Also a valid use case.
+**Language learners:** Many language channels organize lessons by level into playlists. Knowing a "Beginner Spanish" playlist is 22 hours of content helps set realistic expectations for completing it.
+
+**Podcast and interview series:** Long-form interview playlists can stack up to hundreds of hours. Knowing the total helps you prioritize which episodes to watch.
 
 ## How to use the playlist length calculator
 
-**Step 1:** Gather the video durations from the playlist you want to calculate. You can find these on the YouTube playlist page — each video shows its length.
+**Step 1:** Find any YouTube playlist. Copy the full URL from the browser address bar.
 
-**Step 2:** Add the durations into the calculator fields. Enter each video's runtime.
+**Step 2:** Paste it into this tool.
 
-**Step 3:** The tool totals them and gives you the combined watch time.
+**Step 3:** Select your playback speed. The calculator accounts for 1x, 1.25x, 1.5x, and 2x.
 
-**Step 4:** Use the speed options if you watch at 1.25x, 1.5x, or 2x speed. The adjusted total shows your actual time investment at your preferred speed.
+**Step 4:** See the total runtime at your selected speed, the video count, and the average video length across the playlist.
 
-The speed calculation is genuinely useful. Watching at 1.5x speed is common for tutorials and courses. A 10-hour playlist at 1.5x becomes 6.6 hours. That changes your planning entirely.
+## What the average video length tells you
 
-## Practical use cases for course creators
+The average video length across a playlist is actually useful data beyond just total runtime.
 
-If you're building a YouTube course series, total playlist length matters for a few reasons:
+If you're studying a competitor and their average video length in a playlist is 3 minutes, you know they're creating snackable content optimized for high watch time completion rates. If the average is 25 minutes, they're creating depth-first long-form content aimed at highly engaged viewers.
 
-**Positioning.** A 3-hour beginner series feels complete and approachable. A 40-hour series signals comprehensive depth. Make sure your total length matches what you're promising in your titles.
-
-**Retention.** YouTube data consistently shows that shorter videos retain viewers better. Knowing your total course length helps you decide whether to split long topics into smaller videos.
-
-**Sponsorship.** Some creators calculate playlist value for sponsors — a 10-video series with a combined 5 hours of watch time is a meaningful sponsorship opportunity.
+For your own channel, comparing average video length across your playlists can reveal patterns in your own content that you hadn't noticed: maybe your tutorials average 12 minutes but your vlogs average 6 minutes. Or maybe one content category consistently runs longer than another.
 
 ## Frequently asked questions
 
-**Does the tool work with YouTube playlist URLs automatically?**
-You manually enter durations in the current version. Automatic playlist parsing may be added in future updates.
+**Does the tool work for private playlists?**
+No. It only works for public playlists. Private playlists require authentication and aren't accessible to external tools.
 
-**Can it calculate at different playback speeds?**
-Yes. The tool includes speed options (1x, 1.25x, 1.5x, 2x) and shows your adjusted watch time for each.
+**How many videos can a playlist have?**
+YouTube playlists can contain up to 5,000 videos. This tool handles playlists of any length.
 
-**What's the maximum number of videos I can calculate?**
-Add as many videos as your playlist contains. There's no hard cap on entries.
+**Why might the total runtime be slightly different from the actual watch time?**
+The tool calculates the sum of video durations as stored in YouTube's metadata. Ads are not included in the video duration, so your actual watch time with ads may be longer at 1x speed.
 
-**Can I use this for podcast episodes or audio content?**
-Yes. Any content measured in hours and minutes can be added. The tool calculates total duration regardless of format.
+**Can I use this for playlists with Shorts mixed in?**
+Yes. If a playlist contains Shorts (under 60 seconds), their durations are included in the total calculation.
 
-**Does it show a breakdown by video or just a total?**
-The tool shows a total combined time. Individual video times are visible in your input fields.
-
----
+**What if the playlist URL doesn't work?**
+Make sure you're using the playlist URL specifically (it should contain "?list=" or "&list=" in the URL). Channel page URLs or individual video URLs won't work.
 
 ---
+
+## The "how long will this actually take" calculation for course buyers
+
+Here's a use case worth naming specifically: evaluating online courses before you buy.
+
+Many creators sell courses and offer free preview playlists on YouTube. Some creators also publish full course content freely on YouTube as a playlist.
+
+Before you commit time to any structured learning playlist, knowing the total runtime gives you one critical data point: is this course 4 hours or 40 hours?
+
+4 hours is something you can finish in a weekend. 40 hours is a 3-month commitment if you watch for 20 minutes per day.
+
+Paste the playlist link into this tool. Check the runtime. Then decide if the time commitment matches the outcome you're after. That's a more useful decision than just looking at video count.

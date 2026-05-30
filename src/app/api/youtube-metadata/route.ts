@@ -65,6 +65,8 @@ async function fetchViaUnofficial(videoId: string) {
       tags,
       hashtags: getHashtags(description, tags),
       timestamps: getTimestamps(description),
+      hasCaptions: false,
+      isHD: false,
     };
   } catch (err) {
     console.error("Unofficial Metadata Error:", err);
@@ -111,6 +113,8 @@ async function fetchViaOfficial(videoId: string) {
           tags,
           hashtags: getHashtags(description, tags),
           timestamps: getTimestamps(description),
+          hasCaptions: item.contentDetails?.caption === "true",
+          isHD: item.contentDetails?.definition === "hd",
         };
       }
 

@@ -87,13 +87,13 @@ export function RayEditorField({
 
   return (
     <div className={textareaClassName}>
-      {/* Container div — Ray Editor mounts itself here using containerId */}
+      {/* Container div - Ray Editor mounts itself here using containerId */}
       <div id={containerId} style={{ minHeight: "22rem" }} />
       {/* Hidden input that carries the HTML to the Server Action */}
       <input ref={hiddenRef} type="hidden" name={name} defaultValue={initialValue ?? ""} />
       {fieldHintClassName ? (
         <span className={fieldHintClassName}>
-          Rich text editor — use the toolbar or type <code>/</code> for slash
+          Rich text editor - use the toolbar or type <code>/</code> for slash
           commands. Supports headings, lists, code blocks, tables, callouts and
           more.
         </span>

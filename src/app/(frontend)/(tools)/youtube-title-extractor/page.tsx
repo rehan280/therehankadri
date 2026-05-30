@@ -20,7 +20,7 @@ import { toolCatalog } from "@/lib/tool-catalog";
 
 const slug = "youtube-title-extractor";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
-const pageTitle = "YouTube Title Extractor - Free Online Tool (2026)";
+const pageTitle = "YouTube Title Extractor - Copy Video Titles Online";
 const pageDescription =
   "Extract any YouTube video title in one click. Free, no login, no limits. Works on desktop, mobile, and Shorts for YouTube SEO research.";
 const socialImage = buildAbsoluteImageUrl();

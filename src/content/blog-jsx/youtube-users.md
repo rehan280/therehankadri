@@ -61,7 +61,7 @@ Here's the growth curve:
 | 2026 (March est.) | 2.83 billion | +4.8% |
 | 2025 | 2.58–2.70 billion | +0.74–3.2% |
 | 2024 | 2.50 billion | +8.7% |
-| 2022 | 2.68 billion | — |
+| 2022 | 2.68 billion | - |
 | 2021 | 2.50 billion | +8.6% |
 | 2020 | 2.30 billion | +15.0% |
 | 2019 | 2.00 billion | +11.1% |

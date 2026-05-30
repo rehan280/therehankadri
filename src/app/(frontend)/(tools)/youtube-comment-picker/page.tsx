@@ -16,14 +16,16 @@ import { getToolRating } from "@/lib/tool-ratings";
 import RelatedTools from "@/components/tools/RelatedTools";
 
 const canonicalUrl = buildCanonicalUrl("/youtube-comment-picker");
+const pageDescription =
+  "Pick a random YouTube comment winner for giveaways and contests. Paste comments or fetch them by video URL, filter duplicates, and choose fairly.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const tool = getToolBySlug("youtube-comment-picker")!;
 
   return {
     ...createPageMetadata({
-      title: `${tool.title} - Free API Tool`,
-      description: tool.shortDescription,
+      title: "YouTube Comment Picker - Pick Giveaway Winners",
+      description: pageDescription,
       path: `/${tool.slug}`,
       type: "article",
       imageAlt: `${tool.title} by The Rehan Kadri`,

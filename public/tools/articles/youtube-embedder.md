@@ -1,70 +1,90 @@
-Embedding a YouTube video should take 15 seconds, not 15 minutes of copy-pasting and debugging broken iframes.
+YouTube videos don't just live on YouTube. They live on websites, blog posts, email newsletters, learning management systems, and thousands of other places where someone wanted to embed a specific video.
 
-Paste the video URL, get clean embed code, drop it into your site. Done.
+This tool generates the exact embed code for any YouTube video in seconds. Paste the URL, get the code, customize your player options, and drop it into your site.
 
-This tool generates the iframe code with correct formatting, responsive option if you need it, and zero manual work.
+## Why YouTube's native share embed isn't always enough
 
-## Why generated embed code is better than YouTube's default
+YouTube's built-in share > embed option gives you a basic `<iframe>` code. It works. But it doesn't give you control over player behavior.
 
-YouTube's built-in share > embed option gives you a basic iframe. It works, but it has some issues:
+This tool generates embed code with configurable options that the native share button doesn't expose easily:
 
-The default YouTube embed includes a `?rel=0` parameter gap on older players. It doesn't generate responsive code by default. And if you want to customize autoplay, modestbranding, or loop settings, you have to edit the URL parameters manually.
+**Autoplay:** Choose whether the video starts playing immediately when the page loads. Useful for landing pages with video sales letters. Avoid it for article content where autoplay annoys readers.
 
-This tool handles all of that cleanly. You get properly formatted code that works across browsers and devices.
+**Loop:** Whether the video repeats automatically. Useful for demo loops or background videos. Almost never useful for standard content embeds.
 
-## What the generated embed code includes
+**Controls:** Show or hide the player controls (play, pause, volume, fullscreen). Hiding controls is useful for guided video experiences where you don't want viewers jumping to other parts of the video.
 
-The iframe output includes:
-- Correct video ID parsed from the URL
-- Standard YouTube embed URL format
-- Width and height attributes
-- Frameborder setting
-- Allow parameters for autoplay, clipboard-write, encrypted-media, gyroscope, picture-in-picture
-- Allowfullscreen attribute
+**Start time:** Link directly to a specific point in the video. If you're embedding a long tutorial and your article only references the part starting at 3:45, you can start the embed there.
 
-For responsive embeds, the tool wraps the iframe in a CSS div with correct aspect ratio padding so the video scales properly on mobile screens.
+**Privacy-enhanced mode:** Use `youtube-nocookie.com` instead of the standard YouTube domain. This means YouTube won't store browsing data from visitors to your site unless they actually hit play. A consideration for GDPR compliance.
 
 ## How to use the YouTube video embedder
 
-**Step 1:** Copy the YouTube video URL you want to embed.
+**Step 1:** Copy the URL of the YouTube video you want to embed.
 
-**Step 2:** Paste it into the embedder tool.
+**Step 2:** Paste it into this tool.
 
-**Step 3:** Choose responsive or fixed-width depending on your needs.
+**Step 3:** Set your optional parameters: start time, autoplay on/off, controls on/off, loop on/off.
 
-**Step 4:** Copy the generated code.
+**Step 4:** Copy the generated `<iframe>` code and paste it into your website's HTML.
 
-**Step 5:** Paste it into your website's HTML. In most CMS platforms (WordPress, Webflow, Squarespace), you'll paste it into an HTML block or custom code section.
+## Making your embed responsive
 
-## Where to embed YouTube videos
+By default, the YouTube embed code specifies fixed pixel dimensions (560x315). On mobile devices, that produces a fixed-size player that overflows its container or appears misaligned.
 
-A few smart use cases beyond the obvious:
+To make your embed responsive (scales to any screen size), wrap the `<iframe>` in a div with this CSS:
 
-**Blog posts:** Embedding a related video inside a blog post increases time on page. That's a positive signal for Google's user experience metrics.
+```css
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+}
 
-**Landing pages:** A product demo or explainer video on a landing page typically increases conversion rates. Wyzowl research found that 84% of people say watching a brand's video convinced them to buy a product.
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+```
 
-**Email (kind of):** Email clients don't play embedded video, but you can embed a thumbnail image that links to your YouTube video. That approach works well.
+Then wrap the `<iframe>` tag like this:
+```html
+<div class="video-wrapper">
+  [your iframe code here]
+</div>
+```
 
-**Course pages:** If you run any kind of online course or gated content, clean embeds are essential.
+Every major website builder (WordPress, Squarespace, Webflow, Wix) also has native video block elements that handle responsive sizing automatically. But if you're adding embed code to a custom section, the CSS wrapper above is the correct approach.
 
 ## Frequently asked questions
 
-**Does the embedded video show recommended videos at the end?**
-By default, YouTube shows related videos when your video ends. Add `?rel=0` to the embed URL to limit related videos to your own channel (note: YouTube changed this behavior and full removal of recommendations is no longer supported).
+**Does embedding a YouTube video on my site help the video's YouTube performance?**
+Embedded views count as views on YouTube. If viewers watch the embedded video on your site, that engagement counts toward your YouTube analytics. It also gets credited to your channel, which can help your overall channel standing in the algorithm.
 
-**Can I embed a private YouTube video?**
-No. Only public or unlisted videos can be embedded. Private videos return an error on the embed.
+**Can I embed a YouTube video in a newsletter or email?**
+No. Email clients don't support `<iframe>` embeds - they're blocked for security reasons. The standard approach is to use a thumbnail image linked to the YouTube video. Clicking the image takes the reader to YouTube to watch.
 
-**Does the embedded video count toward the video's YouTube view count?**
-Yes. Views from embedded players count as YouTube views.
+**Does the privacy-enhanced mode affect video performance?**
+No. Videos embedded with the `youtube-nocookie.com` domain work identically from the viewer's perspective. The difference is data storage behavior for visitors who don't interact with the player.
 
-**What's the difference between fixed-width and responsive embed?**
-Fixed-width gives you a set pixel size that doesn't change. Responsive scales with the container, so it looks correct on both desktop and mobile. Use responsive for any modern website.
+**Can I embed unlisted YouTube videos?**
+Yes. Unlisted videos can be embedded and work normally. Private videos cannot be embedded.
 
-**Can I embed a YouTube Shorts video?**
-Yes. Paste the Shorts URL and the embedder generates the iframe code. Shorts embeds display in a vertical format.
-
----
+**Will embedding a YouTube video slow down my website?**
+YouTube iframes load independently from your page, but the YouTube player script does add some load time. If page speed is critical, use a thumbnail image linked to YouTube for above-the-fold placement and load the iframe only on click.
 
 ---
+
+## The embed use case that drives real YouTube growth
+
+Here's a use case that many creators overlook: embedding your YouTube videos in your own blog posts or website content.
+
+When someone finds your blog post through Google search, reads it, and then watches the embedded YouTube video - that's a view that YouTube attributes to your channel. If they engage (watch most of it, like, or comment), those are strong engagement signals that help the video rank higher on YouTube's own search.
+
+Your blog is a search traffic source that drives YouTube engagement signals. That combination is powerful: Google SEO brings the viewer, YouTube's algorithm amplifies the video because of the high engagement rate.
+
+If you have existing blog content that relates to any of your YouTube videos, add the embed. It takes 2 minutes and creates a distribution channel that compounds over time.

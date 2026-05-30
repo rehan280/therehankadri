@@ -319,7 +319,7 @@ Now edit the captured audio using the same Compressor Sandwich workflow above.
 | YouTube / Video | WAV | 48,000 Hz | 24-bit PCM | -14 LUFS |
 | Podcast | MP3 | 44,100 Hz | 128-192 kbps CBR | -16 LUFS (Apple) / -14 LUFS (Spotify) |
 | Voiceover (ACX) | WAV | 44,100 Hz | 16-bit | Peaks < -3 dB, RMS -18 to -23 dB |
-| Reels / Shorts | Export with video | 48,000 Hz | — | -9 to -12 LUFS |
+| Reels / Shorts | Export with video | 48,000 Hz | - | -9 to -12 LUFS |
 
 ---
 

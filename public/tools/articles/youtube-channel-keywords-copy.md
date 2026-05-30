@@ -1,71 +1,77 @@
-Every YouTube channel has a keyword field in its settings.
+Channel keywords sit in a metadata field that most creators have never visited in YouTube Studio.
 
-Most viewers never see it. But YouTube does.
+But they matter. YouTube uses channel keywords to understand the broader topic area your channel covers - and to decide which other videos to recommend yours alongside. A fitness channel with no channel keywords gets matched to fitness, cooking, and lifestyle videos randomly. One with "home workouts, no equipment exercises, calisthenics for beginners" gets matched to exactly the right audience.
 
-Channel-level keywords tell YouTube what your channel is broadly about. They influence which searches your videos get recommended for, which related channels you get shown alongside, and how the algorithm categorizes your overall content.
+This tool extracts the exact channel keywords from any YouTube channel so you can see what competitors are using to signal their niche to the algorithm.
 
-This tool extracts those keywords from any public channel. Paste a channel URL, see the keywords, copy them.
+## Where channel keywords actually appear in YouTube's system
 
-## Why channel keywords matter for your SEO
+Channel keywords are set in YouTube Studio under Settings > Channel > Basic Info > Keywords. They're stored in the channel's page metadata - not visible to viewers, but read by YouTube's categorization system.
 
-Here's the thing most small channels miss: YouTube recommends similar content to viewers.
+Unlike video tags, channel keywords apply to your entire channel. They help YouTube understand:
+- What broad topic area your channel covers
+- Which audience segments to test your content with
+- Which other channels to associate yours with in the recommendation system
 
-When someone watches a video on budgeting, YouTube's sidebar fills up with other budgeting videos and channels. The channels that show up there aren't random. They're the ones YouTube has categorized as "relevant" to that topic.
+This is why copying channel keywords from successful channels in your niche is genuinely useful research. If a channel with 500K subscribers and consistent growth in your niche has specific keywords set, those are worth including in your own channel settings.
 
-Channel keywords are one of the signals YouTube uses to build that relevance map.
+## How to use the channel keywords extractor
 
-Extracting keywords from top channels in your niche tells you exactly how those channels described themselves to YouTube. You can use that as a direct reference when setting your own channel keywords.
+**Step 1:** Find a YouTube channel you want to study. Copy the channel URL or @handle.
 
-## What the tool extracts
+**Step 2:** Paste it into this tool.
 
-Paste any public YouTube channel URL (or handle) and get the channel's keyword tags displayed cleanly.
+**Step 3:** Hit Extract. You'll see the complete list of channel keywords that creator has set in their channel settings.
 
-You see:
-- The exact keywords the channel owner set in YouTube Studio
-- The full list, not just the first few
-- Copy-ready output you can use as reference immediately
+**Step 4:** Compare keywords across 3-5 channels in your niche. The keywords that appear consistently are the ones most clearly associated with your topic category by the algorithm.
 
-## How to use this for your channel SEO
+## What to do with the extracted keywords
 
-**Step 1:** Find 3-5 successful channels in your niche. These should be channels with a similar topic to yours that are growing well.
+Don't just copy the list verbatim into your own channel settings. That's the lazy approach and it misses the point.
 
-**Step 2:** Paste each channel URL into the extractor and copy their keyword lists.
+Instead:
 
-**Step 3:** Look for patterns. Which keywords appear across multiple top channels? Those are probably the most relevant terms for your niche.
+**Build a master list:** Extract keywords from 5-10 channels in your niche. Combine them into one big list.
 
-**Step 4:** Go to YouTube Studio > Customization > Basic Info > Keywords and add a focused set (under 500 characters total) based on your research.
+**Identify the consensus keywords:** Which terms appear across 3 or more channels? These are the core category signals for your niche.
 
-Don't just copy-paste a competitor's exact keyword list. Build yours from what you learn.
+**Add your unique positioning terms:** If your channel has a specific angle or format that distinguishes you, add those terms. "Budget travel," "solo female travel," and "slow travel" are different channel positions within the broader "travel" niche.
 
-## How many keywords should a YouTube channel use?
+**Keep it focused:** YouTube's guidance suggests 5-10 highly relevant channel keywords is more effective than 30 loosely related ones. Quality signal beats quantity.
 
-YouTube gives you 500 characters for channel keywords. That's roughly 15-30 keywords depending on length.
+## How to update your own channel keywords
 
-Use the full space. More relevant keywords means more surface area for YouTube to categorize your channel correctly.
+Open YouTube Studio. Click Settings in the left sidebar. Under Channel, open Basic Info. Scroll to the Keywords section. Add your keywords separated by commas. Save.
 
-Focus on:
-- Your broad topic (personal finance, cooking, tech reviews)
-- Your niche angle (finance for immigrants, vegan cooking on a budget, budget Android phones)
-- Your content format (tutorials, reviews, day-in-the-life)
-- Your audience descriptor (beginners, working moms, college students)
+That's it. Changes are reflected in YouTube's indexing within a few days.
 
 ## Frequently asked questions
 
-**Can I see any channel's keywords with this tool?**
-Any public YouTube channel. Private or terminated channels won't return results.
+**Are channel keywords the same as video tags?**
+No. Video tags apply to individual videos and help categorize specific content. Channel keywords apply to the entire channel and help YouTube understand your overall topic focus. Both are worth optimizing, but they're separate fields.
 
-**Do channel keywords directly affect video rankings?**
-They're a channel-level signal, not a per-video ranking factor. But they influence how YouTube categorizes your channel, which affects overall recommendation visibility.
+**Do channel keywords affect YouTube search rankings for videos?**
+Indirectly. Channel keywords help YouTube categorize your channel, which influences which audience segments your videos get tested with. This affects early engagement quality, which affects ranking.
+
+**Can viewers see my channel keywords?**
+No. Channel keywords are stored in metadata and only visible to YouTube and tools that extract them. Viewers don't see them.
 
 **How often should I update my channel keywords?**
-When your content focus changes significantly. Don't change them every week — consistency helps YouTube build a stable category map for your channel.
+Update them whenever your channel direction changes significantly. If you add a new content pillar or shift your niche focus, update your keywords to reflect the new direction.
 
-**Does this work with YouTube handles (@username)?**
-Yes. Paste the handle or the full channel URL.
-
-**Are channel keywords visible to viewers?**
-No. They appear in your YouTube Studio settings and are used by YouTube's algorithm. Viewers on the channel page can't see them.
+**What if a competitor's channel keywords seem unrelated to their content?**
+Some creators don't optimize this field carefully. Don't copy keywords that don't fit your content just because a competitor included them. Relevance matters more than coverage.
 
 ---
 
----
+## The three minutes that shape your channel's algorithmic identity
+
+Most creators spend zero time on their channel keyword settings.
+
+They film. They edit. They publish. They never open YouTube Studio's settings section.
+
+That means your channel's algorithmic categorization is essentially undefined - YouTube has to guess what your channel is about based purely on video-level signals. And guessing means worse targeting.
+
+Three minutes in YouTube Studio, filling in your channel keywords with 5-10 relevant terms, gives YouTube a clear signal to work with. Extract keywords from the top channels in your niche using this tool. Build your list. Set it and leave it.
+
+It's one of the lowest-effort, highest-impact channel settings most creators haven't touched.

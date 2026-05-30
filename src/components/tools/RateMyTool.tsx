@@ -24,7 +24,7 @@ export default function RateMyTool({ slug, initialAverage, initialCount }: Props
   const [ratingState, setRatingState] = useState<RatingState>({ status: "loading" });
   const hasFetchedRef = useRef(false);
 
-  // Step 1 — On mount, fetch the LIVE rating from the API (not the baked-in static props).
+  // Step 1 - On mount, fetch the LIVE rating from the API (not the baked-in static props).
   // This is exactly how RateMyPost works: an AJAX call on page load to get real numbers.
   useEffect(() => {
     if (hasFetchedRef.current) return;
@@ -58,7 +58,7 @@ export default function RateMyTool({ slug, initialAverage, initialCount }: Props
     const prevAverage = ratingState.average;
     const prevCount = ratingState.count;
 
-    // Step 2 — Optimistic update: show the new values instantly
+    // Step 2 - Optimistic update: show the new values instantly
     const optimisticCount = prevCount + 1;
     const optimisticAverage =
       Math.round(((prevAverage * prevCount + stars) / optimisticCount) * 10) / 10;
@@ -67,7 +67,7 @@ export default function RateMyTool({ slug, initialAverage, initialCount }: Props
     localStorage.setItem(`rated_tool_${slug}`, "true");
 
     try {
-      // Step 3 — POST to API. The API returns the *actual* saved values from Supabase.
+      // Step 3 - POST to API. The API returns the *actual* saved values from Supabase.
       const res = await fetch("/api/tool-rating", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -77,7 +77,7 @@ export default function RateMyTool({ slug, initialAverage, initialCount }: Props
       const data = await res.json() as { success: boolean; average: number; count: number; error?: string };
 
       if (res.ok && data.success) {
-        // Step 4 — Use the confirmed real values from Supabase (not the optimistic ones)
+        // Step 4 - Use the confirmed real values from Supabase (not the optimistic ones)
         setRatingState({ status: "done", average: data.average, count: data.count });
       } else {
         throw new Error(data.error ?? "Unknown error");

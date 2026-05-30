@@ -1,35 +1,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import RelatedTools from "@/components/tools/RelatedTools";
 import {
+  ORGANIZATION_ID,
   SITE_NAME,
   SITE_URL,
+  WEBSITE_ID,
   buildAbsoluteImageUrl,
   buildCanonicalUrl,
   createPageMetadata,
 } from "@/lib/seo";
-import { getToolBySlug, toolCatalog } from "@/lib/tool-catalog";
-import GenericToolArticle, { getGenericToolFaq } from "../_generic/GenericToolArticle";
-import GenericToolClient from "../_generic/GenericToolClient";
-import styles from "../youtube-tags-generator/page.module.css";
-import { getToolTestimonials } from "@/lib/tool-testimonials";
+import {
+  getToolBySlug,
+  getToolSeoDescription,
+  getToolSeoTitle,
+} from "@/lib/tool-catalog";
+import { getToolArticleContent } from "@/lib/tool-article-content";
 import { getToolRating } from "@/lib/tool-ratings";
-import RelatedTools from "@/components/tools/RelatedTools";
+import { getToolTestimonials } from "@/lib/tool-testimonials";
+import styles from "../youtube-tags-generator/page.module.css";
+import GenericToolArticle, { getGenericToolFaq } from "./GenericToolArticle";
+import GenericToolClient from "./GenericToolClient";
 
-type Props = {
-  params: Promise<{
-    toolSlug: string;
-  }>;
-};
-
-export function generateStaticParams() {
-  return toolCatalog
-    .filter((tool) => tool.kind !== "existing")
-    .map((tool) => ({ toolSlug: tool.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { toolSlug } = await params;
+export async function generateGenericToolMetadata(toolSlug: string): Promise<Metadata> {
   const tool = getToolBySlug(toolSlug);
 
   if (!tool || tool.kind === "existing") {
@@ -38,8 +32,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     ...createPageMetadata({
-      title: `${tool.title} - Free Tool`,
-      description: `${tool.shortDescription} Free ${tool.keyword} from The Rehan Kadri tools hub.`,
+      title: getToolSeoTitle(tool),
+      description: getToolSeoDescription(tool),
       path: `/${tool.slug}`,
       type: "article",
       imageAlt: `${tool.title} by The Rehan Kadri`,
@@ -57,8 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function GenericToolPage({ params }: Props) {
-  const { toolSlug } = await params;
+export default async function GenericToolPage({ toolSlug }: { toolSlug: string }) {
   const tool = getToolBySlug(toolSlug);
 
   if (!tool || tool.kind === "existing") {
@@ -67,14 +60,41 @@ export default async function GenericToolPage({ params }: Props) {
 
   const canonicalUrl = buildCanonicalUrl(`/${tool.slug}`);
   const faqEntries = await getGenericToolFaq(tool);
+  const article = await getToolArticleContent(tool.slug);
   const testimonials = getToolTestimonials(tool.slug, tool.title);
   const ratingData = await getToolRating(tool.slug);
-  
+  const pageId = `${canonicalUrl}#webpage`;
+  const appId = `${canonicalUrl}#softwareapplication`;
+  const articleId = `${canonicalUrl}#article`;
+  const faqId = `${canonicalUrl}#faq`;
+
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": pageId,
+        url: canonicalUrl,
+        name: getToolSeoTitle(tool),
+        description: tool.shortDescription,
+        inLanguage: "en-US",
+        isPartOf: {
+          "@id": WEBSITE_ID,
+        },
+        about: {
+          "@id": appId,
+        },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: buildAbsoluteImageUrl(),
+        },
+        breadcrumb: {
+          "@id": `${canonicalUrl}#breadcrumb`,
+        },
+      },
+      {
         "@type": "SoftwareApplication",
+        "@id": appId,
         name: tool.title,
         applicationCategory: "WebApplication",
         applicationSubCategory: tool.category,
@@ -107,18 +127,25 @@ export default async function GenericToolPage({ params }: Props) {
         })),
         featureList: [
           `Free ${tool.title}`,
+          tool.intro,
+          ...tool.highlights,
           "No login required",
           "Copy-ready results",
           "Fast browser-based processing",
         ],
+        mainEntityOfPage: {
+          "@id": pageId,
+        },
         publisher: {
-          "@type": "Organization",
-          name: SITE_NAME,
-          url: SITE_URL,
+          "@id": ORGANIZATION_ID,
         },
       },
       {
         "@type": "FAQPage",
+        "@id": faqId,
+        mainEntityOfPage: {
+          "@id": pageId,
+        },
         mainEntity: faqEntries.map((entry) => ({
           "@type": "Question",
           name: entry.question,
@@ -130,6 +157,7 @@ export default async function GenericToolPage({ params }: Props) {
       },
       {
         "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
         itemListElement: [
           {
             "@type": "ListItem",
@@ -153,21 +181,29 @@ export default async function GenericToolPage({ params }: Props) {
       },
       {
         "@type": "Article",
-        headline: tool.title,
+        "@id": articleId,
+        headline: article?.title || tool.title,
         description: tool.shortDescription,
-        mainEntityOfPage: canonicalUrl,
+        mainEntityOfPage: {
+          "@id": pageId,
+        },
         url: canonicalUrl,
         datePublished: "2026-05-26",
         dateModified: "2026-05-26",
+        inLanguage: "en-US",
+        articleSection: tool.category,
+        keywords: [
+          tool.keyword,
+          `free ${tool.keyword}`,
+          tool.title,
+          ...tool.highlights,
+        ],
+        ...(article ? { wordCount: article.wordCount } : {}),
         author: {
-          "@type": "Organization",
-          name: SITE_NAME,
-          url: SITE_URL,
+          "@id": ORGANIZATION_ID,
         },
         publisher: {
-          "@type": "Organization",
-          name: SITE_NAME,
-          url: SITE_URL,
+          "@id": ORGANIZATION_ID,
         },
         image: [buildAbsoluteImageUrl()],
       },
@@ -190,11 +226,15 @@ export default async function GenericToolPage({ params }: Props) {
               <Link href="/tools">Tools</Link>
               <span>/</span>
             </nav>
-            <h1 className={`${styles.title} ${styles.singleLineToolTitle}`}>{tool.title}</h1>
+            <h1 className={`${styles.title} ${styles.singleLineToolTitle}`}>
+              {tool.title}
+            </h1>
             <p className={styles.subtitle}>{tool.shortDescription}</p>
 
             <div className={styles.tabRow}>
-              <span className={styles.tabItem}>{tool.category.replace("YouTube ", "")}</span>
+              <span className={styles.tabItem}>
+                {tool.category.replace("YouTube ", "")}
+              </span>
             </div>
 
             <GenericToolClient tool={tool} />

@@ -8,13 +8,13 @@ This tool scores your title across those three dimensions and gives you specific
 
 **Clarity score:** Does the title clearly communicate the episode topic? Ambiguous titles lose listeners before they even read the description. "The Power of Habits" scores lower than "How to Build a Daily Exercise Habit You'll Actually Keep."
 
-**Curiosity score:** Does the title create a gap — something the listener wants resolved? A curiosity gap is the distance between what someone knows and what they want to know. Titles that open a gap get more clicks than titles that just describe.
+**Curiosity score:** Does the title create a gap - something the listener wants resolved? A curiosity gap is the distance between what someone knows and what they want to know. Titles that open a gap get more clicks than titles that just describe.
 
 **Search intent score:** Does the title match how someone would actually search for this topic on Spotify, Apple Podcasts, or Google? Natural language keywords, specific phrases, and clear topic signals all improve this score.
 
 ## How to use the podcast title analyzer
 
-**Step 1:** Write your episode title — your current best version.
+**Step 1:** Write your episode title - your current best version.
 
 **Step 2:** Paste it into the analyzer tool.
 
@@ -61,6 +61,26 @@ It gives you signal on search intent direction. For specific keyword data, use t
 As many times as you need. Iterate until you're satisfied.
 
 **Should I prioritize the clarity score or the curiosity score?**
-Depends on your growth stage. New shows need clarity more than curiosity — search discovery is the main growth channel. Established shows with loyal audiences can lean into curiosity hooks because subscribers will click regardless.
+Depends on your growth stage. New shows need clarity more than curiosity - search discovery is the main growth channel. Established shows with loyal audiences can lean into curiosity hooks because subscribers will click regardless.
 
 ---
+
+## What Podcast Episode Title Checker / Analyzer Helps You Confirm
+
+This page is built for quick checks.
+
+Use it when you need a clear answer before you make a change, send a link, publish a video, or update a brief.
+
+That sounds small. But small checks prevent messy mistakes.
+
+## Read The Podcast Episode Title Checker Result Carefully
+
+Do not just look at the first line.
+
+Check whether the result matches what you expected. If it does not, test another URL or input. Sometimes the issue is not the tool. Sometimes the original YouTube page is messy, old, private, or restricted.
+
+## When Podcast Episode Title Checker / Analyzer Saves Time
+
+Use it during audits, before publishing, and when cleaning up client work.
+
+Use it when you need title score, clarity notes, podcast seo without doing the whole task by hand.

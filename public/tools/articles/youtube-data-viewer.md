@@ -1,71 +1,83 @@
-Every public YouTube video has a layer of metadata that most people never look at.
+Every YouTube video carries hidden metadata: view count, like count, comment count, upload date, duration, channel name, video ID, and more. It's all stored in YouTube's system. But there's no easy way to see all of it in one place from the video page.
 
-Title, description, tags, category, upload date, view count, duration — all of it is public. This tool pulls it into a clean, structured layout so you can see everything about a video in one place.
+This tool pulls all of that data for any public YouTube video and displays it in a clean, organized format. Paste the URL, see everything.
 
-No switching between tabs. No scrolling through a video page. Just the raw data, organized.
+## Why raw video metadata is more useful than it looks
 
-## Why structured metadata matters for research
+The numbers that appear publicly on a YouTube video (views, likes, comments) tell you the outcome. The metadata tells you the full story.
 
-YouTube video metadata is research gold.
+**View count vs. upload date:** A video with 200,000 views that was uploaded 4 years ago is getting about 50,000 views per year. A video with 200,000 views uploaded 6 months ago is getting 400,000 views per year. The same number means completely different things without the date context.
 
-For creators doing competitive analysis, seeing a video's full metadata reveals how it was optimized: what tags were used, how the description was structured, whether the title changed (you can sometimes infer this from mismatches between title and tags).
+**Duration vs. engagement:** A 45-second Short and a 25-minute tutorial both show as "videos" on a channel. Knowing the duration tells you what type of content you're analyzing and what engagement expectations are appropriate.
 
-For marketers doing influencer or content research, the data viewer gives you a fast overview without watching the video.
+**Tags and description data:** The video data viewer shows you what keyword signals the creator is sending to the algorithm - useful for competitor research.
 
-For SEO professionals who work on YouTube strategy, structured metadata from multiple videos is the foundation of any good keyword or gap analysis.
+**Video ID:** Every video has a permanent 11-character ID. Knowing this ID is useful for building embeds, creating timestamp links, and accessing YouTube API data for the video.
 
-## What the YouTube data viewer shows
+## How to use the data viewer
 
-Paste any public YouTube video URL and see:
+**Step 1:** Copy the URL of any public YouTube video.
 
-- Video title (current)
-- Full description
-- Tags (all of them, not just the first few)
-- Upload date
-- Duration
-- View count, like count, and comment count (where public)
-- Category
-- Channel name and ID
+**Step 2:** Paste it into this tool.
 
-All in one structured view. Copy any field individually.
+**Step 3:** Hit View Data. You'll see all available metadata displayed: title, channel, views, likes, comments, duration, upload date, tags, description, and video ID.
 
-## How to use it
+**Step 4:** Use the data for your research purpose - competitive analysis, content planning, technical integrations, or channel auditing.
 
-**Step 1:** Copy a YouTube video URL.
+## The competitive analysis use case
 
-**Step 2:** Paste it into the data viewer.
+Here's a specific workflow where this tool saves significant time:
 
-**Step 3:** See all metadata displayed in a structured layout.
+You're researching 10 videos that rank in the top 5 for your target keyword. For each one, you want to know:
+- How old is the video?
+- How many views per year is it getting?
+- How long is the video?
+- What tags does it use?
+- How long is the description?
 
-**Step 4:** Copy any individual field you need — tags, description, or other metadata.
+You could open each video and manually compile this data. Or you can run each URL through this tool and pull all of that information in seconds.
 
-## Practical research workflow
+For 10 videos, the time savings is noticeable. For a proper 50-video competitor audit, this tool is essential.
 
-For competitive research: take 5-10 top-performing videos in your niche, view the data on each, and compare:
-- Are their titles front-loaded with the main keyword?
-- How long are their descriptions?
-- How many tags do they use?
-- What's the overlap in tags across top videos?
+## Reading views in context of upload date
 
-Those patterns tell you more about what YouTube rewards in your niche than any generic SEO guide.
+The most useful calculation you can make with video data is views per day (or views per year).
+
+Formula: Total views ÷ Days since upload = Views per day
+
+A video with 500,000 views uploaded 3 years ago (roughly 1,095 days) is getting about 456 views per day - decent, but not remarkable.
+
+A video with 500,000 views uploaded 8 months ago (roughly 240 days) is getting about 2,083 views per day. That's a video the algorithm is actively recommending.
+
+Understanding which competing videos are "growing slowly" vs. "still getting pushed by YouTube" tells you which topics have ongoing search demand and which have plateaued.
 
 ## Frequently asked questions
 
-**Does this show private or unlisted video data?**
-No. Only publicly available data from public videos.
+**Does this tool work for any public YouTube video?**
+Yes. Paste any public video URL and the tool returns all available metadata.
 
-**Can I see the full tag list, not just the first few?**
-Yes. The data viewer shows all tags associated with the video, not just what's visible on the YouTube page.
+**What if a creator has hidden their like count?**
+YouTube allows creators to hide like counts. If likes are hidden, the tool will show this field as unavailable.
 
-**Is view count live or cached?**
-The data is fetched when you paste the URL. For very recent or live videos, refresh to get updated counts.
+**Can I use this to view data on my own videos?**
+Yes. But for your own videos, YouTube Studio gives you more comprehensive analytics including impressions, CTR, average view duration, and revenue. This tool is most useful for analyzing videos you don't have Studio access to.
 
-**Can I export the metadata?**
-Copy individual fields directly from the display. Full export functionality may be added in future updates.
+**Does the view count update in real time?**
+The data reflects YouTube's API at the moment you run the check. YouTube caches view count data, so very recent views (in the last few minutes) may not be reflected.
 
-**Does it work on YouTube Shorts?**
-Yes. Shorts have metadata too. Paste a Shorts URL and view the available public data.
-
----
+**Can I export the data somewhere?**
+The tool displays the data in your browser. Copy and paste the information into a spreadsheet for structured competitive research.
 
 ---
+
+## The 10-second fact-check before your content decision
+
+Here's the specific moment this tool is most valuable: before you decide to make a video on a particular topic.
+
+You've identified a video that's performing well in your niche. You want to make a video on the same topic. But how old is that video? Is it from 2 years ago with declining views or from 6 months ago with accelerating traffic?
+
+That distinction changes your decision. A topic with old, declining videos is a content opportunity - the incumbent is stale and there's room for a fresh take to rank. A topic where 6-month-old videos are still growing means there's real, current demand and also recent competition.
+
+Paste the competing video's URL into this tool. Check the upload date and view count. Make your content decision based on that data, not your gut.
+
+That's a 10-second check that prevents you from spending a week making a video that enters a saturated or declining topic space.

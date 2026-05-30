@@ -3,7 +3,7 @@
 Is that channel making money from ads?
 Paste the URL and find out in under a second.
 
-This tool checks whether a YouTube video or channel is accepted into the YouTube Partner Program (YPP) and actively earning ad revenue. It pulls data directly from YouTube's servers — so the result is accurate, not estimated.
+This tool checks whether a YouTube video or channel is accepted into the YouTube Partner Program (YPP) and actively earning ad revenue. It pulls data directly from YouTube's servers - so the result is accurate, not estimated.
 
 No third-party guessing. No outdated cached data. Just the real monetization status of any public YouTube channel or video.
 
@@ -13,7 +13,7 @@ A lot of creators confuse "having ads on your video" with "being monetized."
 
 Here's the difference.
 
-YouTube can show ads on ANY video — including videos from channels not in the Partner Program. YouTube keeps 100% of that revenue. The creator gets nothing.
+YouTube can show ads on ANY video - including videos from channels not in the Partner Program. YouTube keeps 100% of that revenue. The creator gets nothing.
 
 Being monetized means your channel is accepted into the YouTube Partner Program. You've met the eligibility requirements, YouTube reviewed and approved your channel, and now you get a share of the ad revenue generated on your videos.
 
@@ -31,7 +31,7 @@ To qualify for YPP, a channel needs to meet YouTube's eligibility thresholds. Th
 
 Meeting those numbers is the starting line, not the finish line. YouTube manually reviews channels before approving them. Channels that technically hit the numbers can still be rejected if their content doesn't meet advertiser-friendly guidelines.
 
-The checker tells you whether a channel passed that review — the actual approved status.
+The checker tells you whether a channel passed that review - the actual approved status.
 
 ## Why you'd want to check if a channel is monetized
 
@@ -39,7 +39,7 @@ More situations come up than most people expect.
 
 **Sponsorship research.** If you're a brand or agency evaluating a creator for a paid collaboration, knowing whether they're in YPP tells you something about their channel health. A channel with 50,000 subscribers that isn't monetized may have had policy issues in the past.
 
-**Competitor analysis.** Tracking which channels in your niche are monetized — and which ones aren't — gives you a clearer picture of the competitive landscape.
+**Competitor analysis.** Tracking which channels in your niche are monetized - and which ones aren't - gives you a clearer picture of the competitive landscape.
 
 **Checking your own channel status.** Sometimes YouTube Studio's dashboard isn't immediately clear on approval status, especially right after an application decision. A direct check removes the ambiguity.
 
@@ -51,7 +51,7 @@ More situations come up than most people expect.
 
 It's a one-step process.
 
-**Step 1:** Copy the URL of the YouTube channel or video you want to check. Either format works — a video URL or a direct channel URL.
+**Step 1:** Copy the URL of the YouTube channel or video you want to check. Either format works - a video URL or a direct channel URL.
 
 **Step 2:** Paste it into the input field and hit Check Monetization.
 
@@ -59,7 +59,7 @@ It's a one-step process.
 
 The tool accepts both video links and channel links. If you paste a video URL, it identifies the channel behind the video and checks its YPP status.
 
-## What the result tells you — and what it doesn't
+## What the result tells you - and what it doesn't
 
 The checker confirms whether a channel is accepted into the YouTube Partner Program.
 
@@ -97,7 +97,7 @@ Yes. Paste any public YouTube video or channel URL. The tool checks the YPP stat
 It pulls data directly from YouTube. The result reflects actual YPP enrollment status, not an estimate. Accuracy is 100% based on what YouTube's own data returns.
 
 **Does a monetized channel earn money on every video view?**
-No. Not every view generates an ad. Ad blockers, YouTube Premium subscribers, and skipped ads all reduce monetized playback rate. On average, 40–60% of views result in a monetized impression for most channels.
+No. Not every view generates an ad. Ad blockers, YouTube Premium subscribers, and skipped ads all reduce monetized playback rate. On average, 40-60% of views result in a monetized impression for most channels.
 
 **My channel just got approved for YPP but the tool shows it as not monetized. Why?**
 There can be a short delay between YPP approval and when the status updates in YouTube's public data. Check again in a few hours.

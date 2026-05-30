@@ -2,7 +2,7 @@ Your podcast episode title does more work than most podcasters give it credit fo
 
 It shows up in Spotify search results. It appears in Apple Podcasts. It's what someone reads on an episode card before deciding whether to listen. And if you have a website or show notes page for each episode, the title is the most important on-page SEO element.
 
-This tool generates episode title ideas from your topic or guest angle — SEO angles, curiosity hooks, interview-specific formats, all of it.
+This tool generates episode title ideas from your topic or guest angle - SEO angles, curiosity hooks, interview-specific formats, all of it.
 
 ## What makes a podcast title actually work
 
@@ -30,7 +30,7 @@ They pick a title that sounds good to them and move on. Then they wonder why the
 
 Podcast search on Spotify and Apple Podcasts is a real discovery channel. Spotify's podcast discovery algorithm uses episode titles and descriptions as primary signals. An episode titled "Cold Email Strategy for B2B SaaS Founders" gets found by exactly the right people. "The Outreach Episode" gets found by almost nobody.
 
-Google also indexes podcast show notes pages. If your episode has a dedicated show notes page with the right title and description, it can rank in Google search — another free discovery channel most podcasters ignore.
+Google also indexes podcast show notes pages. If your episode has a dedicated show notes page with the right title and description, it can rank in Google search - another free discovery channel most podcasters ignore.
 
 ## For interviews: how to title a guest episode
 
@@ -54,11 +54,31 @@ They can match or be variations. For SEO, having the same keyword in both the ep
 Spotify displays around 60 characters before truncating. Apple Podcasts shows more. Aim for clarity in the first 50-60 characters.
 
 **Should I include the episode number in the title?**
-It's optional. Episode numbers help with internal organization but don't help with discovery. If you include one, put it at the end, not the front: "Building a SaaS Company in 12 Months — Ep. 47" works better than "Ep. 47: Building a SaaS Company in 12 Months."
+It's optional. Episode numbers help with internal organization but don't help with discovery. If you include one, put it at the end, not the front: "Building a SaaS Company in 12 Months - Ep. 47" works better than "Ep. 47: Building a SaaS Company in 12 Months."
 
 **Does this tool work for video podcast titles on YouTube?**
 Yes. The titles work for both audio and video podcast formats.
 
 ---
 
----
+## Give Podcast Episode Title Generator A Specific Starting Point
+
+This tool gets better when your input is specific.
+
+A broad topic gives you broad results. A focused topic gives you angles you can actually use.
+
+For example, "fitness" is too vague. "home workouts for busy dads" gives the tool a real direction.
+
+## Turn Podcast Episode Title Generator Ideas Into A Real Plan
+
+Do not use the first result without thinking.
+
+Pick 3 ideas that match your channel, then ask: can I make this video better than what already exists?
+
+If yes, save it. If no, rewrite the angle until it has a clearer promise.
+
+## Best Time To Use Podcast Episode Title Generator
+
+Use it before you open your content calendar.
+
+It helps you move from "I need to post something" to a real list of ideas, titles, or formats. That is a much better place to start.

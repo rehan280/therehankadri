@@ -11,7 +11,7 @@ import RelatedTools from "@/components/tools/RelatedTools";
 import { toolCatalog } from "@/lib/tool-catalog";
 
 const canonicalUrl = buildCanonicalUrl("/youtube-tags-generator");
-const pageTitle = "Free YouTube Tag Generator | No Login Required";
+const pageTitle = "YouTube Tag Generator - Generate SEO Tags Online";
 const pageDescription =
   "Generate SEO-optimized YouTube tags in 10 seconds and it's free, no login required. Covers long-tail, exact-match & channel tags. Try it now.";
 const socialImage = buildAbsoluteImageUrl();

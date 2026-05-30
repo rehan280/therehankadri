@@ -213,7 +213,7 @@ export default function MonetizationClient() {
               <div style={{ marginTop: "1.5rem", display: "flex", gap: "0.5rem", alignItems: "flex-start", padding: "1rem", backgroundColor: "rgba(59, 130, 246, 0.1)", borderRadius: "0.5rem" }}>
                 <AlertCircle size={20} color="rgb(59, 130, 246)" style={{ flexShrink: 0, marginTop: "0.1rem" }} />
                 <p style={{ fontSize: "0.875rem", color: "var(--text-secondary)" }}>
-                  <strong>Note:</strong> We check real YouTube Partner Program signals — memberships, merch, Super features, and ad data — rather than the outdated <code>yt_ad</code> flag, which YouTube removed in 2024. Results are estimates; only the channel owner can see their exact YPP status.
+                  <strong>Note:</strong> We check real YouTube Partner Program signals - memberships, merch, Super features, and ad data - rather than the outdated <code>yt_ad</code> flag, which YouTube removed in 2024. Results are estimates; only the channel owner can see their exact YPP status.
                 </p>
               </div>
             </section>

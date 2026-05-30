@@ -254,7 +254,7 @@ export async function GET() {
           item.snippet?.thumbnails?.medium?.url ||
           item.snippet?.thumbnails?.default?.url ||
           "",
-        country: item.snippet?.country || "—",
+        country: item.snippet?.country || " - ",
         description: (item.snippet?.description || "").slice(0, 90),
         category: item.snippet?.customUrl || "",
         subsRaw: parseInt(item.statistics?.subscriberCount || "0", 10),

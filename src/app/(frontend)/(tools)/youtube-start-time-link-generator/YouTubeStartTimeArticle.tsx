@@ -50,7 +50,7 @@ export default async function YouTubeStartTimeArticle({
   article: YouTubeStartTimeArticle;
 }) {
   const canonicalUrl = buildCanonicalUrl("/youtube-start-time-link-generator");
-  const shareTitle = "YouTube Start Time Link Generator - Free [2026]";
+  const shareTitle = "YouTube Timestamp Link Generator - Start at Any Time";
   const ratingData = await getToolRating("youtube-start-time-link-generator");
 
   return (

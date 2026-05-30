@@ -57,8 +57,10 @@ export default function ToolsPage() {
   const toolsPageJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
+    "@id": `${canonicalUrl}#webpage`,
     name: "SEO Tools | Rehan Kadri",
     url: canonicalUrl,
+    inLanguage: "en-US",
     description:
       "A growing collection of free SEO and growth tools from Rehan Kadri.",
     about: {
@@ -66,11 +68,26 @@ export default function ToolsPage() {
     },
     mainEntity: {
       "@type": "ItemList",
+      name: "Free YouTube and SEO Tools",
+      numberOfItems: tools.length,
       itemListElement: tools.map((tool, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        name: tool.title,
-        url: buildCanonicalUrl(`/${tool.slug}`),
+        item: {
+          "@type": "SoftwareApplication",
+          name: tool.title,
+          url: buildCanonicalUrl(`/${tool.slug}`),
+          description: tool.shortDescription,
+          applicationCategory: "WebApplication",
+          applicationSubCategory: tool.category,
+          operatingSystem: "Web",
+          isAccessibleForFree: true,
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+          },
+        },
       })),
     },
   };

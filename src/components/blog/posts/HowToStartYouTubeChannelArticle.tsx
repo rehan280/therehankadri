@@ -247,7 +247,7 @@ function parseMarkdownArticle(markdown: string): ParsedMarkdownArticle {
         continue;
       }
 
-      /* H3 inside FAQ — skip heading handler, fall through to FAQ parser */
+      /* H3 inside FAQ - skip heading handler, fall through to FAQ parser */
       if (inFaqSection && level === 3) {
         /* don't increment index; let FAQ handler below process this line */
       } else {
