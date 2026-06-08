@@ -25,9 +25,23 @@ const socialLinks = [
 ];
 
 const youtubeTools = [
+  { name: "YouTube video ideas generator", href: "/youtube-video-ideas-generator" },
   { name: "YouTube tag generator", href: "/youtube-tags-generator" },
+  { name: "YouTube hashtags generator", href: "/youtube-hashtags-generator" },
+  { name: "YouTube title generator", href: "/youtube-title-generator" },
+  { name: "YouTube channel name generator", href: "/youtube-channel-name-generator" },
+  { name: "YouTube thumbnail downloader", href: "/youtube-thumbnail-downloader" },
+  { name: "YouTube money calculator", href: "/youtube-money-calculator" },
+  { name: "YouTube comment picker", href: "/youtube-comment-picker" },
   { name: "YouTube title extractor", href: "/youtube-title-extractor" },
   { name: "YouTube description extractor", href: "/youtube-description-extractor" },
+  { name: "YouTube video SEO checker", href: "/youtube-video-seo-checker" },
+  { name: "YouTube embed code generator", href: "/youtube-embedder" },
+  { name: "YouTube channel ID finder", href: "/youtube-channel-id-finder" },
+  { name: "YouTube tags inspector", href: "/youtube-tags-inspector" },
+  { name: "YouTube timestamp link generator", href: "/youtube-timestamp" },
+  { name: "YouTube description generator", href: "/youtube-description-generator" },
+  { name: "YouTube script generator", href: "/youtube-script-generator" },
 ];
 
 function renderSocialIcon(type: "linkedin" | "instagram" | "youtube" | "x") {
@@ -111,6 +125,9 @@ export default function SiteFooter() {
                 {tool.name}
               </Link>
             ))}
+            <Link href="/tools" prefetch className={styles.seeAllLink} style={{ color: "#ff5a36", fontWeight: "600", gridColumn: "1 / -1", marginTop: "1rem" }}>
+              See all tools →
+            </Link>
           </div>
         </nav>
 
@@ -118,8 +135,8 @@ export default function SiteFooter() {
           <p>© 2026 The Rehan Kadri. All rights reserved.</p>
           <div className={styles.links}>
             <Link href="/" prefetch>Home</Link>
+            <Link href="/services" prefetch>Services</Link>
             <Link href="/#works" prefetch>Results</Link>
-            <Link href="/#process" prefetch>Systems</Link>
             <Link href="/blog" prefetch>Blog</Link>
             <Link href="/contact" prefetch>Contact</Link>
           </div>
@@ -128,13 +145,3 @@ export default function SiteFooter() {
     </footer>
   );
 }
-
-
-
-
-
-
-
-
-
-

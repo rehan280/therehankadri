@@ -93,6 +93,7 @@ type ToolResult =
   | { kind: "list"; items: string[] }
   | { kind: "insights"; items: string[] }
   | { kind: "text-list"; items: string[] }
+  | { kind: "idea-list"; items: { title: string; description: string; score: number; category: string }[] }
   | { kind: "yt-analysis"; videos: VideoResult[]; summary: string[] }
   // ── New tool result types ──────────────────────────────────────────────────
   | { kind: "ctr"; ctr: number; impressions: number; clicks: number }
@@ -738,6 +739,7 @@ function resultToCopyText(result: ToolResult): string {
     case "picker":      return `Winner: ${result.winner}\nEntries: ${result.count}`;
     case "score":       return [`Score: ${result.score}/100`, ...result.notes].join("\n");
     case "category":    return `Category: ${result.category}\nKeyword: ${result.keyword}\n${result.evidence}`;
+    case "idea-list":   return result.items.map(i => `${i.title}\n\n${i.description}\n[Score: ${i.score}/100 | ${i.category}]`).join("\n\n---\n\n");
     case "chips": case "list": case "insights": case "text-list":
       return result.items.join("\n");
     case "yt-analysis":
@@ -1413,6 +1415,40 @@ function TextListResult({ items, onCopy, copyTarget }: { items: string[]; onCopy
           )}
         </div>
       ))}
+    </div>
+  );
+}
+
+function IdeaListResult({ items, onCopy, copyTarget }: { items: { title: string; description: string; score: number; category: string }[]; onCopy: (v: string, t: string) => void; copyTarget: string | null }) {
+  return (
+    <div style={{ display: "grid", gap: "1rem" }}>
+      {items.map((item, i) => {
+        const copyText = `${item.title}\n\n${item.description}\n[Score: ${item.score}/100 | ${item.category}]`;
+        const scoreColor = item.score >= 80 ? "#10b981" : item.score >= 60 ? "#facc15" : "#f87171";
+        const scoreBg = item.score >= 80 ? "rgba(16,185,129,0.1)" : item.score >= 60 ? "rgba(250,204,21,0.1)" : "rgba(248,113,113,0.1)";
+
+        return (
+          <div key={i} style={{ padding: "1.25rem", background: "var(--bg-alt)", border: "1px solid var(--border)", borderRadius: "12px", display: "flex", flexDirection: "column", gap: "0.75rem", position: "relative", overflow: "hidden", transition: "transform 0.2s, box-shadow 0.2s" }}
+               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.12)"; }}
+               onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <div style={{ padding: "0.25rem 0.6rem", borderRadius: "6px", background: scoreBg, border: `1px solid ${scoreColor}40`, color: scoreColor, fontSize: "0.75rem", fontWeight: 700 }}>
+                  Score: {item.score}/100
+                </div>
+                <div style={{ padding: "0.25rem 0.6rem", borderRadius: "6px", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border)", color: "var(--text-secondary)", fontSize: "0.75rem", fontWeight: 600 }}>
+                  {item.category}
+                </div>
+              </div>
+              <button type="button" className={`${styles.smButton} ${styles.smButtonGhost}`} onClick={() => onCopy(copyText, item.title)}>
+                {copyTarget === item.title ? "Copied ✓" : "Copy"}
+              </button>
+            </div>
+            <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 800, color: "var(--foreground)", lineHeight: 1.4 }}>{item.title}</h3>
+            <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-secondary)", lineHeight: 1.5 }}>{item.description}</p>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -3540,11 +3576,14 @@ export default function GenericToolClient({ tool }: Props) {
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || "Failed to generate ideas");
             
-            // Format ideas for display (title + description + score)
-            const formattedIdeas = data.ideas.map((idea: any) => 
-              `${idea.title}\n\n${idea.description}\n[Score: ${idea.trend_score}/100 | ${idea.category}]`
-            );
-            setResult({ kind: "text-list", items: formattedIdeas });
+            // Format ideas for display
+            const ideaItems = data.ideas.map((idea: any) => ({
+              title: idea.title,
+              description: idea.description,
+              score: idea.trend_score,
+              category: idea.category,
+            }));
+            setResult({ kind: "idea-list", items: ideaItems });
             break;
           }
           case "keyword-generator": {
@@ -3958,6 +3997,7 @@ export default function GenericToolClient({ tool }: Props) {
       case "chips":         return <ChipsResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
       case "list":          return <ListResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
       case "insights":      return <InsightsResult items={result.items} />;
+      case "idea-list":     return <IdeaListResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
       case "text-list":     return <TextListResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
       case "yt-analysis":   return <InsightsResult items={result.summary} />;
       // ── New tool results ──────────────────────────────────────────────────

@@ -8,7 +8,7 @@ import { toolCatalog } from "@/lib/tool-catalog";
 const blogHref = "/blog";
 const statsHref = "/stats";
 const toolsHref = "/tools";
-const serviceHref = "/#services";
+const serviceHref = "/services";
 const aboutHref = "/about";
 const contactHref = "/contact";
 
@@ -32,7 +32,7 @@ export default function HomeNavbar() {
   const isBlogActive = pathname.startsWith(blogHref);
   const isStatsActive = pathname.startsWith(statsHref);
   const isToolsActive = pathname.startsWith(toolsHref) || toolCatalog.some((tool) => pathname === `/${tool.slug}`);
-  const isServiceActive = pathname === "/";
+  const isServiceActive = pathname === "/services";
   const isAboutActive = pathname === aboutHref || pathname === contactHref;
 
   if (shouldHideNavbar) {
