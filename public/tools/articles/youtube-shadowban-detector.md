@@ -8,6 +8,14 @@ That's exactly what a shadowban feels like.
 
 This tool checks your YouTube channel or video for the signals that indicate algorithmic restriction - search indexing status, family-safe flags, and content visibility health - and returns a health score with a diagnosis.
 
+## Am I shadowbanned on YouTube? Start with these checks
+
+If you are asking "am I shadowbanned on YouTube," do not start by changing everything on your channel. Start with evidence.
+
+A YouTube shadowban checker should look for the signals that usually show up when visibility is restricted: your own title not appearing in search, sudden impression collapse, family-safe flags, or metadata that may trigger automated filters.
+
+Run the detector on the affected video first. If one video is flagged but the rest of the channel is healthy, you are likely dealing with a video-level restriction. If multiple recent uploads show the same pattern, then audit channel-level metadata, upload topics, and policy warnings inside YouTube Studio.
+
 ## What is a YouTube shadowban?
 
 YouTube doesn't officially use the term "shadowban." But what happens in practice is real, documented, and something thousands of creators deal with every year.

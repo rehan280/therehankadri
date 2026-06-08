@@ -131,7 +131,7 @@ export async function GET(request: Request) {
     }
 
     const queries = buildAutocompleteQueries(keyword);
-    
+
     // Concurrently fetch suggestions and SERP
     const [suggestionGroups, serpVideosUnofficial] = await Promise.all([
       Promise.all(queries.map((query) => fetchSuggestionSet(query))),

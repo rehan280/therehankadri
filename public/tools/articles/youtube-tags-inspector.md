@@ -4,6 +4,14 @@ Some creators dump 30 loosely related tags onto every video and call it SEO. Oth
 
 This tool extracts the exact tags from any YouTube video and shows you what successful channels are actually using. No guessing. No theory. Real data from real videos.
 
+## YouTube tag viewer for competitor research
+
+Think of this as a tag viewer for any public YouTube video. Paste a URL and you can see the tags the creator used, then compare those tags against the title, description, and ranking position.
+
+That comparison is more useful than the tags alone. If the same keyword appears in the title, description, and first few tags, it is probably the video's primary search target. If a tag appears only once and does not match the content, ignore it.
+
+Use the tag viewer to build a better tag set, but also to understand how top videos frame the topic.
+
 ## What tags actually do in 2026
 
 YouTube uses tags to confirm your video's topic - not to discover it from scratch.

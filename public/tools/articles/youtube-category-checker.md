@@ -4,6 +4,16 @@ Channel categories are set at the account level in YouTube Studio under Advanced
 
 This tool shows you the channel category for any YouTube channel. Use it to check your own channel's classification and to see what category top creators in your niche are using.
 
+## YouTube category checker vs. video category finder
+
+People search for "category checker" in two different ways, so here is the clean distinction.
+
+A YouTube category checker helps you review whether a channel or video is sitting in the right broad content category. A YouTube video category finder is more specific: it looks at an individual video and shows the category attached to that upload.
+
+Use the checker when you are auditing your channel settings or comparing creators in your niche. Use a video category finder when you need to inspect one specific upload before making your own video, ad targeting decision, or competitor note.
+
+For SEO, the goal is not to force your content into a trendy category. The goal is to remove mismatch. A gaming tutorial should not look like People & Blogs, and a business education channel should not look like Entertainment unless that is truly the main format.
+
 ## Channel category vs. video category: what's different
 
 **Video category** applies to individual videos. You set it per upload. It affects how that specific video is clustered in recommendations.

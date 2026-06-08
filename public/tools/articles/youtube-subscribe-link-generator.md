@@ -4,6 +4,14 @@ But most creators send viewers to their channel's homepage and hope they figure 
 
 This tool generates a direct YouTube subscribe link for any channel. No login required. Paste the channel URL or handle, get the link, start using it.
 
+## How to create a subscribe link for YouTube
+
+To create a subscribe link for YouTube, you need your channel URL plus YouTube's subscription confirmation parameter. The final link sends visitors to your channel and prompts them to subscribe immediately.
+
+This tool handles the formatting for you. Paste your channel link, @handle, or channel ID and it generates the correct subscription YouTube link. Use it anywhere you would normally ask people to subscribe: video descriptions, bios, landing pages, email signatures, and pinned comments.
+
+If you are trying to generate a subscribe link for a 1K subscriber push, keep the call-to-action specific. Tell people what they get by subscribing, then use the direct link to reduce friction.
+
 ## What a YouTube subscribe link actually does
 
 A standard YouTube channel URL takes visitors to your channel homepage. They browse, maybe watch a video, and then maybe subscribe.

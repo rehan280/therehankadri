@@ -4,6 +4,11 @@ export const toolDefinition: ToolDefinition = {
     slug: "youtube-description-extractor",
     title: "YouTube Description Extractor",
     keyword: "youtube description extractor",
+    aliases: [
+      "link and description download",
+      "youtube description download",
+      "youtube description copy",
+    ],
     category: "YouTube SEO & Optimization",
     kind: "existing",
     shortDescription: "Extract the full description, tags, and hashtags from any YouTube video.",

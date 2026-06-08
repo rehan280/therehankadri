@@ -59,6 +59,7 @@ export type ToolDefinition = {
   slug: string;
   title: string;
   keyword: string;
+  aliases?: string[];
   category: ToolCategory;
   shortDescription: string;
   intro: string;

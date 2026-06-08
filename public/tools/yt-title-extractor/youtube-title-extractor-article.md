@@ -26,6 +26,16 @@ One-click copy to clipboard. Or download as a .txt file.
 
 ---
 
+## YouTube title copy and download workflow
+
+If you need to copy a YouTube video title, downloading the page or retyping the title is the slow way. Paste the video URL here and the tool extracts the exact current title in one click.
+
+This helps when you are building a title swipe file, documenting competitor videos, or saving titles before a creator changes them. Use the download option when you want the title, description, tags, and other public metadata stored together as a text file.
+
+For SEO research, do not stop at one title. Extract 10-20 titles from ranking videos, then compare keyword placement, hook style, length, and repeated phrases. That is how a simple YouTube title copy task turns into useful title strategy.
+
+---
+
 ## What this tool extracts
 
 You get more than just the title.

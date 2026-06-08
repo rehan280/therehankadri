@@ -39,6 +39,7 @@ export async function generateGenericToolMetadata(toolSlug: string): Promise<Met
       imageAlt: `${tool.title} by The Rehan Kadri`,
       keywords: [
         tool.keyword,
+        ...(tool.aliases ?? []),
         `free ${tool.keyword}`,
         tool.title.toLowerCase(),
         tool.category.toLowerCase(),
@@ -128,6 +129,7 @@ export default async function GenericToolPage({ toolSlug }: { toolSlug: string }
         featureList: [
           `Free ${tool.title}`,
           tool.intro,
+          ...(tool.aliases ?? []).map((alias) => `Supports ${alias}`),
           ...tool.highlights,
           "No login required",
           "Copy-ready results",
@@ -194,6 +196,7 @@ export default async function GenericToolPage({ toolSlug }: { toolSlug: string }
         articleSection: tool.category,
         keywords: [
           tool.keyword,
+          ...(tool.aliases ?? []),
           `free ${tool.keyword}`,
           tool.title,
           ...tool.highlights,
@@ -230,6 +233,11 @@ export default async function GenericToolPage({ toolSlug }: { toolSlug: string }
               {tool.title}
             </h1>
             <p className={styles.subtitle}>{tool.shortDescription}</p>
+            {tool.aliases?.length ? (
+              <p className={styles.subtitle}>
+                Also covers: {tool.aliases.slice(0, 4).join(", ")}.
+              </p>
+            ) : null}
 
             <div className={styles.tabRow}>
               <span className={styles.tabItem}>

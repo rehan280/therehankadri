@@ -4,6 +4,14 @@ A finance channel can earn $15-40 per 1,000 views. A gaming channel might earn $
 
 This tool calculates your estimated monthly YouTube revenue based on your actual view count and your niche's RPM. Paste the numbers. See the estimate in seconds.
 
+## YouTube monetization calculator vs. ad revenue calculator
+
+Creators use a few names for the same job: YouTube monetization calculator, YouTube AdSense calculator, YouTube ad revenue calculator, and YouTube earnings calculator.
+
+The important thing is the formula. Estimated revenue equals views divided by 1,000, multiplied by RPM. If you know your actual RPM from YouTube Studio, use that number. If you are planning before monetization, use a realistic niche benchmark and treat the output as a scenario, not a promise.
+
+This calculator is best for answering practical questions: how many views do I need for $500 per month, what happens if my RPM doubles, or how much could a video earn if it reaches 100,000 views?
+
 ## Why your view count and earnings don't match what you expect
 
 Most YouTube earnings calculators online use a single average RPM of $1-3. That's wildly inaccurate for most creators.

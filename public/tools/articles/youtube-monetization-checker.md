@@ -7,6 +7,14 @@ This tool checks whether a YouTube video or channel is accepted into the YouTube
 
 No third-party guessing. No outdated cached data. Just the real monetization status of any public YouTube channel or video.
 
+## Run a monetization check before you trust the numbers
+
+A YouTube monetization checker is different from a revenue calculator. The checker answers "is this channel monetized?" The calculator answers "how much could this channel earn?"
+
+That difference matters. A channel can have strong views and still be outside YPP. It might not meet the requirements yet, it might have policy issues, or it might have lost monetization after approval. Running a quick monetization check gives you the status before you make assumptions about AdSense income.
+
+Use this tool for terms like "yt monetization checker," "youtube monetized checker," and "monetization check" because the intent is the same: verify whether a public channel or video is actually eligible to earn ad revenue.
+
 ## What "monetized" actually means on YouTube
 
 A lot of creators confuse "having ads on your video" with "being monetized."

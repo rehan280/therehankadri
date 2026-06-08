@@ -8,7 +8,9 @@ You type in your main keyword. The tool spits out a list of relevant tags. You c
 
 That's it.
 
-Instead of spending 20 minutes figuring out how to generate tags for YouTube videos manually, this free video tag tool gets you a full, optimized list in about 10 seconds. It works as both a tag generator and optimizer are covering everything from exact-match keywords to long-tail variations in one shot.
+Instead of spending 20 minutes figuring out how to generate tags for YouTube videos manually, this free video tag tool gets you a full, optimized list in about 10 seconds. It works as both a free tag generator and optimizer, covering everything from exact-match keywords to long-tail variations in one shot.
+
+If you are looking for free YouTube tags, a YouTube tag generator free of login walls, or a vidIQ tag generator alternative that opens directly on the tool, this page is built for that faster workflow.
 
 ---
 

@@ -4,6 +4,13 @@ export const toolDefinition: ToolDefinition = {
     slug: "youtube-title-extractor",
     title: "YouTube Title Extractor",
     keyword: "youtube title extractor",
+    aliases: [
+      "youtube title download",
+      "youtube title copy",
+      "youtube title downloader",
+      "youtube video title copy",
+      "youtube title copy tool",
+    ],
     category: "YouTube SEO & Optimization",
     kind: "existing",
     shortDescription: "Extract any YouTube video title from a URL for research and audits.",

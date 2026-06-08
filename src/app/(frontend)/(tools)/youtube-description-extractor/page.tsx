@@ -34,6 +34,9 @@ export const metadata: Metadata = {
     imageAlt: "YouTube Description Extractor by The Rehan Kadri",
     keywords: [
       "youtube description extractor",
+      "link and description download",
+      "youtube description download",
+      "youtube description copy",
       "youtube metadata extractor",
       "youtube title and description extractor",
       "extract youtube description",

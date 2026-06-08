@@ -2,6 +2,14 @@ Your YouTube channel ID is the unique identifier that never changes - even if yo
 
 Most creators need their channel ID for one of three reasons: setting up an RSS feed, integrating with a third-party tool, or building a custom subscribe link. This tool finds it in seconds from any channel URL or handle.
 
+## Get a YouTube channel ID from any channel link
+
+If you searched "get YouTube channel ID," you probably have a handle or custom URL, but the tool you are using needs the permanent UC ID.
+
+Paste the channel URL into this finder and it returns the channel ID without making you inspect page source, open YouTube Studio, or guess from the handle. That is useful for RSS feeds, API calls, automation tools, dashboards, and subscribe link workflows.
+
+The key rule: handles can change, channel IDs do not. When an integration asks for stable identification, use the channel ID.
+
 ## What a YouTube channel ID is and why it matters
 
 Every YouTube channel has two identifiers:

@@ -4,6 +4,12 @@ export const toolDefinition: ToolDefinition = {
     slug: "youtube-tags-inspector",
     title: "YouTube Tags Extractor",
     keyword: "youtube tags extractor",
+    aliases: [
+      "tag viewer",
+      "youtube tag viewer",
+      "youtube tags viewer",
+      "youtube tags inspector",
+    ],
     category: "YouTube SEO & Optimization",
     kind: "tags-inspector",
     shortDescription: "Extract hidden YouTube video tags from any public URL instantly.",

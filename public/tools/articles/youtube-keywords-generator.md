@@ -2,6 +2,14 @@ Keyword research is how you make sure your videos get found. Not just seen - fou
 
 This tool generates keyword ideas for any YouTube topic. Type in a seed phrase, get a full list of related keywords your audience is already searching for - organized by relevance and length-tail specificity.
 
+## Best free keyword tool for YouTube: what to look for
+
+The best free YouTube keyword tool should do three things well: generate real search phrases, separate broad topics from long-tail ideas, and give you copy-ready keywords without forcing a signup.
+
+Use this page when you need a quick keyword generator for YouTube free of paywalls. Start with one seed topic, then look for keyword ideas that match a specific video angle. A phrase like "youtube keyword" is too broad for most creators, but "youtube keyword research for small channels" gives you a clearer title, description, and tags direction.
+
+If you are comparing free YouTube keyword tools, judge the output by usefulness, not list size. Ten relevant keywords you can actually build videos around beat 100 generic suggestions that all say the same thing.
+
 ## The difference between keywords your audience searches and keywords you assume they search
 
 Here's the mistake almost every early-stage YouTube creator makes: they assume they know what keywords their audience uses.

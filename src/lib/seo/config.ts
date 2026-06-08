@@ -1,6 +1,6 @@
 export const SITE_NAME = "The Rehan Kadri";
 export const SITE_URL = "https://www.therehankadri.com";
-export const DEFAULT_SOCIAL_IMAGE_PATH = "/rehanous-website.webp";
+export const DEFAULT_SOCIAL_IMAGE_PATH = "/web-app-manifest-512x512.png";
 export const GOOGLE_SITE_VERIFICATION = "-iqotlS2yoMry14iyOTphf1XHwjiHO4lOvjAU9o7Hpg";
 
 export function buildCanonicalUrl(path = "") {

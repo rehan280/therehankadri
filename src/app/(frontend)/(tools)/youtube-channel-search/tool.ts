@@ -4,6 +4,11 @@ export const toolDefinition: ToolDefinition = {
     slug: "youtube-channel-search",
     title: "YouTube Channel Search",
     keyword: "youtube channel search",
+    aliases: [
+      "channel search",
+      "youtube channel finder",
+      "search youtube channels",
+    ],
     category: "YouTube Video & Channel Utilities",
     kind: "channel-search",
     shortDescription: "Search YouTube channels by topic, name, or niche with targeted search links.",

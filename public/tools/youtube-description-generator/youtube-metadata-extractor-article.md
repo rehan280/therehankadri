@@ -26,6 +26,16 @@ One-click copy to clipboard. Or download as a .txt file. Either works.
 
 ---
 
+## Link and description download workflow
+
+Sometimes you do not just need to copy a YouTube description. You need the link and description downloaded together so you can save research, document sources, or build a content brief.
+
+Use this extractor as a YouTube description download tool when you want the public video URL, title, description, tags, hashtags, timestamps, and metadata in one place. Copy the fields for quick work, or download the result as a text file when you need a permanent record.
+
+This is useful for agencies, editors, and creators who audit many videos. Instead of keeping one tab open for every competitor video, extract the metadata, save the file, and review everything later in a cleaner workspace.
+
+---
+
 ## What this tool extracts
 
 Here's exactly what you get:

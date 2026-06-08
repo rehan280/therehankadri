@@ -4,6 +4,14 @@ The platform's native search doesn't filter by channel type. You can't easily fi
 
 This tool does exactly that.
 
+## Channel search for competitor and niche research
+
+A normal YouTube search usually gives you videos. A channel search helps you find the creators behind a niche.
+
+Use this page when you need to search YouTube channels by topic, keyword, or audience category. It is useful for finding competitors, collaboration partners, channel examples for a client, or creators covering the same problem from different angles.
+
+For SEO research, the channel list matters because it shows who already owns attention in the niche. Study their playlists, titles, upload cadence, and channel keywords before you decide what content to make.
+
 ## What channel search actually solves
 
 If you're doing competitor research, niche analysis, or trying to find collaboration partners, you need to find channels - not just videos.

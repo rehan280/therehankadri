@@ -40,6 +40,22 @@ By the end, you'll know how to edit audio on a Windows PC, Mac, iPhone, Android,
 6. Normalize to the right target, such as -14 LUFS for YouTube
 7. Export in WAV for editing or MP3 for delivery
 
+## How to edit voice recordings
+
+Voice recordings need a slightly different workflow than music. The goal is not to make the voice sound "produced." The goal is to make every word easy to understand.
+
+For a voice recording, start by cutting dead air, long pauses, repeated takes, mouth clicks, and heavy breaths. Then remove constant room noise before you touch EQ. After cleanup, cut low-end rumble below 80-100 Hz, reduce muddy frequencies around 200-400 Hz, add a small clarity boost around 3-5 kHz, and use compression to even out loud and quiet words.
+
+If you searched "how to edit voice recording," "edit voice," or "audio correction," this is the core order: clean first, shape second, control volume third, export last.
+
+## How to edit songs and music
+
+Editing songs is different from editing spoken audio because you are protecting musical balance, not just speech clarity.
+
+For music, avoid aggressive noise reduction unless the recording has obvious hiss or hum. Trim the start and end cleanly, apply fades so the song does not click, use EQ gently, and normalize the final level without crushing the dynamics. If you are editing a song for a video, make sure the music sits below the voice instead of competing with it.
+
+For most creator workflows, the safest music edit is simple: trim, fade, lower the background track under narration, and export at the same sample rate as your video project.
+
 ## Audio Editing Workflow Summary
 
 | Step | Action | Tool |

@@ -2,6 +2,14 @@ Every YouTube video carries hidden metadata: view count, like count, comment cou
 
 This tool pulls all of that data for any public YouTube video and displays it in a clean, organized format. Paste the URL, see everything.
 
+## YouTube data viewer for quick metadata audits
+
+Use this YouTube data viewer when you need more than the public video page shows at a glance. It works like a clean metadata viewer: paste one URL and review the title, description, tags, video ID, upload date, duration, and engagement numbers together.
+
+That matters because a video's performance rarely comes from one field. A strong title with weak tags tells a different story than a weak title with a detailed description. A recent upload with fast view growth means something different from an older upload with the same view count.
+
+If you are doing SEO research, save the data for 5-10 ranking videos and compare patterns. The repeated phrases, title formats, upload recency, and video lengths tell you what the niche is rewarding right now.
+
 ## Why raw video metadata is more useful than it looks
 
 The numbers that appear publicly on a YouTube video (views, likes, comments) tell you the outcome. The metadata tells you the full story.

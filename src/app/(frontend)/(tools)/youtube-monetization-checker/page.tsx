@@ -32,6 +32,11 @@ export const metadata: Metadata = {
     imageAlt: "YouTube Monetization Checker by The Rehan Kadri",
     keywords: [
       "youtube monetization checker",
+      "yt monetization checker",
+      "youtube monetized checker",
+      "monetization checker youtube",
+      "check monetization",
+      "monetization check",
       "check if youtube channel is monetized",
       "is this video monetized",
       "youtube partner program checker",
@@ -85,6 +90,7 @@ export default async function YouTubeMonetizationCheckerPage() {
       reviewBody: t.quote,
     })),
     featureList: [
+      "Run a YouTube monetization check",
       "Check YouTube channel monetization status",
       "Check YouTube video monetization status",
       "Verify hidden source code flags",

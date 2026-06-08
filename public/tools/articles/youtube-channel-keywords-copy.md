@@ -4,6 +4,18 @@ But they matter. YouTube uses channel keywords to understand the broader topic a
 
 This tool extracts the exact channel keywords from any YouTube channel so you can see what competitors are using to signal their niche to the algorithm.
 
+## YouTube channel keywords list: what to copy and what to ignore
+
+When you extract a YouTube channel keywords list, do not treat it like a magic ranking formula. Treat it like a map of how that creator describes their niche.
+
+A useful channel keywords generator or channel tags extractor should help you find three kinds of terms:
+
+- Core niche keywords that appear across several competing channels
+- Format keywords like tutorial, review, reaction, shorts, podcast, or documentary
+- Positioning keywords that describe the creator's unique angle
+
+Copying every channel keyword from a competitor is usually a mistake. Instead, collect keywords from 5-10 channels, remove anything irrelevant, and keep the terms that accurately describe your own videos. That gives YouTube a cleaner channel-level topic signal.
+
 ## Where channel keywords actually appear in YouTube's system
 
 Channel keywords are set in YouTube Studio under Settings > Channel > Basic Info > Keywords. They're stored in the channel's page metadata - not visible to viewers, but read by YouTube's categorization system.

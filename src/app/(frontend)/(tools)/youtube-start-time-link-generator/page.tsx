@@ -33,6 +33,12 @@ export const metadata: Metadata = {
     imageAlt: "YouTube Start Time Link Generator by The Rehan Kadri",
     keywords: [
       "youtube start time link generator",
+      "youtube link generator",
+      "youtube video link generator",
+      "link youtube time",
+      "youtube time link",
+      "time youtube link",
+      "link generator youtube",
       "youtube timestamp link generator",
       "youtube link with timestamp",
       "how to share youtube video at specific time",
@@ -118,6 +124,7 @@ export default async function YouTubeStartTimeLinkGeneratorPage() {
     articleSection: "YouTube SEO",
     keywords: [
       "youtube start time link generator",
+      "youtube link generator",
       "youtube timestamp link generator",
       "youtube link with timestamp",
       "youtube timestamp link mobile",

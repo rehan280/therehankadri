@@ -32,6 +32,8 @@ export const metadata: Metadata = {
     imageAlt: "YouTube Shadowban Detector by The Rehan Kadri",
     keywords: [
       "youtube shadowban detector",
+      "youtube shadowban checker",
+      "am i shadowbanned on youtube",
       "is my channel shadowbanned",
       "youtube search restriction check",
       "youtube algorithm check",
@@ -85,6 +87,7 @@ export default async function YouTubeShadowbanDetectorPage() {
       reviewBody: t.quote,
     })),
     featureList: [
+      "Check if you are shadowbanned on YouTube",
       "Check YouTube channel search indexing",
       "Detect 'Family Safe' restriction flags",
       "Analyze shadowban risk score",
