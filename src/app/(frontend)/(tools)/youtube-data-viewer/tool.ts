@@ -14,6 +14,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube Video & Channel Utilities",
     kind: "data-viewer",
     shortDescription: "View all public YouTube video data and metadata in one clean layout.",
+    seoTitle: "Free YouTube Data Viewer - No Signup Required",
+    seoDescription: "View all public YouTube video data and metadata in one clean layout. Use our free YouTube Data Viewer online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Paste a video URL and see every metadata field in one place. Title, description, tags, views, dates, all of it.",
     highlights: ["Metadata viewer", "Public data", "Copy fields"],
   };

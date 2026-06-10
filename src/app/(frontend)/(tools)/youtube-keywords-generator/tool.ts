@@ -15,6 +15,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube SEO & Optimization",
     kind: "keyword-generator",
     shortDescription: "Generate free YouTube keyword ideas from a seed topic to rank in search.",
+    seoTitle: "Free YouTube Keyword Generator: Fast & Online",
+    seoDescription: "Generate free YouTube keyword ideas from a seed topic to rank in search. Use our free YouTube Keyword Generator online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Type one topic and get a full YouTube keyword list. Use the ideas in your titles, tags, and descriptions to get found.",
     highlights: ["Long-tail ideas", "Search intent", "Copy-ready"],
   };

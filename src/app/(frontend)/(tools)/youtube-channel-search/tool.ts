@@ -12,6 +12,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube Video & Channel Utilities",
     kind: "channel-search",
     shortDescription: "Search YouTube channels by topic, name, or niche with targeted search links.",
+    seoTitle: "Free YouTube Channel Search - No Signup Required",
+    seoDescription: "Search YouTube channels by topic, name, or niche with targeted search links. Use our free YouTube Channel Search online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Type a niche or creator name and get targeted YouTube channel search links. Find competitors in seconds.",
     highlights: ["Search links", "Channel discovery", "Fast research"],
   };

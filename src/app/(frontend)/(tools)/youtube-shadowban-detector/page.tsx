@@ -206,8 +206,11 @@ export default async function YouTubeShadowbanDetectorPage() {
         <div className={styles.wrap}>
           <div className={styles.heroInner}>
             <nav className={styles.breadcrumbNav} aria-label="Breadcrumb">
+              <Link href="/">Home</Link>
+              <span className={styles.breadcrumbSeparator}>›</span>
               <Link href="/tools">Tools</Link>
-              <span>/</span>
+              <span className={styles.breadcrumbSeparator}>›</span>
+              <span className={styles.breadcrumbCurrent}>YouTube Shadowban Checker</span>
             </nav>
             <h1 className={`${styles.title} ${styles.singleLineToolTitle}`}>
               YouTube Shadowban Detector

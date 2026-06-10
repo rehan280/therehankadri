@@ -15,6 +15,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube Analytics & Monetization",
     kind: "existing",
     shortDescription: "Instantly check if any YouTube video or channel is monetized.",
+    seoTitle: "Free YouTube Monetization Checker: Instant Analysis",
+    seoDescription: "Instantly check if any YouTube video or channel is monetized. Use our free YouTube Monetization Checker online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Paste a YouTube video or channel link to verify if it is accepted into the YouTube Partner Program and earning ad revenue.",
     highlights: ["Channel & Video support", "Source code verification", "Instant results"],
   };

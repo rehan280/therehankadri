@@ -15,6 +15,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube Video & Channel Utilities",
     kind: "subscribe-link",
     shortDescription: "Create a YouTube subscribe link that opens the subscription dialog instantly.",
+    seoTitle: "Free YouTube Subscribe Link Generator: Fast & Online",
+    seoDescription: "Create a YouTube subscribe link that opens the subscription dialog instantly. Use our free YouTube Subscribe Link Generator online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Generate a one-click subscribe link for your bio, email, and descriptions. Fewer steps means more subscribers.",
     highlights: ["Subscribe CTA", "Channel links", "Copy-ready"],
   };

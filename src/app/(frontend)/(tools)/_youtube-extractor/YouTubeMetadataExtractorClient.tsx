@@ -12,6 +12,7 @@ import {
   UserRound,
 } from "lucide-react";
 import styles from "../youtube-tags-generator/page.module.css";
+import Link from "next/link";
 
 type ExtractorMode = "title" | "description";
 
@@ -398,6 +399,18 @@ export default function YouTubeMetadataExtractorClient({ mode }: Props) {
           ) : null}
         </div>
       ) : null}
+      {/* LEAD CAPTURE BOTTOM - PREMIUM BOX */}
+      <div style={{ padding: "3rem 2rem", background: "linear-gradient(145deg, rgba(20,20,20,0.9), rgba(10,10,10,1))", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "16px", marginTop: "3rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", boxShadow: "0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)", position: "relative", overflow: "hidden" }}>
+        {/* Subtle orange glow at the top */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: "linear-gradient(90deg, transparent, var(--brand-orange), transparent)", opacity: 0.6 }}></div>
+        {/* Subtle orange ambient glow in background */}
+        <div style={{ position: "absolute", top: "-50px", left: "50%", transform: "translateX(-50%)", width: "200px", height: "100px", background: "var(--brand-orange)", filter: "blur(80px)", opacity: 0.15, pointerEvents: "none" }}></div>
+        
+        <h3 style={{ margin: "0 0 0.75rem", fontSize: "1.6rem", fontWeight: 800, color: "#ffffff", letterSpacing: "-0.02em", position: "relative", zIndex: 1 }}>Need help growing your channel?</h3>
+        <p style={{ margin: "0 0 2rem", color: "rgba(255,255,255,0.7)", fontSize: "1.05rem", maxWidth: "450px", lineHeight: 1.6, position: "relative", zIndex: 1 }}>We help creators and brands scale with proven content strategy, SEO, and audience retention tactics.</p>
+        
+        <Link href="/contact" style={{ position: "relative", zIndex: 1, display: "inline-flex", alignItems: "center", justifyContent: "center", padding: "1rem 2rem", background: "var(--brand-orange)", color: "#fff", fontWeight: 700, borderRadius: "8px", textDecoration: "none", fontSize: "1.05rem", transition: "all 0.2s ease-in-out", boxShadow: "0 4px 15px rgba(255,90,54,0.4)", width: "100%", maxWidth: "320px" }} onMouseOver={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 25px rgba(255,90,54,0.5)"; e.currentTarget.style.background = "#ff6a45"; }} onMouseOut={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 4px 15px rgba(255,90,54,0.4)"; e.currentTarget.style.background = "var(--brand-orange)"; }}>Book Free Strategy Call</Link>
+      </div>
     </div>
   );
 }

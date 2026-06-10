@@ -236,8 +236,11 @@ export default async function YouTubeStartTimeLinkGeneratorPage() {
         <div className={baseStyles.wrap}>
           <div className={baseStyles.heroInner}>
             <nav className={baseStyles.breadcrumbNav} aria-label="Breadcrumb">
+              <Link href="/">Home</Link>
+              <span className={baseStyles.breadcrumbSeparator}>›</span>
               <Link href="/tools">Tools</Link>
-              <span>/</span>
+              <span className={baseStyles.breadcrumbSeparator}>›</span>
+              <span className={baseStyles.breadcrumbCurrent}>YouTube Start Time Link Generator</span>
             </nav>
             <h1 className={`${baseStyles.title} ${styles.intentTitle}`}>
               <span>YouTube Start Time</span>

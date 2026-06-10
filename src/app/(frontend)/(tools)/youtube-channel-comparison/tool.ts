@@ -7,6 +7,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube Analytics & Monetization",
     kind: "channel-compare",
     shortDescription: "Compare two YouTube channels side-by-side with subscribers, views, and video count.",
+    seoTitle: "Free YouTube Channel Comparison - No Signup Required",
+    seoDescription: "Compare two YouTube channels side-by-side with subscribers, views, and video count. Use our free YouTube Channel Comparison online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Enter two YouTube channel URLs and get a side-by-side comparison of key stats. Perfect for competitor research.",
     highlights: ["Side-by-side", "Key metrics", "Competitor research"],
   };

@@ -15,6 +15,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube SEO & Optimization",
     kind: "channel-keywords-copy",
     shortDescription: "Extract and copy hidden YouTube channel keywords from any public channel URL.",
+    seoTitle: "Free YouTube Channel Keywords Copy - No Signup Required",
+    seoDescription: "Extract and copy hidden YouTube channel keywords from any public channel URL. Use our free YouTube Channel Keywords Copy online. No signup or login required. Get instant, copy-ready results today.",
     intro: "See the exact channel keywords any creator uses in their YouTube Studio settings. Paste their URL and copy the keyword list.",
     highlights: ["Channel SEO", "Niche keywords", "Copy-ready"],
   };

@@ -7,6 +7,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube SEO & Optimization",
     kind: "shorts-trend",
     shortDescription: "Discover trending YouTube Shorts topics and formats from live YouTube data.",
+    seoTitle: "Free YouTube Shorts Trend Analyzer - No Signup Required",
+    seoDescription: "Discover trending YouTube Shorts topics and formats from live YouTube data. Use our free YouTube Shorts Trend Analyzer online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Type a niche or keyword and see what Shorts formats, hooks, and topics are trending right now based on real YouTube search data.",
     highlights: ["Live trends", "Shorts angles", "Format ideas"],
   };

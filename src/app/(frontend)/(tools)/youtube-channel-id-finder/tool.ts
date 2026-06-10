@@ -12,6 +12,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube Video & Channel Utilities",
     kind: "channel-id-finder",
     shortDescription: "Find any YouTube channel ID from a URL, handle, or custom channel link.",
+    seoTitle: "Free YouTube Channel ID Finder - No Signup Required",
+    seoDescription: "Find any YouTube channel ID from a URL, handle, or custom channel link. Use our free YouTube Channel ID Finder online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Paste any channel URL and get the permanent UC channel ID in one click. Works with all YouTube URL formats.",
     highlights: ["Channel URLs", "Handle parser", "Lookup links"],
   };

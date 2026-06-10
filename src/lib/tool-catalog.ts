@@ -66,6 +66,8 @@ export type ToolDefinition = {
   kind: GenericToolKind | "existing";
   highlights: string[];
   sourceUrl?: string;
+  seoTitle: string;
+  seoDescription: string;
 };
 
 export const toolCategories: ToolCategory[] = [
@@ -272,23 +274,9 @@ function getToolWorkflowLabel(category: ToolCategory) {
 }
 
 export function getToolSeoTitle(tool: ToolDefinition) {
-  const action = seoActionByKind[tool.kind] ?? tool.highlights[0] ?? "Use Online";
-  const title = `${tool.title} - ${action}`;
-
-  if (title.length <= 60) {
-    return title;
-  }
-
-  return tool.title.length <= 58 ? tool.title : `${tool.keyword.replace(/\b\w/g, (letter) => letter.toUpperCase())}`;
+  return tool.seoTitle;
 }
 
 export function getToolSeoDescription(tool: ToolDefinition) {
-  const workflow = getToolWorkflowLabel(tool.category);
-  const description = `${tool.shortDescription} No signup required. Get fast, copy-ready results for ${workflow}.`;
-
-  if (description.length <= 158) {
-    return description;
-  }
-
-  return clampMetaDescription(`${tool.shortDescription} No signup required. Copy results instantly.`);
+  return tool.seoDescription;
 }

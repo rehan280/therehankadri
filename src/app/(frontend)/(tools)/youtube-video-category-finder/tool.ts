@@ -7,6 +7,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube Video & Channel Utilities",
     kind: "video-category-finder",
     shortDescription: "Find the exact YouTube category assigned to any public video.",
+    seoTitle: "Free YouTube Video Category Finder - No Signup Required",
+    seoDescription: "Find the exact YouTube category assigned to any public video. Use our free YouTube Video Category Finder online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Paste a YouTube video URL and see which of YouTube's 15 content categories it's in. Useful for monetization and ad targeting research.",
     highlights: ["Official category", "Category ID", "Instant"],
   };

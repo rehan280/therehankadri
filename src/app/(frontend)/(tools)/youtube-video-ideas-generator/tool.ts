@@ -7,6 +7,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube SEO & Optimization",
     kind: "idea-generator",
     shortDescription: "Generate YouTube video ideas from any niche or keyword in seconds.",
+    seoTitle: "Free YouTube Video Ideas Generator: Fast & Online",
+    seoDescription: "Generate YouTube video ideas from any niche or keyword in seconds. Use our free YouTube Video Ideas Generator online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Get 10 video ideas in 30 seconds. Type your niche, hit generate, and your content calendar fills itself.",
     highlights: ["Topic ideas", "Shorts angles", "Copy-ready"],
   };

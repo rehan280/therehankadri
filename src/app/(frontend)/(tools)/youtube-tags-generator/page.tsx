@@ -185,13 +185,15 @@ export default async function YouTubeTagGeneratorPage() {
         }}
       />
 
-
       <section className={styles.heroSection}>
         <div className={styles.wrap}>
           <div className={styles.heroInner}>
             <nav className={styles.breadcrumbNav} aria-label="Breadcrumb">
+              <Link href="/">Home</Link>
+              <span className={styles.breadcrumbSeparator}>›</span>
               <Link href="/tools">Tools</Link>
-              <span>/</span>
+              <span className={styles.breadcrumbSeparator}>›</span>
+              <span className={styles.breadcrumbCurrent}>YouTube Tag Generator</span>
             </nav>
             <h1 className={styles.title}>YouTube Tag Generator</h1>
             <p className={styles.subtitle}>
@@ -216,4 +218,3 @@ export default async function YouTubeTagGeneratorPage() {
     </main>
   );
 }
-

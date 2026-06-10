@@ -16,6 +16,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube Video & Channel Utilities",
     kind: "existing",
     shortDescription: "Create YouTube links that start at a specific time for sharing and embedding.",
+    seoTitle: "Free YouTube Start Time Link Generator: Fast & Online",
+    seoDescription: "Create YouTube links that start at a specific time for sharing and embedding. Use our free YouTube Start Time Link Generator online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Share any YouTube video from the exact second you want. Enter your start time, copy your link, done.",
     highlights: ["Start links", "Embed ready", "No login"],
   };

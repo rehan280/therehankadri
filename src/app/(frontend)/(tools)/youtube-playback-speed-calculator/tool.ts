@@ -7,6 +7,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube Video & Channel Utilities",
     kind: "playback-speed-calculator",
     shortDescription: "Calculate YouTube video watch time at any playback speed.",
+    seoTitle: "Free YouTube Playback Speed Calculator: Quick Online Tool",
+    seoDescription: "Calculate YouTube video watch time at any playback speed. Use our free YouTube Playback Speed Calculator online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Enter a video duration and see how long it takes to watch at 1.25x, 1.5x, 1.75x, 2x, and custom speeds.",
     highlights: ["All speeds", "Custom input", "Time savings"],
   };

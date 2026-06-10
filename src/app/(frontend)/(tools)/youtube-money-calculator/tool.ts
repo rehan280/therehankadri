@@ -14,6 +14,8 @@ export const toolDefinition: ToolDefinition = {
     category: "YouTube Analytics & Monetization",
     kind: "money-calculator",
     shortDescription: "Calculate YouTube ad revenue and monetization estimates from views and RPM.",
+    seoTitle: "Free YouTube Ad Money Calculator: Quick Online Tool",
+    seoDescription: "Calculate YouTube ad revenue and monetization estimates from views and RPM. Use our free YouTube Ad Money Calculator online. No signup or login required. Get instant, copy-ready results today.",
     intro: "Enter your view count and niche RPM. See your estimated YouTube earnings in 10 seconds.",
     highlights: ["Revenue estimate", "RPM input", "Scenario planning"],
   };
