@@ -17,6 +17,8 @@ import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { toolCatalog } from "@/lib/tool-catalog";
+import ToolFeatureGrid from "@/components/tools/ToolFeatureGrid";
+import ToolTabNav from "@/components/tools/ToolTabNav";
 
 const slug = "youtube-title-extractor";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
@@ -261,14 +263,14 @@ export default async function YouTubeTitleExtractorPage() {
               Paste a YouTube video or Shorts link and copy the exact current title for SEO research, swipe files, and mobile workflows.
             </p>
 
-            <div className={styles.tabRow}>
-              <span className={styles.tabItem}>YouTube</span>
-            </div>
+            <ToolTabNav currentTool={toolCatalog.find(t => t.slug === slug)!} />
 
             <YouTubeMetadataExtractorClient mode="title" />
           </div>
         </div>
       </section>
+
+      <ToolFeatureGrid tool={toolCatalog.find(t => t.slug === slug)!} />
 
       <YouTubeExtractorArticle
         article={article}

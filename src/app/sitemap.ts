@@ -4,6 +4,8 @@ import { getAllBlogPosts } from "@/lib/blog-content";
 import { getPostPath } from "@/lib/post-paths";
 import { SITE_URL } from "@/lib/seo";
 import { toolCatalog } from "@/lib/tool-catalog";
+import fs from "fs";
+import path from "path";
 
 const staticRoutes: MetadataRoute.Sitemap = [
   {
@@ -54,12 +56,6 @@ const staticRoutes: MetadataRoute.Sitemap = [
   },
 ];
 
-const toolRoutes: MetadataRoute.Sitemap = toolCatalog.map((tool) => ({
-  url: `${SITE_URL}/${tool.slug}`,
-  lastModified: new Date("2026-05-26T00:00:00+05:30"),
-  changeFrequency: "weekly",
-  priority: 0.8,
-}));
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogPosts = await getAllBlogPosts();
@@ -71,6 +67,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  const toolRoutes: MetadataRoute.Sitemap = toolCatalog.map((tool) => {
+    let lastModified = new Date("2026-05-26T00:00:00+05:30");
+    try {
+      const toolPath = path.join(process.cwd(), "src/app/(frontend)/(tools)", tool.slug, "tool.ts");
+      const stat = fs.statSync(toolPath);
+      lastModified = stat.mtime;
+    } catch (e) {
+      // Fallback
+    }
+    return {
+      url: `${SITE_URL}/${tool.slug}`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    };
+  });
+
   return [...staticRoutes, ...toolRoutes, ...blogRoutes];
 }
-

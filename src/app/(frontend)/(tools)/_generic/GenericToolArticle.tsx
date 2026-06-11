@@ -107,7 +107,7 @@ function getStandaloneStrongText(text: string) {
   return match ? match[1] : null;
 }
 
-function getStepCards(blocks: ArticleBlock[]) {
+export function getStepCards(blocks: ArticleBlock[]) {
   const introBlocks: ArticleBlock[] = [];
   const cards: Array<{
     body: ArticleBlock[];
@@ -165,6 +165,18 @@ export default async function GenericToolArticle({ tool }: Props) {
             <article className={`${blogStyles.articleCopy} ${styles.centeredArticleCopy} authority-post-copy`}>
               <div className={`${blogStyles.articleProse} ${styles.articleProseShell}`}>
                 
+                <section className={`${blogStyles.articleSection} ${styles.articleSection}`}>
+                  <h2>Quick Facts (TL;DR)</h2>
+                  <ul className={blogStyles.articleList}>
+                    <li><strong>Purpose:</strong> {tool.shortDescription}</li>
+                    <li><strong>Cost:</strong> 100% Free</li>
+                    <li><strong>Sign up:</strong> Not Required</li>
+                    {tool.highlights && tool.highlights.length > 0 && (
+                      <li><strong>Key Features:</strong> {tool.highlights.join(", ")}</li>
+                    )}
+                  </ul>
+                </section>
+
                 {content ? (
                   <>
                     {content.sections.map((section) => {
@@ -185,9 +197,9 @@ export default async function GenericToolArticle({ tool }: Props) {
                                   ))}
                                 </div>
                               )}
-                              <div className={styles.articleStrategyGrid}>
+                              <ol className={styles.articleStrategyGrid} style={{ listStyle: "none", padding: 0 }}>
                                 {cards.map((card, index) => (
-                                  <article key={index} className={blogStyles.youtubeInsightCard}>
+                                  <li key={index} className={blogStyles.youtubeInsightCard}>
                                     <div className={styles.articleFeatureHeaderInline}>
                                       <span className={blogStyles.youtubeInsightNumber}>
                                         {String(index + 1).padStart(2, "0")}
@@ -201,9 +213,9 @@ export default async function GenericToolArticle({ tool }: Props) {
                                         <div key={`body-${bodyIndex}`}>{renderBlock(block)}</div>
                                       ))}
                                     </div>
-                                  </article>
+                                  </li>
                                 ))}
-                              </div>
+                              </ol>
                             </div>
                           </section>
                         );
@@ -226,12 +238,12 @@ export default async function GenericToolArticle({ tool }: Props) {
                 ) : (
                   <>
                     <section className={`${blogStyles.articleSection} ${styles.articleSection}`}>
-                      <h2>About This Tool</h2>
+                      <h2>What is the {tool.title}?</h2>
                       <p>
-                        The {tool.title} helps you handle one small creator workflow quickly:
+                        The <strong>{tool.title}</strong> is a free online tool that helps you handle one small creator workflow quickly:
                         start with a URL, title, topic, or list, then turn it into something
                         useful you can copy. It is intentionally simple, so you can get the
-                        answer and keep working.
+                        answer and keep working without creating an account.
                       </p>
                     </section>
 

@@ -9,6 +9,8 @@ import { getToolRating } from "@/lib/tool-ratings";
 import styles from "./page.module.css";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { toolCatalog } from "@/lib/tool-catalog";
+import ToolFeatureGrid from "@/components/tools/ToolFeatureGrid";
+import ToolTabNav from "@/components/tools/ToolTabNav";
 
 const canonicalUrl = buildCanonicalUrl("/youtube-tags-generator");
 const pageTitle = "YouTube Tag Generator - Generate SEO Tags Online";
@@ -201,14 +203,14 @@ export default async function YouTubeTagGeneratorPage() {
               your title or primary keyword.
             </p>
 
-            <div className={styles.tabRow}>
-              <span className={styles.tabItem}>YouTube</span>
-            </div>
+            <ToolTabNav currentTool={toolCatalog.find(t => t.slug === "youtube-tags-generator")!} />
 
             <YouTubeTagGeneratorClient />
           </div>
         </div>
       </section>
+
+      <ToolFeatureGrid tool={toolCatalog.find(t => t.slug === "youtube-tags-generator")!} />
 
       <YouTubeTagsArticle article={article} />
       <RelatedTools 

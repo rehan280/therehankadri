@@ -17,6 +17,8 @@ import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { toolCatalog } from "@/lib/tool-catalog";
+import ToolFeatureGrid from "@/components/tools/ToolFeatureGrid";
+import ToolTabNav from "@/components/tools/ToolTabNav";
 
 const slug = "youtube-description-extractor";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
@@ -258,14 +260,14 @@ export default async function YouTubeDescriptionExtractorPage() {
               Paste a YouTube video or Shorts link and pull the public description, title, tags, hashtags, timestamps, and key metadata.
             </p>
 
-            <div className={styles.tabRow}>
-              <span className={styles.tabItem}>YouTube</span>
-            </div>
+            <ToolTabNav currentTool={toolCatalog.find(t => t.slug === slug)!} />
 
             <YouTubeMetadataExtractorClient mode="description" />
           </div>
         </div>
       </section>
+
+      <ToolFeatureGrid tool={toolCatalog.find(t => t.slug === slug)!} />
 
       <YouTubeExtractorArticle
         article={article}

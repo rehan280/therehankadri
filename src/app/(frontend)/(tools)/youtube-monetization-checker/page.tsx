@@ -15,6 +15,8 @@ import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { toolCatalog } from "@/lib/tool-catalog";
+import ToolFeatureGrid from "@/components/tools/ToolFeatureGrid";
+import ToolTabNav from "@/components/tools/ToolTabNav";
 
 const slug = "youtube-monetization-checker";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
@@ -222,14 +224,14 @@ export default async function YouTubeMonetizationCheckerPage() {
               Paste a YouTube video or channel link to verify if it is accepted into the YouTube Partner Program and earning ad revenue.
             </p>
 
-            <div className={styles.tabRow}>
-              <span className={styles.tabItem}>YouTube</span>
-            </div>
+            <ToolTabNav currentTool={toolCatalog.find(t => t.slug === slug)!} />
 
             <MonetizationClient />
           </div>
         </div>
       </section>
+
+      <ToolFeatureGrid tool={toolCatalog.find(t => t.slug === slug)!} />
 
       <YouTubeExtractorArticle
         article={article}

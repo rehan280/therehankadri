@@ -13,6 +13,8 @@ import baseStyles from "../youtube-tags-generator/page.module.css";
 import styles from "./page.module.css";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { toolCatalog } from "@/lib/tool-catalog";
+import ToolFeatureGrid from "@/components/tools/ToolFeatureGrid";
+import ToolTabNav from "@/components/tools/ToolTabNav";
 import { getYouTubeStartTimeArticle, youtubeStartTimeFaqEntries } from "./article";
 import YouTubeStartTimeArticle from "./YouTubeStartTimeArticle";
 import YouTubeStartTimeLinkGeneratorClient from "./YouTubeStartTimeLinkGeneratorClient";
@@ -250,14 +252,14 @@ export default async function YouTubeStartTimeLinkGeneratorPage() {
               Create a YouTube link that starts at the exact second you want.
             </p>
 
-            <div className={`${baseStyles.tabRow} ${styles.intentTabRow}`}>
-              <span className={baseStyles.tabItem}>YouTube</span>
-            </div>
+            <ToolTabNav currentTool={toolCatalog.find(t => t.slug === slug)!} />
 
             <YouTubeStartTimeLinkGeneratorClient />
           </div>
         </div>
       </section>
+
+      <ToolFeatureGrid tool={toolCatalog.find(t => t.slug === slug)!} />
 
       <YouTubeStartTimeArticle article={article} />
       <RelatedTools 

@@ -14,6 +14,8 @@ import styles from "./page.module.css";
 import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
 import RelatedTools from "@/components/tools/RelatedTools";
+import ToolFeatureGrid from "@/components/tools/ToolFeatureGrid";
+import ToolTabNav from "@/components/tools/ToolTabNav";
 
 const canonicalUrl = buildCanonicalUrl("/youtube-comment-picker");
 const pageDescription =
@@ -156,15 +158,15 @@ export default async function YouTubeCommentPickerPage() {
             <h1 className={`${styles.title} ${styles.singleLineToolTitle}`}>{tool.title}</h1>
             <p className={styles.subtitle}>{tool.shortDescription}</p>
 
-            <div className={styles.tabRow}>
-              <span className={styles.tabItem}>{tool.category.replace("YouTube ", "")}</span>
-            </div>
+            <ToolTabNav currentTool={tool} />
 
             {/* The Custom Client Component */}
             <YouTubeCommentPickerClient />
           </div>
         </div>
       </section>
+
+      <ToolFeatureGrid tool={tool} />
 
       <section className={styles.contentArea}>
         <div className={styles.articleProseShell}>

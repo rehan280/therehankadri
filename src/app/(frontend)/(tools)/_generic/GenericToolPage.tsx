@@ -20,8 +20,10 @@ import { getToolArticleContent } from "@/lib/tool-article-content";
 import { getToolRating } from "@/lib/tool-ratings";
 import { getToolTestimonials } from "@/lib/tool-testimonials";
 import styles from "../youtube-tags-generator/page.module.css";
-import GenericToolArticle, { getGenericToolFaq } from "./GenericToolArticle";
+import GenericToolArticle, { getGenericToolFaq, getStepCards } from "./GenericToolArticle";
 import GenericToolClient from "./GenericToolClient";
+import ToolFeatureGrid from "@/components/tools/ToolFeatureGrid";
+import ToolTabNav from "@/components/tools/ToolTabNav";
 
 export async function generateGenericToolMetadata(toolSlug: string): Promise<Metadata> {
   const tool = getToolBySlug(toolSlug);
@@ -68,6 +70,36 @@ export default async function GenericToolPage({ toolSlug }: { toolSlug: string }
   const appId = `${canonicalUrl}#softwareapplication`;
   const articleId = `${canonicalUrl}#article`;
   const faqId = `${canonicalUrl}#faq`;
+
+  let howToSchema = null;
+  if (article) {
+    const howToSection = article.sections.find((s) => s.id.includes("how-to-use"));
+    if (howToSection) {
+      const { cards } = getStepCards(howToSection.blocks);
+      if (cards.length > 0) {
+        howToSchema = {
+          "@type": "HowTo",
+          "@id": `${canonicalUrl}#howto`,
+          name: `How to use the ${tool.title}`,
+          description: `Step-by-step instructions for using the free ${tool.title}.`,
+          step: cards.map((card, index) => {
+            const cleanTitle = card.title.replace(/\*/g, "").trim();
+            return {
+              "@type": "HowToStep",
+              position: index + 1,
+              name: cleanTitle,
+              itemListElement: [
+                {
+                  "@type": "HowToDirection",
+                  text: cleanTitle,
+                },
+              ],
+            };
+          }),
+        };
+      }
+    }
+  }
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -210,6 +242,7 @@ export default async function GenericToolPage({ toolSlug }: { toolSlug: string }
         },
         image: [buildAbsoluteImageUrl()],
       },
+      ...(howToSchema ? [howToSchema] : []),
     ],
   };
 
@@ -236,22 +269,15 @@ export default async function GenericToolPage({ toolSlug }: { toolSlug: string }
               {tool.title}
             </h1>
             <p className={styles.subtitle}>{tool.shortDescription}</p>
-            {tool.aliases?.length ? (
-              <p className={styles.subtitle}>
-                Also covers: {tool.aliases.slice(0, 4).join(", ")}.
-              </p>
-            ) : null}
 
-            <div className={styles.tabRow}>
-              <span className={styles.tabItem}>
-                {tool.category.replace("YouTube ", "")}
-              </span>
-            </div>
+            <ToolTabNav currentTool={tool} />
 
             <GenericToolClient tool={tool} />
           </div>
         </div>
       </section>
+
+      <ToolFeatureGrid tool={tool} />
 
       <GenericToolArticle tool={tool} />
       <RelatedTools currentToolSlug={tool.slug} category={tool.category} />

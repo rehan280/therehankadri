@@ -15,6 +15,8 @@ import { getToolTestimonials } from "@/lib/tool-testimonials";
 import { getToolRating } from "@/lib/tool-ratings";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { toolCatalog } from "@/lib/tool-catalog";
+import ToolFeatureGrid from "@/components/tools/ToolFeatureGrid";
+import ToolTabNav from "@/components/tools/ToolTabNav";
 
 const slug = "youtube-shadowban-detector";
 const canonicalUrl = buildCanonicalUrl(`/${slug}`);
@@ -219,14 +221,14 @@ export default async function YouTubeShadowbanDetectorPage() {
               Paste a YouTube video or channel link to check its health score and diagnose algorithmic restrictions.
             </p>
 
-            <div className={styles.tabRow}>
-              <span className={styles.tabItem}>YouTube</span>
-            </div>
+            <ToolTabNav currentTool={toolCatalog.find(t => t.slug === slug)!} />
 
             <ShadowbanClient />
           </div>
         </div>
       </section>
+
+      <ToolFeatureGrid tool={toolCatalog.find(t => t.slug === slug)!} />
 
       <YouTubeExtractorArticle
         article={article}
