@@ -20,7 +20,16 @@ export default function ArticleSummarizer() {
 
   if (!mounted) return null;
 
-  const platforms = [
+  type Platform = {
+    name: string;
+    url: string;
+    paramName: string;
+    imgSrc?: string;
+    icon?: any;
+    color?: string;
+  };
+
+  const platforms: Platform[] = [
     { name: "ChatGPT", imgSrc: "/llm-icons/chatgpt.webp", url: "https://chatgpt.com/", paramName: "q" },
     { name: "Perplexity", icon: PerplexityIcon, url: "https://www.perplexity.ai/search", paramName: "q" },
     { name: "Claude", imgSrc: "/llm-icons/claude.svg", url: "https://claude.ai/new", paramName: "q" },
