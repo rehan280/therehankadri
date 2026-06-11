@@ -2914,7 +2914,7 @@
 }
 
 .postHero {
-  padding-top: 8rem !important;
+  padding-top: 4rem !important;
   padding-bottom: 2.75rem !important;
 }
 
@@ -2944,7 +2944,7 @@
   }
 
   .postHero {
-    padding-top: 5.15rem !important;
+    padding-top: 3.5rem !important;
     padding-bottom: 1.9rem !important;
   }
 
@@ -5058,8 +5058,8 @@
 .postHeroFeature h1.postHeroTitle.postHeroTitleSplit {
   width: min(100%, 38rem) !important;
   max-width: 38rem !important;
-  margin: 0.5rem 0 0.7rem !important;
-  font-size: clamp(2.35rem, 4.2vw, 3.85rem) !important;
+  margin: -0.2rem 0 0.7rem !important;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem) !important;
   line-height: 1.03 !important;
   letter-spacing: -0.038em !important;
   text-align: left !important;
@@ -5196,7 +5196,7 @@
     width: 100% !important;
     max-width: 100% !important;
     margin: 0.95rem 0 1.05rem !important;
-    font-size: clamp(2rem, 10vw, 3rem) !important;
+    font-size: clamp(1.6rem, 8vw, 2.2rem) !important;
     line-height: 0.98 !important;
     letter-spacing: -0.035em !important;
   }
@@ -5277,4 +5277,25 @@
   scroll-margin-top: 7rem;
 }
 
+.heroMetaWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+  margin: 0 auto;
+}
 
+.heroAuthorRow {
+  justify-content: flex-start;
+  margin: 1.45rem 0 0 0;
+}
+
+@media (max-width: 640px) {
+  .heroMetaWrap {
+    align-items: center;
+  }
+  
+  .heroAuthorRow {
+    justify-content: center;
+  }
+}

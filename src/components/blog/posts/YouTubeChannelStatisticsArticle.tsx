@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 import Link from "next/link";
 import baseStyles from "@/app/(frontend)/blog/blog.module.css";
 import styles from "./youtube-stats-visuals.module.css";
+import TldrBox from "@/components/blog/TldrBox";
 
 type MetricCard = {
   label: string;
@@ -1010,6 +1011,9 @@ export const youtubeChannelStatisticsWordCount = 1725;
 export default function YouTubeChannelStatisticsArticle() {
   return (
     <>
+      <TldrBox>
+        The creator economy is booming, but the reality for most YouTube channels is stark. Out of millions of active channels, only a fraction ever reach the elusive 1 million subscriber mark. This article delves into the numbers behind channel growth, the impact of AI content moderation, and what the data reveals about the true earning potential of modern creators.
+      </TldrBox>
       {articleBlocks.map((block, index) => {
         const nextBlock = articleBlocks[index + 1];
         const sectionId = block.type === "heading" ? undefined : block.sectionId;

@@ -15,6 +15,7 @@ import BlogRichText from "@/components/blog/BlogRichText";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
 import ArticleSocialShare from "@/components/blog/ArticleSocialShare";
 import DefaultBlogPostArticle from "@/components/blog/DefaultBlogPostArticle";
+import ArticleSummarizer from "@/components/blog/ArticleSummarizer";
 import { getBlogPostModule } from "@/components/blog/post-pages";
 import PremiumFaq from "@/components/content/PremiumFaq";
 import {
@@ -341,38 +342,42 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               )}
             </h1>
 
-            <div className={styles.authorRow}>
-              <div className={styles.authorIdentity}>
-                {hasFeatureHeroLayout ? null : (
-                  <div className={styles.authorAvatarWrap}>
-                    <Image
-                      src={postAuthor.image}
-                      alt={postAuthor.name}
-                      width={80}
-                      height={80}
-                      sizes="45px"
-                      className={styles.authorAvatar}
-                    />
+            <div className={styles.heroMetaWrap}>
+              <div className={`${styles.authorRow} ${styles.heroAuthorRow}`}>
+                <div className={styles.authorIdentity}>
+                  {hasFeatureHeroLayout ? null : (
+                    <div className={styles.authorAvatarWrap}>
+                      <Image
+                        src={postAuthor.image}
+                        alt={postAuthor.name}
+                        width={80}
+                        height={80}
+                        sizes="45px"
+                        className={styles.authorAvatar}
+                      />
+                    </div>
+                  )}
+                  <div className={styles.authorText}>
+                    <strong>By {postAuthor.name}</strong>
+                    {hasFeatureHeroLayout ? null : <span>{postAuthor.role}</span>}
                   </div>
-                )}
-                <div className={styles.authorText}>
-                  <strong>By {postAuthor.name}</strong>
-                  {hasFeatureHeroLayout ? null : <span>{postAuthor.role}</span>}
+                </div>
+
+                <div className={styles.postMetaRow}>
+                  <span className={styles.postMetaItem}>
+                    <CalendarDays size={16} strokeWidth={2.1} />
+                    <time dateTime={getBlogDisplayDateTimeValue(currentPost)}>
+                      {getBlogDisplayDateLabel(currentPost)}: {formatBlogDisplayDate(currentPost)}
+                    </time>
+                  </span>
+                  <span className={styles.postMetaItem}>
+                    <Clock3 size={16} strokeWidth={2.1} />
+                    <span>{postReadTime}</span>
+                  </span>
                 </div>
               </div>
 
-              <div className={styles.postMetaRow}>
-                <span className={styles.postMetaItem}>
-                  <CalendarDays size={16} strokeWidth={2.1} />
-                  <time dateTime={getBlogDisplayDateTimeValue(currentPost)}>
-                    {getBlogDisplayDateLabel(currentPost)}: {formatBlogDisplayDate(currentPost)}
-                  </time>
-                </span>
-                <span className={styles.postMetaItem}>
-                  <Clock3 size={16} strokeWidth={2.1} />
-                  <span>{postReadTime}</span>
-                </span>
-              </div>
+              <ArticleSummarizer />
             </div>
           </div>
 

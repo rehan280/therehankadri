@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ArticleList from "@/components/blog/ArticleList";
 import YouTubeTutorialEmbed from "@/components/common/YouTubeTutorialEmbed";
+import TldrBox from "@/components/blog/TldrBox";
 import styles from "./how-to-record-audio.module.css";
 
 type MarkdownBlock =
@@ -799,6 +800,11 @@ export default function HowToEditAudioArticle() {
   }
 
   return (
-    <div className={styles.article}>{elements}</div>
+    <div className={styles.article}>
+      <TldrBox>
+        Great video with terrible audio will always perform poorly. Audio quality is the single most important factor for viewer retention. This comprehensive guide walks you through the exact steps to edit and enhance your audio for YouTube, ensuring your content sounds professional even if you are recording on a budget.
+      </TldrBox>
+      {elements}
+    </div>
   );
 }

@@ -12,6 +12,7 @@ import {
 import styles from "./page.module.css";
 import RateMyTool from "@/components/tools/RateMyTool";
 import { getToolRating } from "@/lib/tool-ratings";
+import TldrBox from "@/components/blog/TldrBox";
 
 type HighlightCard = {
   title: string;
@@ -333,11 +334,6 @@ function renderStandardSection(section: ArticleSection) {
       className={`${blogStyles.articleSection} ${styles.articleSection}`}
     >
       <h2 className={titleClassName}>{section.title}</h2>
-      {isComparisonSection && (
-        <p className={styles.articleLastUpdated}>
-          <time dateTime="2026-04-06">Last Updated: April 6, 2026</time>
-        </p>
-      )}
       <div className={styles.articleFlow}>
         {renderableBlocks.map((block, index) => (
           <div key={`${section.id}-${block.type}-${index}`}>
@@ -538,6 +534,9 @@ export default async function YouTubeTagsArticle({ article }: { article: ParsedA
               className={`${blogStyles.articleCopy} ${styles.centeredArticleCopy} authority-post-copy`}
             >
               <div className={`${blogStyles.articleProse} ${styles.articleProseShell}`}>
+              <TldrBox>
+                YouTube tags aren't as powerful as they used to be, but they still play a critical role in correcting misspellings and helping the algorithm categorize your content. This generator instantly analyzes your keyword to provide highly relevant tags that you can copy and paste directly into your video settings.
+              </TldrBox>
               <div className={styles.articleStatGrid}>
                 {youtubeTagGeneratorArticleStats.map((stat) => (
                   <article key={stat.label} className={styles.articleStatCard}>

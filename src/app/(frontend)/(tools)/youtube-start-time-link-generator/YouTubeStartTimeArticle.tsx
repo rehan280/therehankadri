@@ -7,6 +7,7 @@ import styles from "./page.module.css";
 import type { YouTubeStartTimeArticle } from "./article";
 import RateMyTool from "@/components/tools/RateMyTool";
 import { getToolRating } from "@/lib/tool-ratings";
+import TldrBox from "@/components/blog/TldrBox";
 
 const statCards = [
   {
@@ -62,6 +63,10 @@ export default async function YouTubeStartTimeArticle({
               className={`${blogStyles.articleCopy} ${baseStyles.centeredArticleCopy} authority-post-copy`}
             >
               <div className={`${blogStyles.articleProse} ${baseStyles.articleProseShell}`}>
+                <TldrBox>
+                  Sharing a YouTube video from a specific start time is the best way to point viewers directly to the most important part of a long video. This tool generates clean, clickable timestamp links that work perfectly on desktop, mobile apps, and embedded players.
+                </TldrBox>
+
                 <div className={`${baseStyles.articleStatGrid} ${styles.startTimeStatGrid}`}>
                   {statCards.map((stat) => (
                     <article

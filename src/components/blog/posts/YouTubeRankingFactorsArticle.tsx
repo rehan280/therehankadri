@@ -6,6 +6,7 @@ import type { CSSProperties, ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ArticleList from "@/components/blog/ArticleList";
+import TldrBox from "@/components/blog/TldrBox";
 import styles from "./youtube-ranking-factors.module.css";
 
 type MarkdownBlock =
@@ -1016,5 +1017,12 @@ export default function YouTubeRankingFactorsArticle() {
     elements.push(renderTable(block, key));
   }
 
-  return <div className={styles.article}>{elements}</div>;
+  return (
+    <div className={styles.article}>
+      <TldrBox>
+        Cracking the YouTube algorithm in 2026 comes down to understanding the signals it prioritizes. YouTube looks at hundreds of factors, but this article cuts through the noise, detailing the exact metrics and metadata you need to optimize in order to rank higher in search, get recommended in browse features, and succeed with Shorts.
+      </TldrBox>
+      {elements}
+    </div>
+  );
 }

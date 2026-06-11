@@ -61,7 +61,7 @@
 
 .heroTitle {
   margin: 0;
-  font-family: var(--font-therehankadri), var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-family:  var(--font-hero), var(--font-display), Arial, sans-serif;
   font-size: clamp(2.55rem, 4vw, 3.55rem);
   line-height: 0.94;
   letter-spacing: -0.05em;
@@ -194,7 +194,7 @@
 .topicCardTitle {
   display: block;
   margin-bottom: 0.85rem;
-  font-family: var(--font-therehankadri), var(--font-hero), var(--font-display), Arial, sans-serif;
+  font-family:  var(--font-hero), var(--font-display), Arial, sans-serif;
   font-size: clamp(1.65rem, 1.9vw, 2.05rem);
   line-height: 1;
   letter-spacing: -0.04em;

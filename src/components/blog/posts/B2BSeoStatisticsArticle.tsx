@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { slugifyHeading } from "@/lib/blog-rich-text";
 import baseStyles from "@/app/(frontend)/blog/blog.module.css";
 import styles from "./b2b-stats-visuals.module.css";
+import TldrBox from "@/components/blog/TldrBox";
 
 type MarkdownBlock =
   | { type: "heading"; level: 2 | 3; text: string; id: string }
@@ -1034,5 +1035,12 @@ export default function B2BSeoStatisticsArticle() {
     );
   }
 
-  return <>{content}</>;
+  return (
+    <>
+      <TldrBox>
+        B2B SEO is fundamentally changing. The days of generic keyword stuffing are over, replaced by a need for deep expertise and targeted content. This article breaks down the most critical B2B SEO statistics for 2026, showing you exactly where the industry is heading and how you can adapt your strategy to stay ahead of the competition.
+      </TldrBox>
+      {content}
+    </>
+  );
 }

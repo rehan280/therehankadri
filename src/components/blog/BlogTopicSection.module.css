@@ -242,7 +242,7 @@
 }
 
 .topicSection {
-  --blog-display-family: var(--font-therehankadri), var(--font-hero), var(--font-display), Arial, sans-serif;
+  --blog-display-family:  var(--font-hero), var(--font-display), Arial, sans-serif;
   --blog-copy-family: var(--font-copy), "IBM Plex Sans", Arial, ui-sans-serif, system-ui, sans-serif;
   --blog-heading-color: rgb(26, 26, 46);
   --blog-body-color: rgb(51, 51, 51);
@@ -355,8 +355,8 @@
 
 /* Final live Ahrefs typography mapping for topic cards */
 .topicSection {
-  --blog-ahrefs-family: var(--font-therehankadri), var(--font-therehankadri-display), Arial, sans-serif;
-  --blog-ahrefs-condensed-family: var(--font-therehankadri-condensed), var(--font-therehankadri), Arial, sans-serif;
+  --blog-ahrefs-family:   Arial, sans-serif;
+  --blog-ahrefs-condensed-family:   Arial, sans-serif;
   --blog-copy-family: var(--font-blog-plex), var(--font-copy), "IBM Plex Sans", Arial, ui-sans-serif, system-ui, sans-serif;
   --blog-text-primary: rgb(51, 51, 51);
   --blog-text-secondary: rgba(51, 51, 51, 0.7);

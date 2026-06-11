@@ -5,6 +5,7 @@ import { readFileSync } from "node:fs";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import ArticleList from "@/components/blog/ArticleList";
+import TldrBox from "@/components/blog/TldrBox";
 import styles from "./youtube-ranking-factors.module.css";
 
 type MarkdownBlock =
@@ -589,5 +590,12 @@ export default function HowToStartYouTubeChannelArticle() {
     }
   }
 
-  return <div className={styles.article}>{elements}</div>;
+  return (
+    <div className={styles.article}>
+      <TldrBox>
+        Starting a YouTube channel in 2026 requires more than just uploading videos. The platform is highly competitive, but massive opportunities still exist for those who treat it like a real business. This guide covers the complete step by step process from choosing a profitable niche to optimizing your videos for search and eventually monetizing your audience.
+      </TldrBox>
+      {elements}
+    </div>
+  );
 }

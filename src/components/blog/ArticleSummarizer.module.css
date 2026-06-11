@@ -1,0 +1,66 @@
+.summarizerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .summarizerWrapper {
+    align-items: center;
+  }
+}
+
+.summarizerLabel {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-copy), Arial, ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+}
+
+.summarizerButtons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.summarizerButton {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  height: 41.6px;
+  margin: 0px;
+  padding: 8px 14px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: none;
+  color: rgb(20, 21, 29);
+  background-color: rgb(255, 255, 255);
+  border: 0.8px solid rgb(229, 231, 243);
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 4px 0px;
+  cursor: pointer;
+  border-radius: 8px;
+  gap: 5px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.summarizerButton:hover {
+  transform: translateY(-1px);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 8px 0px;
+}
+
+.summarizerIcon {
+  flex-shrink: 0;
+}
+
+@media (max-width: 1180px) {
+  .summarizerWrapper {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

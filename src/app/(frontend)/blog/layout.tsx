@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import BlogHeader from "@/components/blog/BlogHeader";
-import {
-  blogPlexFont,
-  therehankadriCondensedFont,
-  therehankadriDisplayFont,
-  therehankadriFont,
-} from "@/lib/blog-fonts";
+import { blogPlexFont } from "@/lib/blog-fonts";
 import { copyFont, heroFont } from "@/lib/fonts";
 import { monoFont } from "@/lib/mono-font";
 import { createPageMetadata } from "@/lib/seo";
@@ -25,11 +20,10 @@ export default function BlogLayout({
 }) {
   return (
     <div
-      className={`${therehankadriFont.variable} ${therehankadriDisplayFont.variable} ${therehankadriCondensedFont.variable} ${blogPlexFont.variable} ${monoFont.variable} ${heroFont.variable} ${copyFont.variable}`}
+      className={`   ${blogPlexFont.variable} ${monoFont.variable} ${heroFont.variable} ${copyFont.variable}`}
     >
       <BlogHeader />
       {children}
     </div>
   );
 }
-

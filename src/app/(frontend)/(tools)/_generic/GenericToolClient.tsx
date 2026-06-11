@@ -12,16 +12,6 @@ import Link from "next/link";
 // Types
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const LeadCaptureCta = () => (
-  <div style={{ padding: "3rem 2rem", background: "linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))", backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: "16px", marginTop: "3rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", boxShadow: "0 8px 32px rgba(0,0,0,0.2)", position: "relative", overflow: "hidden" }}>
-    <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent, var(--brand-orange), transparent)", opacity: 0.5 }}></div>
-    <div style={{ position: "absolute", top: "-50px", left: "50%", transform: "translateX(-50%)", width: "200px", height: "100px", background: "var(--brand-orange)", filter: "blur(80px)", opacity: 0.1, pointerEvents: "none" }}></div>
-    <h3 style={{ margin: "0 0 0.75rem", fontSize: "1.6rem", fontWeight: 800, color: "#ffffff", letterSpacing: "-0.02em", position: "relative", zIndex: 1 }}>Need help growing your channel?</h3>
-    <p style={{ margin: "0 0 2rem", color: "rgba(255,255,255,0.7)", fontSize: "1.05rem", maxWidth: "450px", lineHeight: 1.6, position: "relative", zIndex: 1 }}>We help creators and brands scale with proven content strategy, SEO, and audience retention tactics.</p>
-    <Link href="/contact" style={{ position: "relative", zIndex: 1, display: "inline-flex", alignItems: "center", justifyContent: "center", padding: "1rem 2rem", background: "var(--brand-orange)", color: "#fff", fontWeight: 700, borderRadius: "8px", textDecoration: "none", fontSize: "1.05rem", transition: "all 0.2s ease-in-out", boxShadow: "0 4px 15px rgba(255,90,54,0.3)", width: "100%", maxWidth: "320px" }} onMouseOver={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 25px rgba(255,90,54,0.4)"; e.currentTarget.style.background = "#ff6a45"; }} onMouseOut={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 4px 15px rgba(255,90,54,0.3)"; e.currentTarget.style.background = "var(--brand-orange)"; }}>Book Free Strategy Call</Link>
-  </div>
-);
-
 type Props = { tool: ToolDefinition };
 
 type YouTubeMetadata = {
@@ -144,10 +134,10 @@ type SeoCheck = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const stopWords = new Set([
-  "a","an","and","are","as","at","be","been","by","do","for","from",
-  "has","have","how","i","in","is","it","its","me","my","no","not",
-  "of","on","or","so","that","the","this","to","up","us","was","we",
-  "when","who","with","you","your",
+  "a", "an", "and", "are", "as", "at", "be", "been", "by", "do", "for", "from",
+  "has", "have", "how", "i", "in", "is", "it", "its", "me", "my", "no", "not",
+  "of", "on", "or", "so", "that", "the", "this", "to", "up", "us", "was", "we",
+  "when", "who", "with", "you", "your",
 ]);
 
 function titleCase(v: string) {
@@ -173,7 +163,7 @@ function getVideoId(input: string) {
     if (host === "youtu.be") return parts[0] || "";
     if (host.endsWith("youtube.com")) {
       if (parts[0] === "watch") return url.searchParams.get("v") || "";
-      if (["shorts","embed","live"].includes(parts[0])) return parts[1] || "";
+      if (["shorts", "embed", "live"].includes(parts[0])) return parts[1] || "";
     }
   } catch { return ""; }
   return "";
@@ -392,7 +382,7 @@ function runIdeaAlgorithm(topic: string, videos: VideoResult[], suggestions?: st
     }
     if (out.size >= 10) return Array.from(out).slice(0, 10);
   }
-  
+
   // Fallback to top video modelling
   const sorted = [...videos].sort((a, b) => {
     const parseViews = (str: string) => {
@@ -567,7 +557,7 @@ function runKeywordAlgorithm(topic: string, videos: VideoResult[], suggestions: 
 
 function runNameAlgorithm(topic: string, videos: VideoResult[]): string[] {
   const channels = extractChannels(videos);
-  
+
   // Extract all words from actual competing channel names
   const words: string[] = [];
   for (const c of channels) {
@@ -575,7 +565,7 @@ function runNameAlgorithm(topic: string, videos: VideoResult[]): string[] {
     words.push(...parts.filter(p => p.length > 2));
   }
   const cleanWords = unique(words).map(titleCase);
-  
+
   const out = new Set<string>();
   const topicWords = getWords(topic).map(titleCase);
   const base = topicWords[0] || "Channel";
@@ -590,7 +580,7 @@ function runNameAlgorithm(topic: string, videos: VideoResult[]): string[] {
       out.add(`The ${w} Project`);
     }
   }
-  
+
   // Fallbacks if we didn't get enough words
   if (out.size < 5) {
     out.add(`${base} Insider`);
@@ -641,15 +631,15 @@ function runCategoryAlgorithm(topic: string, videos: VideoResult[]): { category:
 
   const signals: Record<string, RegExp> = {
     "Education & How-To": /how to|tutorial|learn|guide|course|step|explain|understand/,
-    "Gaming":             /game|minecraft|fortnite|roblox|gaming|play|stream/,
-    "Music":              /music|song|beat|sound|track|album|artist|listen/,
-    "News & Politics":    /news|update|politics|election|breaking|current/,
-    "Entertainment":      /funny|comedy|prank|challenge|react|watch|shorts/,
-    "Health & Fitness":   /workout|fitness|diet|health|exercise|gym|weight/,
-    "Tech & Gadgets":     /tech|review|unbox|gadget|phone|app|software|coding/,
+    "Gaming": /game|minecraft|fortnite|roblox|gaming|play|stream/,
+    "Music": /music|song|beat|sound|track|album|artist|listen/,
+    "News & Politics": /news|update|politics|election|breaking|current/,
+    "Entertainment": /funny|comedy|prank|challenge|react|watch|shorts/,
+    "Health & Fitness": /workout|fitness|diet|health|exercise|gym|weight/,
+    "Tech & Gadgets": /tech|review|unbox|gadget|phone|app|software|coding/,
     "Business & Finance": /money|business|invest|income|earn|passive|profit|startup/,
-    "People & Vlogs":     /vlog|day in|travel|food|lifestyle|family|daily/,
-    "Howto & Style":      /style|fashion|beauty|makeup|hair|design|creative/,
+    "People & Vlogs": /vlog|day in|travel|food|lifestyle|family|daily/,
+    "Howto & Style": /style|fashion|beauty|makeup|hair|design|creative/,
   };
 
   const scores: Record<string, number> = {};
@@ -679,14 +669,14 @@ function runTop100Algorithm(topic: string, videos: VideoResult[]): string[] {
   const repeatedChannels = channels.filter((c, i) => channels.indexOf(c) !== i);
 
   // Format distribution from real data
-  const howToCount    = allTitles.filter(t => /^how\s+to/.test(t)).length;
-  const numberCount   = allTitles.filter(t => /\b\d+\b/.test(t)).length;
+  const howToCount = allTitles.filter(t => /^how\s+to/.test(t)).length;
+  const numberCount = allTitles.filter(t => /\b\d+\b/.test(t)).length;
   const questionCount = allTitles.filter(t => /\?/.test(t)).length;
 
   const dominantKw = topKw.slice(0, 3).map(w => titleCase(w)).join(", ");
   const dominant = [
     howToCount > numberCount && howToCount > questionCount ? "How-To tutorials" :
-    numberCount > questionCount ? "list/number-based videos" : "curiosity-gap questions"
+      numberCount > questionCount ? "list/number-based videos" : "curiosity-gap questions"
   ][0];
 
   const insights: string[] = [
@@ -720,7 +710,7 @@ function runTop100Algorithm(topic: string, videos: VideoResult[]): string[] {
 function resultToCopyText(result: ToolResult): string {
   switch (result.kind) {
     case "thumbnails":
-      return ["maxresdefault","hqdefault","mqdefault","default"]
+      return ["maxresdefault", "hqdefault", "mqdefault", "default"]
         .map(k => `https://img.youtube.com/vi/${result.videoId}/${k}.jpg`).join("\n");
     case "embed":
       return `Share URL: ${result.shareUrl}\n\nEmbed code:\n${result.embedCode}`;
@@ -733,42 +723,42 @@ function resultToCopyText(result: ToolResult): string {
       ].join("\n");
     case "tags-inspector":
       return result.meta.tags.join(", ");
-    case "data":        return JSON.stringify(result.meta, null, 2);
+    case "data": return JSON.stringify(result.meta, null, 2);
     case "labeled-links": return result.items.map(i => `${i.label}: ${i.url}`).join("\n");
-    case "subscribe":   return result.url;
+    case "subscribe": return result.url;
     case "money":
       return `Estimated revenue: $${result.revenue.toFixed(2)}\nViews: ${result.views.toLocaleString()}\nRPM: $${result.rpm.toFixed(2)}`;
     case "playlist": {
       const total = result.videos.reduce((acc, v) => acc + v.durationSeconds, 0);
       return [`Total: ${formatDuration(total)}`,
-        `1.25×: ${formatDuration(total/1.25)}`,
-        `1.5×: ${formatDuration(total/1.5)}`,
-        `2×: ${formatDuration(total/2)}`].join("\n");
+      `1.25×: ${formatDuration(total / 1.25)}`,
+      `1.5×: ${formatDuration(total / 1.5)}`,
+      `2×: ${formatDuration(total / 2)}`].join("\n");
     }
     case "playlist-text":
       return result.videos.map((v, i) => `${i + 1}. ${v.title} (${formatDuration(v.durationSeconds)})`).join("\n");
-    case "picker":      return `Winner: ${result.winner}\nEntries: ${result.count}`;
-    case "score":       return [`Score: ${result.score}/100`, ...result.notes].join("\n");
-    case "category":    return `Category: ${result.category}\nKeyword: ${result.keyword}\n${result.evidence}`;
-    case "idea-list":   return result.items.map(i => `${i.title}\n\n${i.description}\n[Score: ${i.score}/100 | ${i.category}]`).join("\n\n---\n\n");
+    case "picker": return `Winner: ${result.winner}\nEntries: ${result.count}`;
+    case "score": return [`Score: ${result.score}/100`, ...result.notes].join("\n");
+    case "category": return `Category: ${result.category}\nKeyword: ${result.keyword}\n${result.evidence}`;
+    case "idea-list": return result.items.map(i => `${i.title}\n\n${i.description}\n[Score: ${i.score}/100 | ${i.category}]`).join("\n\n---\n\n");
     case "chips": case "list": case "insights": case "text-list":
       return result.items.join("\n");
     case "yt-analysis":
       return result.videos.map(v => `${v.title} - ${v.channel}`).join("\n");
     // New result types
-    case "clean-url":       return result.cleaned;
-    case "embed-code":      return result.code;
+    case "clean-url": return result.cleaned;
+    case "embed-code": return result.code;
     case "thumbnail-preview": return `https://img.youtube.com/vi/${result.videoId}/maxresdefault.jpg`;
-    case "channel-age":    return `Channel: ${result.title}\nCreated: ${result.publishedAt}\nAge: ${Math.floor(result.ageDays/365)}y ${Math.floor((result.ageDays%365)/30)}m`;
-    case "region-check":   return result.isGloballyAvailable ? "Available worldwide" : `Allowed: ${result.allowed.join(", ")}\nBlocked: ${result.blocked.join(", ")}`;
+    case "channel-age": return `Channel: ${result.title}\nCreated: ${result.publishedAt}\nAge: ${Math.floor(result.ageDays / 365)}y ${Math.floor((result.ageDays % 365) / 30)}m`;
+    case "region-check": return result.isGloballyAvailable ? "Available worldwide" : `Allowed: ${result.allowed.join(", ")}\nBlocked: ${result.blocked.join(", ")}`;
     case "upload-schedule": return `Best day: ${result.bestDay}\nBest hour: ${result.bestHour}\nAvg/month: ${result.avgUploadsPerMonth}`;
     case "channel-compare": return `${result.channel1.title}: ${result.channel1.subscriberCount} subs\n${result.channel2.title}: ${result.channel2.subscriberCount} subs`;
-    case "video-seo":      return `SEO Score: ${result.score}/100\n${result.checks.map(c => `${c.passed ? '✓' : '✗'} ${c.label}: ${c.note}`).join("\n")}`;
+    case "video-seo": return `SEO Score: ${result.score}/100\n${result.checks.map(c => `${c.passed ? '✓' : '✗'} ${c.label}: ${c.note}`).join("\n")}`;
     case "channel-videos": return result.videos.map(v => v.url).join("\n");
-    case "rss-url":        return result.rssUrl;
+    case "rss-url": return result.rssUrl;
     case "comments-export": return result.comments.map(c => `${c.author}: ${c.text}`).join("\n");
     case "video-category": return `Category: ${result.categoryName} (ID: ${result.categoryId})`;
-    case "playlist-links": return result.videos.map((v, i) => `${i+1}. ${v.url}`).join("\n");
+    case "playlist-links": return result.videos.map((v, i) => `${i + 1}. ${v.url}`).join("\n");
     case "advanced-keywords": return result.keywords.map(k => `${k.tag} (Free YouTube volume score: ${k.demandScore}/100, suggestions: ${k.uniqueSuggestions ?? 0}, KD: ${k.kdPercent}%, SEO: ${k.seoScore})`).join("\n");
     case "ctr": case "title-length": case "desc-length": case "playback-speed": case "views-ratio": case "shorts-trend":
       return "";
@@ -782,9 +772,9 @@ function resultToCopyText(result: ToolResult): string {
 function ThumbnailResult({ videoId, customUrl, onCopy, copyTarget }: { videoId: string; customUrl?: string; onCopy: (v: string, t: string) => void; copyTarget: string | null }) {
   const resolutions = [
     { key: "maxresdefault", label: "Max Res", size: "1280 × 720" },
-    { key: "hqdefault",     label: "HQ",       size: "480 × 360"  },
-    { key: "mqdefault",     label: "MQ",       size: "320 × 180"  },
-    { key: "default",       label: "Default",  size: "120 × 90"   },
+    { key: "hqdefault", label: "HQ", size: "480 × 360" },
+    { key: "mqdefault", label: "MQ", size: "320 × 180" },
+    { key: "default", label: "Default", size: "120 × 90" },
   ];
   if (customUrl) {
     return (
@@ -967,10 +957,10 @@ function calculateTagRelevance(tag: string, title: string, description: string):
   const wordsCount = t.split(/\s+/).length;
   if (wordsCount === 1) score -= 10;
   if (wordsCount > 5) score -= 15;
-  
+
   if (score < 10) score = Math.floor(Math.random() * 20) + 10;
 
-  score = Math.min(100, Math.max(1, Math.round(score + 10))); 
+  score = Math.min(100, Math.max(1, Math.round(score + 10)));
 
   if (titleLow.includes(t)) {
     score = Math.max(90, score);
@@ -1011,33 +1001,33 @@ function TagsInspectorResult({ meta, onCopy, copyTarget }: { meta: YouTubeMetada
     <div className={styles.metaFieldStack}>
       <div className={styles.metaField}>
         <div className={styles.metaFieldTop}>
-          <span className={styles.metaFieldLabel} style={{textTransform: 'none'}}>
+          <span className={styles.metaFieldLabel} style={{ textTransform: 'none' }}>
             Extracted "{meta.title}" tags :
           </span>
           <button type="button" className={`${styles.smButton} ${styles.smButtonGhost}`} onClick={handleCopyAll}>
             {copyTarget === "all-tags" ? "Copied ✓" : "Copy to Clipboard"}
           </button>
         </div>
-        
+
         <div className={styles.metaChips} style={{ gap: '0.8rem', marginTop: '0.5rem' }}>
           {activeTags.map(({ tag, score }) => {
             const isHigh = score >= 80;
             const isMed = score >= 50 && score < 80;
-            
-            const theme = isHigh 
+
+            const theme = isHigh
               ? { bg: 'rgba(16, 185, 129, 0.08)', border: 'rgba(16, 185, 129, 0.2)', text: '#10b981', badgeBg: 'rgba(16, 185, 129, 0.15)' }
               : isMed
                 ? { bg: 'rgba(245, 158, 11, 0.08)', border: 'rgba(245, 158, 11, 0.2)', text: '#f59e0b', badgeBg: 'rgba(245, 158, 11, 0.15)' }
                 : { bg: 'rgba(148, 163, 184, 0.08)', border: 'rgba(148, 163, 184, 0.2)', text: '#94a3b8', badgeBg: 'rgba(148, 163, 184, 0.15)' };
 
             return (
-              <div 
-                key={tag} 
-                style={{ 
-                  display: 'inline-flex', alignItems: 'stretch', 
-                  background: theme.bg, 
-                  borderRadius: '6px', 
-                  border: `1px solid ${theme.border}`, 
+              <div
+                key={tag}
+                style={{
+                  display: 'inline-flex', alignItems: 'stretch',
+                  background: theme.bg,
+                  borderRadius: '6px',
+                  border: `1px solid ${theme.border}`,
                   overflow: 'hidden',
                   transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                 }}
@@ -1052,12 +1042,12 @@ function TagsInspectorResult({ meta, onCopy, copyTarget }: { meta: YouTubeMetada
               >
                 <div style={{ display: 'flex', alignItems: 'center', padding: '0.3rem 0.5rem', gap: '0.5rem' }}>
                   <span style={{ fontSize: '0.85rem', color: 'var(--foreground)' }}>{tag}</span>
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => setRemovedTags(prev => new Set(prev).add(tag))}
-                    style={{ 
+                    style={{
                       background: 'transparent', border: 'none', borderRadius: '4px',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
                       cursor: 'pointer', color: 'var(--text-secondary)', padding: '2px',
                       transition: 'all 0.15s ease'
                     }}
@@ -1074,11 +1064,11 @@ function TagsInspectorResult({ meta, onCopy, copyTarget }: { meta: YouTubeMetada
                     <X size={14} strokeWidth={2.5} />
                   </button>
                 </div>
-                <div style={{ 
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                  background: theme.badgeBg, color: theme.text, 
-                  fontWeight: 600, fontSize: '0.75rem', padding: '0 0.6rem', 
-                  borderLeft: `1px solid ${theme.border}` 
+                <div style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: theme.badgeBg, color: theme.text,
+                  fontWeight: 600, fontSize: '0.75rem', padding: '0 0.6rem',
+                  borderLeft: `1px solid ${theme.border}`
                 }}>
                   {score}%
                 </div>
@@ -1093,12 +1083,12 @@ function TagsInspectorResult({ meta, onCopy, copyTarget }: { meta: YouTubeMetada
 
 function DataResult({ meta, onCopy, copyTarget }: { meta: YouTubeMetadata; onCopy: (v: string, t: string) => void; copyTarget: string | null }) {
   const stats = [
-    { label: "Views",     value: meta.viewCount ? Number(meta.viewCount).toLocaleString("en-US") : " - " },
-    { label: "Likes",     value: meta.likeCount || " - " },
-    { label: "Comments",  value: meta.commentCount || " - " },
-    { label: "Duration",  value: meta.durationSeconds ? formatDuration(Number(meta.durationSeconds)) : " - " },
+    { label: "Views", value: meta.viewCount ? Number(meta.viewCount).toLocaleString("en-US") : " - " },
+    { label: "Likes", value: meta.likeCount || " - " },
+    { label: "Comments", value: meta.commentCount || " - " },
+    { label: "Duration", value: meta.durationSeconds ? formatDuration(Number(meta.durationSeconds)) : " - " },
     { label: "Published", value: meta.uploadDate?.slice(0, 10) || " - " },
-    { label: "Video ID",  value: meta.videoId },
+    { label: "Video ID", value: meta.videoId },
   ];
   return (
     <div className={styles.dataResultStack}>
@@ -1191,18 +1181,18 @@ function PlaylistResult({ videos }: { videos: PlaylistVideoFrontend[] }) {
   const customSpeedValue = typeof customSpeed === "number" && customSpeed > 0 ? customSpeed : 1;
   const speeds = [
     { label: "1.25×", value: formatDuration(totalSeconds / 1.25) },
-    { label: "1.5×",  value: formatDuration(totalSeconds / 1.5)  },
+    { label: "1.5×", value: formatDuration(totalSeconds / 1.5) },
     { label: "1.75×", value: formatDuration(totalSeconds / 1.75) },
-    { label: "2×",    value: formatDuration(totalSeconds / 2)    },
+    { label: "2×", value: formatDuration(totalSeconds / 2) },
   ];
   if (customSpeedValue !== 1 && ![1.25, 1.5, 1.75, 2].includes(customSpeedValue)) {
-     speeds.push({ label: `${customSpeedValue}×`, value: formatDuration(totalSeconds / customSpeedValue) });
+    speeds.push({ label: `${customSpeedValue}×`, value: formatDuration(totalSeconds / customSpeedValue) });
   }
 
   return (
     <div className={styles.calcCard} style={{ marginTop: "2rem" }}>
       <div className={styles.calcContainer}>
-        
+
         <div className={styles.calcTop} style={{ flexDirection: "column", gap: "1.5rem" }}>
           <div className={styles.calcControl}>
             <div className={styles.calcHeader}>
@@ -1210,24 +1200,24 @@ function PlaylistResult({ videos }: { videos: PlaylistVideoFrontend[] }) {
               <span className={styles.calcVal}>{startRange} - {endRange}</span>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginTop: "0.5rem" }}>
-               <input
-                  type="number"
-                  min="1"
-                  max={videos.length}
-                  value={startRange}
-                  onChange={(e) => setStartRange(Number(e.target.value))}
-                  className={styles.calcInput}
-                  placeholder="Start video (e.g. 1)"
-               />
-               <input
-                  type="number"
-                  min="1"
-                  max={videos.length}
-                  value={endRange}
-                  onChange={(e) => setEndRange(Number(e.target.value))}
-                  className={styles.calcInput}
-                  placeholder={`End video (e.g. ${videos.length})`}
-               />
+              <input
+                type="number"
+                min="1"
+                max={videos.length}
+                value={startRange}
+                onChange={(e) => setStartRange(Number(e.target.value))}
+                className={styles.calcInput}
+                placeholder="Start video (e.g. 1)"
+              />
+              <input
+                type="number"
+                min="1"
+                max={videos.length}
+                value={endRange}
+                onChange={(e) => setEndRange(Number(e.target.value))}
+                className={styles.calcInput}
+                placeholder={`End video (e.g. ${videos.length})`}
+              />
             </div>
             <p className={styles.calcLimits} style={{ marginTop: "0.5rem", justifyContent: "center" }}>Total Videos Available: {videos.length}</p>
           </div>
@@ -1238,14 +1228,14 @@ function PlaylistResult({ videos }: { videos: PlaylistVideoFrontend[] }) {
               <span className={styles.calcVal}>{customSpeed ? `${customSpeed}×` : "1×"}</span>
             </div>
             <input
-               type="number"
-               min="0.1"
-               step="0.05"
-               value={customSpeed}
-               onChange={(e) => setCustomSpeed(e.target.value ? Number(e.target.value) : "")}
-               className={styles.calcInput}
-               placeholder="Custom speed (e.g., 2.25)"
-               style={{ marginTop: "0.5rem", maxWidth: "200px" }}
+              type="number"
+              min="0.1"
+              step="0.05"
+              value={customSpeed}
+              onChange={(e) => setCustomSpeed(e.target.value ? Number(e.target.value) : "")}
+              className={styles.calcInput}
+              placeholder="Custom speed (e.g., 2.25)"
+              style={{ marginTop: "0.5rem", maxWidth: "200px" }}
             />
           </div>
         </div>
@@ -1350,7 +1340,7 @@ function CategoryResult({ category, keyword, evidence }: { category: string; key
           <h3 style={{ margin: 0, fontSize: "1.4rem", fontWeight: 800, color: "var(--foreground)" }}>{category}</h3>
         </div>
       </div>
-      
+
       {keyword && (
         <div className={styles.metaField}>
           <span className={styles.metaFieldLabel}>Keyword Analyzed</span>
@@ -1440,8 +1430,8 @@ function IdeaListResult({ items, onCopy, copyTarget }: { items: { title: string;
 
         return (
           <div key={i} style={{ padding: "1.25rem", background: "var(--bg-alt)", border: "1px solid var(--border)", borderRadius: "12px", display: "flex", flexDirection: "column", gap: "0.75rem", position: "relative", overflow: "hidden", transition: "transform 0.2s, box-shadow 0.2s" }}
-               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.12)"; }}
-               onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}>
+            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.12)"; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <div style={{ padding: "0.25rem 0.6rem", borderRadius: "6px", background: scoreBg, border: `1px solid ${scoreColor}40`, color: scoreColor, fontSize: "0.75rem", fontWeight: 700 }}>
@@ -1511,10 +1501,10 @@ function CtrCalculator() {
           <div className={styles.calcSliderWrap}>
             <input type="range" min="0" max="1000000" step="1000" value={Math.min(impressions, 1000000)}
               onChange={e => setImpressions(Number(e.target.value))} className={styles.calcSlider}
-              style={{ background: `linear-gradient(to right, #ff5a36 ${Math.min(100, impressions/10000)}%, rgba(255,90,54,0.2) ${Math.min(100, impressions/10000)}%)` }} />
+              style={{ background: `linear-gradient(to right, #ff5a36 ${Math.min(100, impressions / 10000)}%, rgba(255,90,54,0.2) ${Math.min(100, impressions / 10000)}%)` }} />
             <div className={styles.calcLimits}><span>0</span><span>1,000,000</span></div>
           </div>
-          <input type="text" value={fmt(impressions)} onChange={e => setImpressions(Number(e.target.value.replace(/,/g,"")) || 0)} className={styles.calcInput} />
+          <input type="text" value={fmt(impressions)} onChange={e => setImpressions(Number(e.target.value.replace(/,/g, "")) || 0)} className={styles.calcInput} />
         </div>
         <div className={styles.calcControl}>
           <div className={styles.calcHeader}>
@@ -1524,10 +1514,10 @@ function CtrCalculator() {
           <div className={styles.calcSliderWrap}>
             <input type="range" min="0" max={Math.max(impressions, 1000)} step="10" value={Math.min(clicks, Math.max(impressions, 1000))}
               onChange={e => setClicks(Number(e.target.value))} className={styles.calcSlider}
-              style={{ background: `linear-gradient(to right, #ff5a36 ${Math.min(100, (clicks/Math.max(impressions,1))*100)}%, rgba(255,90,54,0.2) ${Math.min(100, (clicks/Math.max(impressions,1))*100)}%)` }} />
+              style={{ background: `linear-gradient(to right, #ff5a36 ${Math.min(100, (clicks / Math.max(impressions, 1)) * 100)}%, rgba(255,90,54,0.2) ${Math.min(100, (clicks / Math.max(impressions, 1)) * 100)}%)` }} />
             <div className={styles.calcLimits}><span>0</span><span>{fmt(Math.max(impressions, 1000))}</span></div>
           </div>
-          <input type="text" value={fmt(clicks)} onChange={e => setClicks(Number(e.target.value.replace(/,/g,"")) || 0)} className={styles.calcInput} />
+          <input type="text" value={fmt(clicks)} onChange={e => setClicks(Number(e.target.value.replace(/,/g, "")) || 0)} className={styles.calcInput} />
         </div>
       </div>
       <div className={styles.calcBottom}>
@@ -1557,7 +1547,7 @@ function TitleLengthChecker() {
   const displayLimit = 60;
   const maxLimit = 100;
   const truncated = text.length > displayLimit ? text.slice(0, displayLimit) + "..." : text;
-  
+
   let score = 100;
   let status = "Optimal length";
   if (chars === 0) { score = 0; status = ""; }
@@ -1567,7 +1557,7 @@ function TitleLengthChecker() {
 
   const barColor = score >= 80 ? "#10b981" : score >= 60 ? "#facc15" : "#f87171";
   const pct = Math.min(100, (chars / maxLimit) * 100);
-  
+
   return (
     <div className={styles.calcContainer}>
       <textarea
@@ -1591,13 +1581,13 @@ function TitleLengthChecker() {
       {text && (
         <div style={{ marginTop: "2rem", display: "grid", gap: "1.25rem" }}>
           <div style={{ display: "flex", gap: "1rem", alignItems: "center", padding: "1rem", background: `rgba(${score >= 80 ? '16,185,129' : score >= 60 ? '250,204,21' : '248,113,113'}, 0.08)`, border: `1px solid ${barColor}40`, borderRadius: "10px" }}>
-             <div style={{ fontSize: "2rem", fontWeight: 800, color: barColor }}>{score}/100</div>
-             <div>
-               <p style={{ margin: "0 0 0.25rem", fontWeight: 700, fontSize: "0.95rem", color: "var(--foreground)" }}>Title SEO Score</p>
-               <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>Titles between 40-60 characters generally perform best for CTR on mobile devices.</p>
-             </div>
+            <div style={{ fontSize: "2rem", fontWeight: 800, color: barColor }}>{score}/100</div>
+            <div>
+              <p style={{ margin: "0 0 0.25rem", fontWeight: 700, fontSize: "0.95rem", color: "var(--foreground)" }}>Title SEO Score</p>
+              <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>Titles between 40-60 characters generally perform best for CTR on mobile devices.</p>
+            </div>
           </div>
-          
+
           <div className={styles.metaField}>
             <span className={styles.metaFieldLabel}>Mobile Search Preview (approx {displayLimit} chars)</span>
             <div style={{ padding: "0.75rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "6px", display: "flex", alignItems: "center", gap: "0.75rem" }}>
@@ -1605,7 +1595,7 @@ function TitleLengthChecker() {
               <p className={styles.metaFieldValue} style={{ fontWeight: 600, margin: 0 }}>{truncated}</p>
             </div>
           </div>
-          
+
           <div className={styles.dataStatGrid}>
             {[
               { label: "Characters", value: String(chars) },
@@ -1632,7 +1622,7 @@ function DescriptionLengthChecker() {
   const lines = text.split("\n").length;
   const aboveFold = text.slice(0, 157);
   const aboveFoldFull = text.length <= 157;
-  
+
   const hashtags = (text.match(/#[a-z0-9_]+/gi) || []);
   const uniqueHashtags = new Set(hashtags.map(h => h.toLowerCase())).size;
 
@@ -1645,7 +1635,7 @@ function DescriptionLengthChecker() {
     if (uniqueHashtags > 15) score -= 40; // Over-optimization penalty
   }
   score = Math.max(0, score);
-  
+
   const pct = Math.min(100, (chars / 5000) * 100);
   const barColor = chars > 5000 ? "#f87171" : chars > 3000 ? "#facc15" : "#10b981";
   const scoreColor = score >= 80 ? "#10b981" : score >= 60 ? "#facc15" : "#f87171";
@@ -1672,11 +1662,11 @@ function DescriptionLengthChecker() {
       {text && (
         <div style={{ marginTop: "2rem", display: "grid", gap: "1.25rem" }}>
           <div style={{ display: "flex", gap: "1rem", alignItems: "center", padding: "1rem", background: `rgba(${score >= 80 ? '16,185,129' : score >= 60 ? '250,204,21' : '248,113,113'}, 0.08)`, border: `1px solid ${scoreColor}40`, borderRadius: "10px" }}>
-             <div style={{ fontSize: "2rem", fontWeight: 800, color: scoreColor }}>{score}/100</div>
-             <div>
-               <p style={{ margin: "0 0 0.25rem", fontWeight: 700, fontSize: "0.95rem", color: "var(--foreground)" }}>Description SEO Score</p>
-               <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>Aim for 250+ characters with 1-3 targeted hashtags for best search indexability.</p>
-             </div>
+            <div style={{ fontSize: "2rem", fontWeight: 800, color: scoreColor }}>{score}/100</div>
+            <div>
+              <p style={{ margin: "0 0 0.25rem", fontWeight: 700, fontSize: "0.95rem", color: "var(--foreground)" }}>Description SEO Score</p>
+              <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>Aim for 250+ characters with 1-3 targeted hashtags for best search indexability.</p>
+            </div>
           </div>
 
           <div className={styles.metaField}>
@@ -1716,11 +1706,11 @@ function PlaybackSpeedCalculator() {
   };
   const speeds = [
     { label: "1.25×", value: totalSec / 1.25 },
-    { label: "1.5×",  value: totalSec / 1.5  },
+    { label: "1.5×", value: totalSec / 1.5 },
     { label: "1.75×", value: totalSec / 1.75 },
-    { label: "2×",    value: totalSec / 2    },
-    { label: "2.5×", value: totalSec / 2.5  },
-    { label: "3×",    value: totalSec / 3    },
+    { label: "2×", value: totalSec / 2 },
+    { label: "2.5×", value: totalSec / 2.5 },
+    { label: "3×", value: totalSec / 3 },
   ];
   return (
     <div className={styles.calcContainer}>
@@ -1787,11 +1777,11 @@ function ViewsRatioCalculator() {
             <div className={styles.calcSliderWrap}>
               <input type="range" min="0" max={max} step={max / 1000} value={Math.min(value, max)}
                 onChange={e => set(Number(e.target.value))} className={styles.calcSlider}
-                style={{ background: `linear-gradient(to right, #ff5a36 ${Math.min(100, (value/max)*100)}%, rgba(255,90,54,0.2) ${Math.min(100, (value/max)*100)}%)` }} />
+                style={{ background: `linear-gradient(to right, #ff5a36 ${Math.min(100, (value / max) * 100)}%, rgba(255,90,54,0.2) ${Math.min(100, (value / max) * 100)}%)` }} />
               <div className={styles.calcLimits}><span>0</span><span>{fmt(max)}</span></div>
             </div>
             <input type="text" value={fmt(value)}
-              onChange={e => set(Number(e.target.value.replace(/,/g,"")) || 0)} className={styles.calcInput} />
+              onChange={e => set(Number(e.target.value.replace(/,/g, "")) || 0)} className={styles.calcInput} />
           </div>
         ))}
       </div>
@@ -1893,7 +1883,7 @@ function ThumbnailPreviewResult({ videoId, title }: { videoId: string; title: st
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <p style={{ color: "#0f0f0f", fontWeight: 600, fontSize: "0.8rem", lineHeight: 1.3, margin: 0, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{title || "Your Video Title Here"}</p>
-              <p style={{ color: "#606060", fontSize: "0.7rem", marginTop: "0.3rem" }}>Channel Name<br/>234K views · 5 days ago</p>
+              <p style={{ color: "#606060", fontSize: "0.7rem", marginTop: "0.3rem" }}>Channel Name<br />234K views · 5 days ago</p>
             </div>
           </div>
         </div>
@@ -2010,8 +2000,8 @@ function UploadScheduleResult({ result }: { result: Extract<ToolResult, { kind: 
     result.avgUploadsPerMonth >= 8
       ? `Publishing ${result.avgUploadsPerMonth} videos/month puts this channel in the <strong>top 15% for consistency</strong> - the algorithm rewards this heavily.`
       : result.avgUploadsPerMonth >= 4
-      ? `At ${result.avgUploadsPerMonth} videos/month, consistency is <strong>moderate</strong>. Pushing to 8+ per month could unlock a significant reach increase.`
-      : `Only ${result.avgUploadsPerMonth} videos/month - <strong>low posting frequency</strong> limits algorithmic amplification. A fixed weekly upload slot would help.`,
+        ? `At ${result.avgUploadsPerMonth} videos/month, consistency is <strong>moderate</strong>. Pushing to 8+ per month could unlock a significant reach increase.`
+        : `Only ${result.avgUploadsPerMonth} videos/month - <strong>low posting frequency</strong> limits algorithmic amplification. A fixed weekly upload slot would help.`,
     `Best upload hour is <strong>${result.bestHour}</strong> - this likely targets the channel's core audience timezone.`,
   ];
 
@@ -2085,14 +2075,14 @@ function UploadScheduleResult({ result }: { result: Extract<ToolResult, { kind: 
               const intensity = maxHourCount > 0 ? count / maxHourCount : 0;
               const isBestH = count === maxHourCount && count > 0;
               return (
-                <div key={hour} title={`${String(hour).padStart(2,"0")}:00 - ${count} upload${count !== 1 ? "s" : ""}`}
+                <div key={hour} title={`${String(hour).padStart(2, "0")}:00 - ${count} upload${count !== 1 ? "s" : ""}`}
                   style={{ height: "32px", borderRadius: "4px", background: isBestH ? `rgba(255,90,54,${0.3 + intensity * 0.7})` : `rgba(255,90,54,${0.08 + intensity * 0.5})`, border: isBestH ? "1px solid rgba(255,90,54,0.6)" : "1px solid transparent", cursor: "default", transition: "background 0.3s" }} />
               );
             })}
           </div>
           <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5px" }}>
-            {["0","6","12","18","23"].map(h => (
-              <span key={h} style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", fontFamily: "var(--font-sans)" }}>{h.padStart(2,"0")}:00</span>
+            {["0", "6", "12", "18", "23"].map(h => (
+              <span key={h} style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", fontFamily: "var(--font-sans)" }}>{h.padStart(2, "0")}:00</span>
             ))}
           </div>
         </div>
@@ -2232,7 +2222,7 @@ function ChannelCompareResult({ result }: { result: Extract<ToolResult, { kind: 
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "2rem", marginTop: "1rem" }}>
-      
+
       {/* Hero Section */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "3rem", padding: "3rem 2rem", background: "linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.06) 100%)", borderRadius: "16px", border: "1px solid var(--border)", position: "relative", overflow: "hidden", boxShadow: "0 10px 40px rgba(0,0,0,0.15)" }}>
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "18rem", opacity: 0.02, fontWeight: 900, pointerEvents: "none", zIndex: 0 }}>VS</div>
@@ -2259,7 +2249,7 @@ function ChannelCompareResult({ result }: { result: Extract<ToolResult, { kind: 
 
       {/* Monetization Estimates */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem" }}>
-        
+
         {/* Monthly Revenue */}
         <div style={{ background: "linear-gradient(145deg, rgba(16,185,129,0.05) 0%, rgba(16,185,129,0.12) 100%)", border: "1px solid rgba(16,185,129,0.25)", borderRadius: "16px", padding: "2rem", position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", top: -20, right: -20, fontSize: "6rem", opacity: 0.1, pointerEvents: "none" }}>💰</div>
@@ -2308,7 +2298,7 @@ function ChannelCompareResult({ result }: { result: Extract<ToolResult, { kind: 
 function VideoSeoResult({ meta, score, checks }: { meta: YouTubeMetadata; score: number; checks: SeoCheck[] }) {
   const passed = checks.filter(c => c.passed).length;
   const failed = checks.filter(c => !c.passed && !c.label.includes("keyword")).length;
-  
+
   const scoreColor = score >= 80 ? "#10b981" : score >= 50 ? "#f59e0b" : "#ef4444";
   const radius = 42;
   const circumference = 2 * Math.PI * radius;
@@ -2330,15 +2320,15 @@ function VideoSeoResult({ meta, score, checks }: { meta: YouTubeMetadata; score:
     return { text: `Unoptimized parameter detected: ${c.label.toLowerCase()}. Rectify this to strengthen your semantic indexing signals.`, type: "Improvement" };
   });
 
-  const expertVerdict = score >= 80 
+  const expertVerdict = score >= 80
     ? "High Authority Asset. You've executed all core metadata best practices perfectly. The algorithm has strong semantic signals to rank this. Focus your remaining efforts entirely on CTR (Thumbnail psychology) and AVD (Audience Retention) to push this video viral."
     : score >= 50
-    ? "Missed Potential. You have a solid foundation, but you are leaving organic search traffic on the table. Implement the High Priority action items below to improve your ranking velocity and secure better suggested-video placements."
-    : "Unoptimized Asset. The algorithm currently lacks the necessary semantic signals to categorize and push this video to a broader audience. A complete metadata overhaul is required to gain organic traction in the YouTube ecosystem.";
+      ? "Missed Potential. You have a solid foundation, but you are leaving organic search traffic on the table. Implement the High Priority action items below to improve your ranking velocity and secure better suggested-video placements."
+      : "Unoptimized Asset. The algorithm currently lacks the necessary semantic signals to categorize and push this video to a broader audience. A complete metadata overhaul is required to gain organic traction in the YouTube ecosystem.";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginTop: "1.5rem", color: "var(--foreground)" }}>
-      
+
       {/* Video Context Header */}
       <div style={{ display: "flex", alignItems: "center", gap: "1.25rem", background: "var(--bg-alt)", border: "1px solid var(--border)", borderRadius: "12px", padding: "1.25rem", boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}>
         <a href={meta.url} target="_blank" rel="noopener noreferrer" style={{ width: "180px", aspectRatio: "16/9", borderRadius: "8px", overflow: "hidden", flexShrink: 0, position: "relative", display: "block", border: "1px solid rgba(255,255,255,0.1)" }}>
@@ -2372,7 +2362,7 @@ function VideoSeoResult({ meta, score, checks }: { meta: YouTubeMetadata; score:
             </p>
           </div>
         </div>
-        
+
         <div style={{ flex: "1 1 250px", display: "flex", justifyContent: "flex-end", gap: "1rem" }}>
           <div style={{ background: "rgba(0,0,0,0.2)", border: "1px solid var(--border)", borderRadius: "10px", padding: "1.25rem", textAlign: "center", flex: 1 }}>
             <div style={{ fontSize: "1.75rem", fontWeight: 800, color: "#10b981", marginBottom: "0.25rem", lineHeight: 1 }}>{passed}</div>
@@ -2388,7 +2378,7 @@ function VideoSeoResult({ meta, score, checks }: { meta: YouTubeMetadata; score:
       {/* Expert Verdict Box */}
       <div style={{ background: `linear-gradient(90deg, ${scoreColor}15 0%, rgba(0,0,0,0.2) 100%)`, border: `1px solid ${scoreColor}40`, borderLeft: `4px solid ${scoreColor}`, borderRadius: "8px", padding: "1.5rem", display: "flex", gap: "1rem", alignItems: "flex-start" }}>
         <div style={{ color: scoreColor, marginTop: "0.2rem" }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
         </div>
         <div>
           <h3 style={{ margin: "0 0 0.4rem 0", fontSize: "1rem", fontWeight: 800, color: "var(--foreground)", textTransform: "uppercase", letterSpacing: "0.5px" }}>Expert Verdict</h3>
@@ -2428,7 +2418,7 @@ function VideoSeoResult({ meta, score, checks }: { meta: YouTubeMetadata; score:
           <div style={{ background: "var(--bg-alt)", border: "1px solid var(--border)", borderRadius: "12px", overflow: "hidden", boxShadow: "0 4px 20px rgba(0,0,0,0.15)" }}>
             <div style={{ padding: "1.25rem 1.5rem", borderBottom: "1px solid var(--border)", background: "rgba(0,0,0,0.1)" }}>
               <h3 style={{ margin: 0, fontSize: "1.05rem", fontWeight: 700, color: "var(--foreground)", display: "flex", alignItems: "center", gap: "0.6rem" }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
                 Video Insights
               </h3>
             </div>
@@ -2452,7 +2442,7 @@ function VideoSeoResult({ meta, score, checks }: { meta: YouTubeMetadata; score:
           {suggestions.length > 0 && (
             <div style={{ background: "rgba(249, 115, 22, 0.05)", border: "1px solid rgba(249, 115, 22, 0.2)", borderRadius: "12px", padding: "1.5rem" }}>
               <h3 style={{ margin: "0 0 1.25rem 0", fontSize: "1.05rem", fontWeight: 700, color: "var(--primary)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg>
                 Strategic Advice
               </h3>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
@@ -2511,19 +2501,19 @@ function RssResult({ result, onCopy, copyTarget }: { result: Extract<ToolResult,
     <div className={styles.subscribeCard}>
       <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem", justifyContent: "center" }}>
         <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "24px", height: "24px", background: "rgba(249, 115, 22, 0.15)", color: "#f97316", borderRadius: "6px" }}>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 11a9 9 0 0 1 9 9" /><path d="M4 4a16 16 0 0 1 16 16" /><circle cx="5" cy="19" r="1" /></svg>
         </span>
         <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 700, color: "var(--foreground)" }}>RSS Feed Ready</h3>
       </div>
       {result.title && <p style={{ margin: "0 0 1.25rem 0", fontSize: "0.9rem", color: "var(--text-secondary)", textAlign: "center" }}><strong style={{ color: "var(--foreground)" }}>{result.title}</strong></p>}
-      
+
       <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", background: "rgba(0,0,0,0.25)", border: "1px solid var(--border)", borderRadius: "8px", padding: "0.35rem", gap: "0.5rem" }}>
         <div style={{ flex: "1 1 200px", padding: "0.5rem 0.75rem", overflow: "hidden", minWidth: 0 }}>
           <div style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace", fontSize: "0.85rem", color: "var(--foreground)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", textAlign: "left" }}>
             {result.rssUrl}
           </div>
         </div>
-        <button 
+        <button
           onClick={() => onCopy(result.rssUrl, "rss")}
           style={{ flex: "0 0 auto", background: copyTarget === "rss" ? "#10b981" : "var(--primary)", color: "white", border: "none", borderRadius: "6px", padding: "0.6rem 1rem", fontSize: "0.8rem", fontWeight: 700, cursor: "pointer", transition: "all 0.2s", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.4rem", minWidth: "120px", whiteSpace: "nowrap" }}
         >
@@ -2537,7 +2527,7 @@ function RssResult({ result, onCopy, copyTarget }: { result: Extract<ToolResult,
 
       <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center" }}>
         <a href={result.rssUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.85rem", color: "var(--primary)", textDecoration: "none", fontWeight: 600, display: "flex", alignItems: "center", gap: "0.3rem" }}>
-          Open feed in browser <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open feed in browser <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
         </a>
       </div>
 
@@ -2581,13 +2571,13 @@ function CommentsExportResult({ result }: { result: Extract<ToolResult, { kind: 
   const download = () => {
     let content = "", type = "text/plain", ext = "txt";
     if (format === "csv") {
-      content = ["Author,Comment,Likes,Published", ...result.comments.map(c => `"${c.author.replace(/"/g,'""')}","${c.text.replace(/"/g,'""')}",${c.likes},${c.publishedAt}`)].join("\n");
+      content = ["Author,Comment,Likes,Published", ...result.comments.map(c => `"${c.author.replace(/"/g, '""')}","${c.text.replace(/"/g, '""')}",${c.likes},${c.publishedAt}`)].join("\n");
       type = "text/csv"; ext = "csv";
     } else if (format === "json") {
       content = JSON.stringify(result.comments, null, 2);
       type = "application/json"; ext = "json";
     } else {
-      content = result.comments.map((c, i) => `${i+1}. @${c.author}: ${c.text}`).join("\n\n");
+      content = result.comments.map((c, i) => `${i + 1}. @${c.author}: ${c.text}`).join("\n\n");
     }
     const blob = new Blob([content], { type });
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
@@ -2637,7 +2627,7 @@ function VideoCategoryResult({ result }: { result: Extract<ToolResult, { kind: "
 function PlaylistLinksResult({ videos, onCopy, copyTarget }: { videos: PlaylistVideoFrontend[]; onCopy: (v: string, t: string) => void; copyTarget: string | null }) {
   const allUrls = videos.map(v => v.url).join("\n");
   const downloadTxt = () => {
-    const txt = videos.map((v, i) => `${i+1}. ${v.title}\n   ${v.url}`).join("\n\n");
+    const txt = videos.map((v, i) => `${i + 1}. ${v.title}\n   ${v.url}`).join("\n\n");
     const blob = new Blob([txt], { type: "text/plain" });
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
     a.download = "playlist-links.txt"; a.click();
@@ -2654,7 +2644,7 @@ function PlaylistLinksResult({ videos, onCopy, copyTarget }: { videos: PlaylistV
       <div style={{ maxHeight: "400px", overflowY: "auto", border: "1px solid var(--border)", borderRadius: "8px" }}>
         {videos.map((v, i) => (
           <div key={v.videoId} style={{ padding: "0.6rem 1rem", borderBottom: "1px solid var(--border)", display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
-            <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)", width: 24, flexShrink: 0, marginTop: "0.1rem" }}>{i+1}</span>
+            <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)", width: 24, flexShrink: 0, marginTop: "0.1rem" }}>{i + 1}</span>
             <div style={{ flex: 1 }}>
               <p style={{ fontSize: "0.82rem", fontWeight: 600, margin: 0 }}>{v.title}</p>
               <a href={v.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.72rem", color: "var(--primary)" }}>{v.url}</a>
@@ -2837,7 +2827,7 @@ function ShortsTrendAnalyzerDashboard() {
   };
 
   const copyTags = () => {
-    navigator.clipboard.writeText(tags.join(", ")).catch(() => {});
+    navigator.clipboard.writeText(tags.join(", ")).catch(() => { });
   };
 
   const cStyle = { background: "var(--bg-alt)", color: "var(--foreground)", fontFamily: "system-ui", padding: "1.5rem", borderRadius: "12px", border: "1px solid var(--border)", marginTop: "1.5rem", boxShadow: "0 4px 20px rgba(0,0,0,0.15)" };
@@ -2850,7 +2840,7 @@ function ShortsTrendAnalyzerDashboard() {
   return (
     <div style={cStyle}>
       <p style={{ color: "var(--text-secondary)", fontSize: "0.85rem", margin: "0 0 1.5rem 0" }}>Spot rising Shorts in any niche. Compare velocity, engagement, and hashtag leaders. Built with the official YouTube Data API.</p>
-      
+
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem", marginBottom: "1.5rem" }}>
         <div>
           <span style={labelStyle}>Keyword or Niche</span>
@@ -2917,7 +2907,7 @@ function ShortsTrendAnalyzerDashboard() {
                       <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)", alignSelf: "center" }}>ER: {v.er}%</span>
                     </div>
                     <div style={{ fontSize: "0.7rem", color: "var(--text-secondary)", display: "flex", gap: "0.5rem", marginBottom: "0.75rem" }}>
-                      <span>Views: {v.views >= 1000 ? (v.views/1000).toFixed(1) + "K" : v.views}</span>
+                      <span>Views: {v.views >= 1000 ? (v.views / 1000).toFixed(1) + "K" : v.views}</span>
                       <span>Age: {v.ageHours}h</span>
                       <span>Len: {v.lenStr}</span>
                     </div>
@@ -3051,17 +3041,17 @@ function Top100Leaderboard() {
           <div style={{ width: "100%" }}>
             {[...Array(15)].map((_, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: "1rem", padding: "1rem 1.5rem", borderBottom: "1px solid var(--border)", opacity: 1 - i * 0.05 }}>
-              <div style={{ width: 32, height: 18, borderRadius: 4, background: "var(--border)" }} />
-              <div style={{ width: 48, height: 48, borderRadius: 8, background: "var(--border)", flexShrink: 0 }} />
-              <div style={{ flex: 1 }}>
-                <div style={{ width: `${40 + (i % 5) * 8}%`, height: 14, borderRadius: 4, background: "var(--border)", marginBottom: 6 }} />
-                <div style={{ width: "25%", height: 11, borderRadius: 4, background: "var(--border)" }} />
+                <div style={{ width: 32, height: 18, borderRadius: 4, background: "var(--border)" }} />
+                <div style={{ width: 48, height: 48, borderRadius: 8, background: "var(--border)", flexShrink: 0 }} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ width: `${40 + (i % 5) * 8}%`, height: 14, borderRadius: 4, background: "var(--border)", marginBottom: 6 }} />
+                  <div style={{ width: "25%", height: 11, borderRadius: 4, background: "var(--border)" }} />
+                </div>
+                <div style={{ width: 60, height: 14, borderRadius: 4, background: "var(--border)" }} />
+                <div style={{ width: 60, height: 14, borderRadius: 4, background: "var(--border)" }} />
+                <div style={{ width: 50, height: 14, borderRadius: 4, background: "var(--border)" }} />
               </div>
-              <div style={{ width: 60, height: 14, borderRadius: 4, background: "var(--border)" }} />
-              <div style={{ width: 60, height: 14, borderRadius: 4, background: "var(--border)" }} />
-              <div style={{ width: 50, height: 14, borderRadius: 4, background: "var(--border)" }} />
-            </div>
-          ))}
+            ))}
           </div>
         </div>
       )}
@@ -3471,22 +3461,22 @@ export default function GenericToolClient({ tool }: Props) {
 
   // Pure client-side interactive tools that don't need the generic form
   if ((tool.kind as string) === "ctr-calculator") {
-    return <div className={styles.toolArea}><CtrCalculator /><LeadCaptureCta /></div>;
+    return <div className={styles.toolArea}><CtrCalculator /></div>;
   }
   if ((tool.kind as string) === "title-length-checker") {
-    return <div className={styles.toolArea}><TitleLengthChecker /><LeadCaptureCta /></div>;
+    return <div className={styles.toolArea}><TitleLengthChecker /></div>;
   }
   if ((tool.kind as string) === "description-length-checker") {
-    return <div className={styles.toolArea}><DescriptionLengthChecker /><LeadCaptureCta /></div>;
+    return <div className={styles.toolArea}><DescriptionLengthChecker /></div>;
   }
   if ((tool.kind as string) === "playback-speed-calculator") {
-    return <div className={styles.toolArea}><PlaybackSpeedCalculator /><LeadCaptureCta /></div>;
+    return <div className={styles.toolArea}><PlaybackSpeedCalculator /></div>;
   }
   if ((tool.kind as string) === "views-ratio-calculator") {
-    return <div className={styles.toolArea}><ViewsRatioCalculator /><LeadCaptureCta /></div>;
+    return <div className={styles.toolArea}><ViewsRatioCalculator /></div>;
   }
   if ((tool.kind as string) === "shorts-trend") {
-    return <div className={styles.toolArea}><ShortsTrendAnalyzerDashboard /><LeadCaptureCta /></div>;
+    return <ShortsTrendAnalyzerDashboard />;
   }
 
   const [input, setInput] = useState("");
@@ -3586,7 +3576,7 @@ export default function GenericToolClient({ tool }: Props) {
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || "Failed to generate ideas");
-            
+
             // Format ideas for display
             const ideaItems = data.ideas.map((idea: any) => ({
               title: idea.title,
@@ -3661,7 +3651,7 @@ export default function GenericToolClient({ tool }: Props) {
           const res = await fetch(`/api/yt-channel-keywords?target=${encodeURIComponent(target)}`);
           const data = await res.json();
           if (!res.ok) throw new Error(data.error || "Failed to fetch channel keywords");
-          
+
           if (!data.keywords || data.keywords.length === 0) {
             throw new Error("No hidden keywords found for this channel.");
           }
@@ -3702,32 +3692,36 @@ export default function GenericToolClient({ tool }: Props) {
           const target = getChannelTarget(input);
           if (!target) throw new Error("Paste a YouTube channel URL, channel ID, or @handle.");
           const path = target.startsWith("@") ? target : `channel/${target}`;
-          setResult({ kind: "labeled-links", items: [
-            { label: "Channel Handle / ID", url: target, isText: true },
-            { label: "Channel Page", url: `https://www.youtube.com/${path}` },
-            { label: "About Page", url: `https://www.youtube.com/${path}/about` },
-          ]});
+          setResult({
+            kind: "labeled-links", items: [
+              { label: "Channel Handle / ID", url: target, isText: true },
+              { label: "Channel Page", url: `https://www.youtube.com/${path}` },
+              { label: "About Page", url: `https://www.youtube.com/${path}/about` },
+            ]
+          });
           break;
         }
         case "banner-downloader": {
           const target = getChannelTarget(input);
           if (!target) throw new Error("Paste a YouTube channel URL, channel ID, or @handle.");
-          
+
           const res = await fetch(`/api/yt-banner-url?target=${encodeURIComponent(target)}`);
           const data = await res.json();
           if (!res.ok) throw new Error(data.error || "Failed to fetch banner");
-          
+
           setResult({ kind: "thumbnails", videoId: "BANNER", customUrl: data.bannerUrl });
           break;
         }
         case "channel-search": {
           const query = input.trim();
           if (!query) throw new Error("Enter a channel name, handle, or topic.");
-          setResult({ kind: "labeled-links", items: [
-            { label: "YouTube Search", url: `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}` },
-            { label: "YouTube Channel Search", url: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${query} channel`)}` },
-            { label: "Google Site Search", url: `https://www.google.com/search?q=${encodeURIComponent(`site:youtube.com ${query}`)}` },
-          ]});
+          setResult({
+            kind: "labeled-links", items: [
+              { label: "YouTube Search", url: `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}` },
+              { label: "YouTube Channel Search", url: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${query} channel`)}` },
+              { label: "Google Site Search", url: `https://www.google.com/search?q=${encodeURIComponent(`site:youtube.com ${query}`)}` },
+            ]
+          });
           break;
         }
         case "playlist-length": {
@@ -3736,7 +3730,7 @@ export default function GenericToolClient({ tool }: Props) {
           const res = await fetch(`/api/youtube-playlist?url=${encodeURIComponent(target)}`);
           const data = await res.json();
           if (!res.ok) throw new Error(data.error || "Failed to fetch playlist data.");
-          
+
           setResult({ kind: "playlist", videos: data.items });
           break;
         }
@@ -3746,7 +3740,7 @@ export default function GenericToolClient({ tool }: Props) {
           const res = await fetch(`/api/youtube-playlist?url=${encodeURIComponent(target)}`);
           const data = await res.json();
           if (!res.ok) throw new Error(data.error || "Failed to fetch playlist data.");
-          
+
           setResult({ kind: "playlist-text", videos: data.items });
           break;
         }
@@ -3900,7 +3894,7 @@ export default function GenericToolClient({ tool }: Props) {
             { label: "Tags Added (5+ tags)", passed: tagCount >= 5, note: tagCount === 0 ? "No tags found." : tagCount < 5 ? `Only ${tagCount} tags. Add more for better discovery.` : `${tagCount} tags - well optimized.` },
             { label: "Hashtags (1–3 hashtags)", passed: hashtagCount >= 1 && hashtagCount <= 3, note: hashtagCount === 0 ? "No hashtags in description." : hashtagCount > 3 ? `${hashtagCount} hashtags - keep to 1–3 for best results.` : `${hashtagCount} hashtag(s) - good.` },
             { label: "Timestamps in Description", passed: hasTimestamps, note: hasTimestamps ? "Timestamps found - great for chapter navigation." : "No timestamps. Adding them improves watch time." },
-            { label: "Description Has Keywords", passed: descLen > 0 && meta.description?.toLowerCase().includes(meta.title?.split(" ")[0]?.toLowerCase() ?? ""), note: "First word of title found in description - good for relevance."},
+            { label: "Description Has Keywords", passed: descLen > 0 && meta.description?.toLowerCase().includes(meta.title?.split(" ")[0]?.toLowerCase() ?? ""), note: "First word of title found in description - good for relevance." },
           ];
           const score = Math.round((checks.filter(c => c.passed).length / checks.length) * 100);
           setResult({ kind: "video-seo", meta, score, checks });
@@ -3918,16 +3912,16 @@ export default function GenericToolClient({ tool }: Props) {
         case "rss-generator": {
           const target = input.trim();
           if (!target) throw new Error("Paste a YouTube channel URL, handle, or channel ID.");
-          
+
           // Try to get channel info via yt-channel-videos API to get latest videos for preview
           const res = await fetch(`/api/yt-channel-videos?target=${encodeURIComponent(target)}&max=6`);
           const data = await res.json();
-          
+
           if (res.ok && data.channelId) {
-            setResult({ 
-              kind: "rss-url", 
-              channelId: data.channelId, 
-              rssUrl: `https://www.youtube.com/feeds/videos.xml?channel_id=${data.channelId}`, 
+            setResult({
+              kind: "rss-url",
+              channelId: data.channelId,
+              rssUrl: `https://www.youtube.com/feeds/videos.xml?channel_id=${data.channelId}`,
               title: data.channelTitle ?? "",
               videos: data.videos ?? []
             });
@@ -3986,52 +3980,52 @@ export default function GenericToolClient({ tool }: Props) {
     setResult({ ...result, winner: next });
   }
 
-  const usesSecondary = ["money-calculator","video-embedder","timestamp","channel-compare"].includes(tool.kind);
-  const usesTextarea  = ["playlist-length","playlist-to-text","comment-picker"].includes(tool.kind);
+  const usesSecondary = ["money-calculator", "video-embedder", "timestamp", "channel-compare"].includes(tool.kind);
+  const usesTextarea = ["playlist-length", "playlist-to-text", "comment-picker"].includes(tool.kind);
 
   function renderResult() {
     if (!result) return null;
     switch (result.kind) {
-      case "thumbnails":    return <ThumbnailResult videoId={result.videoId} customUrl={result.customUrl} onCopy={copyText} copyTarget={copyTarget} />;
-      case "embed":         return <EmbedResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
-      case "metadata":      return <MetadataResult meta={result.meta} onCopy={copyText} copyTarget={copyTarget} />;
-      case "tags-inspector":return <TagsInspectorResult meta={result.meta} onCopy={copyText} copyTarget={copyTarget} />;
-      case "data":          return <DataResult meta={result.meta} onCopy={copyText} copyTarget={copyTarget} />;
+      case "thumbnails": return <ThumbnailResult videoId={result.videoId} customUrl={result.customUrl} onCopy={copyText} copyTarget={copyTarget} />;
+      case "embed": return <EmbedResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
+      case "metadata": return <MetadataResult meta={result.meta} onCopy={copyText} copyTarget={copyTarget} />;
+      case "tags-inspector": return <TagsInspectorResult meta={result.meta} onCopy={copyText} copyTarget={copyTarget} />;
+      case "data": return <DataResult meta={result.meta} onCopy={copyText} copyTarget={copyTarget} />;
       case "labeled-links": return <LabeledLinksResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
-      case "subscribe":     return <SubscribeResult url={result.url} onCopy={copyText} copyTarget={copyTarget} />;
-      case "money":         return <InteractiveMoneyCalculator />;
-      case "playlist":      return <PlaylistResult videos={result.videos} />;
+      case "subscribe": return <SubscribeResult url={result.url} onCopy={copyText} copyTarget={copyTarget} />;
+      case "money": return <InteractiveMoneyCalculator />;
+      case "playlist": return <PlaylistResult videos={result.videos} />;
       case "playlist-text": return <PlaylistExporter />;
-      case "picker":        return <PickerResult winner={result.winner} count={result.count} allComments={result.allComments} onReroll={handleReroll} />;
-      case "score":         return <ScoreResult score={result.score} notes={result.notes} />;
-      case "category":      return <CategoryResult category={result.category} keyword={result.keyword} evidence={result.evidence} />;
-      case "chips":         return <ChipsResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
-      case "list":          return <ListResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
-      case "insights":      return <InsightsResult items={result.items} />;
-      case "idea-list":     return <IdeaListResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
-      case "text-list":     return <TextListResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
-      case "yt-analysis":   return <InsightsResult items={result.summary} />;
+      case "picker": return <PickerResult winner={result.winner} count={result.count} allComments={result.allComments} onReroll={handleReroll} />;
+      case "score": return <ScoreResult score={result.score} notes={result.notes} />;
+      case "category": return <CategoryResult category={result.category} keyword={result.keyword} evidence={result.evidence} />;
+      case "chips": return <ChipsResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
+      case "list": return <ListResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
+      case "insights": return <InsightsResult items={result.items} />;
+      case "idea-list": return <IdeaListResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
+      case "text-list": return <TextListResult items={result.items} onCopy={copyText} copyTarget={copyTarget} />;
+      case "yt-analysis": return <InsightsResult items={result.summary} />;
       // ── New tool results ──────────────────────────────────────────────────
-      case "clean-url":         return <CleanUrlResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
-      case "embed-code":        return <EmbedCodeResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
+      case "clean-url": return <CleanUrlResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
+      case "embed-code": return <EmbedCodeResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
       case "thumbnail-preview": return <ThumbnailPreviewResult videoId={result.videoId} title={result.title} />;
-      case "channel-age":       return <ChannelAgeResult result={result} />;
-      case "region-check":      return <RegionCheckResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
-      case "upload-schedule":   return <UploadScheduleResult result={result} />;
-      case "channel-compare":   return <ChannelCompareResult result={result} />;
-      case "video-seo":         return <VideoSeoResult meta={result.meta} score={result.score} checks={result.checks} />;
-      case "channel-videos":    return <ChannelVideoLinksResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
-      case "rss-url":           return <RssResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
-      case "comments-export":   return <CommentsExportResult result={result} />;
-      case "video-category":    return <VideoCategoryResult result={result} />;
-      case "playlist-links":    return <PlaylistLinksResult videos={result.videos} onCopy={copyText} copyTarget={copyTarget} />;
+      case "channel-age": return <ChannelAgeResult result={result} />;
+      case "region-check": return <RegionCheckResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
+      case "upload-schedule": return <UploadScheduleResult result={result} />;
+      case "channel-compare": return <ChannelCompareResult result={result} />;
+      case "video-seo": return <VideoSeoResult meta={result.meta} score={result.score} checks={result.checks} />;
+      case "channel-videos": return <ChannelVideoLinksResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
+      case "rss-url": return <RssResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
+      case "comments-export": return <CommentsExportResult result={result} />;
+      case "video-category": return <VideoCategoryResult result={result} />;
+      case "playlist-links": return <PlaylistLinksResult videos={result.videos} onCopy={copyText} copyTarget={copyTarget} />;
       case "advanced-keywords": return <AdvancedKeywordsResult result={result} onCopy={copyText} copyTarget={copyTarget} />;
       // Single-value results for new tools
-      case "ctr":               return <CtrCalculator />;
-      case "title-length":      return <TitleLengthChecker />;
-      case "desc-length":       return <DescriptionLengthChecker />;
-      case "playback-speed":    return <PlaybackSpeedCalculator />;
-      case "views-ratio":       return <ViewsRatioCalculator />;
+      case "ctr": return <CtrCalculator />;
+      case "title-length": return <TitleLengthChecker />;
+      case "desc-length": return <DescriptionLengthChecker />;
+      case "playback-speed": return <PlaybackSpeedCalculator />;
+      case "views-ratio": return <ViewsRatioCalculator />;
     }
   }
 
@@ -4039,6 +4033,11 @@ export default function GenericToolClient({ tool }: Props) {
 
   return (
     <div className={styles.toolArea}>
+      {isYouTubePowered && (
+        <p className={styles.ytPoweredBadge}>
+          <span>⚡</span> Powered by live YouTube data - results update from real search results
+        </p>
+      )}
 
       <div className={styles.generatorForm}>
         <div className={styles.searchRow}>
@@ -4065,7 +4064,7 @@ export default function GenericToolClient({ tool }: Props) {
             <button className={styles.ghostButton} type="button" onClick={() => setSecondaryInput("")}>Clear</button>
           </div>
         ) : null}
-        
+
         {tool.kind === "upload-schedule" ? (
           <div className={styles.searchRow} style={{ marginTop: "0.75rem", display: "flex", gap: "1rem", alignItems: "center", background: "rgba(255,255,255,0.03)", padding: "1rem", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.08)" }}>
             <label style={{ fontSize: "0.85rem", color: "var(--text-secondary)", fontWeight: 600 }}>Videos to analyze (lookback):</label>
@@ -4102,7 +4101,17 @@ export default function GenericToolClient({ tool }: Props) {
       ) : null}
 
       {/* LEAD CAPTURE BOTTOM - PREMIUM BOX */}
-      <LeadCaptureCta />
+      <div style={{ padding: "3rem 2rem", background: "linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))", backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: "16px", marginTop: "3rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", boxShadow: "0 8px 32px rgba(0,0,0,0.2)", position: "relative", overflow: "hidden" }}>
+        {/* Subtle orange glow at the top */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent, var(--brand-orange), transparent)", opacity: 0.5 }}></div>
+        {/* Subtle orange ambient glow in background */}
+        <div style={{ position: "absolute", top: "-50px", left: "50%", transform: "translateX(-50%)", width: "200px", height: "100px", background: "var(--brand-orange)", filter: "blur(80px)", opacity: 0.1, pointerEvents: "none" }}></div>
+
+        <h3 style={{ margin: "0 0 0.75rem", fontSize: "1.6rem", fontWeight: 800, color: "#ffffff", letterSpacing: "-0.02em", position: "relative", zIndex: 1 }}>Need help growing your channel?</h3>
+        <p style={{ margin: "0 0 2rem", color: "rgba(255,255,255,0.7)", fontSize: "1.05rem", maxWidth: "450px", lineHeight: 1.6, position: "relative", zIndex: 1 }}>We help creators and brands scale with proven content strategy, SEO, and audience retention tactics.</p>
+
+        <Link href="/contact" style={{ position: "relative", zIndex: 1, display: "inline-flex", alignItems: "center", justifyContent: "center", padding: "1rem 2rem", background: "var(--brand-orange)", color: "#fff", fontWeight: 700, borderRadius: "8px", textDecoration: "none", fontSize: "1.05rem", transition: "all 0.2s ease-in-out", boxShadow: "0 4px 15px rgba(255,90,54,0.3)", width: "100%", maxWidth: "320px" }} onMouseOver={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 25px rgba(255,90,54,0.4)"; e.currentTarget.style.background = "#ff6a45"; }} onMouseOut={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 4px 15px rgba(255,90,54,0.3)"; e.currentTarget.style.background = "var(--brand-orange)"; }}>Book Free Strategy Call</Link>
+      </div>
     </div>
   );
 }

@@ -269,6 +269,11 @@ export default async function GenericToolPage({ toolSlug }: { toolSlug: string }
               {tool.title}
             </h1>
             <p className={styles.subtitle}>{tool.shortDescription}</p>
+            {tool.aliases?.length ? (
+              <p className={styles.subtitle}>
+                Also covers: {tool.aliases.slice(0, 4).join(", ")}.
+              </p>
+            ) : null}
 
             <ToolTabNav currentTool={tool} />
 

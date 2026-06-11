@@ -20,7 +20,7 @@ export async function getGenericToolFaq(tool: ToolDefinition) {
   if (content && content.faqEntries && content.faqEntries.length > 0) {
     return content.faqEntries;
   }
-  
+
   return [
     {
       question: `What is the ${tool.title}?`,
@@ -124,7 +124,7 @@ export function getStepCards(blocks: ArticleBlock[]) {
       const stepMatch = strongText?.match(/^Step\s*#?\d+:\s*(.+)$/i) || strongText?.match(/^(.+)$/i);
 
       if (stepMatch && currentCard === null && strongText && !strongText.includes(' ')) {
-         // Not a clear step
+        // Not a clear step
       }
 
       // To handle loose format, we treat any standalone bold paragraph in "How to Use" as a step if it feels like one
@@ -164,7 +164,7 @@ export default async function GenericToolArticle({ tool }: Props) {
           <div className={`${blogStyles.postGrid} ${blogStyles.postGridNoSidebar}`}>
             <article className={`${blogStyles.articleCopy} ${styles.centeredArticleCopy} authority-post-copy`}>
               <div className={`${blogStyles.articleProse} ${styles.articleProseShell}`}>
-                
+
                 <section className={`${blogStyles.articleSection} ${styles.articleSection}`}>
                   <h2>Quick Facts (TL;DR)</h2>
                   <ul className={blogStyles.articleList}>
@@ -268,13 +268,13 @@ export default async function GenericToolArticle({ tool }: Props) {
                     className={styles.articleFaqSection}
                   />
                 </section>
-                
-                <RateMyTool 
-                  slug={tool.slug} 
-                  initialAverage={ratingData.average} 
-                  initialCount={ratingData.count} 
+
+                <RateMyTool
+                  slug={tool.slug}
+                  initialAverage={ratingData.average}
+                  initialCount={ratingData.count}
                 />
-                
+
                 <aside className={`${blogStyles.shareRail} ${blogStyles.shareRailMobile}`}>
                   <div className={blogStyles.shareRailInner}>
                     <ArticleSocialShare

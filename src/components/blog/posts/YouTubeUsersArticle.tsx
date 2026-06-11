@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 import Link from "next/link";
 import baseStyles from "@/app/(frontend)/blog/blog.module.css";
 import styles from "./youtube-stats-visuals.module.css";
+import TldrBox from "@/components/blog/TldrBox";
 import type { YouTubeUsersArticleData, YouTubeUsersBlock } from "@/lib/youtube-users-article";
 
 type MetricCard = {
@@ -577,6 +578,9 @@ export default function YouTubeUsersArticle({
 
   return (
     <>
+      <TldrBox>
+        YouTube continues to dominate the video landscape, with billions of users and billions in revenue. The statistics show clear trends: Shorts are growing exponentially, mobile viewing is the norm, and creators who understand their audience demographics have a significant advantage. This breakdown covers the most essential YouTube user data for 2026.
+      </TldrBox>
       {data.blocks.map((block, index) => {
         const nextBlock = data.blocks[index + 1];
         const sectionId = block.type === "heading" ? undefined : block.sectionId;
