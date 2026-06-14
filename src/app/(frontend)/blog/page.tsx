@@ -83,10 +83,10 @@ export default async function BlogIndexPage() {
       />
       <section className={`${styles.hero} ${styles.blogIndexHero}`}>
         <div className={`${styles.heroInner} ${styles.blogIndexHeroInner}`}>
-          <h1 className={styles.blogIndexTitle}>The Rehan Kadri Blog</h1>
+          <h1 className={styles.blogIndexTitle}>SEO Blog &amp; Growth Insights</h1>
 
           <p className={styles.blogIndexCopy}>
-            Practical writing on SEO, content distribution, authority, and conversion infrastructure for teams that want growth to compound.
+            Practical SEO strategies, content systems, YouTube growth tactics, and demand capture frameworks — written for B2B teams and creators who want search to drive real pipeline, not just traffic.
           </p>
         </div>
       </section>

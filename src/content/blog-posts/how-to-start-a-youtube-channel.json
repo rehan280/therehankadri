@@ -50,8 +50,267 @@
     }
   },
   "body": null,
-  "faqEntries": [],
-  "summaryPoints": [],
-  "intro": [],
-  "sections": []
+  "faqEntries": [
+    {
+      "question": "Is it too late to start a YouTube channel in 2026?",
+      "answer": "No. YouTube has 138 million active channels but only a small fraction are active, niche-specific, and optimized. Most channels are abandoned or unfocused. In virtually every sub-niche, there is still room for a creator who commits to consistent quality, smart SEO, and a clear audience focus. Niches are not saturated — poorly executed niches are. A well-researched, well-packaged channel in almost any topic can still grow in 2026."
+    },
+    {
+      "question": "How much does it cost to start a YouTube channel?",
+      "answer": "Starting a YouTube channel costs $0 — a Google account and a smartphone are all you technically need. However, to produce competitive quality content you'll likely want to invest in: a decent microphone ($30-150), a ring light or softbox ($20-80), and basic video editing software (DaVinci Resolve is free). A full beginner setup can be assembled for $100-300. You do not need a camera — modern smartphones (iPhone 14 or newer, Samsung S-series) shoot better video than most $300 cameras from 5 years ago."
+    },
+    {
+      "question": "How long does it take to get 1,000 subscribers on YouTube?",
+      "answer": "For a well-planned channel with consistent uploads (1-2 videos per week) and basic SEO optimization, reaching 1,000 subscribers typically takes 3-12 months. Channels that use YouTube Shorts as a growth accelerator alongside long-form content often get there faster. The biggest variables are: niche selection (competitive vs. underserved), consistency, and whether your videos generate enough watch time to trigger algorithmic distribution."
+    },
+    {
+      "question": "Can you start a YouTube channel without showing your face?",
+      "answer": "Yes. Many successful channels generate millions of views without the creator ever appearing on camera. Formats that work without showing your face include: screen recordings with voiceover (tutorials, software reviews), animated explainer videos, podcast-style audio with visuals, stock footage + narration (documentary-style), gaming channels, and whiteboard animation. The key is that your audio quality must be excellent — a faceless channel where the audio sounds poor will fail regardless of the content."
+    },
+    {
+      "question": "How do you pick a niche for your YouTube channel?",
+      "answer": "The best niche sits at the intersection of three factors: (1) a topic you can create content about for 2+ years without running out of ideas, (2) an audience that searches for this content on YouTube (verify via YouTube search autocomplete and tools like TubeBuddy or vidIQ), and (3) a monetization path — either AdSense, affiliate products, digital products, or sponsorships. Avoid niches that are too broad ('lifestyle'), too competitive without differentiation ('fitness'), or too narrow to sustain a large audience ('left-handed calligraphy for dentists')."
+    }
+  ],
+  "summaryPoints": [
+    "Choose a specific niche with search demand BEFORE creating your first video.",
+    "Set up a Brand Account so you can give team members access without sharing your personal Google password.",
+    "Your channel art, banner, and about section are trust signals — poor branding kills click-through rate.",
+    "Audio quality matters more than video quality — a bad microphone will lose viewers faster than a bad camera.",
+    "Plan your first 10 videos before publishing the first one — consistency from day one signals intent to the algorithm.",
+    "Use YouTube Shorts to grow your subscriber count 3-5x faster while building your long-form audience."
+  ],
+  "intro": [
+    "YouTube is the second largest search engine on the planet. Every minute, 500 hours of video are uploaded — and yet, most channels fail not because they lack talent or ideas, but because they skip the foundation-building steps that determine everything downstream.",
+    "This guide gives you the complete system used by creators who grew past 10,000, 100,000, and 1,000,000 subscribers: from choosing the right niche and setting up your channel correctly, to getting your first video to rank, accelerating growth with Shorts, and eventually getting paid."
+  ],
+  "sections": [
+    {
+      "id": "step-1-choose-your-niche",
+      "title": "Step 1: Choose a Validated Niche Before You Film Anything",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The most common mistake first-time creators make is starting too broad. 'Tech channel.' 'Fitness channel.' 'Cooking channel.' These are categories, not niches. A niche is specific enough that you can describe exactly who watches your channel and why they can't get that content from anyone else."
+        },
+        {
+          "type": "paragraph",
+          "text": "To find a validated niche, you need to test demand BEFORE you invest in production. Go to YouTube and start typing your topic idea in the search bar. Notice the autocomplete suggestions — these are real searches people are making. If YouTube suggests 10+ variations of your topic, there is demand. If the search bar returns nothing, the niche may be too small."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Use the YouTube search autocomplete to identify specific sub-niches with real search volume.",
+            "Check competitor channels in your niche — look for channels with 10K-100K subscribers that are getting 10K+ views per video. That's proof the audience exists.",
+            "Avoid niches with channels above 1M subscribers dominating every keyword — you need room to get early traction.",
+            "Test your topic durability: can you brainstorm 50 unique video ideas right now? If not, the niche may be too narrow.",
+            "Identify at least one monetization path: YouTube AdSense (need 1,000 subscribers + 4,000 watch hours), affiliate products, digital products, coaching, or brand sponsorships."
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "The Niche Formula That Works",
+          "body": "The best YouTube niches in 2026 follow this formula: [Specific Audience] + [Specific Problem/Goal] + [Specific Format]. Examples: 'Midlife women who want to lose weight with low-impact workouts' beats 'fitness.' 'Freelance designers who want to get corporate clients' beats 'design.' 'Parents of autistic children looking for communication strategies' beats 'parenting.'"
+        }
+      ]
+    },
+    {
+      "id": "step-2-create-your-channel",
+      "title": "Step 2: Create Your Channel the Right Way",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Most beginners sign into YouTube with their personal Google account and start uploading. This works but creates problems later. Instead, create a YouTube Brand Account — it allows you to add managers, editors, and collaborators without sharing your personal Google password, and it separates your creator persona from your private email."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Go to YouTube → click your profile icon → 'Create a channel' → 'Use a custom name' to create a Brand Account.",
+            "Choose a channel name that is memorable, spell-correct, and reflects your niche without being so specific that you can't evolve.",
+            "Complete your About section fully: include your primary keywords in the first 125 characters (this is indexed by YouTube search), describe who your channel is for, and add a contact email.",
+            "Verify your phone number to unlock: custom thumbnails, live streaming, longer videos (15+ min), and appeals.",
+            "Enable 2-step verification immediately — YouTube accounts are frequently targeted by hackers."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step-3-channel-branding",
+      "title": "Step 3: Create Professional Channel Branding",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Your channel art is the first visual impression a potential subscriber gets. If it looks amateur, viewers will assume your content is amateur — even if it's excellent. Professional branding signals credibility and increases the subscribe rate from profile visits."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Profile Picture: Use a clear headshot with a contrasting background if you're a personal brand, or a simple logo if it's a topic channel. Minimum 800x800px; YouTube recommends 2048x2048px.",
+            "Channel Banner: Dimensions are 2560x1440px. Include your upload schedule ('New videos every Tuesday'), a tagline describing who the channel is for, and optionally a call to action.",
+            "Channel Trailer (2-3 minutes): Create a non-subscriber trailer that explains who you are, who the channel is for, and what value subscribers get. This auto-plays for new visitors.",
+            "Thumbnail Template: Design a consistent thumbnail style using Canva or Photoshop — same font, same color palette, same layout. Consistent thumbnails build brand recognition in search results.",
+            "Watermark/Subscribe Button: Add a custom watermark via YouTube Studio → Customization → Branding. This appears on every video."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step-4-equipment-and-setup",
+      "title": "Step 4: Choose the Right Equipment for Your Budget",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Audio quality is the most important technical factor in whether viewers stay or leave. Viewers will tolerate average video quality, but they will abandon a video with poor audio within 30 seconds. Prioritize your microphone before any other equipment upgrade."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Budget Starter Setup ($0-100): Smartphone (iPhone 12+ or equivalent), Rode VideoMicro or BOYA BY-M1 lapel mic ($30-60), free DaVinci Resolve for editing, natural window light.",
+            "Mid-Range Setup ($200-600): Sony ZV-E10 or Canon M50 camera, Blue Yeti or Audio-Technica AT2020 condenser mic, 2-panel softbox lighting kit, OBS or DaVinci Resolve.",
+            "Professional Setup ($1,000+): Sony A7C or Blackmagic Pocket Cinema, Rode NT1 or Shure SM7dB mic, 3-point lighting setup, Adobe Premiere Pro.",
+            "Editing Software Recommendations: DaVinci Resolve (free, professional quality), CapCut (free, excellent for Shorts), Final Cut Pro (Mac, $300 one-time), Adobe Premiere Pro ($55/month).",
+            "Backdrop Options: A clean, relevant background beats a fancy one. Remove clutter, add some personality with a bookshelf or plants, or use a solid-color wall."
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "The $0 Setup That Actually Works",
+          "body": "A 2024 or newer smartphone, a $35 lapel microphone from Amazon, and a window facing you as your light source will produce better quality than most videos published in 2020. Equipment is not your bottleneck — consistency and content quality are."
+        }
+      ]
+    },
+    {
+      "id": "step-5-plan-first-10-videos",
+      "title": "Step 5: Plan Your First 10 Videos Before You Film",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Creators who plan their first 10 videos before publishing Video #1 have dramatically higher survival rates. Planning forces you to validate that your niche has enough content depth, helps you batch-produce efficiently, and creates a consistent publishing cadence from day one — which is what the algorithm rewards."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Research keywords for each video using YouTube autocomplete, TubeBuddy, or vidIQ. Each video should target a specific search query.",
+            "Mix video types: 3-4 search-optimized 'evergreen' videos (tutorial, how-to, list), 3-4 trending/reactive videos (news, emerging questions in your niche), 2-3 personal/story videos (builds connection with audience).",
+            "Create a content calendar with specific publish dates — commit to a realistic schedule (1 video/week is better than 3 videos/week for 2 weeks then nothing for a month).",
+            "For each video, write out the hook (first 30 seconds script), a rough outline, and the call to action at the end.",
+            "Batch produce when possible — film 2-3 videos in one session to build a content buffer."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step-6-optimize-each-video",
+      "title": "Step 6: Optimize Every Video for YouTube Search",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Uploading a good video is not enough — it needs to be discoverable. YouTube is a search engine, and every video needs to be optimized so the algorithm understands what it's about and who should see it."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Title: Include your primary keyword in the first 60 characters. Make it compelling with a number, outcome, or power word. Bad: 'My Morning Routine.' Good: '5AM Morning Routine That Doubled My Productivity (No Motivation Required).'",
+            "Description: Write 300+ words for important videos. Include your primary keyword in the first 2 sentences, add 3-5 related keywords naturally, include timestamps, and link to relevant resources.",
+            "Tags: Add 10-15 tags. Start with exact match keyword, then add variations and related broad terms. Use TubeBuddy's tag explorer to find additional opportunities.",
+            "Custom Thumbnail: Design a thumbnail that is different from your competitors' — bright colors, readable text under 5 words, and ideally a face with expression that matches the title.",
+            "End Screen: Add an end screen at the 20-second mark pointing to a related video and a subscribe button.",
+            "Chapters: Add timestamps in the description to create clickable video chapters. This helps viewers navigate and signals content structure to YouTube."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step-7-youtube-shorts-strategy",
+      "title": "Step 7: Use YouTube Shorts to Grow 3-5x Faster",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "YouTube Shorts is the single most underused growth lever for new channels in 2026. Because Shorts are distributed through the Shorts Feed — not through your subscriber base — they can reach hundreds of thousands of people even when your channel has zero subscribers. Creators who combine Shorts with long-form content consistently grow 3-5x faster than those who publish long-form only."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Post 3-5 Shorts per week when starting. Shorts require less production time but deliver massive reach.",
+            "Repurpose your long-form content: take the best 45-60 second clip from each video and post it as a Short with its own hook and title.",
+            "The best Short formats: 'quick tip' takeaways, surprising statistics, before/after demonstrations, one-sentence answers to common questions in your niche.",
+            "Add a call to action at the end of each Short: 'Watch the full video [description link]' — this drives traffic to your long-form content.",
+            "Track Short performance in YouTube Studio Analytics: focus on completion rate and subscriber conversion rate, not just views."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step-8-grow-to-1000-subscribers",
+      "title": "Step 8: The Fastest Path to 1,000 Subscribers",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Reaching 1,000 subscribers unlocks YouTube Partner Program eligibility (combined with 4,000 public watch hours). Here is the framework that gets channels there fastest:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Collaborate with channels 20-50% larger than yours in adjacent niches. A single collaboration can send 500-2,000 targeted subscribers to your channel.",
+            "Promote every new video in niche communities: relevant subreddits, Facebook groups, Discord servers, and Quora answers. Do this naturally — answer questions and reference your video, don't just paste links.",
+            "Build an email list from day one. Even 200 email subscribers who open your launch emails create the engagement burst that triggers algorithmic distribution.",
+            "Reply to every comment for the first 3 months. Comment replies generate comment notifications, which bring viewers back to your video — keeping watch time and engagement high.",
+            "Create a 'gateway video' — one video specifically designed to convert first-time viewers into subscribers. This is usually a valuable, detailed tutorial or a personal story that resonates with your niche.",
+            "Cross-post to TikTok and Instagram Reels using the same Shorts content. These platforms drive backlinks and external traffic that boost your YouTube videos."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step-9-monetization",
+      "title": "Step 9: Monetization — How to Actually Make Money from YouTube",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "AdSense (the YouTube Partner Program) is just one of six revenue streams available to YouTubers. The creators who make the most money rarely rely on AdSense alone — especially in the early stage when view counts are low."
+        },
+        {
+          "type": "list",
+          "items": [
+            "YouTube Partner Program (AdSense): Requires 1,000 subscribers + 4,000 watch hours (long-form) OR 1,000 subscribers + 10 million Shorts views in 90 days. Average RPM: $1-10 per 1,000 views depending on niche.",
+            "Affiliate Marketing: Promote relevant products with affiliate links in your description. No minimum subscriber count required. High-ticket affiliate products ($100-500 commission) can generate income from 1,000 views.",
+            "Sponsored Videos: Brands pay $500-5,000+ per video for integrations. You can pitch brands directly once you reach 5,000-10,000 subscribers in a targeted niche.",
+            "Digital Products: Sell your own templates, presets, courses, or guides. One $97 course sale generates the same revenue as 10,000-100,000 ad views.",
+            "YouTube Memberships and Super Thanks: Available after YPP approval. Memberships convert 1-3% of active subscribers.",
+            "Consulting and Services: YouTube as a lead generation machine for your service business. Many creators generate $5,000-50,000/month in consulting revenue with under 10,000 subscribers."
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "The Fastest Path to $1,000/Month from YouTube",
+          "body": "Affiliate marketing + a simple $49-97 digital product. You don't need AdSense revenue. A creator with 2,000 subscribers in a high-value niche (finance, SaaS, career development, fitness) can earn $1,000-5,000/month through affiliate links and a simple digital product before they ever hit YouTube Partner Program requirements."
+        }
+      ]
+    },
+    {
+      "id": "step-10-consistency-system",
+      "title": "Step 10: Build a Consistency System That Keeps You Going",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The #1 reason YouTube channels fail is inconsistency — not quality, not competition, not timing. Most creators who quit do so within the first 3 months, before the algorithm has had a chance to establish their channel and before they've developed the skills that make production faster and easier."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Set a minimum viable production standard — define what 'good enough' looks like for your channel so you don't get stuck in perfectionism.",
+            "Batch produce: film and edit 3-4 videos in a single weekend so you always have a buffer and never miss a publish date.",
+            "Track your metrics weekly in YouTube Studio. Focus on: Impressions CTR, Average View Duration, Subscriber Growth, and Top Traffic Sources.",
+            "Do a quarterly content audit: which videos are driving the most subscribers? Create more content similar to those.",
+            "Plan 90 days ahead, not just week-to-week. A 90-day content plan eliminates the 'what should I upload next?' paralysis.",
+            "Join a creator community or accountability group — creators who share their progress publicly consistently outperform solo creators."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Starting a YouTube channel in 2026 requires more strategy than it did in 2015, but it also offers more tools, better analytics, and more monetization paths than ever before. The window is still open — the creators who build focused, well-optimized channels today will be the ones collecting the audience that compound-grows over the next decade."
+        }
+      ]
+    }
+  ]
 }

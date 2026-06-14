@@ -31,7 +31,7 @@
   "heroDescription": "How many YouTube users are there in 2026? See monthly active users, daily active users, revenue, Shorts growth, and global audience stats.",
   "seoDescription": "How many YouTube users are there? YouTube has about 2.83 billion monthly active users in 2026, plus daily active user and revenue stats.",
   "publishedAt": "2026-04-25T12:53:41+05:30",
-  "modifiedAt": "2026-04-25T12:53:41+05:30",
+  "modifiedAt": "2026-06-14T00:00:00+05:30",
   "readTime": "22 min read",
   "author": {
     "name": "Rehan Kadri",
@@ -48,7 +48,7 @@
   "faqEntries": [
     {
       "question": "How many people use YouTube in 2026?",
-      "answer": "The numbers vary depending on the source. The most conservative, widely cited figure puts YouTube at 2.58 billion users worldwide as of 2026. But some compiled monthly active user estimates push that number even higher. Here's the thing: both figures are likely right. It just depends on how you define \"user.\""
+      "answer": "The numbers vary depending on the source. The most conservative, widely cited figure puts YouTube at 2.58 billion users worldwide as of 2026. But some compiled monthly active user estimates push that number even higher. Here's the thing: both figures are likely right. It just depends on how you define 'user.'"
     },
     {
       "question": "How many daily active users does YouTube have?",
@@ -67,7 +67,168 @@
       "answer": "Yes. YouTube is still growing through Shorts, connected TV viewing, subscription products, and continued adoption in major global markets."
     }
   ],
-  "summaryPoints": [],
-  "intro": [],
-  "sections": []
+  "summaryPoints": [
+    "YouTube has approximately 2.83 billion monthly active users in 2026.",
+    "122 million daily active users visit YouTube on an average day.",
+    "YouTube generates over $60 billion in annual revenue (advertising + subscriptions).",
+    "India is YouTube's largest market with ~500 million users.",
+    "YouTube Shorts generates 200+ billion daily views.",
+    "Over 500 hours of video are uploaded to YouTube every minute."
+  ],
+  "intro": [
+    "YouTube is not just a video platform. It is the world's second-largest search engine, a primary entertainment destination for 2.83 billion people monthly, and an increasingly dominant connected TV platform that now competes directly with Netflix and Disney+.",
+    "Below are the most accurate, most cited YouTube user statistics for 2026 — organized so you can find exactly the data point you need, with context on what each number actually means."
+  ],
+  "sections": [
+    {
+      "id": "youtube-user-numbers-2026",
+      "title": "How Many YouTube Users Are There in 2026?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "YouTube's monthly active user count is the most frequently cited YouTube statistic — and the one with the most variation between sources. The discrepancy comes down to methodology: some figures count all registered Google accounts that accessed YouTube at least once in a 30-day window, while others use more conservative definitions of 'active user.'"
+        },
+        {
+          "type": "list",
+          "items": [
+            "2.83 billion monthly active users (2026 estimate, based on Alphabet growth trajectories from 2024 Q4 earnings).",
+            "2.58 billion unique visitors per month (Statista, conservative estimate, 2025).",
+            "122 million daily active users (DataReportal, 2026).",
+            "1 billion+ hours of video are watched on YouTube every single day.",
+            "YouTube is available in 100+ languages and accessible in 100+ countries.",
+            "Over 500 hours of video content is uploaded to YouTube every minute (YouTube official stat, 2025).",
+            "YouTube is the second most visited website in the world, after Google.com (Semrush Traffic Analytics, 2025)."
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Why the User Numbers Vary",
+          "body": "When you see different YouTube user counts (2.58B vs 2.83B), the difference comes from definition. '2.58 billion' typically refers to logged-in monthly active users measured by Statista using Alphabet earnings data. The higher estimates include users who access YouTube without logging in — which represents a significant portion of search and embedded video viewers. Both numbers are defensible depending on your use case."
+        }
+      ]
+    },
+    {
+      "id": "youtube-users-by-country",
+      "title": "YouTube Users by Country: Where the Audience Is",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "YouTube's audience is genuinely global — but the distribution is concentrated in a handful of high-population markets. Understanding geography matters for creators and advertisers because YouTube's CPM (cost per thousand ad views) varies dramatically by country."
+        },
+        {
+          "type": "list",
+          "items": [
+            "India: ~500 million users — the world's largest YouTube audience (DataReportal, 2026).",
+            "United States: ~254 million users — the highest-revenue market by far (Statista, 2025).",
+            "Brazil: ~147 million users (Statista, 2025).",
+            "Indonesia: ~139 million users (Statista, 2025).",
+            "Mexico: ~85 million users (Statista, 2025).",
+            "Japan: ~78 million users (Statista, 2025).",
+            "Germany: ~67 million users (Statista, 2025).",
+            "Thailand: ~46 million users (Statista, 2025).",
+            "Pakistan: ~71 million users (DataReportal, 2025).",
+            "Vietnam: ~63 million users (DataReportal, 2025)."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "From a creator monetization perspective, these numbers require important context: India's 500 million users generate significantly less AdSense revenue per view than the US's 254 million users. YouTube CPM in the US averages $3-10 per thousand views, while India averages $0.50-2. This is why many English-language creators earn far more despite having smaller audiences than Hindi-language channels."
+        }
+      ]
+    },
+    {
+      "id": "youtube-usage-habits",
+      "title": "How People Use YouTube: Time Spent and Viewing Habits",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Understanding how YouTube users actually engage with the platform reveals why it has become such a powerful advertising and content distribution channel — and why connected TV viewing is now a top priority for Alphabet."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Average YouTube session duration: 40 minutes per session on mobile devices.",
+            "Average time spent on YouTube per visitor per month: 19-21 hours (SimilarWeb, 2025).",
+            "YouTube is watched on TV screens by over 1 billion users monthly — more hours watched on TV than on mobile in the US (YouTube for Press, 2025).",
+            "Connected TV watch time grew 55% year-over-year in the US in 2024 (Nielsen, 2024).",
+            "70% of YouTube views come from mobile devices globally (YouTube, 2025).",
+            "The average viewer watches YouTube Shorts for 30+ minutes per session once they enter the Shorts Feed (YouTube internal data, 2024).",
+            "YouTube is the #2 most used app globally by time spent, behind only TikTok in some markets (App Annie, 2025).",
+            "18-34 year olds are the most active YouTube demographic, representing 35% of total watch time (Statista, 2025).",
+            "Viewers over 55 are YouTube's fastest-growing demographic, with watch time up 67% since 2020 (YouTube, 2025).",
+            "44% of YouTube users say they use the platform to learn new skills (Think with Google, 2025)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "youtube-revenue-statistics",
+      "title": "YouTube Revenue Statistics: How Much Does YouTube Make?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "YouTube generates revenue from three main streams: advertising (Google Ads on YouTube), YouTube Premium subscriptions, and other subscriptions including YouTube TV. In 2025, YouTube became one of the most valuable media properties in history by revenue."
+        },
+        {
+          "type": "list",
+          "items": [
+            "YouTube total revenue in 2025 (advertising + subscriptions): approximately $60.8 billion (Alphabet Q4 2025 earnings).",
+            "YouTube advertising revenue in 2025: approximately $40.37 billion (Alphabet earnings disclosure).",
+            "YouTube Premium subscriber count: approximately 100 million paid subscribers (2025 estimate).",
+            "YouTube TV subscriber count: approximately 8.5 million subscribers (2025 estimate).",
+            "YouTube's share of Alphabet's total revenue: approximately 14% (2025).",
+            "Year-over-year YouTube advertising revenue growth: 11.4% in Q4 2025 (Alphabet earnings).",
+            "The US generates approximately 38-42% of YouTube's total global advertising revenue despite being its second-largest audience market by users."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "youtube-shorts-statistics",
+      "title": "YouTube Shorts Statistics: The Fastest-Growing Format",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "YouTube Shorts launched in India in September 2020 and globally in 2021. By 2026, it has become a dominant short-form video platform that directly competes with TikTok and Instagram Reels for creator attention and audience time."
+        },
+        {
+          "type": "list",
+          "items": [
+            "YouTube Shorts generates over 200 billion views per day (YouTube for Press, 2025).",
+            "YouTube Shorts has over 2 billion logged-in monthly active users (YouTube CEO Sundar Pichai, 2024).",
+            "Shorts content creation grew 50% year-over-year between 2024 and 2025 (YouTube, 2025).",
+            "Creators who post both Shorts and long-form content grow their subscriber count 89% faster than long-form-only creators (Creator Insider, 2025).",
+            "Shorts has driven a 30% increase in YouTube's overall daily active user count since its global launch (YouTube data, 2025).",
+            "Average Shorts completion rate across all creators: 65% — significantly higher than TikTok's 58% completion rate (SocialInsider, 2025).",
+            "Shorts monetization launched in 2023 and generates an average RPM of $0.03-$0.07 per view — lower than long-form but significant at scale.",
+            "Top Shorts creators generate over $1 million annually from Shorts-specific monetization (YouTube Creator Blog, 2025)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "youtube-creator-statistics",
+      "title": "YouTube Creator Economy Statistics",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "YouTube's creator economy is one of the largest in the world, with millions of channels generating income through advertising, sponsorships, merchandise, and fan funding. But the distribution of success is extremely uneven — which the statistics below reflect clearly."
+        },
+        {
+          "type": "list",
+          "items": [
+            "138 million active YouTube channels exist in 2026 — meaning channels with at least one public video (SocialBlade, 2026).",
+            "Over 10 million channels have at least 1,000 subscribers.",
+            "Approximately 500,000 channels have reached YouTube Partner Program requirements (1,000 subscribers + 4,000 watch hours).",
+            "YouTube paid out over $70 billion to creators, artists, and media companies in the last three years (YouTube, 2024).",
+            "The top 1% of YouTube channels capture approximately 77% of all video views (TubeFilter analysis, 2025).",
+            "MrBeast (Jimmy Donaldson) became the first YouTuber to reach 450 million subscribers in 2026.",
+            "The average YouTube channel earns $18 per 1,000 views from AdSense (across all niches) — though this varies from $1-$100 depending on audience location and content niche.",
+            "Finance and business niches have the highest CPM rates ($10-50 per thousand views), while gaming and entertainment average $1-5 per thousand views.",
+            "Only 3% of YouTube channels earn more than $100,000 per year from YouTube monetization alone — most creators earn the majority of their income from brand deals, courses, and other revenue streams (Creator Insider, 2025)."
+          ]
+        }
+      ]
+    }
+  ]
 }

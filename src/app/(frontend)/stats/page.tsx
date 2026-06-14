@@ -15,12 +15,21 @@ import {
 import styles from "./stats-hub.module.css";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Statistics Hub | Rehan Kadri",
+  title: "Research-Driven Statistics Hub | YouTube, B2B & SEO Data | Rehan Kadri",
   description:
-    "Browse research-driven statistics pages on YouTube, platform trends, growth data, and digital benchmarks in one place.",
+    "Browse research-backed statistics pages on YouTube channel growth, user numbers, B2B SEO trends, and digital marketing benchmarks. Updated for 2026.",
   path: "/stats",
   imagePath: "/stats/stats-clean.png",
-  imageAlt: "Statistics hub hero artwork",
+  imageAlt: "Marketing and YouTube statistics hub by Rehan Kadri",
+  keywords: [
+    "YouTube statistics hub",
+    "B2B SEO statistics hub",
+    "marketing statistics 2026",
+    "digital marketing benchmarks",
+    "YouTube channel statistics",
+    "creator economy statistics",
+    "SEO benchmarks 2026",
+  ],
 });
 
 const hubIntro =
@@ -115,8 +124,25 @@ export default async function StatsHubPage() {
             url: buildCanonicalUrl(getPostPath(post.slug)),
           })),
         },
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: ["h1", ".hero-copy", "h2"],
+        },
       },
       breadcrumbJsonLd,
+      {
+        "@type": "Dataset",
+        "@id": `${hubCanonicalUrl}#dataset`,
+        name: "Marketing Statistics Hub 2026",
+        description: "Compiled statistics on YouTube, B2B SEO, and digital marketing benchmarks for 2026.",
+        url: hubCanonicalUrl,
+        temporalCoverage: "2026",
+        measurementTechnique: "Aggregated from publicly available platform reports, research studies, and industry sources.",
+        creator: {
+          "@id": ORGANIZATION_ID,
+        },
+        keywords: "YouTube statistics, B2B SEO statistics, digital marketing benchmarks, creator economy, YouTube growth",
+      },
     ],
   };
 

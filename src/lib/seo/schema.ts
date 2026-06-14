@@ -8,6 +8,7 @@ export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 export const PERSON_ID = `${SITE_URL}/#person`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const HOME_PAGE_ID = `${SITE_URL}/#webpage`;
+export const BLOG_ID = `${SITE_URL}/blog#webpage`;
 
 export const SOCIAL_PROFILES = [
   "https://www.linkedin.com/in/therehankadri/",
@@ -28,7 +29,10 @@ export function createOrganizationJsonLd() {
     email: "youtech280@gmail.com",
     logo: {
       "@type": "ImageObject",
-      url: buildAbsoluteImageUrl("/favicon/web-app-manifest-512x512.png"),
+      // Uses root-level manifest image (verified path in /public/)
+      url: buildAbsoluteImageUrl("/web-app-manifest-512x512.png"),
+      width: 512,
+      height: 512,
     },
     image: buildAbsoluteImageUrl("/rehan.webp"),
     sameAs: SOCIAL_PROFILES,
@@ -47,23 +51,46 @@ export function createPersonJsonLd() {
     "@type": "Person",
     "@id": PERSON_ID,
     name: "Rehan Kadri",
+    givenName: "Rehan",
+    familyName: "Kadri",
     url: SITE_URL,
-    image: buildAbsoluteImageUrl("/rehan.webp"),
+    image: {
+      "@type": "ImageObject",
+      url: buildAbsoluteImageUrl("/rehan.webp"),
+      width: 500,
+      height: 600,
+    },
     description:
-      "Growth marketer and SEO strategist building content, YouTube, and pipeline systems for compounding growth.",
+      "SEO specialist and growth strategist with 8+ years of hands-on experience. Grew a blog to 1M+ monthly organic visitors and a YouTube channel to 33K+ subscribers. Helps B2B brands build content systems, YouTube strategies, and pipeline-generating SEO programs.",
     jobTitle: "SEO & Growth Strategist",
+    hasOccupation: {
+      "@type": "Occupation",
+      name: "SEO & Growth Marketing Strategist",
+      occupationLocation: {
+        "@type": "Country",
+        name: "Pakistan",
+      },
+      skills: "SEO, YouTube growth, B2B lead generation, content systems, organic traffic growth",
+    },
+    knowsAbout: [
+      "Search Engine Optimization",
+      "YouTube SEO",
+      "YouTube growth strategy",
+      "Content marketing",
+      "B2B lead generation",
+      "Growth marketing",
+      "Organic traffic growth",
+      "Content systems",
+      "Answer Engine Optimization",
+    ],
     sameAs: SOCIAL_PROFILES,
     worksFor: {
       "@id": ORGANIZATION_ID,
     },
-    knowsAbout: [
-      "SEO",
-      "YouTube growth",
-      "Content marketing",
-      "B2B lead generation",
-      "Growth strategy",
-      "Organic traffic growth",
-    ],
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: "Self-taught digital marketer",
+    },
   };
 }
 
@@ -77,6 +104,14 @@ export function createWebsiteJsonLd() {
     inLanguage: "en-US",
     publisher: {
       "@id": ORGANIZATION_ID,
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE_URL}/tools?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
     },
   };
 }
@@ -100,6 +135,7 @@ export function createHomePageStructuredData({
         url: SITE_URL,
         name: title,
         description,
+        inLanguage: "en-US",
         isPartOf: {
           "@id": WEBSITE_ID,
         },
@@ -108,7 +144,13 @@ export function createHomePageStructuredData({
         },
         primaryImageOfPage: {
           "@type": "ImageObject",
-          url: buildAbsoluteImageUrl(),
+          url: buildAbsoluteImageUrl("/rehan.webp"),
+          width: 500,
+          height: 600,
+        },
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: ["h1", ".hero-subtitle-desktop", ".hero-cta-note"],
         },
       },
     ],

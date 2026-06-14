@@ -17,6 +17,7 @@ import ArticleSocialShare from "@/components/blog/ArticleSocialShare";
 import DefaultBlogPostArticle from "@/components/blog/DefaultBlogPostArticle";
 import ArticleSummarizer from "@/components/blog/ArticleSummarizer";
 import { getBlogPostModule } from "@/components/blog/post-pages";
+import RelatedToolsForBlog from "@/components/blog/RelatedToolsForBlog";
 import PremiumFaq from "@/components/content/PremiumFaq";
 import {
   type BlogPost,
@@ -173,14 +174,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     publisher: {
       "@id": ORGANIZATION_ID,
     },
+    // isPartOf points to the BLOG SECTION, not the article itself
     isPartOf: {
-      "@id": canonicalUrl,
+      "@id": buildCanonicalUrl("/blog"),
     },
     breadcrumb: {
       "@id": breadcrumbId,
     },
     about: articleEntities?.about,
     mentions: articleEntities?.mentions,
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", ".post-hero-title", ".article-summarizer", "h2"],
+    },
   };
   const articleStructuredData = {
     "@context": "https://schema.org",
@@ -415,6 +421,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <div className={styles.articleProse}>
                 {articleContent}
                 {!postModule?.rendersFaqInternally ? faqSection : null}
+                
+                <RelatedToolsForBlog post={currentPost} />
               </div>
 
               <aside className={`${styles.shareRail} ${styles.shareRailMobile}`}>

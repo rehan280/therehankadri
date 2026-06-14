@@ -22,12 +22,22 @@ const featuredYouTubeStatsResources = [
 ] as const;
 
 export const metadata: Metadata = createPageMetadata({
-  title: "YouTube Statistics Hub | Rehan Kadri",
+  title: "YouTube Statistics 2026 — Users, Channels, Revenue & Growth | Rehan Kadri",
   description:
-    "Browse YouTube statistics pages covering channel counts, users, revenue, Shorts, and platform growth in one organized hub.",
+    "Find the latest YouTube statistics for 2026: monthly active users, channel counts, Shorts views, revenue figures, creator income data, and platform growth benchmarks.",
   path: "/stats/youtube",
   imagePath: "/stats/youtube/youtube-stats-transparent.png",
-  imageAlt: "YouTube statistics hub hero artwork",
+  imageAlt: "YouTube statistics hub 2026 — users, channels, revenue, and growth data",
+  keywords: [
+    "YouTube statistics 2026",
+    "how many YouTube users",
+    "how many YouTube channels",
+    "YouTube monthly active users",
+    "YouTube revenue 2026",
+    "YouTube Shorts statistics",
+    "creator economy stats",
+    "YouTube growth data",
+  ],
 });
 
 const hubIntro =
@@ -83,8 +93,30 @@ export default async function YouTubeStatsHubPage() {
             })),
           ],
         },
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: ["h1", ".hero-copy", "h2"],
+        },
       },
       breadcrumbJsonLd,
+      {
+        "@type": "Dataset",
+        "@id": `${hubCanonicalUrl}#dataset`,
+        name: "YouTube Statistics 2026",
+        description: "Compiled YouTube platform statistics for 2026, including user counts, channel data, Shorts performance, revenue figures, and creator economy benchmarks.",
+        url: hubCanonicalUrl,
+        temporalCoverage: "2026",
+        measurementTechnique: "Aggregated from YouTube official reports, Alphabet earnings, and industry research studies.",
+        creator: {
+          "@id": ORGANIZATION_ID,
+        },
+        keywords: "YouTube statistics, YouTube users, YouTube channels, YouTube revenue, YouTube Shorts, creator economy",
+        about: {
+          "@type": "Thing",
+          name: "YouTube",
+          sameAs: "https://www.youtube.com",
+        },
+      },
     ],
   };
 

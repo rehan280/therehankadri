@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import fs from "fs";
+import path from "path";
 import RelatedTools from "@/components/tools/RelatedTools";
+import RelatedBlogPostsForTool from "@/components/tools/RelatedBlogPostsForTool";
 import {
   ORGANIZATION_ID,
   SITE_NAME,
@@ -24,6 +27,20 @@ import GenericToolArticle, { getGenericToolFaq, getStepCards } from "./GenericTo
 import GenericToolClient from "./GenericToolClient";
 import ToolFeatureGrid from "@/components/tools/ToolFeatureGrid";
 import ToolTabNav from "@/components/tools/ToolTabNav";
+
+function getToolFileDates(toolSlug: string): { published: string; modified: string } {
+  const defaultDate = "2026-05-26";
+  try {
+    const toolFilePath = path.join(process.cwd(), "src/app/(frontend)/(tools)", toolSlug, "tool.ts");
+    const stat = fs.statSync(toolFilePath);
+    const mtime = stat.mtime.toISOString().split("T")[0];
+    // Use ctime (creation time) as published, mtime as modified
+    const ctime = stat.ctime.toISOString().split("T")[0];
+    return { published: ctime, modified: mtime };
+  } catch {
+    return { published: defaultDate, modified: defaultDate };
+  }
+}
 
 export async function generateGenericToolMetadata(toolSlug: string): Promise<Metadata> {
   const tool = getToolBySlug(toolSlug);
@@ -101,6 +118,10 @@ export default async function GenericToolPage({ toolSlug }: { toolSlug: string }
     }
   }
 
+  const toolDates = getToolFileDates(tool.slug);
+  const datePublished = tool.publishedAt ?? toolDates.published;
+  const dateModified = tool.updatedAt ?? toolDates.modified;
+
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -123,6 +144,10 @@ export default async function GenericToolPage({ toolSlug }: { toolSlug: string }
         },
         breadcrumb: {
           "@id": `${canonicalUrl}#breadcrumb`,
+        },
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: ["h1", ".subtitle", "h2"],
         },
       },
       {
@@ -222,8 +247,8 @@ export default async function GenericToolPage({ toolSlug }: { toolSlug: string }
           "@id": pageId,
         },
         url: canonicalUrl,
-        datePublished: "2026-05-26",
-        dateModified: "2026-05-26",
+        datePublished,
+        dateModified,
         inLanguage: "en-US",
         articleSection: tool.category,
         keywords: [
@@ -286,6 +311,7 @@ export default async function GenericToolPage({ toolSlug }: { toolSlug: string }
 
       <GenericToolArticle tool={tool} />
       <RelatedTools currentToolSlug={tool.slug} category={tool.category} />
+      <RelatedBlogPostsForTool tool={tool} />
     </main>
   );
 }

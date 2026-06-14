@@ -14,6 +14,22 @@ export const metadata: Metadata = createPageMetadata({
     "SEO consultant",
     "YouTube growth strategist",
     "B2B SEO",
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { createHomePageStructuredData, createPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Rehan Kadri | SEO & YouTube Growth Strategist",
+  description:
+    "SEO, YouTube growth, and content systems designed to turn visibility into qualified pipeline for B2B brands.",
+  path: "/",
+  imageAlt: "The Rehan Kadri growth marketing portfolio",
+  keywords: [
+    "Rehan Kadri",
+    "SEO consultant",
+    "YouTube growth strategist",
+    "B2B SEO",
     "content systems",
     "pipeline marketing",
     "growth marketing strategist",
@@ -25,6 +41,42 @@ const homePageStructuredData = createHomePageStructuredData({
   description:
     "SEO, YouTube growth, and content systems designed to turn visibility into qualified pipeline for B2B brands.",
 });
+
+const homeFaqEntries = [
+  {
+    question: "What does Rehan Kadri specialize in?",
+    answer: "Rehan Kadri is an SEO specialist and YouTube growth strategist who helps B2B brands build content systems that generate qualified pipeline from organic search. He has 8+ years of experience, has grown a blog to 1M+ monthly organic visitors, and built a YouTube channel to 33K+ subscribers. His core services are B2B SEO, YouTube channel growth, and content repurposing systems."
+  },
+  {
+    question: "How long does it take to see results from SEO?",
+    answer: "For B2B SEO, most clients see measurable organic traffic improvements within 3-6 months for competitive keywords, and meaningful pipeline influence within 6-12 months. The timeline depends heavily on domain authority, content quality, and how competitive the target keyword cluster is. Quick wins (ranking for long-tail, low-competition queries) can appear within 4-8 weeks."
+  },
+  {
+    question: "What makes Rehan Kadri different from other SEO consultants?",
+    answer: "Most SEO consultants optimize for traffic metrics. Rehan builds systems that connect search rankings to actual pipeline — meaning every content decision is tied to a conversion path, not just a keyword. He also has rare cross-channel expertise: organic SEO, YouTube growth, LinkedIn content, and email — so the strategy works across every surface where B2B buyers research."
+  },
+  {
+    question: "Does Rehan Kadri work with small businesses or only enterprise?",
+    answer: "Rehan works with B2B brands at different stages — from funded startups and mid-market companies to established enterprises. The common denominator is a genuine product or service, a defined target audience, and a commitment to content as a long-term growth channel. He does not work with businesses that need short-term traffic hacks or link-buying schemes."
+  },
+  {
+    question: "How can I hire Rehan Kadri for SEO or YouTube growth?",
+    answer: "The best starting point is the contact form at therehankadri.com/contact. Describe your business, your current SEO situation, and your primary growth goal. Rehan reviews all inquiries personally and responds within 1-2 business days."
+  }
+];
+
+const homeFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: homeFaqEntries.map((entry) => ({
+    "@type": "Question",
+    name: entry.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: entry.answer,
+    },
+  })),
+};
 
 type ProofShot = {
   img: string;
@@ -682,337 +734,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 6. VISUAL PROOF ──
-      <section id="proofs" className="section-dark section-padding defer-section">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-label">Undeniable Proof</span>
-            <h2 className="section-title">The Data <span className="text-orange">Behind The Systems</span></h2>
-            <p className="section-desc">Raw backend analytics verifying exponential growth trajectories.</p>
-          </div>
-          <div className="proof-showcase-list">
-            {visualProofItems.map(({ img, alt, tag, h3, p, proofShots, features }, i) => (
-              <div
-                className="proof-showcase-row"
-                key={i}
-              >
-                <div className="proof-showcase-img-container">
-                  <Image
-                    src={img}
-                    alt={alt}
-                    width={getShowcaseImageDimensions(img).width}
-                    height={getShowcaseImageDimensions(img).height}
-                    sizes="(max-width: 640px) 100vw, 520px"
-                    className="proof-showcase-image"
-                  />
-                  {proofShots ? (
-                    <div className="proof-shot-grid">
-                      {proofShots.map((shot) => (
-                        <div className="proof-shot-card" key={shot.img}>
-                          <Image
-                            src={shot.img}
-                            alt={shot.alt}
-                            width={getShowcaseImageDimensions(shot.img).width}
-                            height={getShowcaseImageDimensions(shot.img).height}
-                            sizes="(max-width: 640px) 100vw, 300px"
-                            className="proof-shot-image"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-                <div className="proof-showcase-content">
-                  <span className="proof-showcase-tag">{tag}</span>
-                  <h3>{h3}</h3>
-                  <p>{p}</p>
-                  <div className="proof-features">
-                    {features.map(({ title, desc }) => (
-                      <div className="proof-feature" key={title}>
-                        <div className="pf-icon">✦</div>
-                        <div><h4>{title}</h4><p>{desc}</p></div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+      {/* ── FAQ SECTION (AEO) ── */}
+      <section className="section-dark defer-section" style={{ background: "#0a0a0a", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(homeFaqSchema).replace(/</g, "\\u003c"),
+          }}
+        />
+        <div className="container" style={{ maxWidth: 860, margin: "0 auto", padding: "5rem 1.5rem" }}>
+          <h2 style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", color: "#fff", marginBottom: "0.5rem", fontWeight: 700 }}>
+            Frequently Asked Questions
+          </h2>
+          <p style={{ color: "rgba(255,255,255,0.55)", marginBottom: "3rem", fontSize: "1rem" }}>
+            Everything you need to know about working with Rehan Kadri on SEO and YouTube growth.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            {homeFaqEntries.map((entry, i) => (
+              <div key={i} style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "1.5rem" }}>
+                <h3 style={{ color: "#fff", fontSize: "1.05rem", fontWeight: 600, marginBottom: "0.6rem" }}>
+                  {entry.question}
+                </h3>
+                <p style={{ color: "rgba(255,255,255,0.65)", lineHeight: 1.7, fontSize: "0.95rem", margin: 0 }}>
+                  {entry.answer}
+                </p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-      */}
-
-      {/* ── 6.5. GROWTH PATHS ── */}
-      <section id="growth" className="section-light section-padding growth-paths-section defer-section">
-        <div className="container">
-          <div className="growth-paths-header">
-            <span className="section-label">How Can I Help</span>
-            <h2 className="section-title">
-              Choose Your <span className="text-orange">Growth Path</span>
-            </h2>
-            <p className="section-desc">
-              Pick the outcome first. Then build the system around it.
-            </p>
-          </div>
-
-          <div className="growth-paths-grid">
-            {[
-              {
-                eyebrow: "For Founders & B2B Teams",
-                choice: "I need qualified B2B pipeline",
-                title: "Build a Predictable Revenue Pipeline",
-                image: "/business path card img 2.webp",
-                alt: "Business growth path illustration",
-                summary: "Turn scattered growth into a system that brings in qualified buyers.",
-                outcome: "More qualified leads. More booked calls.",
-                points: [
-                  "Rank for high-intent keywords that convert",
-                  "Build inbound plus outbound lead systems",
-                ],
-                fit: "SaaS, agencies, and high-ticket services",
-                cta: "Build My Growth System",
-                frameLabel: "Business Track",
-                theme: "business",
-              },
-              {
-                eyebrow: "For Creators & Freelancers",
-                choice: "I need better clients and positioning",
-                title: "Turn Skills Into Consistent Clients",
-                image: "/freelancer img.webp",
-                alt: "Freelancer growth path illustration",
-                summary: "Build a stronger personal brand and inbound system for better clients.",
-                outcome: "Better positioning. Better inbound leads.",
-                points: [
-                  "Grow on LinkedIn and YouTube strategically",
-                  "Position yourself as a niche authority",
-                ],
-                fit: "Freelancers, creators, and personal brands",
-                cta: "Grow My Personal Brand",
-                frameLabel: "Creator Track",
-                theme: "creator",
-              },
-            ].map(({ eyebrow, choice, title, image, alt, summary, outcome, points, fit, cta, frameLabel, theme }) => (
-              <article className={`growth-path-card growth-path-card-${theme}`} key={title}>
-                <div className="growth-path-card-top">
-                  <div className="growth-path-copy">
-                    <span className="growth-path-eyebrow">{eyebrow}</span>
-                    <div className="growth-path-choice">{choice}</div>
-                    <h3>{title}</h3>
-                    <p className="growth-path-summary">{summary}</p>
-                    <p className="growth-path-outcome">{outcome}</p>
-                  </div>
-
-                  <div className="growth-path-media">
-                    <div className="growth-path-media-frame">
-                      <span className="growth-path-frame-label">{frameLabel}</span>
-                      <Image
-                        src={image}
-                        alt={alt}
-                        width={798}
-                        height={724}
-                        sizes="(max-width: 760px) 260px, 320px"
-                        quality={60}
-                        className="growth-path-image"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="growth-path-content">
-                  <ul className="growth-path-points" aria-label={`${title} benefits`}>
-                    {points.map((point) => (
-                      <li className="growth-path-point" key={point}>
-                        <span className="growth-path-check">✓</span>
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="growth-path-footer">
-                    <p className="growth-path-fit">
-                      <strong>Best for:</strong> {fit}
-                    </p>
-                    <Link href="/contact" prefetch={false} className="btn btn-orange growth-path-cta">
-                      {cta} ↗
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 7. MY SYSTEM ── */}
-      <section id="process" className="section-gray section-padding process-section defer-section">
-        <div className="container">
-          <div className="process-header">
-            <div>
-              <span className="section-label">The Process</span>
-              <h2 className="section-title">
-                The Pipeline <span className="text-orange">Architecture</span>
-              </h2>
-              <p className="section-desc">
-                A cleaner four-step system built to move from market clarity to qualified revenue.
-              </p>
-            </div>
-
-            <div className="process-note">
-              <span className="process-note-label">System logic</span>
-              <p>
-                Each phase builds on the one before it, so traffic, authority, and conversion work as one
-                connected engine.
-              </p>
-            </div>
-          </div>
-
-          <div className="process-grid">
-            {[
-              {
-                step: "01",
-                tag: "Audit",
-                title: "Deep Audit & Architecture",
-                desc: "Map the market, identify funnel leaks, and define the highest-leverage growth opportunities before execution begins.",
-              },
-              {
-                step: "02",
-                tag: "Assets",
-                title: "Asset Engineering",
-                desc: "Build the pages, SEO structure, content foundations, and positioning assets that make the pipeline conversion-ready.",
-              },
-              {
-                step: "03",
-                tag: "Distribution",
-                title: "Traffic Generation",
-                desc: "Drive the right audience through search, outbound, and content systems designed to bring in relevant decision-makers.",
-              },
-              {
-                step: "04",
-                tag: "Revenue",
-                title: "Conversion & Revenue",
-                desc: "Tighten the handoff from attention to booked calls by improving every touchpoint that influences trust and action.",
-              },
-            ].map(({ step, tag, title, desc }) => (
-              <article className="process-stage-card" key={step}>
-                <div className="process-stage-top">
-                  <span className="process-step-badge">Step {step}</span>
-                  <span className="process-stage-tag">{tag}</span>
-                </div>
-                <h3>{title}</h3>
-                <p>{desc}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 8. ABOUT ME ── */}
-      <section id="about" className="section-light section-padding defer-section">
-        <div className="container why-hire-grid">
-          <div className="hire-image-wrapper">
-            <Image
-              src="/rehan.webp"
-              alt="Rehan Kadri"
-              width={1237}
-              height={2199}
-              sizes="(max-width: 640px) 80vw, 320px"
-              quality={60}
-              className="hire-img"
-            />
-          </div>
-          <div className="hire-content">
-            <span className="section-label">About Me</span>
-            <h2 className="section-title">Who Is <span className="text-orange">Rehan Kadri</span>?</h2>
-            <p className="section-desc" style={{ marginBottom: "1.5rem", color: "var(--text-dark)", fontWeight: 700 }}>
-              I build simple growth systems that help the right people find you, trust you, and turn into real leads.
-            </p>
-            <p className="section-desc" style={{ marginBottom: "2.5rem" }}>
-              I got into this by testing content, SEO, and distribution for myself. Pretty quickly, I learned that traffic can look impressive and still do very little for a business.
-              <br /><br />
-              That is why I care more about the system behind growth than the vanity of growth itself. I like building a clear path from discovery to trust to conversion, so the right people do not just find you, they actually move.
-              <br /><br />
-              Over time, that approach has helped me scale organic traffic past 1M monthly visitors and build a YouTube audience of 33K+ subscribers. I focus on growth that compounds, feels practical, and keeps working long after the first spike.
-            </p>
-            <div className="hire-stats">
-              <div className="hire-stat">
-                <p className="hire-stat-value">1M+</p>
-                <p className="hire-stat-label">Traffic Scaled</p>
-              </div>
-              <div className="hire-stat">
-                <p className="hire-stat-value">33k+</p>
-                <p className="hire-stat-label">Audience Built</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 9. TESTIMONIALS & PROOF ── */}
-      <section className="section-gray section-padding defer-section" style={{ paddingBottom: "2rem" }}>
-        <div className="container">
-          <div className="section-header" style={{ textAlign: "center", marginBottom: "3rem", margin: "0 auto 3rem auto" }}>
-            <span className="section-label">Client Feedback</span>
-            <h2 className="section-title">The <span className="text-orange">Consensus</span></h2>
-          </div>
-          <div className="testimonials-grid">
-            {[
-              {
-                quote:
-                  "Rehan helped us turn SEO into a real growth channel, not just a visibility play. He connected search, content, and conversion into one system that improved lead quality and gave us a much stronger pipeline.",
-                name: "Julius Frac",
-                role: "Founder, Trinity Web",
-                image: "/julius frac.png",
-              },
-              {
-                quote:
-                  "Rehan helped us fix what was actually holding our growth back. Our traffic increased, but more importantly we started getting qualified leads consistently. The biggest difference was how everything was connected, from SEO to conversion. It finally feels like we have a system that works.",
-                name: "Adil Shaikh",
-                role: "Founder, BinaryLabs",
-                image: "/adill.webp",
-              },
-            ].map(({ quote, name, role, image }) => (
-              <article className="testimonial-card" key={name}>
-                <div className="testimonial-stars">★★★★★</div>
-                <p className="testimonial-quote">&quot;{quote}&quot;</p>
-                <div className="testimonial-person">
-                  <div className="testimonial-person-copy">
-                    <strong>{name}</strong>
-                    <span>{role}</span>
-                  </div>
-                  <Image
-                    src={image}
-                    alt={name}
-                    width={64}
-                    height={64}
-                    sizes="(max-width: 640px) 56px, 64px"
-                    quality={60}
-                    className="testimonial-avatar"
-                  />
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div className="marquee-container" style={{ padding: "2rem 0" }}>
-          <div className="marquee-track">
-            <div className="marquee-content">
-              {["Organic SEO Pipelines", "B2B Lead Generation Systems", "Content & Video Ops", "LinkedIn Outreach Systems", "YouTube Growth Systems",
-                "Organic SEO Pipelines", "B2B Lead Generation Systems", "Content & Video Ops", "LinkedIn Outreach Systems", "YouTube Growth Systems"].map((t, i) => (
-                  <div className="marquee-item" key={i}>{t}</div>
-                ))}
-            </div>
           </div>
         </div>
       </section>
 
       {/* ── 10. FINAL CTA SECTION ── */}
       <section className="section-dark cta-section defer-section">
-        <div className="container">
-          <div className="cta-panel">
-            <div className="cta-copy">
-              <span className="section-label">Final CTA</span>
-              <h2 className="cta-title">
                 Stop <span className="cta-muted">guessing.</span><br />
                 Start <span className="text-orange">scaling.</span>
               </h2>

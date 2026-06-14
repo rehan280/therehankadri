@@ -85,6 +85,8 @@ export function createPageMetadata({
         {
           url: socialImage,
           alt: imageAlt,
+          width: 1200,
+          height: 630,
         },
       ],
     },
@@ -134,6 +136,8 @@ export function createArticleMetadata({
         {
           url: socialImage,
           alt: imageAlt,
+          width: 1200,
+          height: 630,
         },
       ],
     },

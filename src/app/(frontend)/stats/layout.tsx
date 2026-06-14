@@ -6,11 +6,21 @@ import { monoFont } from "@/lib/mono-font";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Marketing Statistics Hub | Rehan Kadri",
+  title: "Marketing Statistics Hub | YouTube, B2B & SEO Stats | Rehan Kadri",
   description:
-    "Statistics-focused content on YouTube, SEO, and digital growth trends.",
+    "Research-driven statistics pages on YouTube users, channel growth, B2B SEO trends, and digital marketing benchmarks. Updated data for marketers and creators in 2026.",
   path: "/stats",
-  imageAlt: "The Rehan Kadri stats section",
+  imageAlt: "Marketing statistics hub by Rehan Kadri",
+  keywords: [
+    "marketing statistics",
+    "YouTube statistics 2026",
+    "B2B SEO statistics",
+    "digital marketing benchmarks",
+    "YouTube growth data",
+    "content marketing statistics",
+    "creator economy stats",
+    "SEO trends 2026",
+  ],
 });
 
 export default function StatsLayout({

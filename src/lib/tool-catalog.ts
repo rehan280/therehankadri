@@ -68,6 +68,10 @@ export type ToolDefinition = {
   sourceUrl?: string;
   seoTitle: string;
   seoDescription: string;
+  /** ISO date string — when the tool page was first published */
+  publishedAt?: string;
+  /** ISO date string — when the tool page was last meaningfully updated */
+  updatedAt?: string;
 };
 
 export const toolCategories: ToolCategory[] = [
